@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Michael Fehl"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Portfolio"
+        href: projects.qmd
+      - href: about.qmd
+        text: About Me
+    right:
+      - icon: github
+        href: https://github.com/mtfehl
+        #aria-label: GitHub
+      - icon: linkedin
+        href: https://linkedin.com/in/michael-t-fehl
+        #aria-label: LinkedIn
+      - icon: envelope
+        href: "mailto:michaelthomasfehl@gmail.com"
+        #aria-label: Email
+
+format:
+  html:
+    theme: cosmo     # Options: cosmo, flatly, journal, darkly
+    css: styles.css
+    toc: true

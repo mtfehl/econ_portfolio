@@ -1,0 +1,14 @@
+---
+title: "My Portfolio"
+listing:
+  contents: projects        # Looks in this folder
+  type: grid                # Grid layout (images + title)
+  sort: "date desc"         # Newest on top
+  categories: true          # Adds clickable filters (e.g., "Python", "Macro")
+  sort-ui: false
+  filter-ui: false
+  fields: [image, title, reading-time, description, categories]
+---
+
+## Featured Work
+Welcome to my portfolio. Here you can find my work on Public Policy, Microeconomics, Econometrics, Causal Inference, and Machine learning.
