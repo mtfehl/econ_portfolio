@@ -14,6 +14,20 @@
     "text": "Welcome to my portfolio. Here you can find my work on Public Policy, Microeconomics, Econometrics, Causal Inference, and Machine learning."
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Student @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. I specialize in Development Economics and Public Policy, with a technical focus on Causal Inference.\nI enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Instrumental Variables (IV) methodology.\nProject: Geospatial visualization of infrastructure development in emerging communities to understand growth patterns.\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, Git\n\n\n\n\n\nDevelopment Economics\nPolicy Evaluation\nData Visualization"
+  },
+  {
+    "objectID": "about.html#michael-fehl",
+    "href": "about.html#michael-fehl",
+    "title": "About Me",
+    "section": "",
+    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Student @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. I specialize in Development Economics and Public Policy, with a technical focus on Causal Inference.\nI enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Instrumental Variables (IV) methodology.\nProject: Geospatial visualization of infrastructure development in emerging communities to understand growth patterns.\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, Git\n\n\n\n\n\nDevelopment Economics\nPolicy Evaluation\nData Visualization"
+  },
+  {
     "objectID": "projects/car_crash/car_crash.html",
     "href": "projects/car_crash/car_crash.html",
     "title": "Modeling the Impact: When Data Hits Hard",

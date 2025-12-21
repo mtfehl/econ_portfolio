@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – Michael Fehl</title>
+<title>Michael Fehl - Portfolio – Michael Fehl</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,92 +72,117 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Michael Fehl</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
-<span class="menu-text">Portfolio</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About Me</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/mtfehl"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://linkedin.com/in/michael-t-fehl"> <i class="bi bi-linkedin" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="mailto:michaelthomasfehl@gmail.com"> <i class="bi bi-envelope" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-layout-custom">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">index</h1>
+
+
+
+<div id="splash-screen">
+  
+  <div class="content-wrapper">
+    <img src="images/computer_pixel2.png" class="laptop-img">
+    
+    <div class="monitor-screen">
+      <div class="terminal-text">SELECT OPTION:</div>
+      
+      <a href="projects.html" class="pixel-btn">
+        &gt; PROJECTS
+      </a>
+      
+      <a href="about.html" class="pixel-btn">
+        &gt; ABOUT
+      </a>
+    </div>
+  </div>
+
 </div>
 
+<style>
+  /* --- BACKGROUND & LAYOUT --- */
+  body {
+    margin: 0; padding: 0; overflow: hidden;
+    background: linear-gradient(180deg, 
+        #6b5b95 0%, #c88ea7 40%, #eeb696 70%, #2d3a46 70%, #243038 100%
+    );
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+  }
 
+  #splash-screen {
+    width: 100vw; height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-<div class="quarto-title-meta">
+  .content-wrapper {
+    position: relative; /* This allows us to layer things on top */
+    text-align: center;
+    width: 500px; /* Must match the image width roughly */
+  }
 
+  /* --- THE IMAGE --- */
+  .laptop-img {
+    width: 100%;
+    image-rendering: pixelated; 
+    display: block;
+  }
+
+  /* --- THE SCREEN OVERLAY --- */
+  .monitor-screen {
+    position: absolute;
+    top: 35%;  /* MOVES BUTTONS UP/DOWN */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+  }
+
+  /* --- THE TEXT & BUTTONS --- */
+  .terminal-text {
+    color: #50fa7b; /* Retro Green */
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 0 #000;
+  }
+
+  .pixel-btn {
+    display: block;
+    width: 120px;
+    margin: 5px auto; /* Centers the buttons */
+    padding: 5px 0;
     
-  
+    background-color: #282a36; /* Dark background */
+    color: #50fa7b;            /* Green Text */
+    border: 2px solid #50fa7b; /* Green Border */
     
-  </div>
-  
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+    transition: all 0.1s;
+  }
+
+  /* Hover Effect: Invert Colors */
+  .pixel-btn:hover {
+    background-color: #50fa7b;
+    color: #282a36;
+    transform: translateY(2px);
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+  }
+</style>
 
 
-</header>
 
 
-
-
-
-</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
