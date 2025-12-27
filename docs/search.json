@@ -4,28 +4,28 @@
     "href": "projects.html",
     "title": "My Portfolio",
     "section": "",
-    "text": "Welcome to my portfolio. Here you can find my work on Public Policy, Microeconomics, Econometrics, Causal Inference, and Machine learning."
+    "text": "“Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including R, MATLAB, Stata, and Python.”"
   },
   {
     "objectID": "projects.html#featured-work",
     "href": "projects.html#featured-work",
     "title": "My Portfolio",
     "section": "",
-    "text": "Welcome to my portfolio. Here you can find my work on Public Policy, Microeconomics, Econometrics, Causal Inference, and Machine learning."
+    "text": "“Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including R, MATLAB, Stata, and Python.”"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Student @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. I specialize in Development Economics and Public Policy, with a technical focus on Causal Inference.\nI enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Instrumental Variables (IV) methodology.\nProject: Geospatial visualization of infrastructure development in emerging communities to understand growth patterns.\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, Git\n\n\n\n\n\nDevelopment Economics\nPolicy Evaluation\nData Visualization"
+    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Student @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. I specialize in Development Economics and Public Policy, with a technical focus on Causal Inference.\nI enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making. I hope to make an impact with my work, no matter the size, as I believe that in data we can can extract important information and uncover hidden patterns that teach us more about the world we live and and strive to improve it the best way possible.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Shift-Share Instrumental Variables (IV) methodology.\nProject: Geospatial visualization of infrastructure development in emerging communities to understand growth patterns (R)\nProject: Replicating Conway’s Game of Life & modeling partial equilibrium in a two-agent, two-good economy in (MATLAB)\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, Git\n\n\n\n\n\nDevelopment Economics\nPolicy Evaluation\nNetworks & Game Theory\nData Visualization"
   },
   {
     "objectID": "about.html#michael-fehl",
     "href": "about.html#michael-fehl",
     "title": "About Me",
     "section": "",
-    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Student @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. I specialize in Development Economics and Public Policy, with a technical focus on Causal Inference.\nI enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Instrumental Variables (IV) methodology.\nProject: Geospatial visualization of infrastructure development in emerging communities to understand growth patterns.\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, Git\n\n\n\n\n\nDevelopment Economics\nPolicy Evaluation\nData Visualization"
+    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Student @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. I specialize in Development Economics and Public Policy, with a technical focus on Causal Inference.\nI enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making. I hope to make an impact with my work, no matter the size, as I believe that in data we can can extract important information and uncover hidden patterns that teach us more about the world we live and and strive to improve it the best way possible.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Shift-Share Instrumental Variables (IV) methodology.\nProject: Geospatial visualization of infrastructure development in emerging communities to understand growth patterns (R)\nProject: Replicating Conway’s Game of Life & modeling partial equilibrium in a two-agent, two-good economy in (MATLAB)\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, Git\n\n\n\n\n\nDevelopment Economics\nPolicy Evaluation\nNetworks & Game Theory\nData Visualization"
   },
   {
     "objectID": "projects/car_crash/car_crash.html",

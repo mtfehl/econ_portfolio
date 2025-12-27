@@ -10,10 +10,10 @@ website:
         href: index.qmd
       - text: "Portfolio"
         href: projects.qmd
-      - text: About Me
+      - text: "About Me"
         href: about.qmd
       - text: "CV"          
-        href: /CV/Fehl_Michael_ECON.pdf
+        href: file/Fehl_Michael.pdf
     right:
       - icon: github
         href: https://github.com/mtfehl

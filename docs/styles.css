@@ -8,7 +8,7 @@ body {
 
 /* 2. Headings (The #6552D0 you asked for) */
 h1, h2, h3, h4, h5, h6 {
-    color: #6552D0 !important; /* Your signature Purple */
+    color: #6552D0 !important;
     font-weight: 700;
 }
 
@@ -84,9 +84,9 @@ nav[role="doc-toc"], #quarto-sidebar, .sidebar {
 #TOC a.active, 
 .sidebar-item .active,
 .nav-link.active {
-    color: #ffffff !important;       /* White text */
-    background-color: #6552D0 !important; /* Your Purple */
-    border-radius: 4px; /* Slight curve to look like your buttons */
+    color: #ffffff !important;      
+    background-color: #6552D0 !important; 
+    border-radius: 4px; /* Slight curve to look like buttons */
 }
 
 /* The TOC Links (Hover State) */
@@ -94,5 +94,39 @@ nav[role="doc-toc"], #quarto-sidebar, .sidebar {
 .sidebar-item a:hover,
 .nav-link:hover {
     color: #ffffff !important;
-    background-color: #1e294a !important; /* Your Card Hover color */
+    background-color: #1e294a !important; /* Card hover color */
+}
+
+/* 8. Trestles Template (About Page) */
+
+/* The Left Sidebar (Image & Links) */
+.about-entity {
+    border-right: 1px solid #6552D0 !important;
+}
+
+/* Profile Image */
+.about-image {
+    border: 3px solid #6552D0; /* Purple ring around photo */
+    box-shadow: 0 0 20px rgba(101, 82, 208, 0.5); /* Purple Glow */
+    margin-bottom: 15px;
+}
+
+/* The Link Buttons (LinkedIn, GitHub, etc.) */
+.about-link {
+    color: #b0a8e0 !important; 
+    border: 1px solid #6552D0 !important;
+    border-radius: 20px;
+    padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.about-link:hover {
+    color: #ffffff !important;
+    background-color: #6552D0 !important; /* Fill purple on hover */
+    text-decoration: none;
+}
+
+/* Force the About Page Text to match body text */
+.about-contents {
+    color: #b0a8e0 !important;
 }

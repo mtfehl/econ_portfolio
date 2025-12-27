@@ -1,6 +1,7 @@
 ---
 title: "About Me"
 image: images/profile_pic.jpg
+toc: false
 about:
   template: trestles  
   links:
@@ -10,9 +11,9 @@ about:
     - icon: github
       text: Github
       href: https://github.com/mtfehl
-    - icon: file-text
-      text: CV
-      href: /CV/Fehl_Michael_ECON.pdf
+    - icon: envelope
+      text: Email
+      href: mailto:michaelthomasfehl@gmail.com
 ---
 
 ## Michael Fehl
@@ -23,37 +24,24 @@ about:
 
 Currently, I am pursuing my Master's in Economics at the **Barcelona School of Economics**. I specialize in **Development Economics** and **Public Policy**, with a technical focus on **Causal Inference**. 
 
-I enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making.
+I enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making. I hope to make an impact with my work, no matter the size, as I believe that in data we can can extract important information and uncover hidden patterns that teach us more about the world we live and and strive to improve it the best way possible.
 
 ---
 
-### 🔭 Current Research
+### Ongoing Research
 
-* **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the **USA and Mexico**, using **Instrumental Variables (IV)** methodology.
-* **Project:** Geospatial visualization of infrastructure development in emerging communities to understand growth patterns.
+* **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the **USA and Mexico**, using **Shift-Share Instrumental Variables (IV)** methodology.
+* **Project:** Geospatial visualization of infrastructure development in emerging communities to understand growth patterns (`R`)
+* **Project:** Replicating Conway's Game of Life & modeling partial equilibrium in a two-agent, two-good economy in (`MATLAB`)
 
-### 🛠️ Active Toolkit
+### Active Toolkit
 
 * **Languages:** R, Python, MATLAB, Stata
 * **Tools:** Quarto, SQL, Git
 
-### 🧠 Key Interests
+### Research Interests
 
 * Development Economics
 * Policy Evaluation
+* Networks & Game Theory
 * Data Visualization
-
-<style>
-  body {
-    background-color: #243038; /* Matches the bottom of your sunset home page */
-    color: #e0e0e0;            /* Soft white text */
-    font-family: sans-serif;   /* Clean font for reading (not pixel) */
-  }
-  
-  /* Link Colors */
-  a { color: #f8bbd0; }
-  a:hover { color: #fff; }
-
-  /* Headings */
-  h1, h2, h3 { color: #ffccbc; }
-</style>

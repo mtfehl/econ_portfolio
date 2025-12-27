@@ -11,4 +11,4 @@ listing:
 ---
 
 ## Featured Work
-Welcome to my portfolio. Here you can find my work on Public Policy, Microeconomics, Econometrics, Causal Inference, and Machine learning.
+"Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including `R`, `MATLAB`, `Stata`, and `Python`."
