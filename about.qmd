@@ -1,5 +1,5 @@
 ---
-title: "About Me"
+title: "Michael Fehl"
 image: images/profile_pic.jpg
 toc: false
 about:
@@ -16,32 +16,34 @@ about:
       href: mailto:michaelthomasfehl@gmail.com
 ---
 
-## Michael Fehl
+## About Me
 
 **BSc in Economics** from **UNC Chapel Hill**.
 
-**MSc Economics Student @ Barcelona School of Economics**
+**MSc Economics Candidate @ Barcelona School of Economics**
 
-Currently, I am pursuing my Master's in Economics at the **Barcelona School of Economics**. I specialize in **Development Economics** and **Public Policy**, with a technical focus on **Causal Inference**. 
+Currently, I am pursuing my Master's in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis. 
 
-I enjoy applying econometric methods to real-world datasets to inform policy and influence decision-making. I hope to make an impact with my work, no matter the size, as I believe that in data we can can extract important information and uncover hidden patterns that teach us more about the world we live and and strive to improve it the best way possible.
+I am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.
+
+Beyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.
 
 ---
 
-### Ongoing Research
+### Ongoing Projects
 
-* **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the **USA and Mexico**, using **Shift-Share Instrumental Variables (IV)** methodology.
-* **Project:** Geospatial visualization of infrastructure development in emerging communities to understand growth patterns (`R`)
-* **Project:** Replicating Conway's Game of Life & modeling partial equilibrium in a two-agent, two-good economy in (`MATLAB`)
+* **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Shift-Share Instrumental Variables methodology in Stata
+* **Project:** Geospatial analysis of infrastructure growth: Visualizing spatial development patterns in emerging markets using R
+* **Project:** Replicating Conway's Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB
+* **Project:** Modeling information cascades and belief propagation through agent-based modeling in Python
 
-### Active Toolkit
+### Toolkit
 
 * **Languages:** R, Python, MATLAB, Stata
-* **Tools:** Quarto, SQL, Git
+* **Tools:** Quarto, SQL, LaTeX
 
 ### Research Interests
 
 * Development Economics
-* Policy Evaluation
-* Networks & Game Theory
-* Data Visualization
+* Causal Inference & Policy Evaluation
+* Networks, Crowds, and Strategic Interaction

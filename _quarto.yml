@@ -10,6 +10,10 @@ website:
         href: index.qmd
       - text: "Portfolio"
         href: projects.qmd
+      - text: "Classes"
+        menu:
+          - text: "Geospatial"
+            href: https://mtfehl.github.io/geospatial/
       - text: "About Me"
         href: about.qmd
       - text: "CV"          
@@ -27,6 +31,6 @@ website:
 
 format:
   html:
-    theme: cosmo     # Options: cosmo, flatly, journal, darkly
+    theme: cosmo    
     css: styles.css
     toc: true

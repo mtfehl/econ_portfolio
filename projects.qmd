@@ -1,14 +1,63 @@
 ---
 title: "My Portfolio"
 listing:
-  contents: projects        # Looks in this folder
-  type: grid                # Grid layout (images + title)
-  sort: "date desc"         # Newest on top
-  categories: true          # Adds clickable filters (e.g., "Python", "Macro")
-  sort-ui: false
-  filter-ui: false
-  fields: [image, title, reading-time, description, categories]
+  - id: featured-work
+    contents: 
+      - projects/car_crash
+    include:
+      featured: true
+    type: grid
+    grid-columns: 3
+    fields: [image, title, reading-time, description, categories]
+    
+  - id: ongoing-projects
+    contents: 
+      - projects/games
+    include:
+      ongoing: true
+    type: grid
+    grid-columns: 3
+    sort: "date desc"
+    categories: true
+    sort-ui: false
+    filter-ui: false
+    fields: [image, title, reading-time, description, categories]
+    
+  - id: completed-projects
+    contents: 
+      - projects/car_crash
+    include:
+      completed: true
+    type: grid
+    grid-columns: 3
+    sort: "date desc"
+    categories: true
+    sort-ui: false
+    filter-ui: false
+    fields: [image, title, reading-time, description, categories]
+---
+
+Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including R, MATLAB, Stata, and Python.
+
 ---
 
 ## Featured Work
-"Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including `R`, `MATLAB`, `Stata`, and `Python`."
+
+::: {#featured-work}
+
+:::
+
+## Ongoing Projects
+
+::: {#ongoing-projects}
+
+:::
+
+
+## Completed Projects
+
+::: {#completed-projects}
+
+:::
+
+<!-- placeholder -->

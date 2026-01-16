@@ -1,0 +1,16 @@
+title: "Steady States: Finding Balance in a Risky World"
+author: "Michael Fehl"
+description: "Simulating resource allocation and risk rationing in a two-agent economy using MATLAB."
+date: 2025-12-27
+featured: false
+ongoing: true
+categories: [MATLAB, Networks, Markets, Game Theory]
+image: "/images/trading_pixel_art.png"
+
+format:
+  html:
+    code-fold: true
+    toc: true
+    fig-align: center     
+    fig-cap-location: bottom 
+    fig-responsive: true

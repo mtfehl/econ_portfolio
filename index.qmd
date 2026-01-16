@@ -24,6 +24,11 @@ search: false
       <a href="about.html" class="pixel-btn">
         > ABOUT
       </a>
+      
+      <a href="file/Fehl_Michael.pdf" class="pixel-btn">
+        > CV
+      </a>
+      
     </div>
   </div>
 

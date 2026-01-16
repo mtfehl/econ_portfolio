@@ -1,0 +1,114 @@
+---
+title: "Scaling the financial relief of an expanded safety net"
+subtitle: "Econometrics DiD Project investigating the 2014 Medicaid expansion in the US to see if there exists causal evidence of reduced out-of-pocket medical expenses for low-income households"
+author: "Michael Fehl"
+date: last-modified
+featured: false
+categories: [Stata, Public Policy, Causal Inference]
+image: "/images/healthcare.jpg"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true 
+render: false
+---
+
+# Intro
+
+The 2014 Medicaid expansion in the US....
+
+# Data
+
+talk about our data source, cleaning, etc
+
+::: {.callout-note collapse="true" appearance="minimal"}
+## >>
+
+```{stata data}
+use "data/labor_market.dta", clear
+
+* Run the primary regression
+regress wages education experience i.industry, vce(robust)
+
+* Export the results for the next section
+esttab using "results/table1.html", replace
+```
+
+:::
+
+so what we find is...
+
+# Identification Strategy
+
+::: {.callout-note collapse="true" appearance="minimal"}
+## >>
+
+```{stata id}
+use "data/labor_market.dta", clear
+
+* Run the primary regression
+regress wages education experience i.industry, vce(robust)
+
+* Export the results for the next section
+esttab using "results/table1.html", replace
+```
+
+:::
+
+# Results
+
+::: {.callout-note collapse="true" appearance="minimal"}
+## >>
+
+```{stata results}
+use "data/labor_market.dta", clear
+
+* Run the primary regression
+regress wages education experience i.industry, vce(robust)
+
+* Export the results for the next section
+esttab using "results/table1.html", replace
+```
+
+:::
+
+we see that:
+
+
+::: {layout-ncol=2}
+
+![Expansion States](results/graph_control.jpg)
+
+![Non-Expansion States](results/graph_treatment.jpg)
+
+:::
+
+in the table, we see numbers:
+
+
+<div class="stata-table-wrapper">
+  {{< include results/table1.html >}}
+</div>
+
+Main Regression Results: The impact of Medicaid expansion on out-of-pocket costs.
+
+# Robustness Check
+
+::: {.callout-note collapse="true" appearance="minimal"}
+## >>
+
+```{stata robust}
+use "data/labor_market.dta", clear
+
+* Run the primary regression
+regress wages education experience i.industry, vce(robust)
+
+* Export the results for the next section
+esttab using "results/table1.html", replace
+```
+
+:::
+
+# Conclusion
+

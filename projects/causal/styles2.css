@@ -1,0 +1,99 @@
+/* ===============================
+   Academic Tables (Stata / esttab)
+   =============================== */
+
+.stata-table-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1.5em 0 0.5em 0;
+  overflow-x: auto;
+}
+
+.stata-table-wrapper table {
+  border-collapse: collapse;
+  width: auto;
+  font-size: 0.9rem;
+}
+
+.stata-table-wrapper th,
+.stata-table-wrapper td {
+  padding: 4px 10px;
+  border: none;
+  white-space: nowrap;
+}
+
+/* Stata-style horizontal rules */
+.stata-table-wrapper thead tr {
+  border-top: 1.5px solid #000;
+  border-bottom: 1.5px solid #000;
+}
+
+.stata-table-wrapper tbody tr:last-child {
+  border-bottom: 1.5px solid #000;
+}
+
+/* Alignment */
+.stata-table-wrapper th:first-child,
+.stata-table-wrapper td:first-child {
+  text-align: left;
+}
+
+.stata-table-wrapper th:not(:first-child),
+.stata-table-wrapper td:not(:first-child) {
+  text-align: center;
+}
+
+
+/* ===============================
+   Academic Table Captions
+   =============================== */
+
+.table-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.4em;
+  margin-bottom: 2em;
+}
+
+
+/* ===============================
+   Academic Figures & Captions
+   =============================== */
+
+figure {
+  margin: 1.5em auto;
+  text-align: center;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  margin-top: 0.4em;
+  text-align: center;
+}
+
+
+/* ===============================
+   Two-column figure layouts
+   =============================== */
+
+.layout-ncol {
+  gap: 1.5em;
+}
+
+
+/* ===============================
+   Callout blocks (subtle, academic)
+   =============================== */
+
+.callout-note {
+  font-size: 0.9rem;
+}
+
+.callout-note summary {
+  font-weight: 600;
+}

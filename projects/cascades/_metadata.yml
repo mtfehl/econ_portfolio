@@ -1,0 +1,14 @@
+title: "cascades"
+author: "Michael Fehl & Brian Leon"
+description: "description"
+date: 2025-12-27
+categories: [Python, SQL, Networks, Agent-Based Modeling]
+image: "/images/contagion_pixel_art.png"
+featured: false
+format:
+  html:
+    code-fold: true
+    toc: true
+    fig-align: center     
+    fig-cap-location: bottom 
+    fig-responsive: true
