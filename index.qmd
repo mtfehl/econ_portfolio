@@ -12,7 +12,7 @@ search: false
 <div id="splash-screen">
   
   <div class="content-wrapper">
-    <img src="images/computer_pixel2.png" class="laptop-img">
+    <img src="./images/computer_pixel2.png" class="laptop-img">
     
     <div class="monitor-screen">
       <div class="terminal-text">SELECT OPTION:</div>

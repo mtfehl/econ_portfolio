@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Michael Fehl"
+  site-url: "https://mtfehl.github.io/econ_portfolio/"
   navbar:
     left:
       - text: "Home"
