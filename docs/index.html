@@ -88,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="splash-screen">
   
   <div class="content-wrapper">
-    <img src="images/computer_pixel2.png" class="laptop-img">
+    <img src="./images/computer_pixel2.png" class="laptop-img">
     
     <div class="monitor-screen">
       <div class="terminal-text">SELECT OPTION:</div>
@@ -262,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/mtfehl\.github\.io\/econ_portfolio\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

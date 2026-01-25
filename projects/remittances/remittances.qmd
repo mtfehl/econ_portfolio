@@ -1,0 +1,27 @@
+---
+title: "Remittances as a Network Shock Absorber"
+author: "Michael Fehl, Anqi Wang Liu Xènia Alemany Rovira, Joan Costa Rodriguez, Francesco Zucca"
+description: " Who absorbs the damages in the event of a macro-level shock in the US? The Mexican immigrant or his family living in Mexico?"
+date: 2026-01-21
+featured: false
+ongoing: true
+categories: [Public Policy, Networks, Microeconomics]
+image: "/images/remittances.png"
+
+format:
+  html:
+    code-fold: true       
+    fig-width: 6
+    fig-height: 4
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    smooth-scroll: true 
+    
+execute:
+  echo: true            
+  output: true
+  message: false
+  warning: false
+  cache: true             
+---

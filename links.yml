@@ -1,0 +1,16 @@
+- title: "Geospatial Data Science & Econometric Spatial Models"
+  path: "https://mtfehl.github.io/geospatial/"
+  description: "Geospatial Analysis and Mapping & Constructing Spatial Models with Economic Applications.."
+  image: images/geospatial-cover.png
+- title: "Econometrics: Time Series"
+  path: "https://mtfehl.github.io/finc_metrics/"
+  description: "Theory & Methodology dealing with Time Series data in Econometrics."
+  image: images/time-series-cover.png
+- title: "Networks: Concepts & Algorithms"
+  path: "https://mtfehl.github.io/networks/"
+  description: "Network & Graph Theory &  Accompanying Algorithms"
+  image: images/networks-cover.png
+- title: "Econometrics: Panel Data"
+  path: "https://mtfehl.github.io/econometrics2/"
+  description: "Theory & Methodology dealing with Panel Data in Econometrics."
+  image: images/econometrics2-cover.png

@@ -32,18 +32,18 @@ Beyond core economics, I am also deeply interested in dynamic data visualization
 
 ### Ongoing Projects
 
-* **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Shift-Share Instrumental Variables methodology in Stata
-* **Project:** Geospatial analysis of infrastructure growth: Visualizing spatial development patterns in emerging markets using R
+* **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Dif-in-Difs methodology in Stata
+* **Project:** Geospatial analysis of migration networks: Constructing spatial migration patterns between Mexico & USA using R
 * **Project:** Replicating Conway's Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB
 * **Project:** Modeling information cascades and belief propagation through agent-based modeling in Python
 
 ### Toolkit
 
 * **Languages:** R, Python, MATLAB, Stata
-* **Tools:** Quarto, SQL, LaTeX
+* **Tools:** Quarto, SQL, LaTeX, SASS
 
 ### Research Interests
 
-* Development Economics
 * Causal Inference & Policy Evaluation
 * Networks, Crowds, and Strategic Interaction
+* Machine Learning

@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects.html</loc>
+    <lastmod>2026-01-21T22:32:47.135Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects/games/games.html</loc>
+    <lastmod>2025-12-27T12:16:55.704Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects/cascades/cascades.html</loc>
+    <lastmod>2025-12-27T18:02:33.921Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/index.html</loc>
+    <lastmod>2026-01-17T00:47:55.299Z</lastmod>
+  </url>
+  <url>
     <loc>https://mtfehl.github.io/econ_portfolio/about.html</loc>
-    <lastmod>2025-12-27T11:19:28.180Z</lastmod>
+    <lastmod>2026-01-25T19:49:55.499Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes.html</loc>
+    <lastmod>2026-01-25T18:47:41.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects/car_crash/car_crash.html</loc>
+    <lastmod>2026-01-16T18:49:10.520Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects/causal/causal.html</loc>
+    <lastmod>2026-01-16T18:16:24.811Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects/remittances/remittances.html</loc>
+    <lastmod>2026-01-21T22:32:59.135Z</lastmod>
   </url>
 </urlset>

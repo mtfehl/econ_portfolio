@@ -26,6 +26,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #ffffff !important; /* Glow white on hover */
 }
 
+/* search icon */
+.aa-SubmitIcon {
+  fill: #b0a8e0;
+}
+
 /* 4. Project Cards (The Grid) */
 .quarto-grid-item {
     background-color: #1e294a; /* Slightly lighter card background */
@@ -95,6 +100,7 @@ nav[role="doc-toc"], #quarto-sidebar, .sidebar {
 .nav-link:hover {
     color: #ffffff !important;
     background-color: #1e294a !important; /* Card hover color */
+    border-radius: 4px;
 }
 
 /* 8. Trestles Template (About Page) */
@@ -129,4 +135,31 @@ nav[role="doc-toc"], #quarto-sidebar, .sidebar {
 /* Force the About Page Text to match body text */
 .about-contents {
     color: #b0a8e0 !important;
+}
+
+/* 9. Default Listing Styling (List View) */
+
+/* The Title Link */
+.listing-title a {
+    color: #6552D0 !important; /* Your signature Purple */
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.listing-title a:hover {
+    color: #ffffff !important; /* Glow white on hover */
+    text-decoration: none;
+}
+
+/* The Description Text */
+.listing-description {
+    color: #b0a8e0 !important; /* Lighter purple/body text color */
+    margin-top: 5px;
+}
+
+/* The Border/Divider between items */
+.quarto-post {
+    border-bottom: 1px solid #3c4c78 !important; /* Subtle divider */
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }

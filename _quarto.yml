@@ -13,8 +13,16 @@ website:
         href: projects.qmd
       - text: "Classes"
         menu:
+          - text: "Home"
+            href: classes.qmd
           - text: "Geospatial"
             href: https://mtfehl.github.io/geospatial/
+          - text: "Econometrics: Time Series"
+            href: https://mtfehl.github.io/finc_metrics/
+          - text: "Networks: Concepts & Algorithms"
+            href: https://mtfehl.github.io/networks/
+          - text: "Econometrics: Panel Data"
+            href: https://mtfehl.github.io/econometrics2/
       - text: "About Me"
         href: about.qmd
       - text: "CV"          

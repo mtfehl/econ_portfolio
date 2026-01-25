@@ -18,7 +18,7 @@
     "href": "projects.html#ongoing-projects",
     "title": "My Portfolio",
     "section": "Ongoing Projects",
-    "text": "Ongoing Projects\n\n\n\n\n\n\n\n\n\n\nSteady States: Finding Balance in a Risky World\n\n1 min\n\n\nMATLAB\n\nNetworks\n\nMarkets\n\nGame Theory\n\n\n\nSimulating resource allocation and risk rationing in a two-agent economy using MATLAB.\n\n\n\n\n\nNo matching items"
+    "text": "Ongoing Projects\n\n\n\n\n\n\n\n\n\n\nRemittances as a Network Shock Absorber\n\n1 min\n\n\nPublic Policy\n\nNetworks\n\nMicroeconomics\n\n\n\nWho absorbs the damages in the event of a macro-level shock in the US? The Mexican immigrant or his family living in Mexico?\n\n\n\n\n\n\n\n\n\n\n\n\nSteady States: Finding Balance in a Risky World\n\n1 min\n\n\nMATLAB\n\nNetworks\n\nMarkets\n\nGame Theory\n\n\n\nSimulating resource allocation and risk rationing in a two-agent economy using MATLAB.\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects.html#completed-projects",
@@ -28,11 +28,67 @@
     "text": "Completed Projects\n\n\n\n\n\n\n\n\n\n\nModeling the Impact: When Data Hits Hard\n\n91 min\n\n\nR\n\nMachine Learning\n\nPublic Policy\n\n\n\nPredicting crash injury severity using penalized classification, kNN, & random forests on NHTSA microdata.\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "projects/causal/causal.html",
-    "href": "projects/causal/causal.html",
-    "title": "Scaling the financial relief of an expanded safety net",
+    "objectID": "projects/games/games.html#intro",
+    "href": "projects/games/games.html#intro",
+    "title": "Steady States: Finding Balance in a Risky World",
+    "section": "Intro",
+    "text": "Intro\nbackground (what)\nmotivation (why)\nproject structure\ngoals of this project"
+  },
+  {
+    "objectID": "projects/games/games.html#game-of-life",
+    "href": "projects/games/games.html#game-of-life",
+    "title": "Steady States: Finding Balance in a Risky World",
+    "section": "Game of Life",
+    "text": "Game of Life\n\n\nCode\n% set our global plot options: \"light mode\"\nset(groot, 'defaultFigureColor', 'w');\nset(groot, 'defaultAxesColor', 'w');\nset(groot, 'defaultAxesXColor', [0.1 0.1 0.1]);\nset(groot, 'defaultAxesYColor', [0.1 0.1 0.1]);\nset(groot, 'defaultTextColor', 'k');\nset(groot, 'defaultLegendTextColor', 'k');   % k == black\nset(groot, 'defaultFigureInvertHardcopy', 'on');\n\n\n\n\nCode\n%%% Simulation Code %%%\n%----------------------\nclear\n\n% Task: build 1000 monte carlo simulations\n\nrng(14) % set seed\nsims = 1000; % num of sims\n\n% to create conways game of life, our universe is a matrix.\n% the non-zero elements are the population\n\nlife = zeros(4); % initalize our 4x4 grid of zeros\n\nrows = [1, 1, 2]; % set our agents\ncols = [1, 2, 2];\nidx = sub2ind(size(life), rows, cols);\nlife(idx) = 1;\n\n% visualize our non-zero points (agents)\nspy(life)\n\n\n\n\n\n\n\nCode\n% t = tiledlayout(1,3,'TileSpacing','Compact');\n%\n% nexttile\n% spy(life_initial); title('t=0')\n%\n% nexttile\n% spy(life_step1); title('t=1')\n%\n% nexttile\n% spy(life_final); title('t=end')\n%% example of combining graphs to help w/ flow"
+  },
+  {
+    "objectID": "projects/games/games.html#general-competitive-equilibrium",
+    "href": "projects/games/games.html#general-competitive-equilibrium",
+    "title": "Steady States: Finding Balance in a Risky World",
+    "section": "General Competitive Equilibrium",
+    "text": "General Competitive Equilibrium"
+  },
+  {
+    "objectID": "projects/games/games.html#extensions",
+    "href": "projects/games/games.html#extensions",
+    "title": "Steady States: Finding Balance in a Risky World",
+    "section": "Extensions",
+    "text": "Extensions\n\n\nn-Agent Economy\n\n\n\nNetwork w/ Intermediaries\n\n\n\nn-Good Economy (?)"
+  },
+  {
+    "objectID": "projects/games/games.html#conclusion",
+    "href": "projects/games/games.html#conclusion",
+    "title": "Steady States: Finding Balance in a Risky World",
+    "section": "Conclusion",
+    "text": "Conclusion\nwhat we learned, confirmed, the things we cannot conclude (need more info), realism, where our models fail (or dont/cant account for), etc."
+  },
+  {
+    "objectID": "projects/cascades/cascades.html",
+    "href": "projects/cascades/cascades.html",
+    "title": "cascades",
     "section": "",
-    "text": "Intro\nThe 2014 Medicaid expansion in the US….\n\n\nData\ntalk about our data source, cleaning, etc\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\nso what we find is…\n\n\nIdentification Strategy\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\n\n\nResults\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\nwe see that:\n\n\n\n\n\n\nExpansion States\n\n\n\n\n\n\n\nNon-Expansion States\n\n\n\n\n\nin the table, we see numbers:\n\n\n\n\n\nModel 1\nModel 2\n\n\n\n\nweight\n-0.006***\n-0.004***\n\n\n\n(0.001)\n(0.002)\n\n\nlength\n\n-0.083\n\n\n\n\n(0.055)\n\n\nforeign\n\n-1.708\n\n\n\n\n(1.067)\n\n\n_cons\n39.440***\n50.537***\n\n\n\n(1.614)\n(6.246)\n\n\nN\n74\n74\n\n\nR2\n0.652\n0.673\n\n\nadj. R2\n0.647\n0.659\n\n\n\n * p &lt; 0.10, ** p &lt; 0.05, *** p &lt; 0.01\n\nMain Regression Results: The impact of Medicaid expansion on out-of-pocket costs.\n\n\nRobustness Check\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\n\n\nConclusion"
+    "text": "Introduction\n\nbackground\ngoals of the project\nconnection/difference from social contagions\nbasic structure\n\n\n\nTheoretical Framework\n\ndefining our framework (graph)\nSIR/SIS models\n\n\n\nSystem Architecture\n\nABM Design\nSQL Backend (manual design or downloaded somewhere?)\n\n\n\nCode\n# import libraries\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n\n\n\nSimulations\n\n\nCode\n# plot output example\nt = np.arange(0.0, 2.0, 0.01)\ns = 1 + np.sin(2 * np.pi * t)\n\nfig, ax = plt.subplots()\nax.plot(t, s)\n\nax.set(xlabel='time (s)', ylabel='voltage (mV)',\n       title='super basic plot')\nax.grid()\n\n\n\n\n\n\n\n\n\n\n\nResults & Data Analysis\n\n\nDiscussion: Policy & Intervention\n\n\nConclusion\n\nfindings from our project, what we learned\nbig picture\nfuture extensions"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Michael Fehl",
+    "section": "",
+    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Candidate @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis.\nI am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.\nBeyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Dif-in-Difs methodology in Stata\nProject: Geospatial analysis of migration networks: Constructing spatial migration patterns between Mexico & USA using R\nProject: Replicating Conway’s Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB\nProject: Modeling information cascades and belief propagation through agent-based modeling in Python\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, LaTeX, SASS\n\n\n\n\n\nCausal Inference & Policy Evaluation\nNetworks, Crowds, and Strategic Interaction\nMachine Learning"
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "Michael Fehl",
+    "section": "",
+    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Candidate @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis.\nI am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.\nBeyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Dif-in-Difs methodology in Stata\nProject: Geospatial analysis of migration networks: Constructing spatial migration patterns between Mexico & USA using R\nProject: Replicating Conway’s Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB\nProject: Modeling information cascades and belief propagation through agent-based modeling in Python\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, LaTeX, SASS\n\n\n\n\n\nCausal Inference & Policy Evaluation\nNetworks, Crowds, and Strategic Interaction\nMachine Learning"
+  },
+  {
+    "objectID": "classes.html",
+    "href": "classes.html",
+    "title": "Classes",
+    "section": "",
+    "text": "Geospatial Data Science & Econometric Spatial Models\n\n\nGeospatial Analysis and Mapping & Constructing Spatial Models with Economic Applications..\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEconometrics: Time Series\n\n\nTheory & Methodology dealing with Time Series data in Econometrics.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNetworks: Concepts & Algorithms\n\n\nNetwork & Graph Theory & Accompanying Algorithms\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEconometrics: Panel Data\n\n\nTheory & Methodology dealing with Panel Data in Econometrics.\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/car_crash/car_crash.html",
@@ -154,59 +210,10 @@
     "text": "6.4 Variable Importance\nThe figure shows the most important predictors for lasso regression and random forest in the three-class injury severity setting. To allow comparison across models, variable importance scores were normalized within each model, benchmarking the most influential variable to one. This normalization makes relative importance comparable across fundamentally different modeling approaches.\nAcross both models, and consistently across alternative specifications (including undersampling and the binary outcome), a stable set of variables repeatedly emerges as influential, although their exact ranking varies. These variables can be grouped into a few key themes that appear decisive in determining crash severity.\nFirst, crash type and exposure play a central role. Variables capturing collisions with non-motorists, non-vehicle crashes, or motorcycles consistently rank among the most important predictors, reflecting the heightened vulnerability of certain road users. Second, occupant protection and vehicle safety indicators, such as restraint use, airbag deployment, and rollover involvement—are highly influential, highlighting the importance of protective mechanisms during a crash. Third, impact severity proxies, including vehicle deformation and the number of vehicles involved, contribute strongly, suggesting that crash force and complexity are key drivers of injury outcomes. Finally, behavioral risk factors, such as alcohol involvement and speeding, appear repeatedly, although their relative importance differs across models.\nAlthough these patterns suggest a coherent narrative linking vulnerability, protection, and crash dynamics to injury severity, interpretation is limited. Importance rankings vary across models due to differences in how predictors and interactions are handled, and reflect predictive relevance rather than causality.\nThe recurrence of similar variable groups across models nonetheless indicates robust underlying structure, while variation in rankings underscores that injury severity arises from multiple interacting factors rather than a single dominant driver.\n\n\nCode\nlasso_coefs_raw &lt;- coef(fit_lasso$finalModel, s = fit_lasso$bestTune$lambda)\nlasso_vi &lt;- do.call(rbind, lapply(names(lasso_coefs_raw), function(class_name) {\n  data.frame(\n    Variable = rownames(as.matrix(lasso_coefs_raw[[class_name]])),\n    Importance = as.vector(as.matrix(lasso_coefs_raw[[class_name]])),\n    Class = class_name\n  )\n})) %&gt;%\n  filter(Variable != \"(Intercept)\") %&gt;%\n  group_by(Variable) %&gt;%\n  summarize(Importance = mean(abs(Importance))) %&gt;%\n  mutate(Model = \"Lasso\")\n\n# --- 2. Extract Random Forest Importance ---\nrf_vi &lt;- vi(fit_rf$finalModel) %&gt;%\n  rename(Importance = Importance) %&gt;%\n  mutate(Model = \"Random Forest\")\n\n# --- 3. Combine and Normalize (0-100 scale) ---\n# We filter for the Top 20 variables from the Random Forest to keep the plot clean\ntop_vars &lt;- rf_vi %&gt;% arrange(desc(Importance)) %&gt;% head(15) %&gt;% pull(Variable)\n\ncombined_vi &lt;- bind_rows(lasso_vi, rf_vi) %&gt;%\n  filter(Variable %in% top_vars) %&gt;%\n  group_by(Model) %&gt;%\n  mutate(Norm_Importance = (Importance / max(Importance)) * 100) %&gt;%\n  ungroup()\n\n# --- 4. Generate the Comparison Plot ---\n# \nggplot(combined_vi, aes(x = Norm_Importance, \n                        y = reorder(Variable, Norm_Importance), \n                        fill = Model)) +\n  geom_col(position = position_dodge(width = 0.7), width = 0.6) +\n  scale_fill_manual(values = c(\"Random Forest\" = \"#1b9e77\", \"Lasso\" = \"#d95f02\")) +\n  labs(title = \"Model Comparison: Variable Importance\",\n       subtitle = \"Top 15 predictors (Normalized 0-100)\",\n       x = \"Importance Score (Normalized)\",\n       y = NULL) +\n  theme_minimal() +\n  theme(legend.position = \"bottom\",\n        plot.subtitle = element_text(hjust = 0.5),\n        plot.title = element_text(hjust = 0.5))"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Michael Fehl",
+    "objectID": "projects/causal/causal.html",
+    "href": "projects/causal/causal.html",
+    "title": "Scaling the financial relief of an expanded safety net",
     "section": "",
-    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Candidate @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis.\nI am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.\nBeyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Shift-Share Instrumental Variables methodology in Stata\nProject: Geospatial analysis of infrastructure growth: Visualizing spatial development patterns in emerging markets using R\nProject: Replicating Conway’s Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB\nProject: Modeling information cascades and belief propagation through agent-based modeling in Python\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, LaTeX\n\n\n\n\n\nDevelopment Economics\nCausal Inference & Policy Evaluation\nNetworks, Crowds, and Strategic Interaction"
-  },
-  {
-    "objectID": "about.html#about-me",
-    "href": "about.html#about-me",
-    "title": "Michael Fehl",
-    "section": "",
-    "text": "BSc in Economics from UNC Chapel Hill.\nMSc Economics Candidate @ Barcelona School of Economics\nCurrently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis.\nI am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.\nBeyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.\n\n\n\n\nThesis: Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Shift-Share Instrumental Variables methodology in Stata\nProject: Geospatial analysis of infrastructure growth: Visualizing spatial development patterns in emerging markets using R\nProject: Replicating Conway’s Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB\nProject: Modeling information cascades and belief propagation through agent-based modeling in Python\n\n\n\n\n\nLanguages: R, Python, MATLAB, Stata\nTools: Quarto, SQL, LaTeX\n\n\n\n\n\nDevelopment Economics\nCausal Inference & Policy Evaluation\nNetworks, Crowds, and Strategic Interaction"
-  },
-  {
-    "objectID": "projects/cascades/cascades.html",
-    "href": "projects/cascades/cascades.html",
-    "title": "cascades",
-    "section": "",
-    "text": "Introduction\n\nbackground\ngoals of the project\nconnection/difference from social contagions\nbasic structure\n\n\n\nTheoretical Framework\n\ndefining our framework (graph)\nSIR/SIS models\n\n\n\nSystem Architecture\n\nABM Design\nSQL Backend (manual design or downloaded somewhere?)\n\n\n\nCode\n# import libraries\nimport matplotlib.pyplot as plt\nimport numpy as np\n\n\n\n\nSimulations\n\n\nCode\n# plot output example\nt = np.arange(0.0, 2.0, 0.01)\ns = 1 + np.sin(2 * np.pi * t)\n\nfig, ax = plt.subplots()\nax.plot(t, s)\n\nax.set(xlabel='time (s)', ylabel='voltage (mV)',\n       title='super basic plot')\nax.grid()\n\n\n\n\n\n\n\n\n\n\n\nResults & Data Analysis\n\n\nDiscussion: Policy & Intervention\n\n\nConclusion\n\nfindings from our project, what we learned\nbig picture\nfuture extensions"
-  },
-  {
-    "objectID": "projects/games/games.html#intro",
-    "href": "projects/games/games.html#intro",
-    "title": "Steady States: Finding Balance in a Risky World",
-    "section": "Intro",
-    "text": "Intro\nbackground (what)\nmotivation (why)\nproject structure\ngoals of this project"
-  },
-  {
-    "objectID": "projects/games/games.html#game-of-life",
-    "href": "projects/games/games.html#game-of-life",
-    "title": "Steady States: Finding Balance in a Risky World",
-    "section": "Game of Life",
-    "text": "Game of Life\n\n\nCode\n% set our global plot options: \"light mode\"\nset(groot, 'defaultFigureColor', 'w');\nset(groot, 'defaultAxesColor', 'w');\nset(groot, 'defaultAxesXColor', [0.1 0.1 0.1]);\nset(groot, 'defaultAxesYColor', [0.1 0.1 0.1]);\nset(groot, 'defaultTextColor', 'k');\nset(groot, 'defaultLegendTextColor', 'k');   % k == black\nset(groot, 'defaultFigureInvertHardcopy', 'on');\n\n\n\n\nCode\n%%% Simulation Code %%%\n%----------------------\nclear\n\n% Task: build 1000 monte carlo simulations\n\nrng(14) % set seed\nsims = 1000; % num of sims\n\n% to create conways game of life, our universe is a matrix.\n% the non-zero elements are the population\n\nlife = zeros(4); % initalize our 4x4 grid of zeros\n\nrows = [1, 1, 2]; % set our agents\ncols = [1, 2, 2];\nidx = sub2ind(size(life), rows, cols);\nlife(idx) = 1;\n\n% visualize our non-zero points (agents)\nspy(life)\n\n\n\n\n\n\n\nCode\n% t = tiledlayout(1,3,'TileSpacing','Compact');\n%\n% nexttile\n% spy(life_initial); title('t=0')\n%\n% nexttile\n% spy(life_step1); title('t=1')\n%\n% nexttile\n% spy(life_final); title('t=end')\n%% example of combining graphs to help w/ flow"
-  },
-  {
-    "objectID": "projects/games/games.html#general-competitive-equilibrium",
-    "href": "projects/games/games.html#general-competitive-equilibrium",
-    "title": "Steady States: Finding Balance in a Risky World",
-    "section": "General Competitive Equilibrium",
-    "text": "General Competitive Equilibrium"
-  },
-  {
-    "objectID": "projects/games/games.html#extensions",
-    "href": "projects/games/games.html#extensions",
-    "title": "Steady States: Finding Balance in a Risky World",
-    "section": "Extensions",
-    "text": "Extensions\n\n\nn-Agent Economy\n\n\n\nNetwork w/ Intermediaries\n\n\n\nn-Good Economy (?)"
-  },
-  {
-    "objectID": "projects/games/games.html#conclusion",
-    "href": "projects/games/games.html#conclusion",
-    "title": "Steady States: Finding Balance in a Risky World",
-    "section": "Conclusion",
-    "text": "Conclusion\nwhat we learned, confirmed, the things we cannot conclude (need more info), realism, where our models fail (or dont/cant account for), etc."
+    "text": "Intro\nThe 2014 Medicaid expansion in the US….\n\n\nData\ntalk about our data source, cleaning, etc\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\nso what we find is…\n\n\nIdentification Strategy\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\n\n\nResults\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\nwe see that:\n\n\n\n\n\n\nExpansion States\n\n\n\n\n\n\n\nNon-Expansion States\n\n\n\n\n\nin the table, we see numbers:\n\n\n\n\n\nModel 1\nModel 2\n\n\n\n\nweight\n-0.006***\n-0.004***\n\n\n\n(0.001)\n(0.002)\n\n\nlength\n\n-0.083\n\n\n\n\n(0.055)\n\n\nforeign\n\n-1.708\n\n\n\n\n(1.067)\n\n\n_cons\n39.440***\n50.537***\n\n\n\n(1.614)\n(6.246)\n\n\nN\n74\n74\n\n\nR2\n0.652\n0.673\n\n\nadj. R2\n0.647\n0.659\n\n\n\n * p &lt; 0.10, ** p &lt; 0.05, *** p &lt; 0.01\n\nMain Regression Results: The impact of Medicaid expansion on out-of-pocket costs.\n\n\nRobustness Check\n\n\n\n\n\n\nNote&gt;&gt;\n\n\n\n\n\nuse \"data/labor_market.dta\", clear\n\n* Run the primary regression\nregress wages education experience i.industry, vce(robust)\n\n* Export the results for the next section\nesttab using \"results/table1.html\", replace\n\n\n\n\n\nConclusion"
   }
 ]

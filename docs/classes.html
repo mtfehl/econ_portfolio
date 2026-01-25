@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>My Portfolio – Michael Fehl</title>
+<title>Classes – Michael Fehl</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -73,76 +73,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-featured-work .list');
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-image','listing-title','listing-reading-time','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-description','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-description","listing-image"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-featured-work'] = new List('listing-featured-work', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-ongoing-projects .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-title','listing-reading-time','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-ongoing-projects'] = new List('listing-ongoing-projects', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-completed-projects .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-title','listing-reading-time','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-completed-projects'] = new List('listing-completed-projects', options);
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -213,7 +157,7 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="./projects.html"> 
 <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -276,31 +220,23 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#featured-work" id="toc-featured-work" class="nav-link active" data-scroll-target="#featured-work">Featured Work</a></li>
-  <li><a href="#ongoing-projects" id="toc-ongoing-projects" class="nav-link" data-scroll-target="#ongoing-projects">Ongoing Projects</a></li>
-  <li><a href="#completed-projects" id="toc-completed-projects" class="nav-link" data-scroll-target="#completed-projects">Completed Projects</a></li>
-  </ul>
-</nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="R2FtZSUyMFRoZW9yeQ==">Game Theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFjaGluZSUyMExlYXJuaW5n">Machine Learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TWFya2V0cw==">Markets <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TUFUTEFC">MATLAB <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWljcm9lY29ub21pY3M=">Microeconomics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmV0d29ya3M=">Networks <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UHVibGljJTIwUG9saWN5">Public Policy <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(2)</span></div></div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">My Portfolio</h1>
+<h1 class="title">Classes</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     
   
@@ -312,144 +248,91 @@ window.Quarto = {
 </header>
 
 
-<p>Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including R, MATLAB, Stata, and Python.</p>
-<hr>
-<section id="featured-work" class="level2">
-<h2 class="anchored" data-anchor-id="featured-work">Featured Work</h2>
-<div id="listing-featured-work" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="UiUyQ01hY2hpbmUlMjBMZWFybmluZyUyQ1B1YmxpYyUyMFBvbGljeQ==" data-listing-date-sort="1766098800000" data-listing-file-modified-sort="1768589350520" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="91" data-listing-word-count-sort="18007">
-<a href="./projects/car_crash/car_crash.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./images/car_crash_pixel_art.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Modeling the Impact: When Data Hits Hard
-</h5>
-<div class="listing-reading-time card-text text-muted">91 min</div>
-<div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('TWFjaGluZSUyMExlYXJuaW5n'); return false;">Machine Learning</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('UHVibGljJTIwUG9saWN5'); return false;">Public Policy</div>
 
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0">
+<div class="thumbnail"><a href="https://mtfehl.github.io/geospatial/" class="no-external">
+
+<img loading="lazy" src="images/geospatial-cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://mtfehl.github.io/geospatial/" class="no-external">Geospatial Data Science &amp; Econometric Spatial Models</a>
+</h3>
+<div class="delink listing-description"><a href="https://mtfehl.github.io/geospatial/" class="no-external">
+<p>Geospatial Analysis and Mapping &amp; Constructing Spatial Models with Economic Applications..</p>
+</a></div>
 </div>
-<div class="card-text listing-description delink">
-<p>Predicting crash injury severity using penalized classification, kNN, &amp; random forests on NHTSA microdata.</p>
+<div class="metadata">
+<a href="https://mtfehl.github.io/geospatial/" class="no-external">
+</a>
 </div>
 </div>
-</div></a>
+<div class="quarto-post image-right" data-index="1">
+<div class="thumbnail"><a href="https://mtfehl.github.io/finc_metrics/" class="no-external">
+
+<img loading="lazy" src="images/time-series-cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://mtfehl.github.io/finc_metrics/" class="no-external">Econometrics: Time Series</a>
+</h3>
+<div class="delink listing-description"><a href="https://mtfehl.github.io/finc_metrics/" class="no-external">
+<p>Theory &amp; Methodology dealing with Time Series data in Econometrics.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="https://mtfehl.github.io/finc_metrics/" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2">
+<div class="thumbnail"><a href="https://mtfehl.github.io/networks/" class="no-external">
+
+<img loading="lazy" src="images/networks-cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://mtfehl.github.io/networks/" class="no-external">Networks: Concepts &amp; Algorithms</a>
+</h3>
+<div class="delink listing-description"><a href="https://mtfehl.github.io/networks/" class="no-external">
+<p>Network &amp; Graph Theory &amp; Accompanying Algorithms</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="https://mtfehl.github.io/networks/" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3">
+<div class="thumbnail"><a href="https://mtfehl.github.io/econometrics2/" class="no-external">
+
+<img loading="lazy" src="images/econometrics2-cover.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="https://mtfehl.github.io/econometrics2/" class="no-external">Econometrics: Panel Data</a>
+</h3>
+<div class="delink listing-description"><a href="https://mtfehl.github.io/econometrics2/" class="no-external">
+<p>Theory &amp; Methodology dealing with Panel Data in Econometrics.</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="https://mtfehl.github.io/econometrics2/" class="no-external">
+</a>
+</div>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div>
-</section>
-<section id="ongoing-projects" class="level2">
-<h2 class="anchored" data-anchor-id="ongoing-projects">Ongoing Projects</h2>
-<div id="listing-ongoing-projects" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="UHVibGljJTIwUG9saWN5JTJDTmV0d29ya3MlMkNNaWNyb2Vjb25vbWljcw==" data-listing-date-sort="1768950000000" data-listing-file-modified-sort="1769034779135" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="./projects/remittances/remittances.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./images/remittances.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Remittances as a Network Shock Absorber
-</h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHVibGljJTIwUG9saWN5'); return false;">Public Policy</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TmV0d29ya3M='); return false;">Networks</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWljcm9lY29ub21pY3M='); return false;">Microeconomics</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Who absorbs the damages in the event of a macro-level shock in the US? The Mexican immigrant or his family living in Mexico?</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-categories="TUFUTEFCJTJDTmV0d29ya3MlMkNNYXJrZXRzJTJDR2FtZSUyMFRoZW9yeQ==" data-listing-date-sort="1766790000000" data-listing-file-modified-sort="1766837815704" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="52">
-<a href="./projects/games/games.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./images/trading_pixel_art.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Steady States: Finding Balance in a Risky World
-</h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('TUFUTEFC'); return false;">MATLAB</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TmV0d29ya3M='); return false;">Networks</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWFya2V0cw=='); return false;">Markets</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('R2FtZSUyMFRoZW9yeQ=='); return false;">Game Theory</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Simulating resource allocation and risk rationing in a two-agent economy using MATLAB.</p>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-</section>
-<section id="completed-projects" class="level2">
-<h2 class="anchored" data-anchor-id="completed-projects">Completed Projects</h2>
-<div id="listing-completed-projects" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="UiUyQ01hY2hpbmUlMjBMZWFybmluZyUyQ1B1YmxpYyUyMFBvbGljeQ==" data-listing-date-sort="1766098800000" data-listing-file-modified-sort="1768589350520" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="91" data-listing-word-count-sort="18007">
-<a href="./projects/car_crash/car_crash.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./images/car_crash_pixel_art.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Modeling the Impact: When Data Hits Hard
-</h5>
-<div class="listing-reading-time card-text text-muted">91 min</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWFjaGluZSUyMExlYXJuaW5n'); return false;">Machine Learning</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHVibGljJTIwUG9saWN5'); return false;">Public Policy</div>
-
-</div>
-<div class="card-text listing-description delink">
-<p>Predicting crash injury severity using penalized classification, kNN, &amp; random forests on NHTSA microdata.</p>
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-<!-- placeholder -->
-
-
-
-</section>
-
-</main> <!-- /main -->
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

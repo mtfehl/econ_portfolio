@@ -3,7 +3,12 @@
     "listing": "/projects.html",
     "items": [
       "/projects/car_crash/car_crash.html",
+      "/projects/remittances/remittances.html",
       "/projects/games/games.html"
     ]
+  },
+  {
+    "listing": "/classes.html",
+    "items": []
   }
 ]

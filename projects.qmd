@@ -13,6 +13,7 @@ listing:
   - id: ongoing-projects
     contents: 
       - projects/games
+      - projects/remittances
     include:
       ongoing: true
     type: grid
