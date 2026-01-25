@@ -1,7 +1,7 @@
 - title: "Geospatial Data Science & Econometric Spatial Models"
   path: "https://mtfehl.github.io/geospatial/"
-  description: "Geospatial Analysis and Mapping & Constructing Spatial Models with Economic Applications.."
-  image: images/geospatial-cover.png
+  description: "Geospatial Analysis and Mapping & Constructing Spatial Models with Economic Applications."
+  image: images/geospatial-cover.jpg
 - title: "Econometrics: Time Series"
   path: "https://mtfehl.github.io/finc_metrics/"
   description: "Theory & Methodology dealing with Time Series data in Econometrics."
