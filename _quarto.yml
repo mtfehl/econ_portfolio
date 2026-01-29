@@ -1,10 +1,27 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - images/
+    - classes/R/*/images/
+    - classes/STATA/*/images/
 
 website:
   title: "Michael Fehl"
   site-url: "https://mtfehl.github.io/econ_portfolio/"
+  search: true  
+  page-navigation: true
+  back-to-top-navigation: true
+  
+  page-footer:
+    right:
+      - icon: github
+        href: https://github.com/mtfehl
+      - icon: linkedin
+        href: https://linkedin.com/in/michael-t-fehl
+      - icon: envelope
+        href: "mailto:michaelthomasfehl@gmail.com"
+
   navbar:
     left:
       - text: "Home"
@@ -16,13 +33,13 @@ website:
           - text: "Home"
             href: classes.qmd
           - text: "Geospatial"
-            href: https://mtfehl.github.io/geospatial/
+            href: classes/R/geospatial/index.qmd
           - text: "Econometrics: Time Series"
-            href: https://mtfehl.github.io/finc_metrics/
+            href: classes/R/finc_ecm/index.qmd
           - text: "Networks: Concepts & Algorithms"
-            href: https://mtfehl.github.io/networks/
+            href: classes/R/networks/index.qmd
           - text: "Econometrics: Panel Data"
-            href: https://mtfehl.github.io/econometrics2/
+            href: classes/STATA/econometrics2/index.qmd
       - text: "About Me"
         href: about.qmd
       - text: "CV"          
@@ -30,16 +47,135 @@ website:
     right:
       - icon: github
         href: https://github.com/mtfehl
-        #aria-label: GitHub
       - icon: linkedin
         href: https://linkedin.com/in/michael-t-fehl
-        #aria-label: LinkedIn
       - icon: envelope
         href: "mailto:michaelthomasfehl@gmail.com"
-        #aria-label: Email
+        
+  
+  sidebar:
+  - id: "classes-sidebar"
+    style: "floating"
+    collapse-level: 1
+    contents:
+      - section: "Classes"
+        contents: 
+          - text: "Directory"
+            href: classes.qmd
 
+          # 1. GEOSPATIAL
+          - section: "Geospatial Data Science & Economic Spatial Models"
+            contents: 
+              - text: "Home"
+                href: classes/R/geospatial/index.qmd
+              - section: "Class Notes"
+                contents:
+                  - text: "Intro: Vector Data"
+                    href: classes/R/geospatial/notes/01/01.qmd
+                  - text: "st_filter() & st_intersect()"
+                    href: classes/R/geospatial/notes/02/02.qmd
+              - section: "Problem Sets"
+                contents: 
+                  - text: "PS01: Vietnam Road Maps"
+                    href: classes/R/geospatial/problem_sets/01ps/01ps.qmd
+              - section: "Projects"
+                contents:
+                  - text: "Project 01"
+                    href: classes/R/geospatial/projects/project01/project01.qmd
+
+          # 2. TIME SERIES
+          - section: "Econometrics: Time Series"
+            contents: 
+              - text: "Home"
+                href: classes/R/finc_ecm/index.qmd
+              - section: "Class Notes"
+                contents:
+                  - text: "Intro: Time Series & Stationarity"
+                    href: classes/R/finc_ecm/notes/01/intro.qmd
+                  - text: "Models: AR(p), MA(q), ARMA(p,q)"
+                    href: classes/R/finc_ecm/notes/02/models.qmd
+              - section: "Problem Sets"
+                contents:
+                  - text: "PS01: Non-Stationary Transformations"
+                    href: classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.qmd
+              - section: "Projects"
+                contents:
+                  - text: "Project 01"
+                    href: classes/R/finc_ecm/projects/Project01/project01.qmd
+
+          # 3. NETWORKS
+          - section: "Networks: Concepts & Algorithms"
+            contents:
+              - text: "Home"
+                href: classes/R/networks/index.qmd
+              - section: "Class Notes"
+                contents:
+                  - text: "Intro to Networks"
+                    href: classes/R/networks/notes/01/01.qmd
+                  - text: "placeholder"
+                    href: classes/R/networks/notes/02/02.qmd
+              - section: "Problem Sets"
+                contents:
+                  - text: "PS01: placeholder"
+                    href: classes/R/networks/problem_sets/ps01/problem_set.qmd
+                  - text: "PS02: placeholder"
+                    href: classes/R/networks/problem_sets/ps02/ps02.qmd
+              - section: "Projects"
+                contents:
+                  - text: "Project 1: placeholder"
+                    href: classes/R/networks/projects/project1/01project.qmd
+                  - text: "Project 2: placeholder"
+                    href: classes/R/networks/projects/project2/02project.qmd
+
+          # 4. PANEL DATA
+          - section: "Econometrics: Panel Data"
+            contents: 
+              - text: "Home"
+                href: classes/STATA/econometrics2/index.qmd
+              - section: "Class Notes"
+                contents:
+                  - text: "Pooled OLS"
+                    href: classes/STATA/econometrics2/Notes/pooled_ols/pols.qmd
+                  - text: "Random Effects"
+                    href: classes/STATA/econometrics2/Notes/random_effects/re.qmd
+                  - text: "Fixed Effects"
+                    href: classes/STATA/econometrics2/Notes/fixed_effects/fe.qmd
+                  - text: "First Differences"
+                    href: classes/STATA/econometrics2/Notes/first_diff/fd.qmd
+                  - text: "GMM"
+                    href: classes/STATA/econometrics2/Notes/gmm/gmm.qmd
+                  - text: "Anderson-Hsiao & Arellano-Bond"
+                    href: classes/STATA/econometrics2/Notes/anderson_arellano/abond.qmd
+                  - text: "MLE"
+                    href: classes/STATA/econometrics2/Notes/mle/mle.qmd
+                  - text: "Binary Choice Models"
+                    href: classes/STATA/econometrics2/Notes/binary_choice/logit_probit.qmd
+                  - text: "Multinomial Models"
+                    href: classes/STATA/econometrics2/Notes/multinomial/multinomial.qmd
+              - section: "Problem Sets"
+                contents: 
+                  - text: "PS01: POLS-RE-FE-FD"
+                    href: classes/STATA/econometrics2/Problem_Sets/PS01/ps01.qmd
+                  - text: "PS02: RE-FE-FD-Arellano-Bond"
+                    href: classes/STATA/econometrics2/Problem_Sets/PS02/ps02.qmd
+              - section: "Projects"
+                contents:
+                  - text: "Project 01"
+                    href: classes/STATA/econometrics2/Projects/Project01/pj01.qmd
+    
+knitr:
+  opts_chunk:
+    message: false
+    warning: false
+    
+execute:
+  freeze: auto
+  warning: false
+  
 format:
   html:
-    theme: cosmo    
-    css: styles.css
-    toc: true
+    toc: true                
+    toc-depth: 4
+    toc-location: right
+    smooth-scroll: true 
+    linestretch: 1.7

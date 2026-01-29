@@ -16,6 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar {
     background-color: #0f152a !important; /* Slightly darker than body */
     border-bottom: 1px solid #6552D0;
+    padding: 5px 10px;
 }
 
 .navbar-brand, .nav-link {
@@ -183,3 +184,72 @@ nav[role="doc-toc"], #quarto-sidebar, .sidebar {
 }
 
 
+/* 10. Transition between pages */
+
+/* Fade in on page load */
+body {
+  animation: pageFadeIn 0.5s ease-out;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Smooth content appearance */
+.quarto-title-block,
+main {
+  animation: contentSlideUp 0.6s ease-out 0.1s backwards;
+}
+
+@keyframes contentSlideUp {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger animation for sections */
+section {
+  animation: sectionFadeIn 0.7s ease-out backwards;
+}
+
+section:nth-of-type(1) { animation-delay: 0.2s; }
+section:nth-of-type(2) { animation-delay: 0.3s; }
+section:nth-of-type(3) { animation-delay: 0.4s; }
+section:nth-of-type(4) { animation-delay: 0.5s; }
+
+@keyframes sectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add fade-out on link clicks */
+body {
+  transition: opacity 0.3s ease-in-out;
+}
+
+body.fade-out {
+  opacity: 0;
+}

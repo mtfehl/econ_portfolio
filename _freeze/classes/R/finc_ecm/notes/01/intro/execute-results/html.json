@@ -1,0 +1,15 @@
+{
+  "hash": "5dd5d8a77a031543b1c5712c8b57a551",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Basics\"\ndescription: \"Intro to TS basics & stationarity transformations\"\ndate: 01-15-2026\nclass-notes: true\nformat:\n  html:\n    page-layout: full\nimage: \"../../images/stationary.png\" \nexecute:\n  cache: true\n---\n\n# Intro\n\n\n\n\n\n\n::: {.cell}\n\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,301 @@
+---
+title: "Steady States: Finding Balance in a Risky World"
+author: "Michael Fehl"
+description: "Simulating resource allocation and risk rationing in a two-agent economy using MATLAB."
+date: 2025-12-27
+featured: false
+ongoing: true
+categories: [MATLAB, Networks, Markets, Game Theory]
+image: "/images/trading_pixel_art.png"
+format:
+  html:
+    code-fold: true
+    toc: true
+    fig-align: center     
+    fig-cap-location: bottom 
+    fig-responsive: true
+    theme:
+      dark: [darkly, ../../classes/theme-dark.scss]
+      light: [darkly, ../../classes/theme-light.scss]
+---
+
+Project is ongoing in MATLAB. Will get to posting updates on here periodically (eventually).
+
+<u> **CHECKLIST** </u>
+
+# 1.  General Equilibrium
+
+1.  checklist
+    - [x] **Build function skeleton**
+        - [x] Inputs, outputs, additional arguments
+        - [x] How to handle optional arguments
+        - [x] Declare $x_1, x_2$ as variables
+    - [x] **Handle interior solutions**
+        - [x] Calculate $MU_1, MU_2, MRS_a$
+        - [x] Define agent b's allocations in terms of agent a's
+        - [x] Rewrite agent b's utility in terms of agent a's
+        - [x] Find $MRS_b$ with new utility
+        - [x] Find pareto set -- 'solve' $MRS_a = MRS_b^{new}$ for $x_2$
+        - [x] Define pareto set in terms of $x1_a, x2_a, x1_b, x2_b$
+    - [x] **Draw Edgeworth box**
+        - [x] Define $x_1, x_2, Z$
+        - [x] Meshgrid for `x1_range`, `x2_range`
+        - [x] Contours, plot, 'box'
+        - [x] `matlabfunction`
+        - [x] Calculate 'raw' values for $x_1, x_2$
+        - [x] Break up raw values into x & y
+        - [x] Store `raw_x` and `raw_y` in a matrix for plotting
+    - [ ] **Handle edge cases**
+        - [x] Interior solution w/ >1 root (sqrt)
+            - [x] Choose solution closer to origin
+        - [x] Complex numbers
+            - [x] Converting complex values to `NaN`
+        - [ ] Non-differentiable utility (min/max)
+            - [x] Create `min_max` helper function
+            - [x] Create `extract_args` helper function
+            - [x] Perfect complements: different ratios
+                - [x] Plotting region vs just lines
+            - [ ] Check if only one utility is differentiable versus both
+        - [x] Perfect substitutes
+            - [x] Check for perfect subs: logical
+            - [x] Plot solution is the entire box: set values as corners
+            - [x] Add `if` condition in plot section, fill if true
+        - [ ] Corner solutions: exists 'bad'
+        - [x] $MRS = 0$ or $MRS = \infty$ (neutral goods)
+            - [x] Create flag for neutral good preferences, add edge case handler
+            - [x] Case: both agents are neutral to the same good
+            - [x] Case: both agents are neutral to the opposing good
+        - [ ] Plotting pareto set
+            - [x] Pushing out of bounds values to 0
+            - [x] Make sure lines are continuous (sort)
+            - [x] Try-catch in case solve is empty
+            - [ ] Non-diff pareto set: solving for kinks
+                - [x] Solving $x_2 = f(x_1)$ for horizontal
+                - [x] Solving $x_1 = f(x_2)$ for vertical
+                - [ ] Forcing boundary segments
+                - [ ] Create matrix of pts for plotting, sort, clean
+            - [ ] Constant but unequal slopes
+            - [x] Plotting right and left axis for neutral diff $u_1$ & non-diff $u_2$
+            - [ ] Cutting off pareto set at non-real (complex) values
+            - [ ] Plotting single pt -- two opposing neutral goods case
+    - [x] **Clean up plot**
+        - [x] Adjust colors of lines
+        - [x] Set labels, axis bounds, text (2 lines), legend
+            - [x] Legend: put in agent names
+        - [x] Dealing with title (remove)
+        - [x] Adding axis labels for agent b
+            - [x] Defining bounds, labels; 'reverse' of ax1
+            - [x] Dynamically adjust bounds when resizing
+        - [x] Remove excess values (0's at origins, overlap of max values)
+            - [x] 'Set' new values after adjusting
+    - [x] **Tables, output**
+        - [x] Classify goods: good/bad/neutral
+        - [x] Implementing agent and good names
+        - [x] Edge case: ranges of good out of bounds
+        - [x] Edge case: neutral goods for pareto allocation & range
+        - [x] Edge case: pareto set for non-diff utilities
+        
+        
+# Core of the Economy
+
+2. checklist
+    - [ ] **build function skeleton**
+        - [ ] inputs: utility functions, endowments, agent/good names
+        - [ ] outputs: core allocations, blocking coalitions, visualizations
+        - [ ] handle optional arguments (plotting preferences, tolerance levels)
+    - [ ] **compute individual rationality constraints**
+        - [ ] calculate utility at initial endowment for each agent
+        - [ ] define ir feasible region for each agent
+        - [ ] plot ir curves on edgeworth box
+    - [ ] **find blocking coalitions**
+        - [ ] check all possible coalitions (single agents, pairs, grand coalition)
+        - [ ] for each coalition: verify feasibility and strict preference
+        - [ ] identify which allocations are blocked
+    - [ ] **calculate core allocations**
+        - [ ] intersect pareto set with ir constraints
+        - [ ] remove blocked allocations
+        - [ ] handle edge cases: empty core, core = single point, core = entire contract curve
+    - [ ] **visualize core region**
+        - [ ] shade/highlight core region on edgeworth box
+        - [ ] mark boundaries of core (if bounded)
+        - [ ] overlay with pareto set from part 1
+    - [ ] **handle edge cases**
+        - [ ] empty core (no mutually beneficial trades)
+        - [ ] core is entire pareto set
+        - [ ] core is single point
+        - [ ] non-convex preferences affecting core shape
+    - [ ] **clean up plot**
+        - [ ] color coding: ir regions, core region, pareto set
+        - [ ] legend: "core", "ir for agent a", "ir for agent b", "pareto set"
+        - [ ] labels and annotations for key allocations
+        - [ ] dual axes for agent b (from part 1)
+    - [ ] **tables, output**
+        - [ ] display core allocation range for each good
+        - [ ] list utility levels at core boundaries
+        - [ ] report if core is empty/bounded/unbounded
+        - [ ] comparison table: initial endowment vs core allocations
+            
+            
+# Competitive Equilibrium
+
+3. checklist
+    - [ ] **build function skeleton**
+        - [ ] inputs: utility functions, endowments, agent/good names, initial price guess
+        - [ ] outputs: equilibrium prices, allocations, excess demand
+        - [ ] optional: convergence tolerance, max iterations
+    - [ ] **solve for walrasian equilibrium**
+        - [ ] normalize prices (set p₁ = 1 or p₁ + p₂ = 1)
+        - [ ] for each agent: solve utility maximization given budget constraint
+        - [ ] calculate excess demand function z(p)
+        - [ ] find prices where z(p) = 0 using fsolve/fzero
+    - [ ] **handle demand functions**
+        - [ ] derive demand functions for each utility type
+        - [ ] corner solutions when optimal bundle at boundary
+        - [ ] zero demand for goods (neutral goods, satiation)
+    - [ ] **budget constraints**
+        - [ ] calculate budget: p · endowment for each agent
+        - [ ] plot budget lines for each agent
+        - [ ] verify allocations satisfy budget constraints
+    - [ ] **market clearing**
+        - [ ] verify total demand = total supply for each good
+        - [ ] handle numerical precision issues
+        - [ ] check walras' law holds
+    - [ ] **verify equilibrium properties**
+        - [ ] check allocations are pareto optimal
+        - [ ] verify allocations are in the core
+        - [ ] confirm tangency of indifference curves (if interior)
+    - [ ] **first welfare theorem verification**
+        - [ ] verify ce allocation is on pareto set
+        - [ ] check conditions: local non-satiation, convexity
+        - [ ] flag cases where fwt might not hold
+    - [ ] **second welfare theorem implementation**
+        - [ ] select target pareto allocation
+        - [ ] calculate required lump-sum transfers
+        - [ ] verify new equilibrium achieves target allocation
+    - [ ] **handle edge cases**
+        - [ ] multiple equilibria
+        - [ ] no equilibrium (non-existence)
+        - [ ] boundary equilibria (corner solutions)
+        - [ ] zero prices
+        - [ ] perfect substitutes/complements equilibria
+    - [ ] **visualize equilibrium**
+        - [ ] plot ce allocation on edgeworth box
+        - [ ] draw budget lines through equilibrium
+        - [ ] show offer curves for both agents
+        - [ ] mark price ratio slope
+    - [ ] **clean up plot**
+        - [ ] color code: equilibrium point, budget lines, offer curves
+        - [ ] legend: "ce allocation", "agent a budget", "agent b budget", "offer curves"
+        - [ ] display price ratio as text annotation
+        - [ ] overlay with pareto set and core from parts 1-2
+        - [ ] dual axes for agent b
+    - [ ] **tables, output**
+        - [ ] display equilibrium prices (normalized)
+        - [ ] show equilibrium allocations for each agent
+        - [ ] report utility levels at equilibrium
+        - [ ] calculate gains from trade vs initial endowment
+        - [ ] verify market clearing conditions (residuals)
+            
+            
+# Simulations
+
+4. checklist
+    - [ ] **uncertainty module**
+        - [ ] define probability distributions for endowments
+        - [ ] random shocks to preferences (utility parameters)
+        - [ ] stochastic arrival of trading opportunities
+    - [ ] **trading mechanisms**
+        - [ ] bilateral bargaining protocol
+        - [ ] random matching of trading partners
+        - [ ] sequential vs simultaneous trading
+        - [ ] implement trading rules (offer/accept/reject)
+    - [ ] **monte carlo simulations**
+        - [ ] generate random initial conditions
+        - [ ] run multiple iterations (1000+ trials)
+        - [ ] track convergence to equilibrium
+        - [ ] record allocation paths over time
+    - [ ] **convergence analysis**
+        - [ ] measure distance from walrasian equilibrium
+        - [ ] track price discovery process
+        - [ ] analyze speed of convergence
+        - [ ] identify factors affecting convergence rate
+    - [ ] **multi-agent extensions (n > 2)**
+        - [ ] generalize to 3+ agents
+        - [ ] handle n-dimensional allocation space
+        - [ ] compute multi-agent core
+        - [ ] network topology: who can trade with whom
+    - [ ] **network with intermediaries**
+        - [ ] define network graph structure
+        - [ ] intermediaries: nodes connecting non-adjacent agents
+        - [ ] transaction costs/fees for intermediation
+        - [ ] calculate equilibrium with network constraints
+    - [ ] **coalition formation**
+        - [ ] dynamic coalition formation algorithm
+        - [ ] stability concepts: core, nash, strong nash
+        - [ ] payoff distribution within coalitions
+        - [ ] blocking dynamics and re-negotiation
+    - [ ] **time series analysis**
+        - [ ] plot allocation evolution over time
+        - [ ] price dynamics and volatility
+        - [ ] trading volume patterns
+        - [ ] convergence metrics vs iteration count
+    - [ ] **statistical output**
+        - [ ] mean/median equilibrium allocations
+        - [ ] standard deviation of outcomes
+        - [ ] distribution of gains from trade
+        - [ ] success rate of reaching equilibrium
+    - [ ] **handle edge cases**
+        - [ ] non-convergence in simulations
+        - [ ] cycles in allocation space
+        - [ ] network fragmentation (disconnected components)
+        - [ ] computational limits for large n
+    - [ ] **clean up plots**
+        - [ ] time series: allocation trajectories
+        - [ ] heatmaps: frequency of allocations visited
+        - [ ] network graphs: agents as nodes, trades as edges
+        - [ ] histograms: distribution of equilibrium prices
+        - [ ] convergence plots: error vs iteration
+            
+# Visualizations      
+
+5.checklist
+    - [ ] **3d heatmaps for trading activity**
+        - [ ] grid representation of allocation space
+        - [ ] color intensity = frequency of trades at location
+        - [ ] overlay equilibrium and pareto set
+        - [ ] animation over time (optional)
+    - [ ] **coalition formation visualization**
+        - [ ] network graph of agent connections
+        - [ ] color-code coalitions
+        - [ ] show coalition size and composition
+        - [ ] animate coalition dynamics (formation/dissolution)
+    - [ ] **multi-agent edgeworth box alternatives**
+        - [ ] simplex representation for 3 agents
+        - [ ] parallel coordinates for n agents
+        - [ ] projection methods for high dimensions
+    - [ ] **interactive plots**
+        - [ ] slider for price adjustment
+        - [ ] click to select allocations
+        - [ ] toggle visibility of different sets (core, pareto, ce)
+        - [ ] zoom/pan for detailed inspection
+    - [ ] **offer curve visualization**
+        - [ ] plot offer curves for each agent
+        - [ ] intersection point = walrasian equilibrium
+        - [ ] show how curves shift with endowment changes
+    - [ ] **price adjustment dynamics**
+        - [ ] tâtonnement process visualization
+        - [ ] vector field of excess demand
+        - [ ] convergence path to equilibrium
+    - [ ] **comparative statics**
+        - [ ] side-by-side plots for parameter variations
+        - [ ] change in equilibrium vs change in endowments
+        - [ ] sensitivity analysis heatmaps
+    - [ ] **export and presentation**
+        - [ ] save high-resolution figures
+        - [ ] export animations as video/gif
+        - [ ] generate publication-ready plots
+        - [ ] create summary dashboard with all key plots
+    - [ ] **clean up plots**
+        - [ ] consistent color scheme across all visualizations
+        - [ ] professional fonts and sizing
+        - [ ] clear legends and annotations

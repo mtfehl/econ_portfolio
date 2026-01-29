@@ -1,7 +1,15 @@
 ---
 title: "Classes"
+sidebar: false
+body-class: classes-page
+bread-crumbs: false
 listing:
   contents: links.yml
   type: default
 page-layout: full
+format:
+  html:
+    theme:
+      dark: [darkly, classes/theme-dark.scss]
+      light: [darkly, classes/theme-light.scss]
 ---

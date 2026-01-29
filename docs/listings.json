@@ -2,13 +2,61 @@
   {
     "listing": "/projects.html",
     "items": [
-      "/projects/car_crash/car_crash.html",
+      "/projects/car_crash/car_crash_final.html",
       "/projects/remittances/remittances.html",
       "/projects/games/games.html"
     ]
   },
   {
+    "listing": "/classes/STATA/econometrics2/index.html",
+    "items": [
+      "/classes/STATA/econometrics2/Notes/binary_choice/logit_probit.html",
+      "/classes/STATA/econometrics2/Notes/gmm/gmm.html",
+      "/classes/STATA/econometrics2/Notes/mle/mle.html",
+      "/classes/STATA/econometrics2/Notes/multinomial/multinomial.html",
+      "/classes/STATA/econometrics2/Notes/first_diff/fd.html",
+      "/classes/STATA/econometrics2/Notes/fixed_effects/fe.html",
+      "/classes/STATA/econometrics2/Notes/pooled_ols/pols.html",
+      "/classes/STATA/econometrics2/Notes/random_effects/re.html",
+      "/classes/STATA/econometrics2/Notes/anderson_arellano/abond.html",
+      "/classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html",
+      "/classes/STATA/econometrics2/Problem_Sets/PS02/ps02.html",
+      "/classes/STATA/econometrics2/Projects/Project01/pj01.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/geospatial/index.html",
+    "items": [
+      "/classes/R/geospatial/notes/01/01.html",
+      "/classes/R/geospatial/notes/02/02.html",
+      "/classes/R/geospatial/problem_sets/01ps/01ps.html",
+      "/classes/R/geospatial/projects/project01/project01.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/finc_ecm/index.html",
+    "items": [
+      "/classes/R/finc_ecm/notes/01/intro.html",
+      "/classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.html",
+      "/classes/R/finc_ecm/projects/Project01/project01.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/networks/index.html",
+    "items": [
+      "/classes/R/networks/notes/01/01.html",
+      "/classes/R/networks/notes/02/02.html",
+      "/classes/R/networks/problem_sets/ps01/problem_set.html",
+      "/classes/R/networks/projects/project1/01project.html"
+    ]
+  },
+  {
     "listing": "/classes.html",
-    "items": []
+    "items": [
+      "/classes/STATA/econometrics2/index.html",
+      "/classes/R/finc_ecm/index.html",
+      "/classes/R/geospatial/index.html",
+      "/classes/R/networks/index.html"
+    ]
   }
 ]

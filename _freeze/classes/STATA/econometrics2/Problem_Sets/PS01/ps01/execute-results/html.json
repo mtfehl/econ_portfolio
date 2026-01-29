@@ -1,0 +1,15 @@
+{
+  "hash": "82c634d0c43d4e3d7ce63c9130e1a5e0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Problem Set 01: POLS/RE/FE/FD\"\nauthor: \"Michael Fehl, Francesco Zucca, Giuseppe Lista, Dominic Jones\"\nproblem-set: true\nformat: html\n---\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

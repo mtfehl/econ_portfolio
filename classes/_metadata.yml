@@ -1,0 +1,6 @@
+format:
+  html:
+    theme:
+      dark: [darkly, theme-dark.scss]
+      light: [darkly, theme-light.scss]
+sidebar: classes-sidebar

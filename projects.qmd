@@ -36,6 +36,11 @@ listing:
     sort-ui: false
     filter-ui: false
     fields: [image, title, reading-time, description, categories]
+    
+format:
+  html:
+    theme: darkly
+    css: styles.css
 ---
 
 Welcome to my portfolio! Here you will find my project work across domains such as public policy, econometrics, game theory, networks, and machine learning. You can explore these projects by topic or by tool, including R, MATLAB, Stata, and Python.

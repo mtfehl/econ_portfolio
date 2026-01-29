@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/projects.html</loc>
-    <lastmod>2026-01-21T22:32:47.135Z</lastmod>
+    <lastmod>2026-01-29T13:27:58.402Z</lastmod>
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/projects/games/games.html</loc>
-    <lastmod>2025-12-27T12:16:55.704Z</lastmod>
+    <lastmod>2026-01-29T18:24:32.344Z</lastmod>
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/projects/cascades/cascades.html</loc>
@@ -14,19 +14,139 @@
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/index.html</loc>
-    <lastmod>2026-01-17T00:47:55.299Z</lastmod>
+    <lastmod>2026-01-29T12:43:57.442Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Projects/Project01/pj01.html</loc>
+    <lastmod>2026-01-29T07:59:24.965Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html</loc>
+    <lastmod>2026-01-29T13:54:41.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/pooled_ols/pols.html</loc>
+    <lastmod>2026-01-29T07:59:24.929Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/mle/mle.html</loc>
+    <lastmod>2026-01-29T07:59:24.925Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/fixed_effects/fe.html</loc>
+    <lastmod>2026-01-29T07:59:24.916Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/binary_choice/logit_probit.html</loc>
+    <lastmod>2026-01-29T07:59:24.786Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/index.html</loc>
+    <lastmod>2026-01-29T08:11:48.202Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/projects/project1/01project.html</loc>
+    <lastmod>2026-01-29T12:48:06.007Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/problem_sets/ps01/problem_set.html</loc>
+    <lastmod>2026-01-29T12:48:15.725Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/notes/01/01.html</loc>
+    <lastmod>2026-01-29T12:48:22.573Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/geospatial/projects/project01/project01.html</loc>
+    <lastmod>2026-01-29T10:54:03.255Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/geospatial/notes/02/02.html</loc>
+    <lastmod>2026-01-29T10:53:55.636Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/geospatial/index.html</loc>
+    <lastmod>2026-01-29T11:03:58.706Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.html</loc>
+    <lastmod>2026-01-29T12:46:25.961Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/finc_ecm/notes/01/intro.html</loc>
+    <lastmod>2026-01-29T12:46:32.359Z</lastmod>
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/about.html</loc>
-    <lastmod>2026-01-25T19:49:55.499Z</lastmod>
+    <lastmod>2026-01-29T13:26:57.073Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/finc_ecm/index.html</loc>
+    <lastmod>2026-01-29T07:59:46.652Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/finc_ecm/notes/02/models.html</loc>
+    <lastmod>2026-01-29T08:11:39.597Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/finc_ecm/projects/Project01/project01.html</loc>
+    <lastmod>2026-01-29T07:59:47.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/geospatial/notes/01/01.html</loc>
+    <lastmod>2026-01-29T10:53:50.572Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/geospatial/problem_sets/01ps/01ps.html</loc>
+    <lastmod>2026-01-29T10:53:26.239Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/index.html</loc>
+    <lastmod>2026-01-29T07:58:58.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/notes/02/02.html</loc>
+    <lastmod>2026-01-29T12:48:19.042Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/problem_sets/ps02/ps02.html</loc>
+    <lastmod>2026-01-29T12:48:11.889Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/R/networks/projects/project2/02project.html</loc>
+    <lastmod>2026-01-29T12:48:02.925Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/anderson_arellano/abond.html</loc>
+    <lastmod>2026-01-29T07:59:24.786Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/first_diff/fd.html</loc>
+    <lastmod>2026-01-29T07:59:24.916Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/gmm/gmm.html</loc>
+    <lastmod>2026-01-29T07:59:24.916Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/multinomial/multinomial.html</loc>
+    <lastmod>2026-01-29T12:48:59.477Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Notes/random_effects/re.html</loc>
+    <lastmod>2026-01-29T07:59:24.929Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtfehl.github.io/econ_portfolio/classes/STATA/econometrics2/Problem_Sets/PS02/ps02.html</loc>
+    <lastmod>2026-01-29T07:59:24.950Z</lastmod>
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/classes.html</loc>
-    <lastmod>2026-01-25T18:47:41.274Z</lastmod>
+    <lastmod>2026-01-29T12:52:32.608Z</lastmod>
   </url>
   <url>
-    <loc>https://mtfehl.github.io/econ_portfolio/projects/car_crash/car_crash.html</loc>
-    <lastmod>2026-01-16T18:49:10.520Z</lastmod>
+    <loc>https://mtfehl.github.io/econ_portfolio/projects/car_crash/car_crash_final.html</loc>
+    <lastmod>2026-01-29T18:24:59.635Z</lastmod>
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/projects/causal/causal.html</loc>
@@ -34,6 +154,6 @@
   </url>
   <url>
     <loc>https://mtfehl.github.io/econ_portfolio/projects/remittances/remittances.html</loc>
-    <lastmod>2026-01-21T22:32:59.135Z</lastmod>
+    <lastmod>2026-01-25T20:52:36.012Z</lastmod>
   </url>
 </urlset>

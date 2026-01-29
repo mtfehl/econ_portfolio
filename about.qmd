@@ -2,6 +2,10 @@
 title: "Michael Fehl"
 image: images/profile_pic.jpg
 toc: false
+format:
+  html:
+    theme: darkly
+    css: styles.css
 about:
   template: trestles  
   links:
