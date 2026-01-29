@@ -1,0 +1,12 @@
+[submodule "classes/R/geospatial"]
+	path = classes/R/geospatial
+	url = https://github.com/mtfehl/geospatial.git
+[submodule "classes/R/networks"]
+	path = classes/R/networks
+	url = https://github.com/mtfehl/networks.git
+[submodule "classes/STATA/econometrics2"]
+	path = classes/STATA/econometrics2
+	url = https://github.com/mtfehl/econometrics2.git
+[submodule "classes/R/finc_ecm"]
+	path = classes/R/finc_ecm
+	url = https://github.com/mtfehl/finc_metrics.git
