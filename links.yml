@@ -1,19 +1,19 @@
 - title: "Geospatial Data Science & Econometric Spatial Models"
-  path: "classes/R/geospatial/index.qmd"
+  path: "classes/R/geospatial/docs/index.html"
   description: "Geospatial Analysis and Mapping & Constructing Spatial Models with Economic Applications."
   image: images/geospatial-cover.jpg
   
 - title: "Econometrics: Time Series"
-  path: "classes/R/finc_ecm/index.qmd"
+  path: "classes/R/finc_ecm/docs/index.html"
   description: "Theory & Methodology dealing with Time Series data in Econometrics."
   image: images/time-series-cover.png
   
 - title: "Networks: Concepts & Algorithms"
-  path: "classes/R/networks/index.qmd"
+  path: "classes/R/networks/docs/index.html"
   description: "Network & Graph Theory & Accompanying Algorithms"
   image: images/networks-cover.png
   
 - title: "Econometrics: Panel Data"
-  path: "classes/STATA/econometrics2/index.qmd"
+  path: "classes/STATA/econometrics2/docs/index.html"
   description: "Theory & Methodology dealing with Panel Data in Econometrics."
   image: images/econometrics2-cover.png
