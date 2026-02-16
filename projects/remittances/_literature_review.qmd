@@ -1,0 +1,129 @@
+---
+title: "Literature Review"
+author: "Michael Fehl"
+date: 02-01-2026
+tbl-colwidths: [75,25]
+format:
+  html:
+    embed-resources: true
+---
+
+For our research project into remittances from Mexican migrants working in the US, it is important to understand the current state of the research. We are then able to get a clearer picture regarding what has been done, weaknesses/strengths in the research, gaps we could potentially fill in, etc. We can divide up the literature review into different categories to organize our readings a bit better.
+
+::: {.column-page}
+
+::: {#tbl-panel layout-ncol=2 layout-nrow=2}
+
+| Paper | Link |
+|------|------|
+| Caballero, Cadena, & Kovak (2023) “The International Transmission of Local Economic Shocks through Migrant Networks”    |  [Paper](https://www.colorado.edu/faculty/cadena/media/7)    |
+| Kagin, Justin, & Charlton (2014) ”International Migration, Remittances, and the Impacts of the Great Recession in Rural Mexico”    |  [Paper](https://academic.oup.com/book/3872/chapter-abstract/145405667?redirectedFrom=fulltext&login=true)    |
+| Bettin, Presbitero, & Spatafora (2014) "Remittances and Vulnerability in Developing Countries" | [Paper](https://www.imf.org/en/-/media/websites/imf/imported-full-text-pdf/external/pubs/ft/wp/2014/_wp1413.pdf) |
+| Yang (2008): ”International Migration, Remittances, and Household Investment: Evidence From Philippine Migrants’ Exchange Rate Shocks”   |  [Paper](https://www.nber.org/system/files/working_papers/w12325/w12325.pdf)    |
+
+: Remittances {#tbl-first}
+
+| Paper | Link |
+|------|------|
+| Bazzi, Gaduh, Rothenberg, & Wong (2016) "Skill Transferability, Migration, and Development: Evidence from Population Resettlement in Indonesia."    |  [Paper](https://www.stern.nyu.edu/sites/default/files/assets/documents/Skill%20Transferability%2C%20Migration%2C%20and%20Development.pdf) |
+|Caballero, Cadena, & Kovak (2018) “Measuring Geographic Migration Patterns using Matrículas Consulares” |  [Paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC6680024/)    |
+| Massey & Zenteno (1999) ”The Dynamics of Mass Migration”    | [Paper](https://www.jstor.org/stable/47395)|
+| Ward (2020) "The Not-So-Hot Melting Pot: The Persistence of Outcomes for Descendants of the Age of Mass Migration" | [Paper](https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.20170382)
+
+: Migration {#tbl-second}
+
+| Paper | Link |
+|------|------|
+| Amuedo-Dorantes & Pozo (2006) ”Remittances as insurance: evidence from Mexican immigrants”    |  [Paper](https://www.jstor.org/stable/20008008?seq=1)    |
+| Lucas & Stark (1985) ”Motivation to Remit: Evidence from Botswana    |  [Paper](https://www.jstor.org/stable/1833062?seq=2)    |
+| Agarwal & Horowitz (2002): ”Are International Remittances Altruism or Insurance? Evidence from Guyana”    |  [Paper](https://www.sciencedirect.com/science/article/abs/pii/S0305750X02001183)    |
+
+: Motivation {#tbl-third}
+
+| Paper | Link |
+|------|------|
+| Albert & Monras (2022) ”Immigration and Spatial Equilibrium: The Role of Expenditures in the Country of Origin”   |  [Paper](https://crei.cat/wp-content/uploads/2022/04/ISE.pdf)    |
+| Redding & Rossi-Hansberg (2017) ”Quantitative Spatial Economics”    |  [Paper](https://www.princeton.edu/~erossi/QSE.pdf)    |
+| Munshi (2003): ”Networks in the Modern Economy: Mexican Migrants in the U. S. Labor Market”  | [Paper](https://inequality.stanford.edu/sites/default/files/media/_media/pdf/Reference%20Media/Munshi_2003_Social%20Networks.pdf)|
+
+: Networks & Spatial Models {#tbl-fourth}
+
+Literature Review Organization
+:::
+
+:::
+
+Below is a summary of each paper, noting the most important and/or relevant results from it.
+
+## Remittances
+
+*Papers found in* @tbl-first
+
+### Cabarello et Al. (2023)
+
+
+
+### Kagin et Al. (2014)
+
+
+
+### Bettin et Al. (2014)
+
+
+
+### Yang (2008)
+
+
+
+## Migration
+
+*Papers found in* @tbl-second
+
+### Cabarello et Al. (2018)
+
+
+
+### Bazzi et Al. (2016)
+
+
+
+### Massey & Zenteno (1999)
+
+
+
+### Ward (2020) 
+
+
+
+## Motivation
+
+*Papers found in* @tbl-third
+
+### Amuedo-Dorantes & Pozo (2006)
+
+
+
+### Lucas & Stark (1985)
+
+
+
+### Agarwal & Horowitz (2002)
+
+
+
+## Networks & Spatial Models
+
+*Papers found in* @tbl-fourth
+
+### Albert & Monras (2022)
+
+
+
+### Redding & Rossi-Hansberg (2017)
+
+
+
+### Munshi (2003)
+
+
+

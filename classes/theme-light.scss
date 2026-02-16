@@ -36,6 +36,14 @@ $code-block-text-color: $theme-black;
 $code-block-border-color: darken($theme-gray, 30%);
 $code-color: $theme-purple;
 
+/* Mermaid Colors */
+$mermaid-bg-color: transparent;
+$mermaid-edge-color: $theme-black;       // line color 
+$mermaid-node-bg-color: lighten($theme-orange, 15%); 
+$mermaid-node-fg-color: $theme-black;    // node text 
+$mermaid-label-fg-color: $theme-black;   //  label text 
+$mermaid-label-bg-color: $bg-color; 
+
 /*-- scss:rules --*/
 
 // Global doc settings
@@ -125,6 +133,43 @@ h1, h2, h3, h4, h5, h6 {
       transform: translateY(-5px); 
       box-shadow: 0 0 15px $grid-item-glow; 
     }
+}
+
+// flowchart
+.node.nav-node {
+  cursor: pointer;
+  rect, circle, polygon, path {
+    stroke: $theme-black !important;
+    stroke-width: 1px !important;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 0 10px $grid-item-glow);
+    rect, circle, polygon, path {
+       stroke-width: 2px !important;
+    }
+  }
+}
+
+// project node (oval, distinct color)
+.node.project-node {
+  cursor: pointer;
+  rect, circle, polygon, path {
+    fill: #f39c12 !important;
+    stroke: #181818 !important;
+    stroke-width: 1px !important;
+    transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 0 10px $grid-item-glow);
+    rect, circle, polygon, path {
+       stroke-width: 2px !important;
+    }
+  }
 }
 
 

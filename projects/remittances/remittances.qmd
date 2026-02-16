@@ -25,3 +25,7 @@ execute:
   warning: false
   cache: true             
 ---
+
+# Literature Review
+
+A comprehensive, detailed report of each relevant research study can be found [here](_literature_review.qmd) 
