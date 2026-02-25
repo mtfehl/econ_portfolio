@@ -29,7 +29,7 @@ search: false
           > ABOUT
         </a>
         
-        <a href="file/Fehl_Michael.pdf" class="pixel-btn" target="_blank">
+        <a href="file/Fehl_Michael_CV.pdf" class="pixel-btn" target="_blank">
           > CV
         </a>
       </div>

@@ -1,10 +1,33 @@
 [
   {
-    "listing": "/projects.html",
+    "listing": "/classes.html",
     "items": [
-      "/projects/games/final.html",
-      "/projects/remittances/remittances.html",
-      "/projects/car_crash/car_crash_final.html"
+      "/classes/STATA/econometrics2/index.html",
+      "/classes/R/finc_ecm/index.html",
+      "/classes/R/geospatial/index.html",
+      "/classes/R/networks/index.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/geospatial/index.html",
+    "items": [
+      "/classes/R/geospatial/notes/01/01.html",
+      "/classes/R/geospatial/notes/02/02.html",
+      "/classes/R/geospatial/notes/03/03.html",
+      "/classes/R/geospatial/notes/04/raster_intro.html",
+      "/classes/R/geospatial/problem_sets/02ps/02ps_final.html",
+      "/classes/R/geospatial/problem_sets/01ps/01ps.html",
+      "/classes/R/geospatial/problem_sets/03ps/placeholder_name.html",
+      "/classes/R/geospatial/projects/project01/project01.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/networks/index.html",
+    "items": [
+      "/classes/R/networks/notes/01/01.html",
+      "/classes/R/networks/notes/02/02.html",
+      "/classes/R/networks/problem_sets/ps01/problem_set.html",
+      "/classes/R/networks/projects/project1/01project.html"
     ]
   },
   {
@@ -31,34 +54,12 @@
     ]
   },
   {
-    "listing": "/classes/R/networks/index.html",
+    "listing": "/projects.html",
     "items": [
-      "/classes/R/networks/notes/01/01.html",
-      "/classes/R/networks/notes/02/02.html",
-      "/classes/R/networks/problem_sets/ps01/problem_set.html",
-      "/classes/R/networks/projects/project1/01project.html"
-    ]
-  },
-  {
-    "listing": "/classes/R/geospatial/index.html",
-    "items": [
-      "/classes/R/geospatial/notes/01/01.html",
-      "/classes/R/geospatial/notes/02/02.html",
-      "/classes/R/geospatial/notes/03/03.html",
-      "/classes/R/geospatial/notes/04/raster_intro.html",
-      "/classes/R/geospatial/problem_sets/02ps/02ps_final.html",
-      "/classes/R/geospatial/problem_sets/01ps/01ps.html",
-      "/classes/R/geospatial/problem_sets/03ps/placeholder_name.html",
-      "/classes/R/geospatial/projects/project01/project01.html"
-    ]
-  },
-  {
-    "listing": "/classes.html",
-    "items": [
-      "/classes/STATA/econometrics2/index.html",
-      "/classes/R/finc_ecm/index.html",
-      "/classes/R/geospatial/index.html",
-      "/classes/R/networks/index.html"
+      "/projects/games/final.html",
+      "/projects/remittances/remittances.html",
+      "/projects/car_crash/car_crash_final.html",
+      "/projects/voting/voting_paper.pdf"
     ]
   }
 ]

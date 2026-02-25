@@ -46,7 +46,7 @@ website:
       - text: "About Me"
         href: about.qmd
       - text: "CV"          
-        href: file/Fehl_Michael.pdf
+        href: file/Fehl_Michael_CV.qmd
     right:
       - icon: github
         href: https://github.com/mtfehl

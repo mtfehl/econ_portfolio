@@ -1,0 +1,359 @@
+---
+title: "Analysis of Economic Strength and Standard of Living Across Voting Systems"
+description: "Evaluating the effectiveness of voting systems across the world"
+author:
+  - Michael Fehl
+  - Ibrahim Shakhtour
+  - Daisy Xue
+date: "November 29, 2022"
+image: "/images/voting_pixel_art.png"
+categories: [Microeconomics, Public Policy]
+abstract: "This study evaluates the effectiveness of four distinct voting systems: Plurality, Majority, Borda, and Dictatorship. We analyze their relationship with national economic performance. Using a Borda Count method, we rank these systems across six macroeconomic indicators and nine microeconomic variables related to standard of living and civil liberties. The analysis reveals a strong positive link between democratic voting systems and economic strength. Specifically, Plurality and Majority systems consistently outperformed the Borda and Dictatorship models across both macro and microeconomic categories, suggesting that these systems provide a superior foundation for economic development and individual welfare."
+completed: true
+bibliography: references.bib
+cite-method: natbib
+natbiboptions: numbers
+format:
+  pdf:
+    documentclass: article
+    classoption: "11pt, letterpaper"
+    geometry: "margin=1in"
+    linestretch: 1.15
+    include-in-header:
+      text: |
+        \usepackage{lmodern}
+        \usepackage{amsmath}
+        \usepackage{booktabs}
+        \usepackage{graphicx}
+        \usepackage{multirow}
+        \usepackage{caption}
+        \usepackage{float}
+        \usepackage{xcolor}
+        \definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+        \AtBeginDocument{
+          \hypersetup{
+            colorlinks=true,
+            linkcolor=darkblue,
+            filecolor=magenta,
+            urlcolor=darkblue,
+            citecolor=darkblue,
+          }
+        }
+---
+
+\section{1 Introduction}
+The goal of our research is to determine the most effective voting system in the world. However, a key question is how to measure the strength of a given system. We decided to measure the success of a voting system by the economic strength of the countries that use it. By finding common patterns in the data and cross-comparing economic performance against each voting system, we aim to determine which system yields the best outcomes. We use a Borda Count method to rank each voting system, which allows us to determine the preference of these systems and see if they follow similar patterns. We hypothesize that countries under Plurality and Majority voting systems will perform the best under our model.
+
+\section{2 Literature Review}
+Empirical analysis has long suggested a strong correlation between regime type and human welfare. \citet{shah2021} demonstrates that dictatorships exhibit significantly higher rates of infant mortality, crime, and poverty compared to quasi-democratic states. Similarly, \citet{zweifel2000} provide  evidence linking democratic governance to superior health outcomes. Theoretically, the underperformance of autocracies is often attributed to the "dictator’s dilemma," where leaders prioritize rent-seeking and power retention over broad economic utility \citep{wintrobe2009}. As noted by \citet{abdellatif2003}, international frameworks now explicitly identify democratic governance as the primary vehicle for development. Furthermore, substantial literature focuses on how specific institutional arrangements influence economic performance. \citet{acemoglu2005} argue that "inclusive" political institutions are the fundamental cause of long-run growth, whereas "extractive" institutions stifle innovation. Within democratic structures, \citet{persson2003} find that electoral rules have distinct impacts on fiscal policy and public goods provision. The theoretical comparison of voting systems rests on the foundations of Social Choice Theory. While \citet{arrow1951} famously demonstrated the impossibility of a perfect voting system, subsequent research has sought to rank systems based on utility. \citet{merrill1984}, for example, used Monte Carlo simulations to demonstrate the theoretical efficiacy of Borda, Black, and Coombs methods. Despite this extensive theoretical background, there is limited empirical work that directly cross-compares the Borda Count system against Plurality and Dictatorship using strictly economic variables. This paper attempts to bridge that gap by applying a Borda-weighted analysis to recent economic freedom data.
+
+\section{3 Model \& Data Collecting Process}
+We designed our model using a Borda Count method to rank each voting system based on points allocated from various economic variables. We selected four primary voting systems for comparison: Borda, Plurality, Majority, and Dictatorship, analyzing real-world data across diverse regions. For each system, we selected four representative countries, with the exception of the Borda system, where only two countries currently utilize this method. We first cross-compared these systems using six macroeconomic variables. Subsequently, to investigate the relationship between voting systems and the standard of living, we analyzed nine microeconomic variables. Applying the Borda Count method again to these microeconomic indicators, we aggregated the scores to determine an overall ranking and identify the most preferable system.
+
+We utilized "The Economic Freedom Index" dataset from Kaggle, which tracks the economic freedom of 186 countries over two decades. From this dataset, we randomly selected 14 countries across different continents and the four voting rules to ensure a diverse and accurate sample. The data was last updated on February 26, 2019, thereby excluding the anomalous economic impacts of the COVID-19 pandemic.
+
+\section{4 Methodology}
+\label{sec:methodology}
+
+To evaluate the comparative economic strength of each voting system, we analyzed six macroeconomic indicators selected to capture overall national performance. Comprehensive country-level data for these variables can be found in \autoref{tab:macro_data} in the Appendix.
+
+We model the ranking process as a social choice function over a set of alternatives $\mathbf{A}_k$ based on the preferences of a set of criteria $\mathbf{V}_n$. Formally, we define the parameters ($k=4$, $n=6$) as:
+
+\begin{align*}
+    \mathbf{A}_4 &= \{ \text{Borda, Plurality, Majority, Dictatorship} \} \\
+    \mathbf{V}_6 &= \{ \text{GDP per Capita, Inflation, Unemployment, GDP Growth Rate,} \\
+    &\quad \ \ \text{5-Year GDP Growth Rate, Public Debt} \}
+\end{align*}
+
+A Borda Count scoring method was applied to rank the systems based on the mean values of these indicators. For each variable in $\mathbf{V}_6$, the best-performing system received 3 points, the second 2 points, the third 1 point, and the worst-performing system (or those with insufficient data) received 0 points.
+
+\subsection{4.1 GDP Per Capita}
+GDP per Capita was selected to approximate the average output per individual, controlling for population size and allowing for valid comparisons between disparate economies (e.g., Kiribati vs. the United States). 
+
+Initial observations from the data (see \autoref{tab:macro_data}) indicate that Plurality and Majority systems exhibit significantly higher average GDP per Capita compared to Dictatorships. Statistical analysis identified specific outliers: India (Plurality), Papua New Guinea (Majority), and Saudi Arabia (Dictatorship).
+
+To ensure robustness, means were recalculated excluding these outliers. As shown in \autoref{tab:stats_summary}, the removal of outliers smoothed the data set; while the rank order remained unchanged, the performance gap between the Borda system and the Majority/Plurality systems narrowed. The Dictatorship regime performed lowest, with an adjusted average of \$7,648.67.
+
+\subsection{4.2 Inflation}
+Inflation serves as a proxy for currency stability and purchasing power. We posited that lower inflation represents preferable economic health. As indicated in the data set (\autoref{tab:macro_data}), most regimes maintained moderate inflation levels, with Saudi Arabia appearing as a significant outlier.
+
+Due to the absence of reported data for North Korea, the Dictatorship system was assigned a score of 0. Among the remaining systems, the Borda system demonstrated the highest stability with a mean inflation rate of 1.80\%.
+
+\subsection{4.3 Unemployment}
+Unemployment rates were analyzed to gauge labor market health and realized productivity. Sudan was identified as a statistical outlier.
+
+The impact of outlier removal was most pronounced in this category. Including Sudan, the Dictatorship average was 6.925\%; excluding Sudan, it improved to 6.00\%. This adjustment shifted the final rankings: Plurality performed best (4.625\%), followed by Dictatorship (6.00\%), and Majority (6.025\%). The Borda system was unranked due to missing data for Kiribati.
+
+\subsection{4.4 GDP Growth Rate (Current and 5-Year)}
+Current GDP Growth Rate reflects immediate economic health. Outliers were identified as India (Plurality), Ireland (Majority), and China (Dictatorship). Post-adjustment calculations reveal that the Borda system achieved the highest current growth rate (4.05\%), followed by Plurality (2.367\%) and Majority (2.20\%).
+
+For the 5-Year GDP Growth Rate, which indicates medium-term economic outlook, the Majority system outperformed others with an average of 4.75\%. Dictatorships were again unranked due to missing data for North Korea.
+
+\subsection{4.5 Public Debt}
+Public debt relative to GDP acts as a predictor for future investment capacity. \autoref{tab:macro_data} highlights Sudan as an outlier with 126.0\% debt. Excluding Sudan, the Borda system demonstrated the most sustainable debt levels (50.85\%), followed by Majority (59.925\%) and Plurality (88.675\%).
+
+\subsection{4.6 Statistical Summary}
+The comparative statistics, adjusted for outliers, are presented in \autoref{tab:stats_summary}. The final Borda Count rankings derived from these statistics are detailed in \autoref{tab:borda_scores}.
+
+\begin{table}[H]
+    \centering
+    \caption{Comparative Economic Statistics by Electoral System (Outlier-Adjusted Means)}
+    \label{tab:stats_summary}
+    \setlength{\tabcolsep}{8pt}
+    \begin{tabular}{l r r r r}
+        \toprule
+        & \multicolumn{4}{c}{\textbf{Voting System}} \\
+        \cmidrule(l){2-5} 
+        \textbf{Indicator} & \textbf{Borda} & \textbf{Plurality} & \textbf{Majority} & \textbf{Dictatorship} \\
+        \midrule
+        GDP Per Capita & \$18,192 & \$50,628 & \$56,544 & \$7,649 \\
+        Inflation Rate & 1.80\% & 2.50\% & 2.18\% & --- \\
+        Unemployment Rate & --- & 4.63\% & 6.03\% & 6.00\% \\
+        GDP Growth (Annual) & 4.05\% & 2.37\% & 2.20\% & 1.20\% \\
+        GDP Growth (5-Year) & 3.05\% & 3.43\% & 4.75\% & --- \\
+        Public Debt (\% of GDP) & 50.85\% & 88.68\% & 59.93\% & --- \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{5 Microeconomic Analysis: Standards of Living}
+\label{sec:micro_analysis}
+
+To determine if a relationship exists between the economic strength of voting systems and their respective standards of living, we conducted a cross-comparison of the four voting systems against nine microeconomic variables. These variables were selected to provide a comprehensive view of individual well-being, categorized into basic human rights (Property Rights, Judicial Effectiveness) and personal economic welfare. Detailed raw data for these indices can be found in \autoref{tab:institutional_quality} and \autoref{tab:economic_freedoms} in the Appendix.
+
+We model the ranking process as a social choice function over a set of alternatives $\mathbf{A}_k$ based on the preferences of a set of criteria $\mathbf{V}_n$. Formally, we define the parameters ($k=4$, $n=9$) as:
+
+\begin{align*}
+    \mathbf{A}_4 &= \{ \text{Borda, Plurality, Majority, Dictatorship} \} \\
+    \mathbf{V}_9 &= \{ \text{Property Rights, Judicial Effectiveness, Tax Burden, Business Freedom,} \\
+    &\quad \ \ \text{Labor Freedom, Monetary Freedom, Trade Freedom, Investment Freedom, Financial Freedom} \}
+\end{align*}
+
+\subsection{5.1 Property Rights}
+Property rights assess the legal protection of private property and the enforcement of those rights. We calculated the mean property rights index for countries within each voting system. As shown in \autoref{tab:property_rights}, the Plurality system demonstrated the highest protection of property rights, followed by Majority.
+
+\begin{table}[H]
+    \centering
+    \caption{Mean Property Rights Index by Voting System}
+    \label{tab:property_rights}
+    \begin{tabular}{l c c}
+        \toprule
+        \textbf{Voting System} & \textbf{Mean Index Score} & \textbf{Borda Points} \\
+        \midrule
+        Plurality & 78.98 & 3 \\
+        Majority & 71.20 & 2 \\
+        Borda & 60.25 & 1 \\
+        Dictatorship & 41.00 & 0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{5.2 Tax Burden}
+The Tax Burden index reflects the fiscal pressure on individuals and corporations; unlike property rights, a negative correlation exists between this index and standard of living. Note that for Dictatorship, North Korea was omitted due to missing data. The Majority system exhibits the lowest tax burden, while Dictatorship exhibits the highest.
+
+\begin{table}[H]
+    \centering
+    \caption{Mean Tax Burden Index by Voting System}
+    \label{tab:tax_burden}
+    \begin{tabular}{l c c}
+        \toprule
+        \textbf{Voting System} & \textbf{Mean Index Score} & \textbf{Borda Points} \\
+        \midrule
+        Majority & 64.83 & 3 \\
+        Borda & 65.70 & 2 \\
+        Plurality & 74.00 & 1 \\
+        Dictatorship & 85.50 & 0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{5.3 Judicial Effectiveness}
+Judicial effectiveness serves as a proxy for the fairness of the legal system and the protection of basic human rights. Our initial hypothesis posited that Dictatorships would score lowest.
+
+The results in \autoref{tab:judicial_eff} confirm a significant gap between democratic and autocratic systems. Plurality systems scored highest (73.88), while Dictatorships and Borda systems lagged significantly behind.
+
+\begin{table}[H]
+    \centering
+    \caption{Mean Judicial Effectiveness Index by Voting System}
+    \label{tab:judicial_eff}
+    \begin{tabular}{l c c}
+        \toprule
+        \textbf{Voting System} & \textbf{Mean Index Score} & \textbf{Borda Points} \\
+        \midrule
+        Plurality & 73.88 & 3 \\
+        Majority & 67.50 & 2 \\
+        Dictatorship & 41.28 & 1 \\
+        Borda & 40.40 & 0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{5.4 Economic Freedoms}
+We analyzed six specific freedom indices: Business, Labor, Monetary, Trade, Investment, and Financial Freedom. \autoref{tab:freedoms_summary} presents the calculated means for each system across these six variables.
+
+The data reveals a consistent pattern: Plurality and Majority systems dominate the rankings, providing significantly higher degrees of economic liberty. Dictatorships consistently rank last, often with scores less than half that of democratic systems (e.g., Investment Freedom: 18.75 vs. 73.75). The Borda system performed moderately well in Monetary Freedom but struggled in Investment and Financial freedoms.
+
+\begin{table}[H]
+    \centering
+    \caption{Summary of Mean Scores for Economic Freedom Indices}
+    \label{tab:freedoms_summary}
+    \setlength{\tabcolsep}{5pt}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l c c c c c c}
+        \toprule
+        & \multicolumn{4}{c}{\textbf{Mean Index Score (0--100)}} & \\
+        \cmidrule(lr){2-5}
+        \textbf{Variable} & \textbf{Borda} & \textbf{Plurality} & \textbf{Majority} & \textbf{Dictatorship} & \textbf{Winner (3pts)} \\
+        \midrule
+        Business Freedom & 60.60 & 78.93 & 78.70 & 46.40 & Plurality \\
+        Labor Freedom & 55.95 & 69.60 & 69.30 & 47.88 & Plurality \\
+        Monetary Freedom & 82.35 & 76.85 & 80.68 & 51.73 & Borda \\
+        Trade Freedom & 69.60 & 82.95 & 83.88 & 48.50 & Majority \\
+        Investment Freedom & 47.50 & 73.75 & 67.50 & 18.75 & Plurality \\
+        Financial Freedom & 40.00 & 70.00 & 65.00 & 22.50 & Plurality \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}
+
+\section{6 Results}
+\label{sec:results}
+
+In Section 3, we cross-compared six macroeconomic variables. \autoref{tab:borda_scores} presents the final Borda count. The Plurality system ranked highest (13 points), closely followed by Majority (12 points). Borda (8 points) and Dictatorship (3 points) lagged significantly.
+
+Applying the same methodology to the nine microeconomic variables yields the results in the "Micro Score" column of \autoref{tab:borda_scores}. Plurality remains the highest-performing system (22 points), followed by Majority (20 points). The gap widens significantly for the remaining systems, with Dictatorship scoring only 1 point.
+
+\begin{table}[H]
+    \centering
+    \caption{Final Borda Count Scoring}
+    \label{tab:borda_scores}
+    \begin{tabular}{l c c c}
+        \toprule
+        \textbf{Voting System} & \textbf{Macro Score} & \textbf{Micro Score} & \textbf{Total Score} \\
+        & (Max 18) & (Max 27) & (Max 45) \\
+        \midrule
+        \textbf{Plurality} & 13 & 22 & 35 \\
+        \textbf{Majority} & 12 & 20 & 32 \\
+        \textbf{Borda} & 8 & 11 & 19 \\
+        \textbf{Dictatorship} & 3 & 1 & 4 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{7 Discussion}
+\label{sec:discussion}
+The utilization of the Borda count method allowed for the effective ranking of disparate voting systems by aggregating multiple heterogeneous variables (6 macroeconomic and 9 microeconomic). A key strength of this study is the identification of a consistent relationship between economic variables and civil freedoms; the rank order of systems remained largely consistent across both the macro and micro analyses. \\
+However, a primary limitation is the distinction between correlation and causation. While our model establishes a correlation between democratic voting systems (Plurality/Majority) and higher standards of living, it cannot definitively prove causality. External factors such as natural resource endowment, internal conflict, and historical context influence economic outcomes.
+
+\section{8 Conclusion}
+\label{sec:conclusion}
+
+The dual Borda count analyses reveal a positive relationship between the economic strength of a voting system and the quality of life within that system. The Plurality and Majority systems consistently outperformed Borda and Dictatorship systems, supporting our hypothesis that democratic structures correlate with superior economic development and human freedoms. Conversely, Dictatorships exhibited poor economic strength and restricted freedoms. While extraneous factors prevent the declaration of a simple causal link, the data strongly suggests that Plurality and Majority voting systems provide a more favorable environment for economic and social well-being.
+
+\newpage
+\appendix
+\section{A Appendix: Detailed Data Tables}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Macroeconomic Performance Indicators by Country and Voting System}
+    \label{tab:macro_data}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l l c c c c c c}
+        \toprule
+        \textbf{System} & \textbf{Country} & \textbf{GDP Cap} & \textbf{Inflation} & \textbf{Unemp.} & \textbf{Growth} & \textbf{5-Yr Growth} & \textbf{Debt} \\
+        & & (PPP \$) & (\%) & (\%) & (\%) & (\%) & (\% GDP) \\
+        \midrule
+        \textbf{Borda}
+        & Kiribati & 1,976 & 2.2 & 0.0 & 3.1 & 3.6 & 26.3 \\
+        & Slovenia & 34,407 & 1.4 & 6.6 & 5.0 & 2.5 & 75.4 \\
+        \midrule
+        \textbf{Plurality}
+        & UK & 44,118 & 2.7 & 4.3 & 1.8 & 2.2 & 87.0 \\
+        & USA & 59,501 & 2.1 & 4.4 & 2.3 & 2.2 & 107.8 \\
+        & Canada & 48,265 & 1.6 & 6.3 & 3.0 & 2.1 & 89.7 \\
+        & India & 7,183 & 3.6 & 3.5 & 6.7 & 7.2 & 70.2 \\
+        \midrule
+        \textbf{Majority}
+        & PNG & 3,675 & 5.2 & 2.7 & 2.5 & 5.8 & 32.6 \\
+        & Australia & 50,334 & 2.0 & 5.6 & 2.3 & 1.1 & 41.6 \\
+        & France & 43,761 & 1.2 & 9.4 & 1.8 & 2.4 & 97.0 \\
+        & Ireland & 75,538 & 0.3 & 6.4 & 7.8 & 9.7 & 68.5 \\
+        \midrule
+        \textbf{Dictatorship}
+        & N. Korea & 1,700 & 0.0 & 4.8 & 1.1 & 0.0 & 0.0 \\
+        & Saudi Arabia & 54,777 & -0.9 & 5.5 & -0.7 & 2.3 & 17.3 \\
+        & Sudan & 4,586 & 32.4 & 12.7 & 3.2 & 3.0 & 126.0 \\
+        & China & 16,660 & 1.6 & 4.7 & 6.9 & 7.1 & 47.8 \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Institutional Quality Indices: Tax Burden and Judicial Effectiveness}
+    \label{tab:institutional_quality}
+    \begin{tabular}{l l c c c}
+        \toprule
+        \textbf{System} & \textbf{Country} & \textbf{Property Rights} & \textbf{Tax Burden} & \textbf{Judicial Eff.} \\
+        \midrule
+        \textbf{Borda} 
+        & Kiribati & 44.1 & 73.0 & 34.3 \\
+        & Slovenia & 76.4 & 58.4 & 46.5 \\
+        \midrule
+        \textbf{Plurality}
+        & UK & 92.3 & 64.7 & 85.9 \\
+        & USA & 79.3 & 75.1 & 78.6 \\
+        & Canada & 87.0 & 76.8 & 69.4 \\
+        & India & 57.3 & 79.4 & 61.6 \\
+        \midrule
+        \textbf{Majority}
+        & PNG & 37.4 & 71.8 & 49.0 \\
+        & Australia & 79.1 & 62.8 & 86.5 \\
+        & France & 82.5 & 48.4 & 66.1 \\
+        & Ireland & 85.8 & 76.3 & 68.4 \\
+        \midrule
+        \textbf{Dictatorship} 
+        & N. Korea & 31.6 & 0.0 & 5.0 \\
+        & Saudi Arabia & 55.0 & 99.8 & 62.7 \\
+        & Sudan & 27.5 & 86.3 & 22.2 \\
+        & China & 49.9 & 70.4 & 75.2 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Economic Freedom Indices by Country (Scale 0-100)}
+    \label{tab:economic_freedoms}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l l c c c c c c}
+        \toprule
+        \textbf{System} & \textbf{Country} & \textbf{Business} & \textbf{Labor} & \textbf{Monetary} & \textbf{Trade} & \textbf{Invest.} & \textbf{Financ.} \\
+        \midrule
+        \textbf{Borda}
+        & Kiribati & 41.9 & 50.7 & 81.1 & 53.2 & 25 & 30 \\
+        & Slovenia & 79.3 & 61.2 & 83.6 & 86.0 & 70 & 50 \\
+        \midrule
+        \textbf{Plurality}
+        & UK & 92.9 & 73.5 & 81.2 & 86.0 & 90 & 80 \\
+        & USA & 83.8 & 89.4 & 76.6 & 86.6 & 85 & 80 \\
+        & Canada & 81.9 & 73.7 & 77.2 & 86.8 & 80 & 80 \\
+        & India & 57.1 & 41.8 & 72.4 & 72.4 & 40 & 40 \\
+        \midrule
+        \textbf{Majority}
+        & PNG & 62.2 & 72.6 & 70.0 & 80.9 & 25 & 30 \\
+        & Australia & 88.3 & 84.1 & 86.6 & 87.6 & 80 & 90 \\
+        & France & 81.2 & 45.2 & 79.1 & 81.0 & 75 & 70 \\
+        & Ireland & 83.1 & 75.3 & 87.0 & 86.0 & 90 & 70 \\
+        \midrule
+        \textbf{Dictatorship}
+        & N. Korea & 5.0 & 5.0 & 0.0 & 0.0 & 0 & 0 \\
+        & Saudi Arabia & 72.3 & 63.3 & 78.1 & 76.0 & 45 & 50 \\
+        & Sudan & 52.1 & 59.0 & 56.9 & 45.0 & 5 & 20 \\
+        & China & 56.2 & 64.2 & 71.9 & 73.0 & 25 & 20 \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}

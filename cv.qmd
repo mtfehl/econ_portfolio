@@ -1,0 +1,114 @@
+---
+title: "CV"
+toc: false
+format:
+  html:
+    css: cv.css
+    page-layout: article
+    title-block-style: none
+---
+
+::: {.cv-container}
+
+# Michael Fehl {.cv-name}
+
+::: {.cv-contact}
+Date of Birth: 19/01/2001 | Nationality: American \
+Mobile: +34 604 42 66 33 | [michael.fehl@bse.eu](mailto:michael.fehl@bse.eu) \
+[linkedin.com/in/michael-t-fehl](https://www.linkedin.com/in/michael-t-fehl) | [mtfehl.github.io/econ_portfolio/](https://mtfehl.github.io/econ_portfolio/)
+:::
+
+## Education
+
+::: {.entry}
+::: {.entry-row}
+[**Barcelona School of Economics**]{.entry-left} [Barcelona, Spain]{.entry-right}
+:::
+::: {.entry-row}
+[*Master Program in Economics & Finance*]{.entry-left} [09/2025 -- 07/2026]{.entry-right}
+:::
+**Relevant Courses:** Advanced Panel Data Methods, Nonparametric Methods & Distributional Analysis, Nowcasting & Forecasting, Network Econometrics, Network Algorithms, Geospatial DS & Economic Spatial Models
+
+Degree awarded by Universitat Pompeu Fabra and Universitat Autònoma de Barcelona.
+:::
+
+::: {.entry}
+::: {.entry-row}
+[**University of North Carolina at Chapel Hill**]{.entry-left} [Chapel Hill, USA]{.entry-right}
+:::
+::: {.entry-row}
+[*Bachelor of Science in Economics*]{.entry-left} [08/2019 -- 05/2023]{.entry-right}
+:::
+*Philosophy, Politics, & Economics Minor*
+:::
+
+## Professional Experience
+
+::: {.entry}
+::: {.entry-row}
+[**Resource Allocation under Uncertainty & Network Dynamics**]{.entry-left} [Personal Project]{.entry-right}
+:::
+::: {.entry-row}
+[*Lead Researcher | MATLAB*]{.entry-left} [12/2025 -- Present]{.entry-right}
+:::
+- Developing a general equilibrium model in MATLAB to simulate multi-agent trade under uncertainty.
+- Programming algorithms to solve for Walrasian equilibria and the core, validating results against the First & Second Welfare Theorems.
+- Modeling network structures with intermediaries to analyze how coalitions impact market efficiency.
+- Constructing 3D spatiotemporal visualizations to track the density of goods & utility across populations.
+- Integrating Conway's "Game of Life" to study emergent market behaviors and the distribution of goods.
+:::
+
+::: {.entry}
+::: {.entry-row}
+[**Duke University**]{.entry-left} [Durham, USA]{.entry-right}
+:::
+::: {.entry-row}
+[*Teaching Assistant | Excel, R*]{.entry-left} [06/2024 -- 01/2025]{.entry-right}
+:::
+- Imported & cleaned raw economic data from BEA and FRED using R to model industry profit trends.
+- Investigated key macro indicator trends during recessions & expansions in Excel & R.
+- Designed interactive dashboards to display updated macro indicators and corporate profits.
+- Developed automated tables in Excel that refresh macro data and dynamically update charts.
+:::
+
+::: {.entry}
+::: {.entry-row}
+[**University of North Carolina at Chapel Hill**]{.entry-left} [Chapel Hill, USA]{.entry-right}
+:::
+::: {.entry-row}
+[*Researcher | R*]{.entry-left} [02/2024 -- 04/2024]{.entry-right}
+:::
+- Cleaned & analyzed a dataset of 32,000,000 observations in R using efficient data-handling.
+- Conducted a comparative analysis of machine learning models, including Random Forests, SVM, and gradient-boosting to optimize predictive performance.
+- Engineered an XGBoost classifier that achieved 88.4% accuracy in predicting customer behavior, outperforming baseline models.
+- Visualized model interpretability and hyperparameter tuning results through feature importance plots, confusion matrices, and ROC curves.
+:::
+
+::: {.entry}
+::: {.entry-row}
+[**University of North Carolina at Chapel Hill**]{.entry-left} [Chapel Hill, USA]{.entry-right}
+:::
+::: {.entry-row}
+[*Researcher | Stata*]{.entry-left} [07/2023 -- 08/2023]{.entry-right}
+:::
+- Modeled regressions in Stata on DHS panel data to predict health outcomes of women & children.
+- Found evidence that a new family planning policy was effective in increasing modern contraceptive usage.
+:::
+
+## Skills & Languages
+
+::: {.skills-table}
+| | |
+|:---|:---|
+| **Analytical Methods** | Causal Inference, A/B Testing, Time Series Forecasting, Spatial Econometrics, Machine Learning |
+| **Software & Tools** | R, Python, Stata, MATLAB, SQL, Excel, LaTeX, Quarto, Shiny |
+| **Languages** | English (Native), Spanish (Intermediate) |
+:::
+
+## Additional Information
+
+- **Systematic Literature Review Volunteer**, Water Institute, UNC Chapel Hill (2024): Read, filtered, and sorted literature relevant to WASH research.
+- **Volunteer**, Carolina Covid Service Corps, UNC Chapel Hill (2021): Administered COVID-19 testing services to thousands of students on campus.
+- **Research Interests:** Applied Microeconomics, Econometrics, Machine Learning, Game Theory.
+
+:::

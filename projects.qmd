@@ -30,6 +30,7 @@ listing:
     contents: 
       - projects/car_crash
       - projects/games
+      - projects/voting
     include:
       completed: true
     type: grid

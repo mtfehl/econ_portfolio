@@ -28,26 +28,27 @@ about:
 
 Currently, I am pursuing my Master's in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis. 
 
-I am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.
+I am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand the world around us, such that we can strive to generate positive change.
 
-Beyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.
+Beyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods. I like to spend my free time supporting FC Barcelona, going on hikes, or reading at the beach.
 
 ---
 
 ### Ongoing Projects
 
 * **Thesis:** Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Dif-in-Difs methodology in Stata
-* **Project:** Geospatial analysis of migration networks: Constructing spatial migration patterns between Mexico & USA using R
-* **Project:** Replicating Conway's Game of Life & modeling partial equilibrium in a two-agent, two-good economy in MATLAB
-* **Project:** Modeling information cascades and belief propagation through agent-based modeling in Python
+* **Project:** Geospatial analysis of migration networks: visualizing spatial migration patterns between Mexico & USA using R and responsiveness to US policy shocks
+* **Project**: Investigating economic shocks propagated through migration networks via a connected origin city using network machine learning
+* **Project:** Aggregating tabular, text, and time series data in Python to manually construct SQL databases for ML models 
 
 ### Toolkit
 
 * **Languages:** R, Python, MATLAB, Stata
-* **Tools:** Quarto, SQL, LaTeX, SASS
+* **Tools:** Quarto, SQL, $\LaTeX$, SCSS, Git
 
 ### Research Interests
 
-* Causal Inference & Policy Evaluation
-* Networks, Crowds, and Strategic Interaction
+* Causal Inference and Policy Evaluation
+* Networks and Strategic Interaction
 * Machine Learning
+* Game Theory

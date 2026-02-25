@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -132,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./file/Fehl_Michael.pdf"> 
+    <a class="nav-link" href="./file/Fehl_Michael_CV.pdf"> 
 <span class="menu-text">CV</span></a>
   </li>  
 </ul>
@@ -197,31 +226,32 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>BSc in Economics</strong> from <strong>UNC Chapel Hill</strong>.</p>
 <p><strong>MSc Economics Candidate @ Barcelona School of Economics</strong></p>
 <p>Currently, I am pursuing my Master’s in Economics at the Barcelona School of Economics. My research interests revolve around game theory, causal inference, public policy, and network analysis.</p>
-<p>I am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive impactful change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand and improve the world around us.</p>
-<p>Beyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods to enhance data interpretation and decision-making.</p>
+<p>I am passionate about applying econometric methods to real-world datasets to inform policy decisions and drive change. I believe that through data, we can uncover hidden patterns and extract valuable insights that help us better understand the world around us, such that we can strive to generate positive change.</p>
+<p>Beyond core economics, I am also deeply interested in dynamic data visualizations and machine learning methods. I like to spend my free time supporting FC Barcelona, going on hikes, or reading at the beach.</p>
 <hr>
 <section id="ongoing-projects" class="level3">
 <h3 data-anchor-id="ongoing-projects">Ongoing Projects</h3>
 <ul>
 <li><strong>Thesis:</strong> Analyzing the effects of macro-level shocks on remittance transfers between the USA and Mexico, using Dif-in-Difs methodology in Stata</li>
-<li><strong>Project:</strong> Geospatial analysis of migration networks: Constructing spatial migration patterns between Mexico &amp; USA using R</li>
-<li><strong>Project:</strong> Replicating Conway’s Game of Life &amp; modeling partial equilibrium in a two-agent, two-good economy in MATLAB</li>
-<li><strong>Project:</strong> Modeling information cascades and belief propagation through agent-based modeling in Python</li>
+<li><strong>Project:</strong> Geospatial analysis of migration networks: visualizing spatial migration patterns between Mexico &amp; USA using R and responsiveness to US policy shocks</li>
+<li><strong>Project</strong>: Investigating economic shocks propagated through migration networks via a connected origin city using network machine learning</li>
+<li><strong>Project:</strong> Aggregating tabular, text, and time series data in Python to manually construct SQL databases for ML models</li>
 </ul>
 </section>
 <section id="toolkit" class="level3">
 <h3 data-anchor-id="toolkit">Toolkit</h3>
 <ul>
 <li><strong>Languages:</strong> R, Python, MATLAB, Stata</li>
-<li><strong>Tools:</strong> Quarto, SQL, LaTeX, SASS</li>
+<li><strong>Tools:</strong> Quarto, SQL, <span class="math inline">\(\LaTeX\)</span>, SCSS, Git</li>
 </ul>
 </section>
 <section id="research-interests" class="level3">
 <h3 data-anchor-id="research-interests">Research Interests</h3>
 <ul>
-<li>Causal Inference &amp; Policy Evaluation</li>
-<li>Networks, Crowds, and Strategic Interaction</li>
+<li>Causal Inference and Policy Evaluation</li>
+<li>Networks and Strategic Interaction</li>
 <li>Machine Learning</li>
+<li>Game Theory</li>
 </ul>
 
 
