@@ -4,15 +4,17 @@ listing:
   - id: featured-work
     contents: 
       - projects/car_crash
+      - projects/games
+      - projects/remittances
     include:
       featured: true
     type: grid
     grid-columns: 3
+    sort: "date desc"
     fields: [image, title, reading-time, description, categories]
     
   - id: ongoing-projects
     contents: 
-      - projects/games
       - projects/remittances
     include:
       ongoing: true
@@ -27,6 +29,7 @@ listing:
   - id: completed-projects
     contents: 
       - projects/car_crash
+      - projects/games
     include:
       completed: true
     type: grid

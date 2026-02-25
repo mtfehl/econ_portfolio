@@ -53,6 +53,26 @@ h1, h2, h3, h4, h5, h6 {
     color: #b0a8e0;
 }
 
+/* Make each listing a single-row horizontal scroller */
+#featured-work .list.grid,
+#ongoing-projects .list.grid,
+#completed-projects .list.grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+#featured-work .quarto-grid-item,
+#ongoing-projects .quarto-grid-item,
+#completed-projects .quarto-grid-item {
+  flex: 0 0 auto !important;
+  width: calc(33.333% - 1rem) !important;
+  max-width: calc(33.333% - 1rem) !important;
+  min-width: 250px;
+}
+
 /* 5. Code Blocks */
 pre, code, .cell-output {
     background-color: #0f152a !important; /* Darker background for code */

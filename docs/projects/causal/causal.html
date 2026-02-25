@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Michael Fehl">
-<meta name="dcterms.date" content="2026-01-16">
+<meta name="dcterms.date" content="2026-02-25">
 
 <title>Scaling the financial relief of an expanded safety net – Michael Fehl</title>
 <style>
@@ -173,9 +173,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#identification-strategy" id="toc-identification-strategy" class="nav-link" data-scroll-target="#identification-strategy">Identification Strategy</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#robustness-check" id="toc-robustness-check" class="nav-link" data-scroll-target="#robustness-check">Robustness Check</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
@@ -208,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 16, 2026</p>
+      <p class="date">February 25, 2026</p>
     </div>
   </div>
   
@@ -239,33 +237,23 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre class="{stata data}"><code>use "data/labor_market.dta", clear
+<p>``{stata data} use “data/labor_market.dta”, clear</p>
+<ul>
+<li><p>Run the primary regression regress wages education experience i.industry, vce(robust)</p></li>
+<li><p>Export the results for the next section esttab using “results/table1.html”, replace</p></li>
+</ul>
+<pre><code>
+:::
 
-* Run the primary regression
-regress wages education experience i.industry, vce(robust)
+so what we find is...
 
-* Export the results for the next section
-esttab using "results/table1.html", replace</code></pre>
-</div>
-</div>
-</div>
-<p>so what we find is…</p>
-</section>
-<section id="identification-strategy" class="level1">
-<h1>Identification Strategy</h1>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>&gt;&gt;
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<pre class="{stata id}"><code>use "data/labor_market.dta", clear
+# Identification Strategy
+
+::: {.callout-note collapse="true" appearance="minimal"}
+## &gt;&gt;
+
+``{stata id}
+use "data/labor_market.dta", clear
 
 * Run the primary regression
 regress wages education experience i.industry, vce(robust)
@@ -279,7 +267,7 @@ esttab using "results/table1.html", replace</code></pre>
 <section id="results" class="level1">
 <h1>Results</h1>
 <div class="callout callout-style-simple callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -288,126 +276,61 @@ esttab using "results/table1.html", replace</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre class="{stata results}"><code>use "data/labor_market.dta", clear
+<p>``{stata results} use “data/labor_market.dta”, clear</p>
+<ul>
+<li><p>Run the primary regression regress wages education experience i.industry, vce(robust)</p></li>
+<li><p>Export the results for the next section esttab using “results/table1.html”, replace</p></li>
+</ul>
+<pre><code>
+:::
 
-* Run the primary regression
-regress wages education experience i.industry, vce(robust)
+we see that:
 
-* Export the results for the next section
-esttab using "results/table1.html", replace</code></pre>
-</div>
-</div>
-</div>
-<p>we see that:</p>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="results/graph_control.jpg" class="img-fluid figure-img"></p>
-<figcaption>Expansion States</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="results/graph_treatment.jpg" class="img-fluid figure-img"></p>
-<figcaption>Non-Expansion States</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>in the table, we see numbers:</p>
-<div class="stata-table-wrapper">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Model 1</th>
-<th style="text-align: center;">Model 2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>weight</td>
-<td style="text-align: center;">-0.006***</td>
-<td style="text-align: center;">-0.004***</td>
-</tr>
-<tr class="even">
-<td></td>
-<td style="text-align: center;">(0.001)</td>
-<td style="text-align: center;">(0.002)</td>
-</tr>
-<tr class="odd">
-<td>length</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">-0.083</td>
-</tr>
-<tr class="even">
-<td></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">(0.055)</td>
-</tr>
-<tr class="odd">
-<td>foreign</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">-1.708</td>
-</tr>
-<tr class="even">
-<td></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">(1.067)</td>
-</tr>
-<tr class="odd">
-<td>_cons</td>
-<td style="text-align: center;">39.440***</td>
-<td style="text-align: center;">50.537***</td>
-</tr>
-<tr class="even">
-<td></td>
-<td style="text-align: center;">(1.614)</td>
-<td style="text-align: center;">(6.246)</td>
-</tr>
-<tr class="odd">
-<td><em>N</em></td>
-<td style="text-align: center;">74</td>
-<td style="text-align: center;">74</td>
-</tr>
-<tr class="even">
-<td><em>R</em><sup>2</sup></td>
-<td style="text-align: center;">0.652</td>
-<td style="text-align: center;">0.673</td>
-</tr>
-<tr class="odd">
-<td>adj. <em>R</em><sup>2</sup></td>
-<td style="text-align: center;">0.647</td>
-<td style="text-align: center;">0.659</td>
-</tr>
-</tbody>
-</table>
-<p><br> * <em>p</em> &lt; 0.10, ** <em>p</em> &lt; 0.05, *** <em>p</em> &lt; 0.01</p>
-</div>
-<p>Main Regression Results: The impact of Medicaid expansion on out-of-pocket costs.</p>
-</section>
-<section id="robustness-check" class="level1">
-<h1>Robustness Check</h1>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>&gt;&gt;
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<pre class="{stata robust}"><code>use "data/labor_market.dta", clear
+
+::: {layout-ncol=2}
+
+![Expansion States](results/graph_control.jpg)
+
+![Non-Expansion States](results/graph_treatment.jpg)
+
+:::
+
+in the table, we see numbers:
+
+
+&lt;div class="stata-table-wrapper"&gt;
+
+|              |      Model 1    |      Model 2    |
+| ------------ | :-------------: | :-------------: |
+| weight       |       -0.006*** |       -0.004*** |
+|              |      (0.001)    |      (0.002)    |
+| length       |                 |       -0.083    |
+|              |                 |      (0.055)    |
+| foreign      |                 |       -1.708    |
+|              |                 |      (1.067)    |
+| \_cons       |       39.440*** |       50.537*** |
+|              |      (1.614)    |      (6.246)    |
+| *N*          |           74    |           74    |
+| *R*&lt;sup&gt;2&lt;/sup&gt; |        0.652    |        0.673    |
+| adj. *R*&lt;sup&gt;2&lt;/sup&gt; |        0.647    |        0.659    |
+
+&lt;br&gt;
+* *p* &lt; 0.10, ** *p* &lt; 0.05, *** *p* &lt; 0.01
+
+
+&lt;/div&gt;
+
+Main Regression Results: The impact of Medicaid expansion on out-of-pocket costs.
+
+# Robustness Check
+
+::: {.callout-note collapse="true" appearance="minimal"}
+## &gt;&gt;
+
+``{stata robust}
+use "data/labor_market.dta", clear
 
 * Run the primary regression
 regress wages education experience i.industry, vce(robust)

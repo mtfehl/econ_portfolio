@@ -1,0 +1,315 @@
+---
+title: "Steady States: Finding Balance in a Risky World"
+description: "A general equilibrium model of two-agent, two-good trade"
+author: Michael Fehl
+date: today
+featured: true
+completed: true
+categories: [MATLAB, Networks, Markets, Game Theory]
+image: "/images/trading_pixel_art.png"
+format:
+  html:
+    theme:
+      dark: [darkly, ../../classes/theme-dark.scss]
+      light: [darkly, ../../classes/theme-light.scss]
+    toc: true
+    toc-depth: 3
+    code-fold: true       
+    math: mathjax
+    fig-align: center     
+    fig-cap-location: bottom 
+    fig-responsive: true
+execute:
+  echo: true
+  eval: false
+  freeze: auto
+---
+
+**OUTLINE OF THE WRITEUP**
+
+[Link](https://www.linkedin.com/feed/update/urn:li:activity:7431253938743533568/) to see a preview of the algorithm
+
+*note*: how much code should be included? perhaps only what is necessary to explain each section (could do code folding for most of the algos, just highlighting only the 'most important' parts)
+
+# 1. Introduction
+
+hook: two people, different tastes (utilities), fixed resources. what happens?
+The five questions this project answers (matching the five sections)
+
+A preview figure: the final Edgeworth box with Pareto set, core, CE, offer curves
+
+# 2. The Economic Setup
+
+## 2.1 Agents, Goods, and Preferences
+
+Define $u_1(x_1, x_2)$, $u_2(x_1, x_2)$ in prose: what utility means, why it's ordinal. dive into primitive notions of utility, preferences, and assumptions underlying these notions.
+
+Math block: the general form, then the running example 
+
+$$u_\text{Yuri}(x_1, x_2) = x_1(x_2 + 3), \quad u_\text{Zack}(x_1, x_2) = x_1(x_2 + 2)$$
+
+Brief note on the types of preferences the model handles (normal, Leontief, convex, non-quasi-concave)
+
+## 2.2 Endowments and the Edgeworth Box
+
+What an endowment is; total endowment $\omega = \omega_1 + \omega_2$
+
+The Edgeworth box: explain the geometry in plain language
+
+Figure: the empty Edgeworth box diagram with axes labeled, endowment point marked
+
+Callout box: "Every interior point of the box is a complete allocation of all goods. No resources are wasted."
+
+## 2.3 The Marginal Rate of Substitution
+
+Define $MRS = \frac{MU(x_1)}{MU(x_2)}$; the slope of an indifference curve
+
+Math block: general formula, then computed for the running example
+
+Why MRS is the key to efficiency: it measures willingness to trade
+
+# 3. Pareto Optimality
+
+## 3.1 The Concept
+
+Definition: an allocation is Pareto optimal if no reallocation makes one agent better off without harming the other
+
+Geometric interpretation: tangency of indifference curves
+
+Figure: Edgeworth box showing two indifference curves tangent at a Pareto optimal point vs. crossing at a non-optimal point
+
+## 3.2 The MRS Condition
+
+$$\text{MRS}_A(x_1, x_2) = \text{MRS}_B(\omega_1 - x_1,; \omega_2 - x_2)$$
+
+Derivation: why equal MRS means no mutually beneficial trade exists
+
+The substitution: B's utility written in A's coordinate frame
+
+## 3.3 Special Preference Cases
+
+
+::: {#special-preferences layout-ncol=2 layout-nrow=2}
+
+Normal (differentiable): smooth contract curve via MRS = MRS
+
+Leontief / min: L-shaped curves - Pareto set is a region, not a curve
+
+Convex / max: reverse-L curves - Pareto set is the boundary
+
+Non-quasi-concave: bowl-shaped curves - interior tangencies are minima, not maxima; Pareto set on boundary via grid dominance
+
+Satiation Points
+
+:::
+
+
+## 3.4 The Solver Decision Tree
+
+Prose + flowchart diagram of how solveParetoSet dispatches: classify --> neutral?  -->  constant MRS?  -->  bordered Hessian test  -->  interior / boundary path
+
+Brief explanation of paretoBoundary: why a 100×100 grid dominance check is needed
+
+## 3.5 Results
+
+Figure: the full Edgeworth box for the running example with the Pareto set (white contract curve)
+
+Console output: the efficiency range table
+
+Callout box: "The contract curve is the locus of all deals both agents could agree are efficient; but it says nothing about which one they'd actually choose."
+
+# 4. The Core
+
+## 4.1 Individual Rationality
+
+Why efficiency alone isn't enough: agents have outside options (their own endowment)
+
+IR constraint: $u_i(allocation) \geq u_i(endowment)$
+
+Math block: the two IR inequalities
+
+## 4.2 The Core
+
+Definition: Pareto set $\cap$ IR region
+
+Geometric interpretation: the segment of the contract curve between the two IR indifference curves
+
+Callout box: "The core contains every allocation that is simultaneously efficient and voluntarily acceptable. Neither agent would prefer to walk away."
+
+## 4.3 Results
+
+Figure: Edgeworth box with IR boundary curves (dotted), core highlighted in cyan, endowment (yellow square)
+
+Note on degenerate cases: when the core collapses to a point vs. when it spans the entire contract curve
+
+# 5. Competitive Equilibrium
+
+## 5.1 The Walrasian Setup
+
+Price normalization: $p_1 = 1$, find $p_2^*$
+
+Budget constraint: each agent sells their endowment at market prices, buys their preferred bundle 
+
+$$p_1 x_1 + p_2 x_2 = p_1 w_{i,1} + p_2 w_{i,2}$$
+
+Market clearing: demand_A(p2) + demand_B(p2) = $\omega$ (by Walras' Law)
+
+## 5.2 Deriving Demand
+
+The utility maximization problem: Lagrangian, FOC $\frac{MU(x_1)}{MU(x_2)} = \frac{p_1}{p_2}$, budget binding
+
+Key engineering point: `makeDemandFn()` derives the formula symbolically once → returns a vectorized `@(p2)` function
+
+Code block (collapsed): the demand derivation for the running example, showing the symbolic formula before vectorization
+
+## 5.3 Finding Equilibrium
+
+How `solveEquilibrium()` works: symbolic `solve()` first, numeric fzero fallback
+
+Figure: excess demand curve $z(p_2)$ crossing zero at $p_2^*$
+
+## 5.4 Offer Curves and the Box
+
+What an offer curve is: the set of bundles demanded as price varies
+
+Figure: the full Walrasian figure: ICs, Pareto set, core (cyan), offer curves (teal/orange), budget line (green), CE (gold star), endowment (yellow square)
+
+## 5.5 Welfare Theorems
+
+<u>**FWT**</u>: every CE is Pareto optimal; the market doesn't waste
+
+<u>**SWT**</u>: any Pareto optimal allocation can be supported as a CE with lump-sum transfers; i.e., equity and efficiency can be separated
+
+Show fwt.dist and swt.holds (or doesnt hold!) from the console output. What cases does this faill? assumptions they rely on -- quasiconcavity, continuity, LNS; reasonable assumptions? 
+
+# 6. Simulations: How the Market Converges
+
+## 6.1 The Tâtonnement Process
+
+The auctioneer metaphor: announce price --> observe excess demand  -->  adjust  -->  repeat
+
+The update rule and why multiplicative form: 
+
+$$p_{t+1} = p_t \cdot \exp(\lambda \cdot z(p_t))$$
+
+Parameters: step size $\lambda$, tolerance, max iterations
+
+## 6.2 A Single Trial
+
+Figure: the tâtonnement trace; price path (top) and $|z(p_t)|$ on log scale (bottom)
+
+What convergence looks like vs. failure to converge
+
+## 6.3 Monte Carlo: Many Starting Prices
+
+Why starting price matters (or doesn't)
+
+80 trials over logspace to test robustness
+
+Figure: scatter of $p_0$ vs $p_{final}$ colored by convergence + histogram of iteration counts
+
+Callout box: "If the market converges to the same price regardless of where it starts, the equilibrium is globally stable; the economy finds its way there no matter how chaotic the initial conditions."
+
+# 7. Visualization
+
+## 7.1 The 2x2 Figure
+
+Layout description: 3D box (top-left), holdings bar chart (top-right), welfare over time (bottom-left), price convergence (bottom-right)
+
+How all four panels update simultaneously each frame
+
+## 7.2 The Three Cylinder Styles
+
+Use a tabset:
+
+Tab: Original (total goods)
+
+Height = $x_1 + x_2$; color = agent identity
+
+What to look for: cylinders drifting toward CE
+
+Tab: Utility Height
+
+Height = normalized utility; cylinders grow taller as agents gain welfare
+
+What to look for: both cylinders rising together; Pareto improvement at every step
+
+Figure: screenshot of the utility-height animation
+
+Tab: Stacked Goods
+
+Green band = good 1 held; amber band = good 2 held
+
+What to look for: as Yuri trades away apples, his green band shrinks; as he receives fish, his amber band grows
+
+Figure: screenshot of the stacked-goods animation
+
+## 7.3 Reading the Animation
+
+Trail lines show the path through allocation space
+
+Pareto set (white) and CE (gold star) anchored on the floor
+
+Agent names float above their cylinders
+
+# 8. Technical Architecture
+
+## 8.1 The State Chain
+
+The options.from pattern: how each section checks for upstream state and skips re-computation
+
+Table: which fields each section adds to the struct
+
+Code block: the five-line full pipeline
+
+  * s = `economy(u1, u2, w1, w2)`;
+  * s = `sims(u1, u2, w1, w2, 'from', s)`;
+  * s = `viz(u1, u2, w1, w2, 'from', s, 'style', 'stacked')`;
+
+## 8.2 Key Engineering Decisions
+
+Short paragraph each on:
+
+Symbolic then numeric; why derive demand symbolically before evaluating numerically
+
+`matlabFunction` vs `subs` in a loop: 10,000x speedup on grids
+
+`imag(val)` ~= 0 check: why `~isfinite` alone misses log/sqrt domain violations
+
+drawnow limitrate, non-blocking animation; why not delete/redraw
+
+# 9. Limitations and Extensions
+
+## 9.1 Current Limitations
+
+Static endowment economy: no production, no capital
+
+Two agents, two goods: Edgeworth box geometry doesn't generalize
+
+Price-taking assumption: agents have no market power
+
+## 9.2 Natural Extensions
+
+n-agent tâtonnement: aggregate excess demand across n agents; same update rule
+
+Overlapping generations: agents trade across time periods
+
+Network trade: bilateral trades along a graph instead of a centralized auctioneer
+
+## 10. Conclusion
+
+Restate the five questions, answered
+
+What the project demonstrates about general equilibrium theory
+
+Link to GitHub repository
+
+Appendix (optional, collapsed by default)
+
+Full function reference table (name → purpose → inputs → outputs)
+
+The solver decision tree as a full flowchart
+
+All 13 test cases with utility functions and expected Pareto set type (maybe maintain one thru project? or multiple?)
+
+Quarto callout: how to run the project locally (main.m, run_through settings)
