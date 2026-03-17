@@ -45,7 +45,7 @@ Degree awarded by Universitat Pompeu Fabra and Universitat Autònoma de Barcelon
 \entry{Measuring Migrant Remittance Flows using DiD and Network Modelling}{Barcelona, ES}{Master's Thesis | Python, SQL, Git}{02/2026 -- Present}
 \vspace{-4pt}
 \begin{itemize}[noitemsep, topsep=2pt]
-    \item Engineered a SQL data pipeline consolidating 700+ Excel tables of Mexican municipal migration flows across 50 US states and 14 years for panel analysis
+    \item Engineered a SQL data pipeline consolidating 700+ Excel tables of Mexican municipal migration flows across 50 US states and 14 years into DuckDB for panel analysis
     \item Constructed weighted allocation matrices to impute bilateral remittance flows across 2,500+ municipalities
     \item Modeled Mexico-US migration as a weighted bipartite network; traced how localized US policy shocks propagate to non-exposed Mexican municipalities through intermediary nodes
     \item Applied difference-in-differences to estimate policy shock transmit to Mexican household remittance income

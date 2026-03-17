@@ -2,3 +2,13 @@
 .Rproj.user
 .Rhistory
 **/*.quarto_ipynb
+
+# Stale root-level Quarto output (output goes to docs/, not root)
+/*.html
+/site_libs/
+/*-listing.json
+/listings.json
+/robots.txt
+/search.json
+/sitemap.xml
+/styles.css
