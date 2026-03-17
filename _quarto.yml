@@ -199,8 +199,9 @@ execute:
   
 format:
   html:
-    toc: true                
+    embed-resources: false
+    toc: true
     toc-depth: 4
     toc-location: right
-    smooth-scroll: true 
+    smooth-scroll: true
     linestretch: 1.7

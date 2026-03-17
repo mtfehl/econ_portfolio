@@ -16,14 +16,14 @@ format:
         \hypersetup{colorlinks=true,linkcolor=primaryBlue,urlcolor=primaryBlue}
         \urlstyle{same}
         \titleformat{\section}{\large\bfseries\uppercase}{}{0pt}{}[\titlerule]
-        \titlespacing{\section}{0pt}{11pt}{7pt}
+        \titlespacing{\section}{0pt}{10pt}{6pt}
         \newcommand{\entry}[4]{\noindent \textbf{#1} \hfill #2 \\ \textit{#3} \hfill #4}
 ---
 
 ```{=latex}
 \begin{center}
-    {\LARGE \textbf{Michael Fehl}} \\
-    \vspace{5pt}
+    {\large \textbf{Michael Fehl}} \\
+    \vspace{3pt}
     \href{mailto:michael.fehl@bse.eu}{michael.fehl@bse.eu} | \href{https://www.linkedin.com/in/michael-t-fehl}{linkedin.com/in/michael-t-fehl} | \href{https://mtfehl.github.io/econ_portfolio/}{mtfehl.github.io/econ\_portfolio/}
 \end{center}
 
@@ -35,12 +35,21 @@ format:
 \smallskip
 Degree awarded by Universitat Pompeu Fabra and Universitat Autònoma de Barcelona.
 
-\vspace{6pt}
+\vspace{5pt}
 
 \entry{University of North Carolina at Chapel Hill}{Chapel Hill, USA}{Bachelor of Science in Economics}{08/2019 -- 05/2023} \\
 \textit{Philosophy, Politics, and Economics Minor}
 
 \section{Experience}
+
+\entry{Measuring Migrant Remittance Flows using DiD and Network Modelling}{Barcelona, ES}{Master's Thesis | Python, SQL, Git}{02/2026 -- Present}
+\vspace{-4pt}
+\begin{itemize}[noitemsep, topsep=2pt]
+    \item Engineered a SQL data pipeline consolidating 700+ Excel tables of Mexican municipal migration flows across 50 US states and 14 years for panel analysis
+    \item Constructed weighted allocation matrices to impute bilateral remittance flows across 2,500+ municipalities
+    \item Modeled Mexico-US migration as a weighted bipartite network; traced how localized US policy shocks propagate to non-exposed Mexican municipalities through intermediary nodes
+    \item Applied difference-in-differences to estimate policy shock transmit to Mexican household remittance income
+\end{itemize}
 
 \entry{Resource Allocation under Uncertainty \& Network Dynamics}{Personal Project}{Independent Researcher | MATLAB}{12/2025 -- 02/2026}
 \vspace{-4pt}
@@ -48,10 +57,10 @@ Degree awarded by Universitat Pompeu Fabra and Universitat Autònoma de Barcelon
     \item Developed a general equilibrium model in MATLAB to simulate multi-agent trade under uncertainty.
     \item Programmed algorithms to solve for Walrasian equilibria and the core, validated against welfare theorems
     \item Ran simulations on different starting prices to visualize tatonnement process as an invisible auctioneer
-    \item Constructed 3D spatiotemporal visualizations to track the density of goods \& utility across populations
+    \item Constructed 3D spatiotemporal visualizations to track the density of goods \& utility across different starting prices and allocations
 \end{itemize}
 
-\vspace{6pt}
+\vspace{5pt}
 
 \entry{Duke University}{Durham, USA}{Research Assistant | Excel, R}{06/2024 -- 01/2025}
 \vspace{-4pt}
@@ -62,24 +71,15 @@ Degree awarded by Universitat Pompeu Fabra and Universitat Autònoma de Barcelon
     \item Developed automated tables in Excel that refresh macro data and dynamically update charts.
 \end{itemize}
 
-\vspace{6pt}
+\vspace{5pt}
 
 \entry{University of North Carolina at Chapel Hill}{Chapel Hill, USA}{Independent Researcher | R}{02/2024 -- 04/2024}
 \vspace{-4pt}
 \begin{itemize}[noitemsep, topsep=2pt]
     \item Cleaned \& analyzed a dataset of 32,000,000 observations in R using efficient data-handling.
     \item Deployed machine learning models such as Random Forests, SVM, and boosting to optimize predictions.
-    \item Engineered an XGBoost classifier that achieved 88.4\% accuracy in predicting customer behavior.
+    \item Implemented an XGBoost classifier that achieved 88.4\% accuracy in predicting customer behavior.
     \item Visualized model interpretability, hyperparameter tuning, and feature importance.
-\end{itemize}
-
-\vspace{6pt}
-
-\entry{University of North Carolina at Chapel Hill}{Chapel Hill, USA}{Independent Researcher | Stata}{07/2023 -- 08/2023}
-\vspace{-4pt}
-\begin{itemize}[noitemsep, topsep=2pt]
-    \item Modeled regressions in Stata on DHS panel data to predict health outcomes of women \& children.
-    \item Found evidence that a new family planning policy was effective in increasing modern contraceptive usage.
 \end{itemize}
 
 \section{Skills \& Languages}
@@ -93,6 +93,5 @@ Degree awarded by Universitat Pompeu Fabra and Universitat Autònoma de Barcelon
 \section{Additional Information}
 \begin{itemize}[leftmargin=*, labelsep=5pt, itemsep=2pt]
     \item \textbf{Personal Website} Barcelona, Spain (2025) \\ Built a personal website from scratch using Quarto, Git, and SCSS to host my portfolio.
-    \item \textbf{Systematic Literature Review Volunteer} Water Institute, UNC Chapel Hill (2024) \\ Read, filtered, and sorted literature relevant to WaSH research using Covidence and Excel.
 \end{itemize}
 ```
