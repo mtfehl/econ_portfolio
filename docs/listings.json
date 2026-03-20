@@ -38,6 +38,9 @@
   {
     "listing": "/classes/R/networks/index.html",
     "items": [
+      "/classes/R/networks/notes/01_INTRO/01.html",
+      "/classes/R/networks/notes/02_RGM/02_random_graph_models_r.html",
+      "/classes/R/networks/notes/03_ML/03_ml_network_data_r.html",
       "/classes/R/networks/problem_sets/ps03/PS3_networks.html",
       "/classes/R/networks/problem_sets/ps02/ps02.html",
       "/classes/R/networks/problem_sets/ps01/problem_set.html",

@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-image','listing-title','listing-reading-time','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-image"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -529,6 +529,18 @@ window.Quarto = {
  <span class="menu-text">Raster-Vector Operations</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/geospatial/notes/06/leaflet07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leaflet Maps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/geospatial/notes/07/spatial_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Modeling</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -552,6 +564,12 @@ window.Quarto = {
  <span class="menu-text">PS02: African Marketplaces &amp; Population</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/geospatial/problem_sets/03ps/ps03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: Droughts &amp; Transportation</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -566,7 +584,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/geospatial/projects/project01/project01.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project 01</span></a>
+ <span class="menu-text">Project: US-MX Migration</span></a>
   </div>
 </li>
       </ul>
@@ -624,6 +642,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PS01: Non-Stationary Transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/finc_ecm/problem_sets/HW_2_Forecasting/hw02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS02: Forecasting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/finc_ecm/problem_sets/HW_3_ARCH_GARCH/ARCH_GARCH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: ARCH and GARCH Models</span></a>
   </div>
 </li>
       </ul>
@@ -703,13 +733,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PS01: placeholder</span></a>
+ <span class="menu-text">PS01: Random Graph Models</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/problem_sets/ps02/ps02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">PS02: placeholder</span></a>
+ <span class="menu-text">PS02: Community Detection &amp; ML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/networks/problem_sets/ps03/PS3_networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: Cascades, Seeding, Routing, &amp; Opinions</span></a>
   </div>
 </li>
       </ul>
@@ -726,13 +762,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project 1: placeholder</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../classes/R/networks/projects/project2/02project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Project 2: placeholder</span></a>
+ <span class="menu-text">Project: Migration Network Shock Propagation</span></a>
   </div>
 </li>
       </ul>
@@ -948,7 +978,57 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="class-notes">Class Notes</h2>
 <div id="listing-class-notes" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-
+<div class="g-col-1" data-index="0" data-listing-date-sort="1771455600000" data-listing-file-modified-sort="1773973182127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4953">
+<a href="../../../classes/R/networks/notes/01_INTRO/01.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/notes01_networks.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+01: Introduction to Networks
+</h5>
+<div class="listing-reading-time card-text text-muted">25 min</div>
+<div class="card-text listing-description delink">
+Before diving into definitions, it is worth asking: <em>why is the study of networks a distinct field at all?</em> Most economic models treat agents as interacting through aggregate…<em></em>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-listing-date-sort="1771628400000" data-listing-file-modified-sort="1773973182129" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="33" data-listing-word-count-sort="6519">
+<a href="../../../classes/R/networks/notes/02_RGM/02_random_graph_models_r.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/notes02_RGM.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+02; Random Graph Models
+</h5>
+<div class="listing-reading-time card-text text-muted">33 min</div>
+<div class="card-text listing-description delink">
+In Lecture 1 we learned to <em>describe</em> networks: compute degree distributions, path lengths, clustering coefficients, centralities. These are useful summaries, but they leave…<strong></strong>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-date-sort="1772060400000" data-listing-file-modified-sort="1773973182130" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="32" data-listing-word-count-sort="6311">
+<a href="../../../classes/R/networks/notes/03_ML/03_ml_network_data_r.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/notes03_PCA.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Machine Learning with Network Data
+</h5>
+<div class="listing-reading-time card-text text-muted">32 min</div>
+<div class="card-text listing-description delink">
+In Lectures 1 and 2 we built tools for <em>describing</em> and <em>generating</em> networks. We now shift to <strong>inference</strong>: given an observed network (possibly with node and edge attributes)…<em></em>
+</div>
+</div>
+</div></a>
+</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
@@ -957,7 +1037,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="problem-sets">Problem Sets</h2>
 <div id="listing-problem-sets" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1773097200000" data-listing-file-modified-sort="1773970076191" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="46" data-listing-word-count-sort="9184">
+<div class="g-col-1" data-index="0" data-listing-date-sort="1773097200000" data-listing-file-modified-sort="1773973182134" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="46" data-listing-word-count-sort="9184">
 <a href="../../../classes/R/networks/problem_sets/ps03/PS3_networks.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -969,12 +1049,12 @@ Problem Set 3
 </h5>
 <div class="listing-reading-time card-text text-muted">46 min</div>
 <div class="card-text listing-description delink">
-Load the required libraries:
+<p>Cascades, Seeding, Routing, and Opinion Dynamics</p>
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1772751600000" data-listing-file-modified-sort="1773970076186" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="44" data-listing-word-count-sort="8739">
+<div class="g-col-1" data-index="1" data-listing-date-sort="1772751600000" data-listing-file-modified-sort="1773973182133" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="44" data-listing-word-count-sort="8739">
 <a href="../../../classes/R/networks/problem_sets/ps02/ps02.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -986,12 +1066,12 @@ Problem Set 2
 </h5>
 <div class="listing-reading-time card-text text-muted">44 min</div>
 <div class="card-text listing-description delink">
-Consider the undirected network <span class="math inline">\(G\)</span> with nodes <span class="math inline">\(1, \dots, 8\)</span> and 11 edges given by: <span class="math inline">\(E = \{(1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (2,4), (3,4), (2,5), (5,6), (5,7)\}\)</span>
+<p>Community Detection &amp; ML</p>
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1772319600000" data-listing-file-modified-sort="1773967851484" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7603">
+<div class="g-col-1" data-index="2" data-listing-date-sort="1772319600000" data-listing-file-modified-sort="1773973182131" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="39" data-listing-word-count-sort="7603">
 <a href="../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -1003,7 +1083,7 @@ Problem Set 1
 </h5>
 <div class="listing-reading-time card-text text-muted">39 min</div>
 <div class="card-text listing-description delink">
-A common property of social networks is that they have very small diameters relative to their total size. This property is sometimes called the “small-world phenomenon” and…<span class="math inline"></span><span class="math inline"></span>
+<p>Network Measures &amp; Random Graph Models</p>
 </div>
 </div>
 </div></a>
@@ -1016,7 +1096,7 @@ A common property of social networks is that they have very small diameters rela
 <h2 class="anchored" data-anchor-id="projects">Projects</h2>
 <div id="listing-projects" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1774821600000" data-listing-file-modified-sort="1773970076194" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="0" data-listing-date-sort="1774821600000" data-listing-file-modified-sort="1773973182135" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../../../classes/R/networks/projects/project1/01project.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -1028,7 +1108,7 @@ Project: Shock Propagation Through a Migration Network
 </h5>
 <div class="listing-reading-time card-text text-muted">1 min</div>
 <div class="card-text listing-description delink">
-
+<p>placeholder text</p>
 </div>
 </div>
 </div></a>
