@@ -45,6 +45,10 @@ if not "%SUBMODULE%"=="" (
 
 :: 2. Sync images to docs/images
 echo [2/5] Syncing images to docs/images...
+robocopy "classes\R\geospatial\images"        "images" /E /NFL /NDL /NJH /NJS
+robocopy "classes\R\networks\images"          "images" /E /NFL /NDL /NJH /NJS
+robocopy "classes\R\finc_ecm\images"          "images" /E /NFL /NDL /NJH /NJS
+robocopy "classes\STATA\econometrics2\images" "images" /E /NFL /NDL /NJH /NJS
 robocopy "images" "docs\images" /E /NFL /NDL /NJH /NJS
 
 :: 3. Sync freeze folders

@@ -83,15 +83,21 @@ website:
                     href: classes/R/geospatial/notes/04/raster_intro.qmd
                   - text: "Raster-Vector Operations"
                     href: classes/R/geospatial/notes/05/raster_vector_ops.qmd
+                  - text: "Leaflet Maps"
+                    href: classes/R/geospatial/notes/06/leaflet07.qmd
+                  - text: "Spatial Modeling"
+                    href: classes/R/geospatial/notes/07/spatial_modeling.qmd
               - section: "Problem Sets"
                 contents: 
                   - text: "PS01: Vietnam Road Maps"
                     href: classes/R/geospatial/problem_sets/01ps/01ps.qmd
                   - text: "PS02: African Marketplaces & Population"
                     href: classes/R/geospatial/problem_sets/02ps/02ps_final.qmd
+                  - text: "PS03: Droughts & Transportation"
+                    href: classes/R/geospatial/problem_sets/03ps/ps03.qmd
               - section: "Projects"
                 contents:
-                  - text: "Project 01"
+                  - text: "Project: US-MX Migration"
                     href: classes/R/geospatial/projects/project01/project01.qmd
 
           # 2. TIME SERIES
@@ -109,6 +115,10 @@ website:
                 contents:
                   - text: "PS01: Non-Stationary Transformations"
                     href: classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.qmd
+                  - text: "PS02: Forecasting"
+                    href: classes/R/finc_ecm/problem_sets/HW_2_Forecasting/hw02.qmd
+                  - text: "PS03: ARCH and GARCH Models"
+                    href: classes/R/finc_ecm/problem_sets/HW_3_ARCH_GARCH/ARCH_GARCH.qmd
               - section: "Projects"
                 contents:
                   - text: "Project 01"
@@ -129,16 +139,18 @@ website:
                     href: classes/R/networks/notes/03_ML/03_ml_network_data_r.qmd
               - section: "Problem Sets"
                 contents:
-                  - text: "PS01: placeholder"
+                  - text: "PS01: Random Graph Models"
                     href: classes/R/networks/problem_sets/ps01/problem_set.qmd
-                  - text: "PS02: placeholder"
+                  - text: "PS02: Community Detection & ML"
                     href: classes/R/networks/problem_sets/ps02/ps02.qmd
+                  - text: "PS03: Cascades, Seeding, Routing, & Opinions"
+                    href: classes/R/networks/problem_sets/ps03/PS3_networks.qmd
               - section: "Projects"
                 contents:
-                  - text: "Project 1: placeholder"
+                  - text: "Project: Migration Network Shock Propagation"
                     href: classes/R/networks/projects/project1/01project.qmd
-                  - text: "Project 2: placeholder"
-                    href: classes/R/networks/projects/project2/02project.qmd
+                  #- text: "Project 2: placeholder"
+                  #  href: classes/R/networks/projects/project2/02project.qmd
 
           # 4. PANEL DATA
           - section: "Econometrics: Panel Data"
