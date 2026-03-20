@@ -9,6 +9,17 @@
     ]
   },
   {
+    "listing": "/classes/R/finc_ecm/index.html",
+    "items": [
+      "/classes/R/finc_ecm/notes/02/models.html",
+      "/classes/R/finc_ecm/notes/01/intro.html",
+      "/classes/R/finc_ecm/problem_sets/HW_3_ARCH_GARCH/ARCH_GARCH.html",
+      "/classes/R/finc_ecm/problem_sets/HW_2_Forecasting/hw02.html",
+      "/classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.html",
+      "/classes/R/finc_ecm/projects/Project01/project01.html"
+    ]
+  },
+  {
     "listing": "/classes/R/geospatial/index.html",
     "items": [
       "/classes/R/geospatial/notes/01/01.html",
@@ -16,6 +27,8 @@
       "/classes/R/geospatial/notes/03/03.html",
       "/classes/R/geospatial/notes/04/raster_intro.html",
       "/classes/R/geospatial/notes/05/raster_vector_ops.html",
+      "/classes/R/geospatial/notes/07/spatial_modeling.html",
+      "/classes/R/geospatial/notes/06/leaflet07.html",
       "/classes/R/geospatial/problem_sets/03ps/ps03.html",
       "/classes/R/geospatial/problem_sets/02ps/02ps_final.html",
       "/classes/R/geospatial/problem_sets/01ps/01ps.html",
@@ -25,6 +38,8 @@
   {
     "listing": "/classes/R/networks/index.html",
     "items": [
+      "/classes/R/networks/problem_sets/ps03/PS3_networks.html",
+      "/classes/R/networks/problem_sets/ps02/ps02.html",
       "/classes/R/networks/problem_sets/ps01/problem_set.html",
       "/classes/R/networks/projects/project1/01project.html"
     ]
