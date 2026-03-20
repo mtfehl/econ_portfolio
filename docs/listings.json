@@ -1,0 +1,64 @@
+[
+  {
+    "listing": "/classes.html",
+    "items": [
+      "/classes/STATA/econometrics2/index.html",
+      "/classes/R/finc_ecm/index.html",
+      "/classes/R/geospatial/index.html",
+      "/classes/R/networks/index.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/geospatial/index.html",
+    "items": [
+      "/classes/R/geospatial/notes/01/01.html",
+      "/classes/R/geospatial/notes/02/02.html",
+      "/classes/R/geospatial/notes/03/03.html",
+      "/classes/R/geospatial/notes/04/raster_intro.html",
+      "/classes/R/geospatial/notes/05/raster_vector_ops.html",
+      "/classes/R/geospatial/problem_sets/03ps/ps03.html",
+      "/classes/R/geospatial/problem_sets/02ps/02ps_final.html",
+      "/classes/R/geospatial/problem_sets/01ps/01ps.html",
+      "/classes/R/geospatial/projects/project01/project01.html"
+    ]
+  },
+  {
+    "listing": "/classes/R/networks/index.html",
+    "items": [
+      "/classes/R/networks/problem_sets/ps01/problem_set.html",
+      "/classes/R/networks/projects/project1/01project.html"
+    ]
+  },
+  {
+    "listing": "/classes/STATA/econometrics2/index.html",
+    "items": [
+      "/classes/STATA/econometrics2/Notes/01pooled_ols/pols.html",
+      "/classes/STATA/econometrics2/Notes/02random_effects/re.html",
+      "/classes/STATA/econometrics2/Notes/03fixed_effects/fe.html",
+      "/classes/STATA/econometrics2/Notes/04first_diff/fd.html",
+      "/classes/STATA/econometrics2/Notes/05gmm/gmm.html",
+      "/classes/STATA/econometrics2/Notes/06anderson/ahsiao.html",
+      "/classes/STATA/econometrics2/Notes/06arellano/abond.html",
+      "/classes/STATA/econometrics2/Notes/07mle/mle.html",
+      "/classes/STATA/econometrics2/Notes/08binary_choice/logit_probit.html",
+      "/classes/STATA/econometrics2/Notes/09multinomial/multinomial.html",
+      "/classes/STATA/econometrics2/Notes/10nested_logit/nested.html",
+      "/classes/STATA/econometrics2/Notes/11ordered_response/ordered_response.html",
+      "/classes/STATA/econometrics2/Notes/12censored_truncated/tobit.html",
+      "/classes/STATA/econometrics2/Notes/13heckman/heckman.html",
+      "/classes/STATA/econometrics2/Problem_Sets/PS02/ps02.html",
+      "/classes/STATA/econometrics2/Problem_Sets/PS03/ps03.html",
+      "/classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html",
+      "/classes/STATA/econometrics2/Projects/Project01/pj01.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/games/final.html",
+      "/projects/remittances/remittances.html",
+      "/projects/car_crash/car_crash_final.html",
+      "/projects/voting/voting_paper.pdf"
+    ]
+  }
+]

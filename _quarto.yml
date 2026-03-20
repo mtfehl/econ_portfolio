@@ -122,9 +122,11 @@ website:
               - section: "Class Notes"
                 contents:
                   - text: "Intro to Networks"
-                    href: classes/R/networks/notes/01/01.qmd
-                  - text: "placeholder"
-                    href: classes/R/networks/notes/02/02.qmd
+                    href: classes/R/networks/notes/01_INTRO/01.qmd
+                  - text: "Random Graph Models"
+                    href: classes/R/networks/notes/02_RGM/02_random_graph_models_r.qmd
+                  - text: "ML on Network Data"
+                    href: classes/R/networks/notes/03_ML/03_ml_network_data_r.qmd
               - section: "Problem Sets"
                 contents:
                   - text: "PS01: placeholder"
@@ -194,7 +196,7 @@ knitr:
     warning: false
     
 execute:
-  freeze: auto
+  freeze: true
   warning: false
   
 format:
