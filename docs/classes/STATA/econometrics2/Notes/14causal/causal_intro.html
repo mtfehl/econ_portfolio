@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -45,8 +80,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-628f598885c147727f3461b176aacc5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../../site_libs/bootstrap/bootstrap-dark-16e990400b918c4979fa1e9001020cd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -564,14 +628,18 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Nowcasting &amp; Forecasting</span></span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">Networks: Concepts &amp; Algorithms</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/index.html" class="sidebar-item-text sidebar-link">
@@ -580,13 +648,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/notes/01_INTRO/01.html" class="sidebar-item-text sidebar-link">
@@ -609,13 +677,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
@@ -638,13 +706,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
@@ -657,13 +725,47 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
- <span class="menu-text">Econometrics: Panel Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Latent Network Modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Conditional Independence</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics: Panel Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/index.html" class="sidebar-item-text sidebar-link">
@@ -672,13 +774,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="sidebar-item-text sidebar-link">
@@ -773,13 +875,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="sidebar-item-text sidebar-link">
@@ -802,16 +904,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project 01</span></a>
   </div>
 </li>
@@ -826,8 +928,42 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory">Theory</a>
+  <ul>
+  <li><a href="#introduction-the-treatment-effect-approach" id="toc-introduction-the-treatment-effect-approach" class="nav-link" data-scroll-target="#introduction-the-treatment-effect-approach">Introduction: The Treatment Effect Approach</a></li>
+  <li><a href="#the-fundamental-problem-of-causal-inference" id="toc-the-fundamental-problem-of-causal-inference" class="nav-link" data-scroll-target="#the-fundamental-problem-of-causal-inference">The Fundamental Problem of Causal Inference</a></li>
+  <li><a href="#potential-outcomes-framework" id="toc-potential-outcomes-framework" class="nav-link" data-scroll-target="#potential-outcomes-framework">Potential Outcomes Framework</a>
+  <ul class="collapse">
+  <li><a href="#average-treatment-effect-and-att" id="toc-average-treatment-effect-and-att" class="nav-link" data-scroll-target="#average-treatment-effect-and-att">Average Treatment Effect and ATT</a></li>
+  <li><a href="#selection-bias" id="toc-selection-bias" class="nav-link" data-scroll-target="#selection-bias">Selection Bias</a></li>
+  <li><a href="#sutva" id="toc-sutva" class="nav-link" data-scroll-target="#sutva">SUTVA</a></li>
+  </ul></li>
+  <li><a href="#identification-of-treatment-effects" id="toc-identification-of-treatment-effects" class="nav-link" data-scroll-target="#identification-of-treatment-effects">Identification of Treatment Effects</a>
+  <ul class="collapse">
+  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
+  <li><a href="#conditional-independence" id="toc-conditional-independence" class="nav-link" data-scroll-target="#conditional-independence">Conditional Independence</a></li>
+  <li><a href="#no-conditional-independence" id="toc-no-conditional-independence" class="nav-link" data-scroll-target="#no-conditional-independence">No Conditional Independence</a></li>
+  </ul></li>
+  <li><a href="#linear-regression-and-treatment-effects" id="toc-linear-regression-and-treatment-effects" class="nav-link" data-scroll-target="#linear-regression-and-treatment-effects">Linear Regression and Treatment Effects</a>
+  <ul class="collapse">
+  <li><a href="#homogeneous-effects" id="toc-homogeneous-effects" class="nav-link" data-scroll-target="#homogeneous-effects">Homogeneous Effects</a></li>
+  <li><a href="#heterogeneous-effects" id="toc-heterogeneous-effects" class="nav-link" data-scroll-target="#heterogeneous-effects">Heterogeneous Effects</a></li>
+  </ul></li>
+  <li><a href="#inconsistency-of-ols" id="toc-inconsistency-of-ols" class="nav-link" data-scroll-target="#inconsistency-of-ols">Inconsistency of OLS</a>
+  <ul class="collapse">
+  <li><a href="#omitted-variable-bias" id="toc-omitted-variable-bias" class="nav-link" data-scroll-target="#omitted-variable-bias">Omitted Variable Bias</a></li>
+  <li><a href="#reverse-causality" id="toc-reverse-causality" class="nav-link" data-scroll-target="#reverse-causality">Reverse Causality</a></li>
+  <li><a href="#measurement-error" id="toc-measurement-error" class="nav-link" data-scroll-target="#measurement-error">Measurement Error</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#applied" id="toc-applied" class="nav-link" data-scroll-target="#applied">Applied</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -864,8 +1000,203 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="theory" class="level1">
+<h1>Theory</h1>
+<section id="introduction-the-treatment-effect-approach" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-the-treatment-effect-approach">Introduction: The Treatment Effect Approach</h2>
+<p><strong>Causal inference</strong> is the process of drawing a conclusion about a cause-effect relationship between economic variables. It aims to provide credible quantitative answers to questions such as:</p>
+<ul>
+<li>What is the impact of a deworming treatment for children on their long-term health and economic outcomes?</li>
+<li>What is the impact of an extension of unemployment benefits on unemployment durations?</li>
+<li>What is the impact of early childcare on children’s cognitive development and parents’ labor market participation?</li>
+</ul>
+<p>The classic <strong>structural approach</strong> uses theory-based models of individual choice to conduct <em>ex-ante</em> and <em>ex-post</em> policy evaluation. The <strong>treatment effect approach</strong> has established itself as a key methodology for policy evaluation and the estimation of causal effects.</p>
+<p>The <strong>main goal</strong> is to evaluate <em>ex-post</em> the impact of an existing policy by comparing the distribution of a chosen outcome among affected individuals (the “treatment group”) with the distribution among unaffected individuals (the “control group”).</p>
+<p>The <strong>main challenge</strong> is to find a way to perform the comparison such that the distribution of outcomes for the control group serves as a good counterfactual for the distribution of outcomes in the treatment group in the absence of the treatment.</p>
+<p>The <strong>main advantage</strong> relative to the structural approach is that it provides transparent and credible identification of the policy parameters of interest and does not rely on untestable functional form assumptions.</p>
+<p>The <strong>main disadvantage</strong> is that the estimated parameters are “reduced forms” and are therefore only internally valid. They are generally not useful for welfare analysis and cannot be easily applied to different settings.</p>
+<p>For a treatment effects analysis that aims at estimating causal effects, there are four crucial questions:</p>
+<ol type="1">
+<li>What is the causal relationship of interest?</li>
+<li>What experiment could ideally be used to capture the causal effect of interest?</li>
+<li>What is the identification strategy?</li>
+<li>What is the method of inference? (the population studied, the sample used, the assumptions when constructing standard errors)</li>
+</ol>
+</section>
+<section id="the-fundamental-problem-of-causal-inference" class="level2">
+<h2 class="anchored" data-anchor-id="the-fundamental-problem-of-causal-inference">The Fundamental Problem of Causal Inference</h2>
+<p>The fundamental problem of causal inference is that we can never observe a person’s counterfactual outcomes. We can never know what a person’s outcome would have been if her treatment had been different. Different empirical methods deal with the problem of the “missing counterfactual” by finding suitable control groups that can mimic such counterfactual situations. These methods include:</p>
+<ol type="1">
+<li>Randomized Controlled Trials</li>
+<li>Regression Discontinuity Designs</li>
+<li>Selection on Observables and Matching</li>
+<li>Difference-in-Differences</li>
+<li>Synthetic Control Methods</li>
+</ol>
+<p>Each of these methods relies on different assumptions and identifies different types of causal policy parameters.</p>
+</section>
+<section id="potential-outcomes-framework" class="level2">
+<h2 class="anchored" data-anchor-id="potential-outcomes-framework">Potential Outcomes Framework</h2>
+<p>To formally study causal effects, we adopt the <strong>potential outcomes framework</strong>, also known as the <strong>Rubin Causal Model (RCM)</strong>. Let <span class="math inline">\(Y_{1i}\)</span> denote the outcome for individual <span class="math inline">\(i\)</span> if exposed to the treatment (<span class="math inline">\(D_i = 1\)</span>), and <span class="math inline">\(Y_{0i}\)</span> the outcome for the same individual if not exposed (<span class="math inline">\(D_i = 0\)</span>). The <strong>treatment effect</strong> for individual <span class="math inline">\(i\)</span> is <span class="math inline">\(Y_{1i} - Y_{0i}\)</span>.</p>
+<p>Since we only observe one of the two potential outcomes, the observed outcome is:</p>
+<p><span class="math display">\[
+Y_i = Y_{1i}D_i + Y_{0i}(1-D_i) = Y_{0i} + D_i(Y_{1i} - Y_{0i})
+\]</span></p>
+<section id="average-treatment-effect-and-att" class="level3">
+<h3 class="anchored" data-anchor-id="average-treatment-effect-and-att">Average Treatment Effect and ATT</h3>
+<p>Since individual-level treatment effects cannot be estimated, we focus on two population parameters. The <strong>average treatment effect (ATE)</strong>:</p>
+<p><span class="math display">\[
+\alpha_{ATE} = \mathbb{E}[Y_{1i} - Y_{0i}]
+\]</span></p>
+<p>and the <strong>average treatment effect on the treated (ATT)</strong>:</p>
+<p><span class="math display">\[
+\alpha_{ATT} = \mathbb{E}[Y_{1i} - Y_{0i} \mid D_i = 1]
+\]</span></p>
+<p>The ATE is the average treatment effect for the whole population. The ATT is the average treatment effect among the group of individuals that actually experienced the treatment.</p>
+</section>
+<section id="selection-bias" class="level3">
+<h3 class="anchored" data-anchor-id="selection-bias">Selection Bias</h3>
+<p>Let <span class="math inline">\(\beta\)</span> denote the naive difference in expected outcomes between treated and untreated individuals:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\beta &amp;\equiv \mathbb{E}[Y_i \mid D_i = 1] - \mathbb{E}[Y_i \mid D_i = 0] \\
+&amp;= \underbrace{\mathbb{E}[Y_{1i} - Y_{0i} \mid D_i = 1]}_{\alpha_{ATT}} + \underbrace{(\mathbb{E}[Y_{0i} \mid D_i = 1] - \mathbb{E}[Y_{0i} \mid D_i = 0])}_{\text{selection bias}}
+\end{aligned}
+\]</span></p>
+<p>The second term is the <strong>selection bias</strong>: the difference in untreated potential outcomes between treated and untreated individuals. This is nonzero whenever, for instance, individuals with low <span class="math inline">\(Y_{0i}\)</span> choose treatment more frequently than those with high <span class="math inline">\(Y_{0i}\)</span>. A simple comparison of average outcomes between treatment and control groups will generally not identify the ATT.</p>
+<p>The sample analogs for <span class="math inline">\(\alpha_{ATE}\)</span> and <span class="math inline">\(\alpha_{ATT}\)</span> require observing both potential outcomes, which is infeasible. The sample analog of <span class="math inline">\(\beta\)</span> is simply:</p>
+<p><span class="math display">\[
+\beta^S = \bar{Y}_T - \bar{Y}_C = \frac{1}{N_1}\sum_{i=1}^N Y_i D_i - \frac{1}{N_0}\sum_{i=1}^N (1-D_i)Y_i
+\]</span></p>
+<p>where <span class="math inline">\(N_1 = \sum D_i\)</span> and <span class="math inline">\(N_0 = N - N_1\)</span>.</p>
+</section>
+<section id="sutva" class="level3">
+<h3 class="anchored" data-anchor-id="sutva">SUTVA</h3>
+<p>Implicit in the potential outcomes framework is an important assumption maintained throughout: the <strong>stable unit treatment value assumption (SUTVA)</strong>.</p>
+<p><strong>SUTVA</strong>: the outcome of individual <span class="math inline">\(i\)</span> depends only on the treatment of individual <span class="math inline">\(i\)</span> and not on the treatments of other individuals.</p>
+<p>SUTVA is a strong assumption as it rules out equilibrium or feedback effects as well as strategic interactions among agents. As a result, the potential outcomes framework is not well-suited to the evaluation of system-wide reforms that are likely to have substantial equilibrium effects.</p>
+</section>
+</section>
+<section id="identification-of-treatment-effects" class="level2">
+<h2 class="anchored" data-anchor-id="identification-of-treatment-effects">Identification of Treatment Effects</h2>
+<section id="independence" class="level3">
+<h3 class="anchored" data-anchor-id="independence">Independence</h3>
+<p>The easiest case is when the distribution of potential outcomes is independent of the treatment:</p>
+<p><span class="math display">\[
+(Y_{1i}, Y_{0i}) \perp D_i
+\]</span></p>
+<p>This situation is typical in randomized experiments, where individuals are assigned to treatment or control groups randomly. In this case, <span class="math inline">\(\mathbb{E}[Y_{0i} \mid D_i = 1] = \mathbb{E}[Y_{0i} \mid D_i = 0]\)</span>, so the selection bias vanishes and <span class="math inline">\(\alpha_{ATE} = \alpha_{ATT} = \beta\)</span>. An unbiased estimate of <span class="math inline">\(\alpha_{ATE}\)</span> is:</p>
+<p><span class="math display">\[
+\hat{\alpha}_{ATE} = \bar{Y}_T - \bar{Y}_C = \beta^S
+\]</span></p>
+</section>
+<section id="conditional-independence" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-independence">Conditional Independence</h3>
+<p>A less restrictive assumption is <strong>conditional independence</strong>:</p>
+<p><span class="math display">\[
+(Y_{1i}, Y_{0i}) \perp D_i \mid X_i
+\]</span></p>
+<p>where <span class="math inline">\(X_i\)</span> is a vector of covariates. This is the basis for <strong>matching</strong>: for each “type” of individual (each value of covariates) we can match treated and control individuals, so that the latter act as counterfactuals for the former. Conditional independence implies:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\alpha_{ATE} &amp;= \mathbb{E}[Y_{1i} - Y_{0i}] = \int \left(\mathbb{E}[Y_i \mid D_i = 1, X_i] - \mathbb{E}[Y_i \mid D_i = 0, X_i]\right) dF(X_i)
+\end{aligned}
+\]</span></p>
+<p>Similarly, the ATT integrates over the distribution of <span class="math inline">\(X_i\)</span> among the treated.</p>
+</section>
+<section id="no-conditional-independence" class="level3">
+<h3 class="anchored" data-anchor-id="no-conditional-independence">No Conditional Independence</h3>
+<p>When conditional independence fails, we need an instrument <span class="math inline">\(Z_i\)</span> that provides exogenous variation in the treatment:</p>
+<p><span class="math display">\[
+(Y_{1i}, Y_{0i}) \perp Z_i \mid X_i \qquad \text{and} \qquad \text{Cov}(Z_i, D_i \mid X_i) \neq 0
+\]</span></p>
+<p>In this context we can only identify an average treatment effect for a subgroup of individuals; the resulting parameter is the <strong>local average treatment effect</strong>, <span class="math inline">\(\alpha_{LATE}\)</span>.</p>
+</section>
+</section>
+<section id="linear-regression-and-treatment-effects" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-and-treatment-effects">Linear Regression and Treatment Effects</h2>
+<section id="homogeneous-effects" class="level3">
+<h3 class="anchored" data-anchor-id="homogeneous-effects">Homogeneous Effects</h3>
+<p>Rearranging the potential outcomes equation:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_i &amp;= Y_{0i} + D_i(Y_{1i} - Y_{0i}) \\
+&amp;= \mathbb{E}(Y_{0i}) + (Y_{1i} - Y_{0i})D_i + (Y_{0i} - \mathbb{E}[Y_{0i}]) \\
+&amp;\equiv \beta_0 + \beta_i D_i + U_i
+\end{aligned}
+\]</span></p>
+<p>Assume initially that <span class="math inline">\(\beta_i = \beta\)</span> for all <span class="math inline">\(i\)</span> (<strong>homogeneous treatment effects</strong>). Then <span class="math inline">\(\beta\)</span> is the coefficient in a linear regression of <span class="math inline">\(Y_i\)</span> on <span class="math inline">\(D_i\)</span>, <span class="math inline">\(Y_{1i} - Y_{0i}\)</span> is a constant, and <span class="math inline">\(\alpha_{ATE} = \alpha_{ATT} = \beta\)</span>. Consistently estimating <span class="math inline">\(\beta\)</span> requires that <span class="math inline">\(U_i = Y_{0i} - \mathbb{E}[Y_{0i}]\)</span> is independent of <span class="math inline">\(D_i\)</span>, i.e.&nbsp;no selection bias.</p>
+</section>
+<section id="heterogeneous-effects" class="level3">
+<h3 class="anchored" data-anchor-id="heterogeneous-effects">Heterogeneous Effects</h3>
+<p>When <span class="math inline">\(\beta_i\)</span> is not constant (<strong>heterogeneous treatment effects</strong>), the OLS estimator from the regression <span class="math inline">\(Y_i = \beta_0 + \check{\beta} D_i + U_i\)</span> converges to:</p>
+<p><span class="math display">\[
+\check{\beta} = \mathbb{E}[Y_{1i} - Y_{0i} \mid D_i = 1] + (\mathbb{E}[Y_{0i} \mid D_i = 1] - \mathbb{E}[Y_{0i} \mid D_i = 0]) = \alpha_{ATT} + \text{selection bias}
+\]</span></p>
+<p>In the absence of selection bias (e.g.&nbsp;under random assignment), a linear regression of <span class="math inline">\(Y_i\)</span> on <span class="math inline">\(D_i\)</span> identifies the ATT. Under random assignment, <span class="math inline">\(\alpha_{ATE} = \alpha_{ATT}\)</span>.</p>
+</section>
+</section>
+<section id="inconsistency-of-ols" class="level2">
+<h2 class="anchored" data-anchor-id="inconsistency-of-ols">Inconsistency of OLS</h2>
+<section id="omitted-variable-bias" class="level3">
+<h3 class="anchored" data-anchor-id="omitted-variable-bias">Omitted Variable Bias</h3>
+<p>Consider the true data generating process:</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + X_i'\beta_1 + W_i'\gamma + U_i \qquad \text{where} \quad \mathbb{E}[U_i \mid X_i, W_i] = 0
+\]</span></p>
+<p>Suppose we exclude <span class="math inline">\(W_i\)</span> and estimate the short regression <span class="math inline">\(Y_i = \beta_0 + X_i'\beta_1 + \tilde{U}_i\)</span>, where <span class="math inline">\(\tilde{U}_i = W_i'\gamma + U_i\)</span>. For the case where both <span class="math inline">\(X\)</span> and <span class="math inline">\(W\)</span> are one-dimensional:</p>
+<p><span class="math display">\[
+\text{plim}\; \hat{\beta}_1^S = \beta_1 + \gamma \frac{\text{Cov}(W_i, X_i)}{\text{Var}(X_i)}
+\]</span></p>
+<p>The second term is the <strong>omitted variable bias</strong>. For there to be OVB, the omitted variable <span class="math inline">\(W_i\)</span> must be both correlated with the included variable <span class="math inline">\(X_i\)</span> and a determinant of <span class="math inline">\(Y_i\)</span> (i.e.&nbsp;<span class="math inline">\(\gamma \neq 0\)</span>). The sign and magnitude of the bias depends on the sign and magnitude of <span class="math inline">\(\text{Cov}(W_i, X_i)\)</span> and how important <span class="math inline">\(W_i\)</span> is in determining <span class="math inline">\(Y_i\)</span>.</p>
+</section>
+<section id="reverse-causality" class="level3">
+<h3 class="anchored" data-anchor-id="reverse-causality">Reverse Causality</h3>
+<p>Suppose <span class="math inline">\(Y_i\)</span> causes <span class="math inline">\(X_i\)</span>, but we are interested in the causal effect of <span class="math inline">\(X_i\)</span> on <span class="math inline">\(Y_i\)</span>. If the true relationships are:</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1 X_i + U_i \qquad \text{and} \qquad X_i = \gamma_0 + \gamma_1 Y_i + V_i
+\]</span></p>
+<p>with <span class="math inline">\(\text{Cov}(V_i, U_i) = 0\)</span>, then OLS estimation of the outcome equation yields:</p>
+<p><span class="math display">\[
+\text{plim}\; \hat{\beta}_1^S = \beta_1 + \frac{\gamma_1}{1 - \gamma_1\beta_1}\frac{\text{Var}(U_i)}{\text{Var}(X_i)}
+\]</span></p>
+<p>which is only consistent for <span class="math inline">\(\beta_1\)</span> if <span class="math inline">\(\gamma_1 = 0\)</span>. Addressing reverse causality requires exogenous variation in <span class="math inline">\(X_i\)</span>, either through random assignment or a suitable instrumental variable that shifts <span class="math inline">\(X_i\)</span> but has no direct impact on <span class="math inline">\(Y_i\)</span>.</p>
+</section>
+<section id="measurement-error" class="level3">
+<h3 class="anchored" data-anchor-id="measurement-error">Measurement Error</h3>
+<p>Suppose the true model is <span class="math inline">\(Y_i^* = \beta_0 + \beta_1 X_i^* + U_i\)</span> with <span class="math inline">\(\text{Cov}(U_i, X_i^*) = 0\)</span>, but we only observe <span class="math inline">\(X_i = X_i^* + \mu_i\)</span>, where <span class="math inline">\(\mu_i\)</span> is uncorrelated with <span class="math inline">\(X_i^*\)</span> (<strong>classical measurement error</strong>). Then:</p>
+<p><span class="math display">\[
+\text{plim}\; \hat{\beta}_1 = \beta_1 \left(\frac{\text{Var}(X_i^*)}{\text{Var}(X_i^*) + \text{Var}(\mu_i)}\right)
+\]</span></p>
+<p>Since the term in parentheses is between 0 and 1, classical measurement error in the regressor produces <strong>attenuation bias</strong> towards zero. If the signal-to-noise ratio <span class="math inline">\(\text{Var}(X_i^*)/\text{Var}(\mu_i)\)</span> is very small, the slope estimate will be close to zero.</p>
+<p>Note that attenuation bias is not a general result: it depends on the specific structure of the measurement error. If measurement error is in the outcome <span class="math inline">\(Y_i^* = \beta_0 + \beta_1 X_i^* + (U_i + \mu_i)\)</span>, consistency is unaffected (the variance of the estimate increases but the estimate remains consistent).</p>
+</section>
+</section>
+</section>
+<section id="applied" class="level1">
+<h1>Applied</h1>
+<div id="fbba0020" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#| eval: false</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>* --- causal inference tools are covered <span class="kw">in</span> subsequent <span class="kw">notes</span> ---</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>* see rcts.qmd <span class="kw">for</span> randomized controlled trials</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>* see matching.qmd <span class="kw">for</span> selection <span class="kw">on</span> observables</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>* see did.qmd <span class="kw">for</span> difference-<span class="kw">in</span>-differences</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>* --- omitted <span class="kw">variable</span> bias: <span class="kw">compare</span> <span class="kw">short</span> and <span class="kw">long</span> regressions ---</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> <span class="fu">y</span> x</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">estimates</span> <span class="kw">store</span> <span class="kw">short</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> <span class="fu">y</span> x <span class="fu">w</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">estimates</span> <span class="kw">store</span> <span class="kw">long</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>esttab <span class="kw">short</span> <span class="kw">long</span>, mtitles(<span class="st">"Short"</span> <span class="st">"Long"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>* --- <span class="kw">test</span> <span class="kw">for</span> <span class="fu">reverse</span> causality: instrument x with z ---</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>* requires a valid instrument (relevance + exclusion restriction)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>ivreg2 <span class="fu">y</span> (x = z), <span class="kw">robust</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

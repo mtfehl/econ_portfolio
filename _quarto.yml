@@ -123,8 +123,33 @@ website:
                 contents:
                   - text: "Project 01"
                     href: classes/R/finc_ecm/projects/Project01/project01.qmd
+                    
+          # 3. NOWCASTING & FORECASTING
+          - section: "Nowcasting & Forecasting"
+            contents: 
+              # - text: "Home"
+              #   href: classes/R/nowcasting/index.qmd
+              # - section: "Class Notes"
+              #   contents:
+              #     - text: "Intro01"
+              #       href: classes/R/nowcasting/notes/01/intro.qmd
+              #     - text: "Notes02"
+              #       href: classes/R/nowcasting/notes/02/models.qmd
+              # - section: "Problem Sets"
+              #   contents:
+              #     - text: "PS01"
+              #       href: classes/R/nowcasting/problem_sets/ps01/ps01.qmd
+              #     - text: "PS02"
+              #       href: classes/R/nowcasting/problem_sets/ps02/ps02.qmd
+              #     - text: "PS03"
+              #       href: classes/R/nowcasting/problem_sets/ps03/ps03.qmd
+              # - section: "Projects"
+              #   contents:
+              #     - text: "Project 01"
+              #       href: classes/R/nowcasting/projects/Project01/project01.qmd
 
-          # 3. NETWORKS
+
+          # 4. NETWORKS INTRO AND ML
           - section: "Networks: Concepts & Algorithms"
             contents:
               - text: "Home"
@@ -151,8 +176,37 @@ website:
                     href: classes/R/networks/projects/project1/01project.qmd
                   #- text: "Project 2: placeholder"
                   #  href: classes/R/networks/projects/project2/02project.qmd
-
-          # 4. PANEL DATA
+                  
+          # 5. LATENT NETWORKS
+          - section: "Latent Network Modeling"
+            contents:
+              - text: "Home"
+                href: classes/R/latent_networks/index.qmd
+              - section: "Class Notes"
+                contents:
+                  - text: "Intro: Conditional Independence"
+                    href: classes/R/latent_networks/notes/01intro/lecture01.qmd
+              #     - text: "Random Graph Models"
+              #       href: classes/R/networks/notes/02_RGM/02_random_graph_models_r.qmd
+              #     - text: "ML on Network Data"
+              #       href: classes/R/networks/notes/03_ML/03_ml_network_data_r.qmd
+              # - section: "Problem Sets"
+              #   contents:
+              #     - text: "PS01: Random Graph Models"
+              #       href: classes/R/networks/problem_sets/ps01/problem_set.qmd
+              #     - text: "PS02: Community Detection & ML"
+              #       href: classes/R/networks/problem_sets/ps02/ps02.qmd
+              #     - text: "PS03: Cascades, Seeding, Routing, & Opinions"
+              #       href: classes/R/networks/problem_sets/ps03/PS3_networks.qmd
+              # - section: "Projects"
+              #   contents:
+              #     - text: "Project: Migration Network Shock Propagation"
+              #       href: classes/R/networks/projects/project1/01project.qmd
+                  #- text: "Project 2: placeholder"
+                  #  href: classes/R/networks/projects/project2/02project.qmd
+          
+          
+          # 6. ECONOMETRICS: PANEL DATA       
           - section: "Econometrics: Panel Data"
             contents: 
               - text: "Home"
@@ -201,7 +255,49 @@ website:
                 contents:
                   - text: "Project 01"
                     href: classes/STATA/econometrics2/Projects/Project01/pj01.qmd
-    
+
+          # 7. ADVANCED PANEL DATA METHODS
+          # - section: "Advanced Panel Data Methods"
+          #   contents: 
+          #     - text: "Home"
+          #       href: classes/STATA/Advanced_Panel_Methods/index.qmd
+          #     - section: "Class Notes"
+          #       contents:
+          #         - text: "Pooled OLS"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/01pooled_ols/pols.qmd
+          #         - text: "Random Effects"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/02random_effects/re.qmd
+          #         - text: "Fixed Effects"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/03fixed_effects/fe.qmd
+          #         - text: "First Differences"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/04first_diff/fd.qmd
+          #         - text: "GMM"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/05gmm/gmm.qmd
+          #         - text: "Anderson-Hsiao"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/06anderson/ahsiao.qmd
+          #         - text: "Arellano-Bond"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/06arellano/abond.qmd
+          #         - text: "MLE"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/07mle/mle.qmd
+          #         - text: "Binary Choice Models"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/08binary_choice/logit_probit.qmd
+          #         - text: "Multinomial Models"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/09multinomial/multinomial.qmd
+          #         - text: "Nested Logit"
+          #           href: classes/STATA/Advanced_Panel_Methods/Notes/10nested_logit/nested.qmd
+          #     - section: "Problem Sets"
+          #       contents: 
+          #         - text: "PS01"
+          #           href: classes/STATA/Advanced_Panel_Methods/Problem_Sets/PS01/ps01.qmd
+          #         - text: "PS02"
+          #           href: classes/STATA/Advanced_Panel_Methods/Problem_Sets/PS02/ps02.qmd
+          #         - text: "PS03"
+          #           href: classes/STATA/Advanced_Panel_Methods/Problem_Sets/PS03/ps03.qmd
+          #     - section: "Projects"
+          #       contents:
+          #         - text: "Project01"
+          #           href: classes/STATA/Advanced_Panel_Methods/Projects/Project01/pj01.qmd
+                    
 knitr:
   opts_chunk:
     message: false

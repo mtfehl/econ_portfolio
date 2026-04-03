@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -46,8 +81,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-628f598885c147727f3461b176aacc5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../../site_libs/bootstrap/bootstrap-dark-16e990400b918c4979fa1e9001020cd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,6 +112,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -565,14 +629,18 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Nowcasting &amp; Forecasting</span></span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">Networks: Concepts &amp; Algorithms</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/index.html" class="sidebar-item-text sidebar-link">
@@ -581,13 +649,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/notes/01_INTRO/01.html" class="sidebar-item-text sidebar-link">
@@ -610,13 +678,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
@@ -639,13 +707,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
@@ -658,13 +726,47 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
- <span class="menu-text">Econometrics: Panel Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Latent Network Modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Conditional Independence</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics: Panel Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/index.html" class="sidebar-item-text sidebar-link">
@@ -673,13 +775,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="sidebar-item-text sidebar-link">
@@ -774,13 +876,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="sidebar-item-text sidebar-link">
@@ -803,16 +905,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project 01</span></a>
   </div>
 </li>
@@ -827,8 +929,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory">Theory</a>
+  <ul>
+  <li><a href="#motivation-discrete-outcomes" id="toc-motivation-discrete-outcomes" class="nav-link" data-scroll-target="#motivation-discrete-outcomes">Motivation: Discrete Outcomes</a></li>
+  <li><a href="#binary-models" id="toc-binary-models" class="nav-link" data-scroll-target="#binary-models">Binary Models</a></li>
+  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a>
+  <ul class="collapse">
+  <li><a href="#linear-probability-model" id="toc-linear-probability-model" class="nav-link" data-scroll-target="#linear-probability-model">Linear Probability Model</a>
+  <ul class="collapse">
+  <li><a href="#issues" id="toc-issues" class="nav-link" data-scroll-target="#issues">Issues</a></li>
+  </ul></li>
+  <li><a href="#logit-probit" id="toc-logit-probit" class="nav-link" data-scroll-target="#logit-probit">Logit &amp; Probit</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#applied" id="toc-applied" class="nav-link" data-scroll-target="#applied">Applied</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -870,8 +991,163 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="theory" class="level1">
+<h1>Theory</h1>
+<section id="motivation-discrete-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-discrete-outcomes">Motivation: Discrete Outcomes</h2>
+<p>We now want to consider models were our outcome variable takes on discrete values. For example, whether or not I decide to purchase a good at a store is a choice of <span class="math inline">\(m=2\)</span> mutually exclusive categories, which can be modeled using a Bernoulli RV.</p>
+<p>There are many such cases of this phenomena; perhaps our outcome variable can take <span class="math inline">\(m=j\)</span> categories, such as the different choice of cities to vacation in. There even exists cases such that each category has a natural hierarchy structure, such that <span class="math inline">\(m=1\)</span> is mild and <span class="math inline">\(m=10\)</span> is extreme, and so forth. For now, we will begin by introducing the simplest of these cases in which we have two possible categories; i.e., where <span class="math inline">\(y_i\)</span> can only take on two possible values.</p>
+</section>
+<section id="binary-models" class="level2">
+<h2 class="anchored" data-anchor-id="binary-models">Binary Models</h2>
+<p>In the case where our outcome variable <span class="math inline">\(y_i\)</span> can only take on two values, we say that <span class="math inline">\(y \sim Bern\)</span>, such that:</p>
+<p><span class="math display">\[
+y =
+\begin{cases}
+  1 &amp; \text{w/ Probability } p \\
+  0 &amp; \text{w/ Probability } (1-p)
+\end{cases}
+\]</span></p>
+<p>When we take the unconditional expectation of a discrete random variable, we use the formula:</p>
+<p><span class="math display">\[
+\mathbb{E}[y] = \sum_{i=1}^m y_i \cdot \mathbb{P}(y_i)
+\]</span></p>
+<p>Since we have a binary model, we know that <span class="math inline">\(m=2\)</span>, such that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}[y] &amp;= \sum_{i=1}^2 y_i \cdot \mathbb{P}(y_i) \\
+&amp;= y_i \mathbb{P}(y_i) + (1-y_i) (1-\mathbb{P}(y_i)) \\
+&amp;= 1 \mathbb{P}(y_i) + 0 (1-\mathbb{P}(y_i))  \\
+&amp;= \mathbb{P}(y_i)
+\end{aligned}
+\]</span></p>
+<p>Similarly, for conditional expectations, we know that:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbb{E}[y \mid x] &amp;= \sum_{i=1}^2 y_i \cdot \mathbb{P}(y = i \mid x) \\
+&amp;= y_1 \mathbb{P}(y = 1 \mid x) + (1-y_1) (1-\mathbb{P}(y = 1 \mid x)) \\
+&amp;= 1 \cdot \mathbb{P}(y = 1 \mid x) + 0 (1-\mathbb{P}(y = 1 \mid x))  \\
+&amp;= \mathbb{P}(y = 1 \mid x)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="modeling" class="level2">
+<h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
+<p>In regression analysis, we write our model as:</p>
+<p><span class="math display">\[
+y_i = F(x_i,\beta) +\mu_i
+\]</span></p>
+<p>Where <span class="math inline">\(F(\cdot)\)</span> is some function used to model the probability that <span class="math inline">\(y_i = 1 \mid x\)</span>. Our specification of <span class="math inline">\(F(\cdot)\)</span> controls the characteristics of our binary choice models.</p>
+<p>If we assumed that <span class="math inline">\(\mathbb{E}[\mu_i \mid x] = 0\)</span> take conditional expectations of our model, we find the following relationship:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\mathbb{E}[y_i \mid x] = F(x_i,\beta) + \underbrace{\mathbb{E}[\mu_i \mid x]}_{=0} \\
+&amp;\mathbb{E}[y_i \mid x] = \mathbb{P}[y_i = 1 \mid x] = F(x_i,\beta)
+\end{aligned}
+\]</span></p>
+<section id="linear-probability-model" class="level3">
+<h3 class="anchored" data-anchor-id="linear-probability-model">Linear Probability Model</h3>
+<p>Suppose that we decide to give <span class="math inline">\(F(\cdot)\)</span> a standard linear form, such that the regressors have a linear relationship with the outcome variable (think standard OLS model) After applying OLS, this is known as the <strong>Linear Probability Model</strong>.</p>
+<p><span class="math display">\[
+F(x_i,\beta) = x_i'\beta \quad \text{such that} \quad y_i = x_i'\beta + \mu_i
+\]</span> When we apply OLS, we get that:</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><span class="math display">\[
+\mathbb{E}[y_i \mid x] = \mathbb{P}[y_i = 1 \mid x] = x_i'\beta
+\]</span></p>
+</div><div class="column" style="width:10%;">
+<!-- empty column to create gap -->
+</div><div class="column" style="width:45%;">
+<p><span class="math display">\[
+\text{MEs:} \quad  \frac{\partial \mathbb{P}[y_i = 1 \mid x]}{\partial x_i} = \beta
+\]</span></p>
+</div>
+</div>
+<section id="issues" class="level4">
+<h4 class="anchored" data-anchor-id="issues">Issues</h4>
+<p>Although the LPM has nice interpretability such as the marginal effect simply being the beta coefficients, this is not a good choice to model our binary outcome variable. Specifically, there are three main reasons why linear modeling using OLS is a poor choice:</p>
+<ol type="1">
+<li>Discrete Variance of Errors</li>
+</ol>
+<p>We know that <span class="math inline">\(y_i\)</span> can take on values of either <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>; this implies there exists two possible values for the errors:</p>
+<p>(i). <span class="math inline">\(y_i = 1: \mu_i = 1 - x_i'\beta\)</span> with probability <span class="math inline">\(x_i'\beta\)</span> (ii). <span class="math inline">\(y_i = 0: \mu_i = - x_i'\beta\)</span> with probability <span class="math inline">\(1 - x_i'\beta\)</span></p>
+<p>This implies that the error term is a discrete random variable, only able to take on two values.</p>
+<ol start="2" type="1">
+<li>Unbounded Probability</li>
+</ol>
+<p>We know that by definition, <span class="math inline">\(0 \leq \mathbb{P}[y_i =1 \mid x] \leq 1\)</span>; yet, we find that <span class="math inline">\(\mathbb{P}[y_i =1 \mid x] = x_i'\beta \in (-\infty, +\infty)\)</span>. Thus, we have an issue that our probabilities are bounded, yet our fitted values can lead to predictions outside of the <span class="math inline">\([0,1]\)</span> range. This can lead to negative predicted probabilities and probabilities above 1, which are meaningless in this model.</p>
+<ol start="3" type="1">
+<li>Heteroskedastic Errors</li>
+</ol>
+<p>The issue with the error term from (1) is that the variance of the error terms assume a heteroskedastic structure. To see this:</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \mathbb{V}\text{ar}( \mu_i \mid x) &amp;= \mathbb{E}[\mu_i^2 \mid x] - \underbrace{\mathbb{E}[\mu_i \mid x]^2}_\text{=0}  \\
+  &amp;= \mathbb{E}[(\mu_i = -x_i'\beta)^2 \mid x ] \mathbb{P}[\mu_i = -x_i'\beta \mid x] + \mathbb{E}[(\mu_i = 1-x_i'\beta)^2 \mid x ] \mathbb{P}[\mu_i = 1-x_i'\beta \mid x]   \\
+  &amp;= (-x_i'\beta)^2(1-p_i) + (1 - x_i'\beta)^2 (p_i) \\
+  &amp;= (-x_i'\beta)^2(1-x_i'\beta) + (1-x_i'\beta)^2(x_i'\beta)\\
+  &amp;= (x_i'\beta)(1-x_i'\beta) \\
+  &amp;= \mathbb{P}[y_i = 1 \mid x] \mathbb{P}[y_i = 0 \mid x]
+\end{aligned}
+\]</span></p>
+<p>Thus, the variance of the <span class="math inline">\(\mu_i\)</span> depends on the <span class="math inline">\(x_i'\beta\)</span>; in other words, if <span class="math inline">\(p_i\)</span> is large, then the variance of the errors is tiny. If <span class="math inline">\(p_i \approx 0.5\)</span>, the variance of the errors is large. This means the variance is non-constant across observations.</p>
+</section>
+</section>
+<section id="logit-probit" class="level3">
+<h3 class="anchored" data-anchor-id="logit-probit">Logit &amp; Probit</h3>
+<p>The goal is to constrain the outcome <span class="math inline">\(F(x_i,\beta) \in [0,1]\)</span>. To do so, we seek to construct a “single index model” such that <span class="math inline">\(F(\cdot)\)</span> maps the single index <span class="math inline">\(x_i'\beta\)</span> to <span class="math inline">\(y_i\)</span>. The most popular models use the form:</p>
+<p><span class="math display">\[
+\mathbb{P}[y_i = 1 \mid x] = F(x_i'\beta)
+\]</span></p>
+<p>Where <span class="math inline">\(F(\cdot)\)</span> is chosen as some cumulative distribution function; our choice of this distribution deteremines the properties of our model.</p>
+<p>The two most popular choices are <strong>Logit</strong> and <strong>Probit</strong>.</p>
+<div class="grid">
+<section id="logit" class="level4 g-col-6">
+<h4 class="anchored" data-anchor-id="logit">Logit</h4>
+<p><span class="math display">\[
+F(x_i'\beta) = \Lambda(x_i'\beta) = \frac{\exp(x_i'\beta)}{1 + \exp(x_i'\beta)}
+\]</span></p>
+</section>
+<section id="probit" class="level4 g-col-6">
+<h4 class="anchored" data-anchor-id="probit">Probit</h4>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; F(x_i'\beta) = \Phi(x_i'\beta) = \int_{-\infty}^{x_i'\beta} \phi(t)dt \\
+&amp; \text{where } \phi(t) = \frac{1}{2\pi}e^{(\frac{-t^2}{2})}
+\end{aligned}
+\]</span></p>
+</section>
+</div>
+<p>Both models are very similar in shape, however logit has slightly fatter tails. Both are monotone and increasing functions of <span class="math inline">\(x_i'\beta\)</span>; thus, whenever <span class="math inline">\(\uparrow \beta, \uparrow F(x_i'\beta)\)</span>.</p>
+<p>However, since both models are no longer linear in <span class="math inline">\(\beta\)</span>, we <u>cannot</u> use OLS. Instead, we must use <a href="../../../../../classes/STATA/econometrics2/Notes/07mle/mle.html">maximum likelihood</a> as our estimators.</p>
+</section>
+</section>
+</section>
+<section id="applied" class="level1">
+<h1>Applied</h1>
+<div id="1752599d" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#| eval: false</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>* --- linear probability <span class="kw">model</span> ---</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>* heteroskedastic <span class="kw">by</span> construction; always <span class="kw">use</span> <span class="kw">robust</span> SEs</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">regress</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3, <span class="kw">vce</span>(<span class="kw">robust</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>* --- <span class="kw">logit</span> ---</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">logit</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>* --- <span class="kw">probit</span> ---</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">probit</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>* --- predicted probabilities ---</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">predict</span> phat, pr</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>* --- see MLE <span class="kw">notes</span> <span class="kw">for</span> marginal <span class="kw">effects</span>, LR tests, and goodness-<span class="kw">of</span>-<span class="kw">fit</span> ---</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

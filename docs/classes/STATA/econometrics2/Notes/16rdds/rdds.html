@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Michael Fehl">
-<meta name="dcterms.date" content="2026-01-26">
+<meta name="dcterms.date" content="2026-02-21">
 
-<title>Project 01 – Michael Fehl</title>
+<title>Regression Discontinuity Designs – Michael Fehl</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +67,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../../../">
-<link href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS03/ps03.html" rel="prev">
 <script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -44,8 +78,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-628f598885c147727f3461b176aacc5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../../site_libs/bootstrap/bootstrap-dark-16e990400b918c4979fa1e9001020cd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,6 +109,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -329,7 +392,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../../classes.html">Classes</a></li><li class="breadcrumb-item"><a href="../../../../../classes/STATA/econometrics2/index.html">Econometrics: Panel Data</a></li><li class="breadcrumb-item"><a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html">Projects</a></li><li class="breadcrumb-item"><a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html">Project 01</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Regression Discontinuity Designs</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -347,13 +410,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Classes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes.html" class="sidebar-item-text sidebar-link">
@@ -563,14 +626,18 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Nowcasting &amp; Forecasting</span></span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">Networks: Concepts &amp; Algorithms</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/index.html" class="sidebar-item-text sidebar-link">
@@ -579,13 +646,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/notes/01_INTRO/01.html" class="sidebar-item-text sidebar-link">
@@ -608,13 +675,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
@@ -637,13 +704,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
@@ -656,13 +723,47 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
- <span class="menu-text">Econometrics: Panel Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Latent Network Modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Conditional Independence</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Econometrics: Panel Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/index.html" class="sidebar-item-text sidebar-link">
@@ -671,13 +772,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="sidebar-item-text sidebar-link">
@@ -772,13 +873,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="sidebar-item-text sidebar-link">
@@ -801,16 +902,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project 01</span></a>
   </div>
 </li>
@@ -825,16 +926,42 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory">Theory</a>
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#identification-in-the-sharp-rdd" id="toc-identification-in-the-sharp-rdd" class="nav-link" data-scroll-target="#identification-in-the-sharp-rdd">Identification in the Sharp RDD</a>
+  <ul class="collapse">
+  <li><a href="#imprecise-control-lee-lemieux" id="toc-imprecise-control-lee-lemieux" class="nav-link" data-scroll-target="#imprecise-control-lee-lemieux">Imprecise Control (Lee-Lemieux)</a></li>
+  </ul></li>
+  <li><a href="#the-local-nature-of-the-rdd-estimate" id="toc-the-local-nature-of-the-rdd-estimate" class="nav-link" data-scroll-target="#the-local-nature-of-the-rdd-estimate">The Local Nature of the RDD Estimate</a></li>
+  <li><a href="#identification-in-the-fuzzy-rdd" id="toc-identification-in-the-fuzzy-rdd" class="nav-link" data-scroll-target="#identification-in-the-fuzzy-rdd">Identification in the Fuzzy RDD</a>
+  <ul class="collapse">
+  <li><a href="#homogeneous-treatment-effects" id="toc-homogeneous-treatment-effects" class="nav-link" data-scroll-target="#homogeneous-treatment-effects">Homogeneous Treatment Effects</a></li>
+  <li><a href="#heterogeneous-treatment-effects" id="toc-heterogeneous-treatment-effects" class="nav-link" data-scroll-target="#heterogeneous-treatment-effects">Heterogeneous Treatment Effects</a></li>
+  </ul></li>
+  <li><a href="#estimation-in-the-sharp-rdd" id="toc-estimation-in-the-sharp-rdd" class="nav-link" data-scroll-target="#estimation-in-the-sharp-rdd">Estimation in the Sharp RDD</a>
+  <ul class="collapse">
+  <li><a href="#local-polynomial-methods" id="toc-local-polynomial-methods" class="nav-link" data-scroll-target="#local-polynomial-methods">Local Polynomial Methods</a></li>
+  <li><a href="#robust-bias-correction-inference" id="toc-robust-bias-correction-inference" class="nav-link" data-scroll-target="#robust-bias-correction-inference">Robust Bias Correction Inference</a></li>
+  </ul></li>
+  <li><a href="#estimation-in-the-fuzzy-rdd" id="toc-estimation-in-the-fuzzy-rdd" class="nav-link" data-scroll-target="#estimation-in-the-fuzzy-rdd">Estimation in the Fuzzy RDD</a></li>
+  </ul></li>
+  <li><a href="#applied" id="toc-applied" class="nav-link" data-scroll-target="#applied">Applied</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../../classes.html">Classes</a></li><li class="breadcrumb-item"><a href="../../../../../classes/STATA/econometrics2/index.html">Econometrics: Panel Data</a></li><li class="breadcrumb-item"><a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html">Projects</a></li><li class="breadcrumb-item"><a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html">Project 01</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project 01</h1>
+<h1 class="title">Regression Discontinuity Designs</h1>
 </div>
 
 
@@ -851,7 +978,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 26, 2026</p>
+      <p class="date">February 21, 2026</p>
     </div>
   </div>
   
@@ -863,8 +990,224 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="theory" class="level1">
+<h1>Theory</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Natural or quasi-experiments try to mimic the situation of randomized controlled trials by exploiting variation that is arguably as good as randomly assigned. A special case arises when assignment to treatment is based on a cutoff in an observable variable.</p>
+<p>The key ingredients of a <strong>regression discontinuity design (RDD)</strong> are: at least one observable covariate (the “running” or “assignment” variable) and at least one cutoff that determines assignment to treatment. The key intuition is that units just below and just above the cutoff should be similar in all respects except treatment status. Hence, differences in outcomes at the cutoff can be attributed to the treatment.</p>
+<p>RD designs come in two varieties:</p>
+<ul>
+<li><strong>Sharp RD (SRD)</strong>: treatment status is a deterministic function of the assignment variable at the cutoff. <span class="math inline">\(D_i = \mathbf{1}[X_i \geq c]\)</span>.</li>
+<li><strong>Fuzzy RD (FRD)</strong>: treatment status is a discontinuous stochastic function of the assignment variable at the cutoff. Crossing the cutoff makes it more likely that the unit is treated, but the jump in <span class="math inline">\(P(D_i = 1)\)</span> is not from 0 to 1. This is analogous to imperfect compliance in an RCT, with cutoff crossing <span class="math inline">\(Z_i = \mathbf{1}[X_i \geq c]\)</span> serving as the instrument for <span class="math inline">\(D_i\)</span>.</li>
+</ul>
+</section>
+<section id="identification-in-the-sharp-rdd" class="level2">
+<h2 class="anchored" data-anchor-id="identification-in-the-sharp-rdd">Identification in the Sharp RDD</h2>
+<p>Define the following notation:</p>
+<ul>
+<li><span class="math inline">\(Y_i\)</span>: outcome</li>
+<li><span class="math inline">\(X_i\)</span>: assignment (running) variable</li>
+<li><span class="math inline">\(D_i = \mathbf{1}[X_i \geq c]\)</span>: binary treatment status</li>
+<li><span class="math inline">\(\beta_i\)</span>: individual treatment effect</li>
+<li><span class="math inline">\(c\)</span>: cutoff</li>
+<li><span class="math inline">\(U_i\)</span>: unobservables, other factors that affect <span class="math inline">\(Y_i\)</span></li>
+</ul>
+<p>We make two assumptions:</p>
+<p><strong>A1.</strong> Homogeneous treatment effect: <span class="math inline">\(\beta_i = \beta_D\)</span></p>
+<p><strong>A2.</strong> Continuity: <span class="math inline">\(\mathbb{E}[U_i \mid X_i = x]\)</span> is continuous in <span class="math inline">\(x\)</span></p>
+<p>Under A1 and A2, the RD gap identifies <span class="math inline">\(\beta_D\)</span>. To see this, write the linear regression model <span class="math inline">\(Y_i = \beta_0 + \beta_D D_i + \delta X_i + U_i\)</span>. Then:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x] \\
+&amp;= \lim_{x \downarrow c} \mathbb{E}(\beta_0 + \beta_D D_i + \delta X_i + U_i \mid X_i = x) - \lim_{x \uparrow c} \mathbb{E}(\beta_0 + \beta_D D_i + \delta X_i + U_i \mid X_i = x) \\
+&amp;= \beta_D + \delta c + \mathbb{E}(U_i \mid X_i = c) - \beta_D \cdot 0 - \delta c - \lim_{x \uparrow c}\mathbb{E}(U_i \mid X_i = x) \\
+&amp;= \beta_D
+\end{aligned}
+\]</span></p>
+<p>where the last equality uses A2. Without A1 (heterogeneous effects), the RD gap identifies the conditional average treatment effect at the cutoff:</p>
+<p><span class="math display">\[
+\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x] = \mathbb{E}(\beta_i \mid X_i = c)
+\]</span></p>
+<p>Note that under A2, <span class="math inline">\(\mathbb{E}(U_i \mid X_i = c, D_i = 0) = \mathbb{E}(U_i \mid X_i = c, D_i = 1)\)</span>, so <span class="math inline">\(U_i\)</span> is mean-independent of <span class="math inline">\(D_i\)</span> at <span class="math inline">\(c\)</span>. This means we can test A2 indirectly by checking whether observed covariates <span class="math inline">\(W_i\)</span> satisfy <span class="math inline">\(\mathbb{E}(W_i \mid X_i = x)\)</span> continuous at <span class="math inline">\(c\)</span> – analogous to balance checks in RCTs.</p>
+<section id="imprecise-control-lee-lemieux" class="level3">
+<h3 class="anchored" data-anchor-id="imprecise-control-lee-lemieux">Imprecise Control (Lee-Lemieux)</h3>
+<p>A2 is implied by an alternative assumption A2’ (<strong>imprecise control</strong>): <span class="math inline">\(P(X_i = x \mid U_i = u)\)</span> is continuous in <span class="math inline">\(x\)</span> for all <span class="math inline">\(u\)</span>. This states that the density of <span class="math inline">\(X_i\)</span> must be smooth for all “types” of agents. It allows for different agents to have different levels of control over <span class="math inline">\(X_i\)</span>, as long as none of them can control <span class="math inline">\(X_i\)</span> completely or make sure it is always above the cutoff. Under A2’, A2 follows from Bayes’ rule:</p>
+<p><span class="math display">\[
+\mathbb{E}(U_i \mid X_i = x) = \sum_u \frac{P(X_i = x \mid U_i = u)P(U_i = u)}{\sum_u P(X_i = x \mid U_i = u) P(U_i = u)} u
+\]</span></p>
+<p>A practical implication of A2’ is that the density of the running variable should be smooth at the cutoff. A manipulation test (McCrary density test) checks for a discontinuity in the density of <span class="math inline">\(X_i\)</span> at <span class="math inline">\(c\)</span>.</p>
+</section>
+</section>
+<section id="the-local-nature-of-the-rdd-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="the-local-nature-of-the-rdd-estimate">The Local Nature of the RDD Estimate</h2>
+<p>RDD estimates are <strong>local</strong>: they identify treatment effects only for units with <span class="math inline">\(X_i \approx c\)</span>. In the absence of additional assumptions, they are not informative about treatment effects at other values of the score. This is a fundamental external validity limitation of the design.</p>
+</section>
+<section id="identification-in-the-fuzzy-rdd" class="level2">
+<h2 class="anchored" data-anchor-id="identification-in-the-fuzzy-rdd">Identification in the Fuzzy RDD</h2>
+<section id="homogeneous-treatment-effects" class="level3">
+<h3 class="anchored" data-anchor-id="homogeneous-treatment-effects">Homogeneous Treatment Effects</h3>
+<p>When treatment status is influenced by factors beyond <span class="math inline">\(X_i\)</span>, so <span class="math inline">\(D_i \neq \mathbf{1}[X_i \geq c]\)</span>, there must be a first stage: a discontinuity in the likelihood of treatment at the cutoff.</p>
+<p><strong>A3.</strong> First stage: <span class="math inline">\(\lim_{x \downarrow c} P(D_i = 1 \mid X_i = x) - \lim_{x \uparrow c} P(D_i = 1 \mid X_i = x) &gt; 0\)</span></p>
+<p><strong>A4.</strong> Exclusion restriction: <span class="math inline">\(\beta_Z = 0\)</span> (crossing the cutoff affects outcomes only through treatment, not directly)</p>
+<p>The data generating process is:</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_D D_i + \delta X_i + \beta_Z Z_i + U_i \qquad D_i = \pi_0 + \pi_Z Z_i + \pi_X X_i + V_i
+\]</span></p>
+<p>Under A1-A4, the ratio of RD gaps in <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(D_i\)</span> at the cutoff identifies <span class="math inline">\(\beta_D\)</span>:</p>
+<p><span class="math display">\[
+\frac{\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x]}{\lim_{x \downarrow c} \mathbb{E}[D_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[D_i \mid X_i = x]} = \beta_D
+\]</span></p>
+<p><strong>Proof:</strong> The numerator (reduced form / ITT at the cutoff):</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x] \\
+&amp;= \beta_D [E(D_i \mid X_i = c^+) - E(D_i \mid X_i = c^-)] + \beta_Z \quad \text{under A1, A2} \\
+&amp;= \beta_D \pi_Z + \beta_Z \\
+&amp;= \beta_D \pi_Z \quad \text{under A4}
+\end{aligned}
+\]</span></p>
+<p>Dividing by the first stage <span class="math inline">\(\pi_Z\)</span> gives <span class="math inline">\(\beta_D\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+<p>The RD gap in <span class="math inline">\(Y_i\)</span> alone (the reduced form) is also referred to as the <strong>intention-to-treat effect</strong> at the cutoff. It does not depend on the validity of the exclusion restriction and is sometimes policy-relevant in its own right.</p>
+</section>
+<section id="heterogeneous-treatment-effects" class="level3">
+<h3 class="anchored" data-anchor-id="heterogeneous-treatment-effects">Heterogeneous Treatment Effects</h3>
+<p>Once we drop A1 and allow for heterogeneous effects <span class="math inline">\(\beta_i\)</span> and heterogeneous compliance <span class="math inline">\(\pi_i\)</span>, the data generating process is:</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_i D_i + \delta X_i + \beta_Z Z_i + U_i \qquad D_i = \pi_0 + \pi_i Z_i + \pi_X X_i + V_i
+\]</span></p>
+<p><strong>Under A2-A4 with no cross-overs</strong> (one-sided non-compliance), the ratio of reduced forms identifies the ATT at the cutoff:</p>
+<p><span class="math display">\[
+\frac{\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x]}{\lim_{x \downarrow c} \mathbb{E}[D_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[D_i \mid X_i = x]} = \mathbb{E}(\beta_i \mid D_i = 1, X_i = c)
+\]</span></p>
+<p><strong>Under A2-A4 with two-sided non-compliance</strong>, the ratio identifies a weighted average treatment effect at the cutoff:</p>
+<p><span class="math display">\[
+\frac{\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x]}{\lim_{x \downarrow c} \mathbb{E}[D_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[D_i \mid X_i = x]} = \mathbb{E}\left(\beta_i \frac{\pi_i}{\mathbb{E}(\pi_i)} \,\Big|\, X_i = c\right)
+\]</span></p>
+<p><strong>Under A2-A5</strong> (monotonicity: <span class="math inline">\(P(\pi_i = -1 \mid X_i = c) = 0\)</span>, ruling out defiers at the cutoff), the ratio identifies the <strong>local average treatment effect (LATE)</strong> for compliers at the cutoff:</p>
+<p><span class="math display">\[
+\frac{\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x]}{\lim_{x \downarrow c} \mathbb{E}[D_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[D_i \mid X_i = x]} = \mathbb{E}(\beta_i \mid X_i = c, \pi_i = 1)
+\]</span></p>
+<p>The proportion of compliers at the cutoff is given by the first stage: <span class="math inline">\(P(\pi_i = 1 \mid X_i = c) = \lim_{x \downarrow c} \mathbb{E}[D_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[D_i \mid X_i = x]\)</span>.</p>
+</section>
+</section>
+<section id="estimation-in-the-sharp-rdd" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-in-the-sharp-rdd">Estimation in the Sharp RDD</h2>
+<p>The RD estimand is the gap in <span class="math inline">\(Y_i\)</span> at the cutoff:</p>
+<p><span class="math display">\[
+\hat{\tau}_{SRD} = \lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x] = \mu_+ - \mu_-
+\]</span></p>
+<p>In practice there are often few observations right around the cutoff. A natural solution is to include observations further away and fit a <strong>local polynomial</strong> on each side. The pooled specification within a <span class="math inline">\(\pm h\)</span> bandwidth is:</p>
+<p><span class="math display">\[
+Y_i = \mu_- + (\mu_+ - \mu_-)\mathbf{1}[X_i \geq c] + \mu_{-,1}(X_i - c) + (\mu_{+,1} - \mu_{-,1})(X_i - c)\mathbf{1}[X_i \geq c] + U_i'
+\]</span></p>
+<p>The coefficient on <span class="math inline">\(\mathbf{1}[X_i \geq c]\)</span> is the RD point estimate <span class="math inline">\(\hat{\mu}_+ - \hat{\mu}_-\)</span>.</p>
+<section id="local-polynomial-methods" class="level3">
+<h3 class="anchored" data-anchor-id="local-polynomial-methods">Local Polynomial Methods</h3>
+<p>While the true regression function might be approximately linear close to the cutoff, a larger bandwidth <span class="math inline">\(h\)</span> makes it more likely that the function exhibits curvature. <strong>Local polynomial methods</strong> implement polynomial regression fits using only observations near the cutoff, within a bandwidth <span class="math inline">\(h\)</span>:</p>
+<p>For observations with <span class="math inline">\(X_i \geq c\)</span>:</p>
+<p><span class="math display">\[
+Y_i = \mu_+ + \mu_{+,1}(X_i - c) + \mu_{+,2}(X_i - c)^2 + \ldots + \mu_{+,p}(X_i - c)^p + \varepsilon_i
+\]</span></p>
+<p>using <span class="math inline">\(K\!\left(\frac{X_i - c}{h}\right)\)</span> as a weight for each observation. Symmetrically for <span class="math inline">\(X_i &lt; c\)</span>. The intercept estimates <span class="math inline">\(\hat{\mu}_+\)</span> and <span class="math inline">\(\hat{\mu}_-\)</span> are estimates of <span class="math inline">\(\lim_{x \downarrow c} \mathbb{E}[Y_i \mid X_i = x]\)</span> and <span class="math inline">\(\lim_{x \uparrow c} \mathbb{E}[Y_i \mid X_i = x]\)</span>.</p>
+<p>The three key choices are:</p>
+<ol type="1">
+<li><p><strong>Kernel function <span class="math inline">\(K(\cdot)\)</span></strong>: assigns non-negative weights based on distance to <span class="math inline">\(c\)</span>. The recommended choice is the <strong>triangular kernel</strong> <span class="math inline">\(K(u) = (1-|u|)\mathbf{1}(|u| \leq 1)\)</span>, which assigns maximum weight at <span class="math inline">\(X_i = c\)</span> and declines linearly. In practice results are not sensitive to the kernel choice.</p></li>
+<li><p><strong>Bandwidth <span class="math inline">\(h\)</span></strong>: controls the width of the neighborhood. Smaller <span class="math inline">\(h\)</span> reduces misspecification bias but increases variance (fewer observations). There is a fundamental <strong>bias-variance trade-off</strong>. The optimal bandwidth minimizes the asymptotic MSE:</p></li>
+</ol>
+<p><span class="math display">\[
+AMSE_{\hat{\tau}_p}(h) = \underbrace{h^{2(p+1)} B_p^2}_{\text{Bias}^2} + \underbrace{\frac{1}{nh} V_p}_{\text{Variance}}
+\]</span></p>
+<p>The optimal bandwidth is:</p>
+<p><span class="math display">\[
+h_{opt} = \left(\frac{V_p}{2(p+1)B_p^2}\right)^{1/(2p+3)} \cdot n^{-1/(2p+3)}
+\]</span></p>
+<p>The Calonico, Cattaneo and Titiunik (2014) procedure estimates <span class="math inline">\(h_{opt}\)</span> by estimating the unknown bias <span class="math inline">\(B_p\)</span> using a local polynomial of order <span class="math inline">\(q = p+1\)</span> with a pilot bandwidth <span class="math inline">\(b\)</span>.</p>
+<ol start="3" type="1">
+<li><strong>Polynomial order <span class="math inline">\(p\)</span></strong>: higher order reduces bias for a given bandwidth but increases variance. The AMSE formula can be used to select the optimal order.</li>
+</ol>
+</section>
+<section id="robust-bias-correction-inference" class="level3">
+<h3 class="anchored" data-anchor-id="robust-bias-correction-inference">Robust Bias Correction Inference</h3>
+<p>Since the optimal bandwidth is chosen to minimize AMSE, there is a residual bias term <span class="math inline">\(\mathcal{B}\)</span> that should be accounted for in inference. The <strong>robust bias-corrected confidence interval</strong> is:</p>
+<p><span class="math display">\[
+\text{CI}_{rbc} = \left[(\hat{\tau} - \hat{\mathcal{B}}) \pm 1.96 \cdot \sqrt{\hat{\mathcal{V}}_{bc}}\right]
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\mathcal{B}}\)</span> is the estimated bias and <span class="math inline">\(\hat{\mathcal{V}}_{bc}\)</span> is a bias-corrected variance estimator (larger than the conventional standard error to account for the variability of <span class="math inline">\(\hat{\mathcal{B}}\)</span>).</p>
+</section>
+</section>
+<section id="estimation-in-the-fuzzy-rdd" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-in-the-fuzzy-rdd">Estimation in the Fuzzy RDD</h2>
+<p>In fuzzy RDD, we additionally need to estimate the RD gap in <span class="math inline">\(D_i\)</span>:</p>
+<p><span class="math display">\[
+\lim_{x \downarrow c} \mathbb{E}[D_i \mid X_i = x] - \lim_{x \uparrow c} \mathbb{E}[D_i \mid X_i = x] = \alpha_+ - \alpha_-
+\]</span></p>
+<p>The pooled local linear specification for the first stage is:</p>
+<p><span class="math display">\[
+D_i = \alpha_- + (\alpha_+ - \alpha_-)\mathbf{1}[X_i \geq c] + \alpha_{-,1}(X_i - c) + (\alpha_{+,1} - \alpha_{-,1})(X_i - c)\mathbf{1}[X_i \geq c] + V_i
+\]</span></p>
+<p>The fuzzy RD point estimate is the ratio:</p>
+<p><span class="math display">\[
+\hat{\tau}_{FRD} = \frac{\hat{\mu}_+ - \hat{\mu}_-}{\hat{\alpha}_+ - \hat{\alpha}_-}
+\]</span></p>
+<p>In practice, the LATE estimate is obtained by using the IV estimator, instrumenting <span class="math inline">\(D_i\)</span> with <span class="math inline">\(Z_i = \mathbf{1}[X_i \geq c]\)</span> and including <span class="math inline">\((X_i - c)\)</span> and <span class="math inline">\((X_i - c)\mathbf{1}[X_i \geq c]\)</span> as regressors within the bandwidth.</p>
+<p>The recommended procedure is to use robust local polynomial methods, analogous to the sharp RD setting. Optimal bandwidth selection for the LATE typically relies on a single bandwidth for both numerator and denominator.</p>
+</section>
+</section>
+<section id="applied" class="level1">
+<h1>Applied</h1>
+<div id="f9ad1101" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#| eval: false</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>* --- rdrobust: main RD estimation package ---</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>* <span class="kw">ssc</span> install rdrobust</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>* --- sharp RDD ---</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>* <span class="fu">y</span>: outcome; x: running <span class="kw">variable</span>; c: cutoff (<span class="kw">default</span> 0; subtract c from x)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> x_centered = x - cutoff</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>* <span class="kw">local</span> linear, triangular kernel, MSE-optimal bandwidth (CCT 2014)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>rdrobust <span class="fu">y</span> x_centered, kernel(triangular) <span class="kw">p</span>(1)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>* <span class="kw">local</span> quadratic</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>rdrobust <span class="fu">y</span> x_centered, kernel(triangular) <span class="kw">p</span>(2)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>* specify bandwidth manually</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>rdrobust <span class="fu">y</span> x_centered, kernel(triangular) <span class="kw">p</span>(1) <span class="kw">h</span>(5)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>* --- fuzzy RDD ---</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>* fuzzy(D): D is the treatment receipt <span class="kw">variable</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>rdrobust <span class="fu">y</span> x_centered, fuzzy(D) kernel(triangular) <span class="kw">p</span>(1)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>* --- rddensity: McCrary density <span class="kw">test</span> <span class="kw">for</span> manipulation ---</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>* H0: density <span class="kw">of</span> x is continuous <span class="fu">at</span> the cutoff (no manipulation)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>* <span class="kw">ssc</span> install rddensity</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>rddensity x_centered</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>* --- rdplot: visualize the RD ---</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>* generates binned scatterplot with polynomial fits <span class="kw">on</span> each side</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>rdplot <span class="fu">y</span> x_centered, <span class="kw">p</span>(1)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>* --- <span class="kw">local</span> linear regression manually (<span class="kw">for</span> transparency) ---</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>* restrict to bandwidth around cutoff</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> treatment = (x_centered &gt;= 0)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> x_treat = x_centered * treatment</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>* pooled <span class="kw">local</span> linear within bandwidth <span class="kw">h</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="kw">reg</span> <span class="fu">y</span> treatment x_centered x_treat <span class="kw">if</span> <span class="fu">abs</span>(x_centered) &lt;= <span class="kw">h</span>, <span class="kw">vce</span>(<span class="kw">robust</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>* --- covariate balance <span class="kw">test</span> ---</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>* <span class="kw">run</span> rdrobust <span class="kw">on</span> predetermined covariates; expect tau ~ 0</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>rdrobust w1 x_centered, kernel(triangular) <span class="kw">p</span>(1)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>rdrobust w2 x_centered, kernel(triangular) <span class="kw">p</span>(1)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>* --- fuzzy RDD via IV manually ---</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>* instrument: Z = 1[X &gt;= c]; endogenous: D</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>ivreg2 <span class="fu">y</span> (D = treatment) x_centered x_treat <span class="kw">if</span> <span class="fu">abs</span>(x_centered) &lt;= <span class="kw">h</span>, <span class="kw">robust</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1280,15 +1623,6 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS03/ps03.html" class="pagination-link" aria-label="PS03: mLogit-oProbit-Tobit">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">PS03: mLogit-oProbit-Tobit</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

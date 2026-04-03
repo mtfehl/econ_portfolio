@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" rel="next">
-<link href="../../../classes/R/networks/projects/project1/01project.html" rel="prev">
+<link href="../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" rel="prev">
 <script src="../../../site_libs/quarto-listing/list.min.js"></script>
 <script src="../../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -45,8 +45,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-628f598885c147727f3461b176aacc5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-16e990400b918c4979fa1e9001020cd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -85,7 +85,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-image','listing-title','listing-reading-time','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 18,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
@@ -119,34 +120,6 @@ ul.task-list li input[type="checkbox"] {
 
     window['quarto-listings'] = window['quarto-listings'] || {};
     window['quarto-listings']['listing-problem-sets'] = new List('listing-problem-sets', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-projects .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-title','listing-reading-time','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-projects'] = new List('listing-projects', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -681,14 +654,18 @@ window.Quarto = {
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Nowcasting &amp; Forecasting</span></span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">Networks: Concepts &amp; Algorithms</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/index.html" class="sidebar-item-text sidebar-link">
@@ -697,13 +674,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/notes/01_INTRO/01.html" class="sidebar-item-text sidebar-link">
@@ -726,13 +703,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
@@ -755,13 +732,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
@@ -774,13 +751,47 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
- <span class="menu-text">Econometrics: Panel Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Latent Network Modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/latent_networks/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Conditional Independence</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics: Panel Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/STATA/econometrics2/index.html" class="sidebar-item-text sidebar-link active">
@@ -789,13 +800,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="sidebar-item-text sidebar-link">
@@ -890,13 +901,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="sidebar-item-text sidebar-link">
@@ -919,16 +930,16 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../classes/STATA/econometrics2/Projects/Project01/pj01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../classes/STATA/econometrics2/Projects/Project01/pj01.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project 01</span></a>
   </div>
 </li>
@@ -955,7 +966,6 @@ window.Quarto = {
   </ul></li>
   <li><a href="#class-notes" id="toc-class-notes" class="nav-link" data-scroll-target="#class-notes">Class Notes</a></li>
   <li><a href="#problem-sets" id="toc-problem-sets" class="nav-link" data-scroll-target="#problem-sets">Problem Sets</a></li>
-  <li><a href="#projects" id="toc-projects" class="nav-link" data-scroll-target="#projects">Projects</a></li>
   </ul>
 </nav>
     </div>
@@ -1083,62 +1093,43 @@ window.Quarto = {
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TD
     N1(Causal Inference) --&gt; N2(Randomized Control Trials)
-    
-    
-    
-    %% PS4([Problem Set 4])
-    %% PS5([Problem Set 5])
+    N1 --&gt; N3(Regression Discontinuity Designs)
+    N1 --&gt; N4(Matching/Selection on Observables)
+    N1 --&gt; N5(Difference in Differences)
+    N1 --&gt; N6(Synthetic Control Methods)
+  
+    PS4([Problem Set 4])
+    PS5([Problem Set 5])
 
     %% Invisible link to nudge P near C/D without drawing a line
-    %% N4 ~~~ PS4
-    %% N9 ~~~ PS5
+    N2 ~~~ PS4
+    N4 ~~~ PS5
 
     click N1 "Notes/14causal/causal_intro.html" "Go to Causal Inference Notes"
     click N2 "Notes/15rcts/rcts.html" "Go to RCTs Notes"
-    %%click N3 "Notes/16 rcts/rcts .html" "Go to RCTs Notes"
-    %%click N4 "Notes/17 rcts/rcts .html" "Go to RCTs Notes"
-    %%click N5 "Notes/18 rcts/rcts .html" "Go to RCTs Notes"
-    %%click N6 "Notes/19 rcts/rcts .html" "Go to RCTs Notes"
-    %%click N7 "Notes/20 rcts/rcts .html" "Go to RCTs Notes"
-    %%click N8 "Notes/21 rcts/rcts .html" "Go to RCTs Notes"
-    %%click N9 "Notes/22 RCTs/RCTs .html" "Go to RCTs Notes"
-    %%click N10 "Notes/23 RCTs/RCTs .html" "Go to RCTs Notes"
-    %%click N11 "Notes/24 RCTs/RCTs .html" "Go to RCTs Notes"
-    %%click N12 "Notes/25 RCTs/RCTs .html" "Go to RCTs Notes"
-    %%click N13 "Notes/26 RCTs/RCTs .html" "Go to RCTs Notes"
-    %%click N14 "Notes/27 RCTs/RCTs .html" "Go to RCTs Notes"
-    
-    %% click PS4 "Problem_Sets/PS04/ps04.html" "Go to Problem Set 4"
-    %% click PS5 "Problem_Sets/PS05/ps05.html" "Go to Problem Set 5"
+    click N3 "Notes/16rdds/rdds.html" "Go to RDDs Notes"
+    click N4 "Notes/17selection_matching/selection_matching.html" "Go to Selection/Matching Notes"
+    click N5 "Notes/18dids/dids.html" "Go to RCTs Notes"
+    click N6 "Notes/19scms/scts.html" "Go to RCTs Notes"
 
+    click PS4 "Problem_Sets/PS04/ps04.html" "Go to Problem Set 4"
+    click PS5 "Problem_Sets/PS05/ps05.html" "Go to Problem Set 5"
 
     %% Classes
-    class N1,N2 nav-node
-    %% class PS4,PS5 project-node
+    class N1,N2,N3,N4,N5,N6 nav-node
+    class PS4,PS5 project-node
 
     %% STYLE THE LINES
     linkStyle 0 stroke:#1e5636,stroke-width:2px;
     
-   %% green color palette: #1e5636, #578c49, #99be8f
-   %% brown color palette: #8f8350, #b6a576 (nice forest scheme)
-   %% linkStyle 1 stroke:#9381FF,stroke-width:2px;
-   %% linkStyle 2 stroke:#B8B8FF,stroke-width:2px;
-   %% linkStyle 3 stroke:#B8B8FF,stroke-width:2px;
-   %% linkStyle 4 stroke:#B8B8FF,stroke-width:2px;
-   %% linkStyle 5 stroke:#9381FF,stroke-width:2px;
-   %% linkStyle 6 stroke:#B8B8FF,stroke-width:2px;
-   %% linkStyle 7 stroke:#B8B8FF,stroke-width:2px;
-   %% linkStyle 8 stroke:#A20021,stroke-width:2px;
-   %% linkStyle 9 stroke:#CC183C,stroke-width:2px;
-   %% linkStyle 10 stroke:#F52F57,stroke-width:2px;
-   %% linkStyle 11 stroke:#F52F57,stroke-width:2px;
-   %% linkStyle 12 stroke:#F75C7B,stroke-width:2px;
-   %% linkStyle 13 stroke:#F75C7B,stroke-width:2px;
-   %% linkStyle 14 stroke:#F75C7B,stroke-width:2px;
-   %% linkStyle 15 stroke:#CC183C,stroke-width:2px;
-   %% linkStyle 16 stroke:#F52F57,stroke-width:2px;
+     %% green color palette: #1e5636, #578c49, #99be8f
+     %% brown color palette: #8f8350, #b6a576 (nice forest scheme)
+    linkStyle 1 stroke:#578c49,stroke-width:2px;
+    linkStyle 2 stroke:#99be8f,stroke-width:2px;
+    linkStyle 3 stroke:#8f8350,stroke-width:2px;
+    linkStyle 4 stroke:#b6a576,stroke-width:2px;
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -1151,144 +1142,152 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="class-notes">Class Notes</h2>
 <div id="listing-class-notes" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1767740400000" data-listing-file-modified-sort="1771254654302" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="2">
+<div class="g-col-1" data-index="0" data-listing-date-sort="1767740400000" data-listing-file-modified-sort="1775238053041" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2792">
 <a href="../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/pols.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Pooled OLS
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">14 min</div>
 <div class="card-text listing-description delink">
-
-
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1767913200000" data-listing-file-modified-sort="1771254654305" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="1" data-listing-date-sort="1767913200000" data-listing-file-modified-sort="1775238053043" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2933">
 <a href="../../../classes/STATA/econometrics2/Notes/02random_effects/re.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/random_effects.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Random Effects
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">15 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1768086000000" data-listing-file-modified-sort="1771254654305" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="2" data-listing-date-sort="1768086000000" data-listing-file-modified-sort="1775238053046" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1422">
 <a href="../../../classes/STATA/econometrics2/Notes/03fixed_effects/fe.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/fixed_effects.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Fixed Effects
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">8 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-listing-date-sort="1768172400000" data-listing-file-modified-sort="1771254654313" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="3" data-listing-date-sort="1768172400000" data-listing-file-modified-sort="1775238053049" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1785">
 <a href="../../../classes/STATA/econometrics2/Notes/04first_diff/fd.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/first_diff.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 First Differences
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">9 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="4" data-listing-date-sort="1768258800000" data-listing-file-modified-sort="1771254654317" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="4" data-listing-date-sort="1768258800000" data-listing-file-modified-sort="1775238053051" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="880">
 <a href="../../../classes/STATA/econometrics2/Notes/05gmm/gmm.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/gmm.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Generalized Method of Moments Estimators
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">5 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="5" data-listing-date-sort="1768345200000" data-listing-file-modified-sort="1771254654321" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="5" data-listing-date-sort="1768345200000" data-listing-file-modified-sort="1775238053051" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="805">
 <a href="../../../classes/STATA/econometrics2/Notes/06anderson/ahsiao.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/ahsiao.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Anderson-Hsiao Estimator
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">5 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="6" data-listing-date-sort="1768431600000" data-listing-file-modified-sort="1771254654324" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="6" data-listing-date-sort="1768431600000" data-listing-file-modified-sort="1775238053051" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="998">
 <a href="../../../classes/STATA/econometrics2/Notes/06arellano/abond.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/abond.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-Arellano Bond
+Arellano-Bond
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">5 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="7" data-listing-date-sort="1768863600000" data-listing-file-modified-sort="1771254654327" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="7" data-listing-date-sort="1768863600000" data-listing-file-modified-sort="1775238053059" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1277">
 <a href="../../../classes/STATA/econometrics2/Notes/07mle/mle.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/mle.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Maximum Likelihood Estimators
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">7 min</div>
 <div class="card-text listing-description delink">
-
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="8" data-listing-date-sort="1768950000000" data-listing-file-modified-sort="1771989951906" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="8" data-listing-date-sort="1768950000000" data-listing-file-modified-sort="1775238053059" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="967">
 <a href="../../../classes/STATA/econometrics2/Notes/08binary_choice/logit_probit.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/binary.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Binary Choice Models
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">5 min</div>
 <div class="card-text listing-description delink">
 <p>Logit &amp; Probit Models</p>
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="9" data-listing-date-sort="1769468400000" data-listing-file-modified-sort="1771989960357" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2210">
+<div class="g-col-1" data-index="9" data-listing-date-sort="1769468400000" data-listing-file-modified-sort="1775238053064" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2210">
 <a href="../../../classes/STATA/econometrics2/Notes/09multinomial/multinomial.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -1305,7 +1304,7 @@ Multinomial Models
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="10" data-listing-date-sort="1769554800000" data-listing-file-modified-sort="1771989966156" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1329">
+<div class="g-col-1" data-index="10" data-listing-date-sort="1769554800000" data-listing-file-modified-sort="1775238053066" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1329">
 <a href="../../../classes/STATA/econometrics2/Notes/10nested_logit/nested.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -1322,7 +1321,7 @@ Nested Models
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="11" data-listing-date-sort="1769986800000" data-listing-file-modified-sort="1771989976091" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="777">
+<div class="g-col-1" data-index="11" data-listing-date-sort="1769986800000" data-listing-file-modified-sort="1775238053066" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="777">
 <a href="../../../classes/STATA/econometrics2/Notes/11ordered_response/ordered_response.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -1339,7 +1338,7 @@ Ordered Response Models
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="12" data-listing-date-sort="1770159600000" data-listing-file-modified-sort="1771989986722" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1242">
+<div class="g-col-1" data-index="12" data-listing-date-sort="1770159600000" data-listing-file-modified-sort="1775238053066" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1242">
 <a href="../../../classes/STATA/econometrics2/Notes/12censored_truncated/tobit.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -1356,93 +1355,194 @@ Tobit Model
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="13" data-listing-date-sort="1770246000000" data-listing-file-modified-sort="1771989998221" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="12">
+<div class="g-col-1" data-index="13" data-listing-date-sort="1770246000000" data-listing-file-modified-sort="1775238053066" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1445">
 <a href="../../../classes/STATA/econometrics2/Notes/13heckman/heckman.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/heckman.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Heckit Estimator
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">8 min</div>
 <div class="card-text listing-description delink">
-``{stata} heckman depvar [indepvars], select(depvar s = varlist s) [twostep]
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="14" data-listing-date-sort="1771455600000" data-listing-file-modified-sort="1775238053077" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2612">
+<a href="../../../classes/STATA/econometrics2/Notes/15rcts/rcts.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/rcts.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Randomized Control Trials
+</h5>
+<div class="listing-reading-time card-text text-muted">14 min</div>
+<div class="card-text listing-description delink">
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="15" data-listing-date-sort="1771628400000" data-listing-file-modified-sort="1775238053083" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1949">
+<a href="../../../classes/STATA/econometrics2/Notes/16rdds/rdds.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/rdd.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Regression Discontinuity Designs
+</h5>
+<div class="listing-reading-time card-text text-muted">10 min</div>
+<div class="card-text listing-description delink">
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="16" data-listing-date-sort="1772060400000" data-listing-file-modified-sort="1775238053083" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2331">
+<a href="../../../classes/STATA/econometrics2/Notes/17selection_matching/selection_matching.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/matching.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Selection on Observables and Matching
+</h5>
+<div class="listing-reading-time card-text text-muted">12 min</div>
+<div class="card-text listing-description delink">
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="17" data-listing-date-sort="1772319600000" data-listing-file-modified-sort="1775238053083" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2512">
+<a href="../../../classes/STATA/econometrics2/Notes/18dids/dids.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/DiD.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Difference in Differences
+</h5>
+<div class="listing-reading-time card-text text-muted">13 min</div>
+<div class="card-text listing-description delink">
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="18" data-listing-date-sort="1772838000000" data-listing-file-modified-sort="1775238053092" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3018">
+<a href="../../../classes/STATA/econometrics2/Notes/19scms/scts.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" data-src="../../../images/SCM.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Synthetic Control Methods
+</h5>
+<div class="listing-reading-time card-text text-muted">16 min</div>
+<div class="card-text listing-description delink">
 </div>
 </div>
 </div></a>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
+<nav id="class-notes-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
 </section>
 <section id="problem-sets" class="level2">
 <h2 class="anchored" data-anchor-id="problem-sets">Problem Sets</h2>
 <div id="listing-problem-sets" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1771990034674" data-listing-reading-time-sort="6" data-listing-word-count-sort="1160">
-<a href="../../../classes/STATA/econometrics2/Problem_Sets/PS02/ps02.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Problem Set 02
-</h5>
-<div class="listing-reading-time card-text text-muted">6 min</div>
-<div class="card-text listing-description delink">
-<p>Linear Models: Fixed Effects, First-Diffs, &amp; Arellano-Bond</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-date-sort="1770764400000" data-listing-file-modified-sort="1771990028002" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../../../classes/STATA/econometrics2/Problem_Sets/PS03/ps03.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Problem Set 03
-</h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
-<div class="card-text listing-description delink">
-<p>MLE: Binary choice, mLogit, oProbit, &amp; Tobit</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-date-sort="1768604400000" data-listing-file-modified-sort="1771990039137" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="0" data-listing-date-sort="1768604400000" data-listing-file-modified-sort="1775185733410" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1721">
 <a href="../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/ps01.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Problem Set 01
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">9 min</div>
 <div class="card-text listing-description delink">
 <p>Linear Models: Pooled OLS, Random Effects, Fixed Effects, &amp; First Diffs</p>
 </div>
 </div>
 </div></a>
 </div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-</section>
-<section id="projects" class="level2">
-<h2 class="anchored" data-anchor-id="projects">Projects</h2>
-<div id="listing-projects" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1769382000000" data-listing-file-modified-sort="1771989905536" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../../../classes/STATA/econometrics2/Projects/Project01/pj01.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-listing-date-sort="1769986800000" data-listing-file-modified-sort="1775238053093" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2400">
+<a href="../../../classes/STATA/econometrics2/Problem_Sets/PS02/ps02.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/ps02.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-Project 01
+Problem Set 02
 </h5>
-<div class="listing-reading-time card-text text-muted">1 min</div>
+<div class="listing-reading-time card-text text-muted">12 min</div>
 <div class="card-text listing-description delink">
-
+<p>Linear Models: Fixed Effects, First-Diffs, &amp; Arellano-Bond</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-date-sort="1770764400000" data-listing-file-modified-sort="1775185733465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2069">
+<a href="../../../classes/STATA/econometrics2/Problem_Sets/PS03/ps03.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/ps03.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Problem Set 03
+</h5>
+<div class="listing-reading-time card-text text-muted">11 min</div>
+<div class="card-text listing-description delink">
+<p>MLE: Binary choice, mLogit, oProbit, &amp; Tobit</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="3" data-listing-date-sort="1771974000000" data-listing-file-modified-sort="1775185733481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1806">
+<a href="../../../classes/STATA/econometrics2/Problem_Sets/PS04/ps04.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/ps04.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Problem Set 04
+</h5>
+<div class="listing-reading-time card-text text-muted">10 min</div>
+<div class="card-text listing-description delink">
+<p>Randomized Controlled Trials</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="4" data-listing-date-sort="1772492400000" data-listing-file-modified-sort="1775185733506" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2668">
+<a href="../../../classes/STATA/econometrics2/Problem_Sets/PS05/ps05.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../../../images/ps05.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Problem Set 05
+</h5>
+<div class="listing-reading-time card-text text-muted">14 min</div>
+<div class="card-text listing-description delink">
+<p>Causal Inference: IV with Imperfect Compliance &amp; Propensity Score Matching</p>
 </div>
 </div>
 </div></a>
@@ -1871,8 +1971,8 @@ Project 01
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../classes/R/networks/projects/project1/01project.html" class="pagination-link" aria-label="Project: Migration Network Shock Propagation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Project: Migration Network Shock Propagation</span>
+      <a href="../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="pagination-link" aria-label="Intro: Conditional Independence">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Intro: Conditional Independence</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

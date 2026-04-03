@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Michael Fehl">
+<meta name="dcterms.date" content="2026-03-07">
+
+<title>Synthetic Control Methods – Michael Fehl</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../../">
+<script src="../../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../../index.html">
+    <span class="navbar-title">Michael Fehl</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../../../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../projects.html"> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-classes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Classes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-classes">    
+        <li>
+    <a class="dropdown-item" href="../../../../../classes.html">
+ <span class="dropdown-text">Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../../classes/R/geospatial/index.html">
+ <span class="dropdown-text">Geospatial</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../../classes/R/finc_ecm/index.html">
+ <span class="dropdown-text">Econometrics: Time Series</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../../classes/R/networks/index.html">
+ <span class="dropdown-text">Networks: Concepts &amp; Algorithms</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../../classes/STATA/econometrics2/index.html">
+ <span class="dropdown-text">Econometrics: Panel Data</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../about.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../../file/Fehl_Michael_CV.pdf"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtfehl"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/michael-t-fehl"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:michaelthomasfehl@gmail.com"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Synthetic Control Methods</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../../../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Classes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Directory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Geospatial Data Science &amp; Economic Spatial Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/01/01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Vector Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/02/02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">st_filter() &amp; st_intersect()</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/03/03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vector Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/04/raster_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Raster Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/05/raster_vector_ops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Raster-Vector Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/06/leaflet07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Leaflet Maps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/notes/07/spatial_modeling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spatial Modeling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Problem Sets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/problem_sets/01ps/01ps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS01: Vietnam Road Maps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/problem_sets/02ps/02ps_final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS02: African Marketplaces &amp; Population</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/problem_sets/03ps/ps03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: Droughts &amp; Transportation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/geospatial/projects/project01/project01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project: US-MX Migration</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Econometrics: Time Series</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/notes/01/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Time Series &amp; Stationarity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/notes/02/models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Models: AR(p), MA(q), ARMA(p,q)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Problem Sets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/problem_sets/HW_1_Transformations/01ps_final.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS01: Non-Stationary Transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/problem_sets/HW_2_Forecasting/hw02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS02: Forecasting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/problem_sets/HW_3_ARCH_GARCH/ARCH_GARCH.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: ARCH and GARCH Models</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/finc_ecm/projects/Project01/project01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 01</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Nowcasting &amp; Forecasting</span></span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Networks: Concepts &amp; Algorithms</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/notes/01_INTRO/01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro to Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/notes/02_RGM/02_random_graph_models_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random Graph Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/notes/03_ML/03_ml_network_data_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ML on Network Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">Problem Sets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS01: Random Graph Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/problem_sets/ps02/ps02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS02: Community Detection &amp; ML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/problem_sets/ps03/PS3_networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: Cascades, Seeding, Routing, &amp; Opinions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project: Migration Network Shock Propagation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Latent Network Modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Conditional Independence</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">Econometrics: Panel Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pooled OLS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/02random_effects/re.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random Effects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/03fixed_effects/fe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fixed Effects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/04first_diff/fd.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">First Differences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/05gmm/gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GMM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/06anderson/ahsiao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Anderson-Hsiao</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/06arellano/abond.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Arellano-Bond</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/07mle/mle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MLE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/08binary_choice/logit_probit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binary Choice Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/09multinomial/multinomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Multinomial Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/10nested_logit/nested.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nested Logit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/11ordered_response/ordered_response.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ordered Response</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/12censored_truncated/tobit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tobit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/13heckman/heckman.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Heckit</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Notes/14causal/causal_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Causal Inference: Intro</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
+ <span class="menu-text">Problem Sets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS01: POLS-RE-FE-FD</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS02/ps02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS02: RE-FE-FD-Arellano-Bond</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS03/ps03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PS03: mLogit-oProbit-Tobit</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
+ <span class="menu-text">Projects</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project 01</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory">Theory</a>
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting">Setting</a></li>
+  <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation">Estimation</a></li>
+  <li><a href="#bias-bound" id="toc-bias-bound" class="nav-link" data-scroll-target="#bias-bound">Bias Bound</a></li>
+  <li><a href="#variable-selection" id="toc-variable-selection" class="nav-link" data-scroll-target="#variable-selection">Variable Selection</a></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference">Inference</a></li>
+  <li><a href="#advantages-of-synthetic-control-methods" id="toc-advantages-of-synthetic-control-methods" class="nav-link" data-scroll-target="#advantages-of-synthetic-control-methods">Advantages of Synthetic Control Methods</a>
+  <ul class="collapse">
+  <li><a href="#no-extrapolation" id="toc-no-extrapolation" class="nav-link" data-scroll-target="#no-extrapolation">No Extrapolation</a></li>
+  <li><a href="#transparency-of-fit" id="toc-transparency-of-fit" class="nav-link" data-scroll-target="#transparency-of-fit">Transparency of Fit</a></li>
+  <li><a href="#transparency-of-the-counterfactual" id="toc-transparency-of-the-counterfactual" class="nav-link" data-scroll-target="#transparency-of-the-counterfactual">Transparency of the Counterfactual</a></li>
+  <li><a href="#sparsity" id="toc-sparsity" class="nav-link" data-scroll-target="#sparsity">Sparsity</a></li>
+  <li><a href="#safeguard-against-specification-searches" id="toc-safeguard-against-specification-searches" class="nav-link" data-scroll-target="#safeguard-against-specification-searches">Safeguard Against Specification Searches</a></li>
+  </ul></li>
+  <li><a href="#contextual-requirements" id="toc-contextual-requirements" class="nav-link" data-scroll-target="#contextual-requirements">Contextual Requirements</a></li>
+  <li><a href="#robustness-and-diagnostic-checks" id="toc-robustness-and-diagnostic-checks" class="nav-link" data-scroll-target="#robustness-and-diagnostic-checks">Robustness and Diagnostic Checks</a></li>
+  <li><a href="#synthetic-difference-in-differences" id="toc-synthetic-difference-in-differences" class="nav-link" data-scroll-target="#synthetic-difference-in-differences">Synthetic Difference-in-Differences</a>
+  <ul class="collapse">
+  <li><a href="#setting-1" id="toc-setting-1" class="nav-link" data-scroll-target="#setting-1">Setting</a></li>
+  <li><a href="#sdid-estimator" id="toc-sdid-estimator" class="nav-link" data-scroll-target="#sdid-estimator">SDID Estimator</a></li>
+  <li><a href="#comparison-of-estimators" id="toc-comparison-of-estimators" class="nav-link" data-scroll-target="#comparison-of-estimators">Comparison of Estimators</a></li>
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">Properties</a></li>
+  <li><a href="#inference-1" id="toc-inference-1" class="nav-link" data-scroll-target="#inference-1">Inference</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#applied" id="toc-applied" class="nav-link" data-scroll-target="#applied">Applied</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Synthetic Control Methods</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Michael Fehl </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="theory" class="level1">
+<h1>Theory</h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Synthetic control methods have become standard in empirical work since the early 2000s. The setting is one where treatment is implemented at an aggregate level; e.g., a policy applied to a country, state, or city; and data are available on only a small number of such units. Traditional regression requires large samples and is poorly suited to this setting. Comparative case studies have long been used to evaluate aggregate interventions, but the selection of comparison units is typically informal and hard to replicate. Synthetic control methods formalize this by constructing a weighted combination of untreated units that matches the treated unit’s pre-intervention characteristics as closely as possible.</p>
+<p>Athey and Imbens (2017) describe synthetic controls as “arguably the most important innovation in the policy evaluation literature in the last 15 years.” The key idea is that a combination of unaffected units often provides a more appropriate comparison than any single unaffected unit alone. The overview below follows Abadie (2021, JEL) and the application of Abadie, Diamond and Hainmueller (2015).</p>
+</section>
+<section id="setting" class="level2">
+<h2 class="anchored" data-anchor-id="setting">Setting</h2>
+<p>Suppose there are <span class="math inline">\(J + 1\)</span> units indexed <span class="math inline">\(j = 1, \ldots, J + 1\)</span>. Unit <span class="math inline">\(j = 1\)</span> is the <strong>treated unit</strong> and units <span class="math inline">\(j = 2, \ldots, J + 1\)</span> form the <strong>donor pool</strong> – the set of untreated units not affected by the intervention. There are <span class="math inline">\(T\)</span> time periods and the first <span class="math inline">\(T_0\)</span> periods are before the intervention. For each unit <span class="math inline">\(j\)</span> and period <span class="math inline">\(t\)</span>, the outcome <span class="math inline">\(Y_{jt}\)</span> is observed. For each unit <span class="math inline">\(j\)</span>, a vector of <span class="math inline">\(k\)</span> predictors <span class="math inline">\(X_{1j}, \ldots, X_{kj}\)</span> is also observed. The predictors may include pre-intervention values of <span class="math inline">\(Y_{jt}\)</span> and are themselves unaffected by the intervention.</p>
+<p>Let <span class="math inline">\(Y^N_{jt}\)</span> denote the potential outcome without intervention. Define <span class="math inline">\(Y^I_{1t}\)</span> as the potential outcome for the treated unit under the intervention in post-intervention period <span class="math inline">\(t &gt; T_0\)</span>. The treatment effect for the affected unit in period <span class="math inline">\(t\)</span> is:</p>
+<p><span class="math display">\[
+\tau_{1t} = Y^I_{1t} - Y^N_{1t} \tag{1}
+\]</span></p>
+<p>While <span class="math inline">\(Y^I_{1t}\)</span> is observed for <span class="math inline">\(t &gt; T_0\)</span>, the counterfactual <span class="math inline">\(Y^N_{1t}\)</span> is not. The goal is to estimate it. The treatment effect is allowed to vary over time.</p>
+</section>
+<section id="estimation" class="level2">
+<h2 class="anchored" data-anchor-id="estimation">Estimation</h2>
+<p>Synthetic control methods approximate <span class="math inline">\(Y^N_{1t}\)</span> using a weighted combination of donor pool outcomes. Given a weight vector <span class="math inline">\(\mathbf{W} = (w_2, \ldots, w_{J+1})'\)</span>, the synthetic control estimator of <span class="math inline">\(Y^N_{1t}\)</span> and the corresponding treatment effect estimator are:</p>
+<p><span class="math display">\[
+\hat{Y}^N_{1t} = \sum_{j=2}^{J+1} w_j Y_{jt} \qquad \hat{\tau}_{1t} = Y^I_{1t} - \hat{Y}^N_{1t} \tag{2}
+\]</span></p>
+<p>To avoid extrapolation, weights are restricted to be non-negative and sum to one: <span class="math inline">\(w_j \geq 0\)</span> and <span class="math inline">\(\sum_{j=2}^{J+1} w_j = 1\)</span>. Typically only a small number of donor units receive positive weights – the synthetic control is <strong>sparse</strong>.</p>
+<p>Abadie and Gardeazabal (2003) propose choosing the synthetic control <span class="math inline">\(\mathbf{W}^* = (w_2^*, \ldots, w_{J+1}^*)'\)</span> to minimize the distance between the treated unit’s predictor values and those of the weighted donor pool:</p>
+<p><span class="math display">\[
+\|\mathbf{X}_1 - \mathbf{X}_0 \mathbf{W}\| = \left(\sum_{h=1}^k v_h (X_{h1} - w_2 X_{h2} - \ldots - w_{J+1} X_{h,J+1})^2\right)^{1/2}
+\]</span></p>
+<p>subject to <span class="math inline">\(w_j \geq 0\)</span> and <span class="math inline">\(w_2 + \ldots + w_{J+1} = 1\)</span>. Here <span class="math inline">\(\mathbf{X}_1\)</span> is the <span class="math inline">\(k \times 1\)</span> vector of predictor values for the treated unit and <span class="math inline">\(\mathbf{X}_0 = [\mathbf{X}_2, \ldots, \mathbf{X}_{J+1}]\)</span> is the <span class="math inline">\(k \times J\)</span> matrix of predictor values for the donor pool. The constants <span class="math inline">\(v_1, \ldots, v_k\)</span> reflect the relative importance assigned to each predictor.</p>
+<p>For a given diagonal matrix <span class="math inline">\(\mathbf{V}\)</span> of importance weights, finding <span class="math inline">\(\mathbf{W}^*\)</span> is a constrained quadratic optimization problem. Three approaches to choosing <span class="math inline">\(\mathbf{V}\)</span> are common:</p>
+<ol type="1">
+<li>Use the inverse of the sample variance of each predictor <span class="math inline">\(X_{h1}, \ldots, X_{h,J+1}\)</span>.</li>
+<li>Choose <span class="math inline">\(\mathbf{V}\)</span> to minimize the mean squared prediction error of the synthetic control in the pre-intervention period.</li>
+<li>Split the pre-intervention period into a <em>training period</em> and a <em>validation period</em>. Compute <span class="math inline">\(\mathbf{W}^*\)</span> using training period data for a given <span class="math inline">\(\mathbf{V}\)</span>. Choose <span class="math inline">\(\mathbf{V}^*\)</span> to minimize the MSPE in the validation period. The final weights are <span class="math inline">\(\mathbf{W}^* = \mathbf{W}(\mathbf{V}^*)\)</span>.</li>
+</ol>
+</section>
+<section id="bias-bound" class="level2">
+<h2 class="anchored" data-anchor-id="bias-bound">Bias Bound</h2>
+<p>Abadie, Diamond and Hainmueller (2010) study the bias properties of the synthetic control estimator under a <strong>linear factor model</strong>:</p>
+<p><span class="math display">\[
+Y^N_{jt} = \delta_t + \boldsymbol{\theta}_t \mathbf{Z}_j + \boldsymbol{\lambda}_t \boldsymbol{\mu}_j + \varepsilon_{jt} \tag{3}
+\]</span></p>
+<p>where <span class="math inline">\(\delta_t\)</span> is a common time trend, <span class="math inline">\(\mathbf{Z}_j\)</span> is a vector of observed predictors with time-varying coefficients <span class="math inline">\(\boldsymbol{\theta}_t\)</span>, <span class="math inline">\(\boldsymbol{\mu}_j\)</span> is a vector of unobserved predictors with time-varying coefficients <span class="math inline">\(\boldsymbol{\lambda}_t\)</span>, and <span class="math inline">\(\varepsilon_{jt}\)</span> are zero-mean transitory shocks. In the time-series literature, <span class="math inline">\(\boldsymbol{\theta}_t\)</span> and <span class="math inline">\(\boldsymbol{\lambda}_t\)</span> are common factors and <span class="math inline">\(\mathbf{Z}_j\)</span> and <span class="math inline">\(\boldsymbol{\mu}_j\)</span> are factor loadings.</p>
+<p>This model nests the standard DiD and fixed effects panel models as a special case. Restricting <span class="math inline">\(\boldsymbol{\lambda}_t = \lambda\)</span> to be time-invariant gives <span class="math inline">\(Y^N_{jt} = \delta_t + \boldsymbol{\theta}_t \mathbf{Z}_j + \lambda \boldsymbol{\mu}_j + \varepsilon_{jt}\)</span>, under which units with the same observed predictors follow parallel mean outcome trends. The linear factor model does not impose this restriction, allowing unobserved heterogeneity <span class="math inline">\(\boldsymbol{\mu}_j\)</span> to have time-varying effects <span class="math inline">\(\boldsymbol{\lambda}_t\)</span>.</p>
+<p>The bias of <span class="math inline">\(\hat{\tau}_{1t}\)</span> depends positively on the scale of the transitory shocks <span class="math inline">\(\varepsilon_{jt}\)</span> and negatively on the number of pre-intervention periods <span class="math inline">\(T_0\)</span>. A good pre-intervention fit – <span class="math inline">\(\mathbf{X}_1 \approx \mathbf{X}_0 \mathbf{W}^*\)</span> – and the ability to reproduce the outcome trajectory over an extended pre-intervention period signal low bias.</p>
+<p>Two practical implications follow. First, a large donor pool increases the risk of over-fitting, especially when <span class="math inline">\(T_0\)</span> is small. Second, the donor pool should contain units that are similar to the treated unit in both observed attributes <span class="math inline">\(\mathbf{Z}_j\)</span> and expected unobserved attributes <span class="math inline">\(\boldsymbol{\mu}_j\)</span>.</p>
+</section>
+<section id="variable-selection" class="level2">
+<h2 class="anchored" data-anchor-id="variable-selection">Variable Selection</h2>
+<p>The credibility of the synthetic control estimator depends on its ability to track the pre-intervention trajectory of the outcome for the treated unit. The choice of predictors in <span class="math inline">\(\mathbf{X}_1\)</span> and <span class="math inline">\(\mathbf{X}_0\)</span> is a fundamental part of the estimation task.</p>
+<p>Predictors should include summary measures of pre-intervention outcomes – for example, the average of <span class="math inline">\(Y_{jt}\)</span> over a sub-period – along with other relevant covariates, rather than every annual pre-intervention outcome value. Using all annual outcomes as separate predictors increases over-fitting risk and tends to produce a dense synthetic control with poor bias properties. Summary measures lead to sparser weights and lower bias.</p>
+<p>A data-driven approach to predictor selection:</p>
+<ol type="1">
+<li>Divide the pre-intervention period into a training period and a subsequent validation period.</li>
+<li>Compute synthetic control weights using training period data for a candidate set of predictors.</li>
+<li>Evaluate predictive fit using validation period data only.</li>
+<li>Repeat for different predictor sets.</li>
+<li>Choose the set with the best out-of-sample predictive power.</li>
+</ol>
+</section>
+<section id="inference" class="level2">
+<h2 class="anchored" data-anchor-id="inference">Inference</h2>
+<p>Abadie et al.&nbsp;(2010) propose a <strong>permutation inference</strong> procedure. The dynamic effect of the intervention is estimated separately for each unit in the donor pool, applying the same synthetic control method as if that unit had been treated. This produces a permutation distribution of “placebo effects.” The treatment is considered significant when the magnitude of the estimated effect for the treated unit is extreme relative to this distribution. The logic is similar to randomization inference in RCT settings.</p>
+<p>One complication is that for some donor units, the synthetic control may not provide a good pre-intervention fit, so large post-intervention gaps may arise by construction rather than by treatment. The standard measure of pre-intervention fit is the <strong>root mean squared prediction error (RMSPE)</strong>:</p>
+<p><span class="math display">\[
+R_j(t_1, t_2) = \left(\frac{1}{t_2 - t_1 + 1} \sum_{t=t_1}^{t_2} (Y_{jt} - \hat{Y}^N_{jt})^2\right)^{1/2}
+\]</span></p>
+<p>Inference can be based on the permutation distribution after discarding placebo runs where <span class="math inline">\(R_j(1, T_0)\)</span> is substantially larger than <span class="math inline">\(R_1(1, T_0)\)</span>, the pre-intervention RMSPE for the treated unit.</p>
+</section>
+<section id="advantages-of-synthetic-control-methods" class="level2">
+<h2 class="anchored" data-anchor-id="advantages-of-synthetic-control-methods">Advantages of Synthetic Control Methods</h2>
+<p>Compared to linear regression estimators, synthetic control methods have several advantages.</p>
+<section id="no-extrapolation" class="level3">
+<h3 class="anchored" data-anchor-id="no-extrapolation">No Extrapolation</h3>
+<p>Synthetic control weights are non-negative and sum to one, so the estimated counterfactual always lies in the convex hull of the donor pool outcomes – no extrapolation occurs. A regression-based estimator of <span class="math inline">\(Y^N_{1t}\)</span> uses weights <span class="math inline">\(\mathbf{W}^{reg} = \tilde{\mathbf{X}}_0'(\tilde{\mathbf{X}}_0 \tilde{\mathbf{X}}_0')^{-1} \tilde{\mathbf{X}}_1\)</span>, where <span class="math inline">\(\tilde{\mathbf{X}}_0\)</span> augments <span class="math inline">\(\mathbf{X}_0\)</span> with a row of ones. While the regression weights sum to one, they may lie outside <span class="math inline">\([0, 1]\)</span>, meaning the fitted counterfactual may extrapolate outside the support of the data.</p>
+</section>
+<section id="transparency-of-fit" class="level3">
+<h3 class="anchored" data-anchor-id="transparency-of-fit">Transparency of Fit</h3>
+<p>Regression uses extrapolation to guarantee a perfect fit of the treated unit’s characteristics by construction: <span class="math inline">\(\mathbf{X}_0 \mathbf{W}^{reg} = \mathbf{X}_1\)</span> holds exactly even when the donor units are completely dissimilar to the treated unit. Synthetic controls, by contrast, make visible the actual discrepancy between the treated unit and the best convex combination of donor units. If the pre-intervention fit is poor, this is immediately apparent.</p>
+</section>
+<section id="transparency-of-the-counterfactual" class="level3">
+<h3 class="anchored" data-anchor-id="transparency-of-the-counterfactual">Transparency of the Counterfactual</h3>
+<p>Because synthetic control coefficients are proper weights, the contribution of each comparison unit to the estimated counterfactual is explicit and interpretable. This allows the use of expert knowledge to evaluate whether the counterfactual is credible. In the German reunification application, the synthetic West Germany is a combination of Austria (0.42), Japan (0.16), Netherlands (0.09), Switzerland (0.11), and the United States (0.22).</p>
+</section>
+<section id="sparsity" class="level3">
+<h3 class="anchored" data-anchor-id="sparsity">Sparsity</h3>
+<p>Only a small number of donor units typically receive positive weight, making it straightforward to inspect and evaluate the estimated counterfactual. Sparsity can be further increased by imposing a bound on the number of non-zero weights in <span class="math inline">\(\mathbf{W}^*\)</span>. Regression estimators are typically not sparse.</p>
+</section>
+<section id="safeguard-against-specification-searches" class="level3">
+<h3 class="anchored" data-anchor-id="safeguard-against-specification-searches">Safeguard Against Specification Searches</h3>
+<p>Synthetic control methods do not require access to post-treatment outcomes in the design phase of the study. All design decisions – the donor pool, the predictors, the importance weights – can be made without knowing how they affect the conclusions. Weights can be computed and pre-registered before post-treatment outcomes are observed. This is a safeguard against specification searches and <span class="math inline">\(p\)</span>-hacking, analogous to pre-analysis plans in RCTs.</p>
+</section>
+</section>
+<section id="contextual-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="contextual-requirements">Contextual Requirements</h2>
+<p>There are some contextual conditions under which synthetic controls are appropriate tools for policy evaluation.</p>
+<p><strong>Effect size and volatility.</strong> The method estimates the effect of a single treatment on a single unit. Small effects will be hard to distinguish from the idiosyncratic transitory shocks <span class="math inline">\(\varepsilon_{jt}\)</span>. Note that volatility from the common factors <span class="math inline">\(\boldsymbol{\lambda}_t\)</span> is differenced out by the construction of the synthetic control; the challenge comes specifically from unit-specific shocks.</p>
+<p><strong>Availability of a comparison group.</strong> The donor pool should exclude units affected by the same or similar interventions, units subject to large idiosyncratic shocks to <span class="math inline">\(Y_{jt}\)</span>, and units whose pre-intervention characteristics are too dissimilar from the treated unit. Including highly dissimilar units increases interpolation bias.</p>
+<p><strong>No anticipation.</strong> If forward-looking agents react in advance to the intervention, or if parts of the policy are put in place before the formal implementation date, the pre-intervention fit will be distorted and the estimator will be biased. If there are signs of anticipation, it is advisable to backdate the intervention start date.</p>
+<p><strong>No interference.</strong> The method relies on the stable unit treatment value assumption (SUTVA): each unit’s outcome is unaffected by other units’ treatment status. This can be enforced by removing from the donor pool units whose outcomes are likely to be affected by the intervention on the treated unit. There is some tension here, since such units are often the most geographically proximate and thus the most similar. If spillover concerns remain, one can often deduce the direction of the resulting bias.</p>
+<p><strong>Convex hull condition.</strong> The treated unit’s pre-intervention characteristics must fall close to the convex hull of the donor units’ characteristics. If no combination of untreated units can credibly approximate the treated unit, the standard synthetic control estimator should not be used. Transforming the outcome variable may help in some cases.</p>
+</section>
+<section id="robustness-and-diagnostic-checks" class="level2">
+<h2 class="anchored" data-anchor-id="robustness-and-diagnostic-checks">Robustness and Diagnostic Checks</h2>
+<p><strong>Backdating.</strong> Pretend the intervention occurred earlier and check whether estimated effects appear before the true intervention date. Absent pre-“treatment” effects provide credibility; effects appearing only at the actual intervention date provide further support.</p>
+<p><strong>Leave-one-out.</strong> Re-estimate the synthetic control after dropping one donor unit at a time. If results change substantially when a particular unit is removed, the counterfactual is sensitive to that unit’s presence in the donor pool.</p>
+<p><strong>Predictor sensitivity.</strong> Vary the set of predictors and check whether the estimated effect is stable across specifications.</p>
+</section>
+<section id="synthetic-difference-in-differences" class="level2">
+<h2 class="anchored" data-anchor-id="synthetic-difference-in-differences">Synthetic Difference-in-Differences</h2>
+<p>Arkhangelsky, Athey, Hirshberg, Imbens and Wagner (2021) propose the <strong>Synthetic Difference-in-Differences (SDID)</strong> estimator, which combines elements of DiD and synthetic control methods.</p>
+<p>Traditional DiD and SCM target different settings. DiD is applied when many units are treated and relies on additive unit-specific and time-specific fixed effects to account for selection. SCM is applied when only one or a few units are treated and compensates for the absence of parallel trends by reweighting the donor pool to match pre-treatment outcome paths. SDID is designed to be competitive in both settings.</p>
+<section id="setting-1" class="level3">
+<h3 class="anchored" data-anchor-id="setting-1">Setting</h3>
+<p>Consider a balanced sample with <span class="math inline">\(N\)</span> units and <span class="math inline">\(T\)</span> periods. Let <span class="math inline">\(Y_{it}\)</span> be the outcome and <span class="math inline">\(D_{it} \in \{0, 1\}\)</span> the binary treatment indicator. The first <span class="math inline">\(N_{co}\)</span> units are controls (<span class="math inline">\(D_{it} = 0\)</span>) and the last <span class="math inline">\(N_{tr} = N - N_{co}\)</span> are treated. All treated units are exposed from period <span class="math inline">\(T_{pre} + 1\)</span> onwards (non-staggered adoption).</p>
+</section>
+<section id="sdid-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="sdid-estimator">SDID Estimator</h3>
+<p>The SDID estimator is based on a weighted two-way fixed effects regression:</p>
+<p><span class="math display">\[
+\left(\hat{\tau}^{sdid}, \hat{\mu}, \hat{\alpha}, \hat{\beta}\right) = \arg\min_{\tau, \mu, \alpha, \beta} \left\{ \sum_{i=1}^N \sum_{t=1}^T (Y_{it} - \mu - \alpha_i - \beta_t - D_{it} \tau)^2 \hat{\omega}_i^{sdid} \hat{\lambda}_t^{sdid} \right\}
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\omega}_i^{sdid}\)</span> are <strong>unit weights</strong> that align pre-exposure trends between treated and control units, and <span class="math inline">\(\hat{\lambda}_t^{sdid}\)</span> are <strong>time weights</strong> that balance pre-exposure time periods with post-exposure periods.</p>
+<p><strong>Unit weights</strong> are obtained by solving:</p>
+<p><span class="math display">\[
+(\hat{\omega}_0, \hat{\omega}^{sdid}) = \arg\min_{\omega_0 \in \mathbb{R},\, \omega \in \Omega} \ell_{unit}(\omega_0, \omega) \tag{4}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\ell_{unit}(\omega_0, \omega) = \sum_{t=1}^{T_{pre}} \left(\omega_0 + \sum_{i=1}^{N_{co}} \omega_i Y_{it} - \frac{1}{N_{tr}} \sum_{i=N_{co}+1}^N Y_{it}\right)^2 + \zeta^2 T_{pre} \|\omega\|_2^2
+\]</span></p>
+<p>and <span class="math inline">\(\Omega = \left\{\omega \in \mathbb{R}^N_+ : \sum_{i=1}^{N_{co}} \omega_i = 1,\; \omega_i = N_{tr}^{-1} \text{ for all } i = N_{co}+1, \ldots, N\right\}\)</span>.</p>
+<p><strong>Time weights</strong> are obtained by solving:</p>
+<p><span class="math display">\[
+(\hat{\lambda}_0, \hat{\lambda}^{sdid}) = \arg\min_{\lambda_0 \in \mathbb{R},\, \lambda \in \Lambda} \ell_{time}(\lambda_0, \lambda) \tag{5}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\ell_{time}(\lambda_0, \lambda) = \sum_{i=1}^{N_{co}} \left(\lambda_0 + \sum_{t=1}^{T_{pre}} \lambda_t Y_{it} - \frac{1}{T_{post}} \sum_{t=T_{pre}+1}^T Y_{it}\right)^2
+\]</span></p>
+<p>and <span class="math inline">\(\Lambda = \left\{\lambda \in \mathbb{R}^T_+ : \sum_{t=1}^{T_{pre}} \lambda_t = 1,\; \lambda_t = T_{post}^{-1} \text{ for all } t = T_{pre}+1, \ldots, T\right\}\)</span>.</p>
+<p>The unit weights are closely related to the standard SC weights, with two differences. First, the intercept <span class="math inline">\(\omega_0\)</span> means the weights only need to make trends parallel rather than match pre-intervention levels exactly. Second, the regularization penalty <span class="math inline">\(\zeta^2 T_{pre} \|\omega\|^2_2\)</span> increases the dispersion of the weights and ensures their uniqueness. Setting <span class="math inline">\(\omega_0 = 0\)</span> and <span class="math inline">\(\zeta = 0\)</span> in Equation (4) recovers the standard SC weighting problem.</p>
+</section>
+<section id="comparison-of-estimators" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-estimators">Comparison of Estimators</h3>
+<p>Each of the three estimators can be written as a weighted average difference in adjusted outcomes <span class="math inline">\(\hat{\delta}_i\)</span> with weights <span class="math inline">\(\hat{\omega}_i\)</span>:</p>
+<p><span class="math display">\[
+\hat{\tau} = \hat{\delta}_{tr} - \sum_{i=1}^{N_{co}} \hat{\omega}_i \hat{\delta}_i \qquad \text{where} \qquad \hat{\delta}_{tr} = \frac{1}{N_{tr}} \sum_{i=N_{co}+1}^N \hat{\delta}_i
+\]</span></p>
+<p>The adjusted outcomes differ across estimators:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Estimator</th>
+<th><span class="math inline">\(\hat{\delta}_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SC</td>
+<td><span class="math inline">\(\frac{1}{T_{post}} \sum_{t=T_{pre}+1}^T Y_{it}\)</span></td>
+</tr>
+<tr class="even">
+<td>DiD</td>
+<td><span class="math inline">\(\frac{1}{T_{post}} \sum_{t=T_{pre}+1}^T Y_{it} - \frac{1}{T_{pre}} \sum_{t=1}^{T_{pre}} Y_{it}\)</span></td>
+</tr>
+<tr class="odd">
+<td>SDID</td>
+<td><span class="math inline">\(\frac{1}{T_{post}} \sum_{t=T_{pre}+1}^T Y_{it} - \sum_{t=1}^{T_{pre}} \hat{\lambda}_t^{sdid} Y_{it}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>SC uses only post-treatment information. DiD subtracts a simple equal-weighted pre-treatment average. SDID subtracts a time-weighted pre-treatment average, where the weights <span class="math inline">\(\hat{\lambda}_t^{sdid}\)</span> up-weight pre-treatment periods that are most predictive of post-treatment outcomes.</p>
+</section>
+<section id="properties" class="level3">
+<h3 class="anchored" data-anchor-id="properties">Properties</h3>
+<p>SDID combines the attractive features of both methods: like SC, it reweights to match pre-exposure trends; like DiD, it is invariant to additive unit-level shifts and allows for valid large-panel inference. The SDID weights are sparse but less so than pure SC weights, because the intercept <span class="math inline">\(\omega_0\)</span> and regularization allow greater flexibility. No single unit receives outsized influence, which keeps the variance of the estimator low.</p>
+<p>Simulations in Arkhangelsky et al.&nbsp;(2021) show that SDID performs well relative to DiD and SC benchmarks in both bias and RMSE, and is particularly successful when treatment assignment is not random.</p>
+</section>
+<section id="inference-1" class="level3">
+<h3 class="anchored" data-anchor-id="inference-1">Inference</h3>
+<p>Two inference procedures are available for SDID.</p>
+<p><strong>Clustered bootstrap.</strong> Construct a bootstrap sample <span class="math inline">\(\mathbf{Y}^{(b)}, \mathbf{D}^{(b)}\)</span> by sampling <span class="math inline">\(N\)</span> rows from <span class="math inline">\(\mathbf{Y}, \mathbf{D}\)</span> with replacement (resample if the draw has no treated or control units). Compute the SDID estimator <span class="math inline">\(\hat{\tau}^{(b)}\)</span> on each bootstrap sample and repeat <span class="math inline">\(B\)</span> times. The variance estimator is:</p>
+<p><span class="math display">\[
+\hat{V}^b_\tau = \frac{1}{B} \sum_{b=1}^B \left(\hat{\tau}^{(b)} - \frac{1}{B}\sum_{b=1}^B \hat{\tau}^{(b)}\right)^2
+\]</span></p>
+<p><strong>Placebo variance estimation.</strong> Sample <span class="math inline">\(N_{tr}\)</span> units from the <span class="math inline">\(N_{co}\)</span> control units without replacement to “receive the placebo.” Construct a placebo treatment matrix <span class="math inline">\(\mathbf{D}^{(b)}_{co}\)</span> for the controls and compute the SDID estimator <span class="math inline">\(\hat{\tau}^{(b)}\)</span> on the control data. Repeat <span class="math inline">\(B\)</span> times and estimate the variance as the sample variance of the placebo estimates. This procedure is valid even when <span class="math inline">\(N_{tr}\)</span> is small, but relies on homoskedasticity.</p>
+<p>SDID can be extended to staggered adoption by applying the estimator separately for each adoption date and taking a weighted average. It delivers a single ATT estimate rather than the full profile of dynamic treatment effects.</p>
+</section>
+</section>
+</section>
+<section id="applied" class="level1">
+<h1>Applied</h1>
+<div id="3018dbd9" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#| eval: false</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>* --- synthetic control: synth ---</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>* <span class="kw">ssc</span> install synth, <span class="kw">replace</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>* requires xtset before running</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>xtset country <span class="fu">year</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>* trunit: unit ID <span class="kw">of</span> the treated unit</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>* trperiod: first treatment period</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>* xperiod: pre-intervention periods <span class="bn">over</span> which predictors are averaged</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>* mspeperiod: periods used to choose <span class="kw">V</span> <span class="kw">by</span> minimizing pre-period MSPE</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>* resultsperiod: output periods</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>synth gdp gdp(1980) gdp(1985) gdp(1988) trade inflation industry schooling investment, <span class="co">///</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    trunit(7) trperiod(1990) xperiod(1960(1)1989) <span class="co">///</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    mspeperiod(1960(1)1989) resultsperiod(1960(1)2003) <span class="co">///</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">keep</span>(synthresults, <span class="kw">replace</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>* --- plot: treated vs synthetic ---</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> synthresults, <span class="kw">clear</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">line</span> _Y_treated _time) (<span class="kw">line</span> _Y_synthetic _time, lpattern(<span class="kw">dash</span>)), <span class="co">///</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="bn">xline</span>(1990, lpattern(<span class="kw">dash</span>)) <span class="co">///</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">label</span>(1 <span class="st">"West Germany"</span>) <span class="kw">label</span>(2 <span class="st">"Synthetic West Germany"</span>)) <span class="co">///</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="bn">ytitle</span>(<span class="st">"Per Capita GDP"</span>) <span class="bn">xtitle</span>(<span class="st">"Year"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>* --- plot: gap (treated minus synthetic) ---</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> gap = _Y_treated - _Y_synthetic</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">line</span> gap _time), <span class="kw">yline</span>(0) <span class="bn">xline</span>(1990, lpattern(<span class="kw">dash</span>)) <span class="co">///</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="bn">ytitle</span>(<span class="st">"Gap in Per Capita GDP"</span>) <span class="bn">xtitle</span>(<span class="st">"Year"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>* --- permutation inference: synth_runner ---</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>* <span class="kw">ssc</span> install synth_runner, <span class="kw">replace</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>* automates running synth <span class="kw">for</span> each donor unit <span class="kw">as</span> a placebo</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>synth_runner gdp gdp(1980) gdp(1985) gdp(1988) trade inflation industry schooling investment, <span class="co">///</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    trunit(7) trperiod(1990) gen_vars</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>* plot treated gap vs placebo gaps</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>effect_graphs, trlinename(<span class="st">"West Germany"</span>) tc_name(<span class="st">"All Controls"</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>* filter out placebo units with poor pre-intervention <span class="kw">fit</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>* pval based <span class="kw">on</span> <span class="kw">ratio</span> <span class="kw">of</span> <span class="kw">post</span>-RMSPE to pre-RMSPE</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>pval_graphs 2</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>* --- RMSPE <span class="kw">ratio</span> manually ---</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>* after synth_runner, _pre_rmspe and _post_rmspe are generated per unit</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>* <span class="kw">ratio</span> = _post_rmspe / _pre_rmspe</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>* units with _pre_rmspe &gt;&gt; treated unit's _pre_rmspe are dropped <span class="kw">for</span> inference</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>* --- leave-one-out robustness ---</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>* re-<span class="kw">run</span> synth dropping one donor unit <span class="fu">at</span> a time</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>* check whether estimated gap is stable to the exclusion <span class="kw">of</span> each unit</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>* example: <span class="kw">drop</span> Austria (unit 1) and re-<span class="kw">run</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>synth gdp gdp(1980) gdp(1985) gdp(1988) trade inflation industry schooling investment, <span class="co">///</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    trunit(7) trperiod(1990) xperiod(1960(1)1989) <span class="co">///</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    mspeperiod(1960(1)1989) resultsperiod(1960(1)2003) <span class="co">///</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    counit(2 3 4 5 6 8 9 10 11 12 13 14 15 16)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>* --- predictor sensitivity ---</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>* re-<span class="kw">run</span> with different predictor sets and <span class="kw">compare</span> estimated gaps</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>* --- synthetic difference-<span class="kw">in</span>-differences: sdid ---</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>* <span class="kw">ssc</span> install sdid, <span class="kw">replace</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>* Y: outcome <span class="kw">variable</span>; S: unit ID; T: time <span class="kw">variable</span>; D: treatment indicator (0/1)</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>* <span class="kw">bootstrap</span> inference (valid with large <span class="kw">N</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>sdid gdp country <span class="fu">year</span> treated, <span class="kw">vce</span>(<span class="kw">bootstrap</span>) reps(200) <span class="dv">seed</span>(42) <span class="kw">graph</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>* placebo inference (valid even with small N_tr, assumes homoskedasticity)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>sdid gdp country <span class="fu">year</span> treated, <span class="kw">vce</span>(placebo) reps(200) <span class="dv">seed</span>(42)</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>* <span class="kw">display</span> unit weights and time weights</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>sdid gdp country <span class="fu">year</span> treated, <span class="kw">vce</span>(placebo) reps(200) <span class="dv">seed</span>(42) <span class="co">///</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">graph</span> g1_opt(<span class="bn">ytitle</span>(<span class="st">"Per Capita GDP"</span>) <span class="bn">xtitle</span>(<span class="st">"Year"</span>)) <span class="co">///</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    g2_opt(<span class="bn">ytitle</span>(<span class="st">"Gap"</span>) <span class="bn">xtitle</span>(<span class="st">"Year"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mtfehl\.github\.io\/econ_portfolio\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtfehl">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/michael-t-fehl">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:michaelthomasfehl@gmail.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

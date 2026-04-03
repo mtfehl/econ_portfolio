@@ -42,7 +42,7 @@ $mermaid-edge-color: $theme-black;       // line color
 $mermaid-node-bg-color: lighten($theme-orange, 15%); 
 $mermaid-node-fg-color: $theme-black;    // node text 
 $mermaid-label-fg-color: $theme-black;   //  label text 
-$mermaid-label-bg-color: $bg-color; 
+$mermaid-label-bg-color: transparent;    //  label bckgrnd
 
 /*-- scss:rules --*/
 

@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -45,8 +80,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../../site_libs/bootstrap/bootstrap-628f598885c147727f3461b176aacc5f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../../../site_libs/bootstrap/bootstrap-dark-16e990400b918c4979fa1e9001020cd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -564,14 +628,18 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Nowcasting &amp; Forecasting</span></span>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">Networks: Concepts &amp; Algorithms</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/index.html" class="sidebar-item-text sidebar-link">
@@ -580,13 +648,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/notes/01_INTRO/01.html" class="sidebar-item-text sidebar-link">
@@ -609,13 +677,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/problem_sets/ps01/problem_set.html" class="sidebar-item-text sidebar-link">
@@ -638,13 +706,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/R/networks/projects/project1/01project.html" class="sidebar-item-text sidebar-link">
@@ -657,13 +725,47 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
- <span class="menu-text">Econometrics: Panel Data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Latent Network Modeling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/index.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">Class Notes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../../classes/R/latent_networks/notes/01intro/lecture01.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Intro: Conditional Independence</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Econometrics: Panel Data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/index.html" class="sidebar-item-text sidebar-link">
@@ -672,13 +774,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
  <span class="menu-text">Class Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth3 show">  
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Notes/01pooled_ols/pols.html" class="sidebar-item-text sidebar-link">
@@ -773,13 +875,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false">
  <span class="menu-text">Problem Sets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../../classes/STATA/econometrics2/Problem_Sets/PS01/ps01.html" class="sidebar-item-text sidebar-link">
@@ -802,16 +904,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false">
  <span class="menu-text">Projects</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../../../classes/STATA/econometrics2/Projects/Project01/pj01.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Project 01</span></a>
   </div>
 </li>
@@ -833,8 +935,31 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory">Theory</a>
   <ul>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#motivation-incompletely-observed-outcomes" id="toc-motivation-incompletely-observed-outcomes" class="nav-link" data-scroll-target="#motivation-incompletely-observed-outcomes">Motivation: Incompletely Observed Outcomes</a></li>
+  <li><a href="#censoring-and-truncation" id="toc-censoring-and-truncation" class="nav-link" data-scroll-target="#censoring-and-truncation">Censoring and Truncation</a>
+  <ul class="collapse">
+  <li><a href="#censored-mle" id="toc-censored-mle" class="nav-link" data-scroll-target="#censored-mle">Censored MLE</a></li>
+  <li><a href="#truncated-mle" id="toc-truncated-mle" class="nav-link" data-scroll-target="#truncated-mle">Truncated MLE</a></li>
+  </ul></li>
+  <li><a href="#the-tobit-model" id="toc-the-tobit-model" class="nav-link" data-scroll-target="#the-tobit-model">The Tobit Model</a>
+  <ul class="collapse">
+  <li><a href="#maximum-likelihood-estimation" id="toc-maximum-likelihood-estimation" class="nav-link" data-scroll-target="#maximum-likelihood-estimation">Maximum Likelihood Estimation</a></li>
+  <li><a href="#first-order-conditions" id="toc-first-order-conditions" class="nav-link" data-scroll-target="#first-order-conditions">First Order Conditions</a></li>
+  <li><a href="#marginal-effects" id="toc-marginal-effects" class="nav-link" data-scroll-target="#marginal-effects">Marginal Effects</a></li>
+  </ul></li>
+  <li><a href="#sample-selection-models" id="toc-sample-selection-models" class="nav-link" data-scroll-target="#sample-selection-models">Sample Selection Models</a>
+  <ul class="collapse">
+  <li><a href="#the-bivariate-sample-selection-model" id="toc-the-bivariate-sample-selection-model" class="nav-link" data-scroll-target="#the-bivariate-sample-selection-model">The Bivariate Sample Selection Model</a></li>
+  <li><a href="#joint-normal-errors" id="toc-joint-normal-errors" class="nav-link" data-scroll-target="#joint-normal-errors">Joint Normal Errors</a></li>
+  <li><a href="#conditional-means" id="toc-conditional-means" class="nav-link" data-scroll-target="#conditional-means">Conditional Means</a>
+  <ul class="collapse">
+  <li><a href="#inverse-mills-ratio" id="toc-inverse-mills-ratio" class="nav-link" data-scroll-target="#inverse-mills-ratio">Inverse Mills Ratio</a></li>
+  <li><a href="#truncated-conditional-mean" id="toc-truncated-conditional-mean" class="nav-link" data-scroll-target="#truncated-conditional-mean">Truncated Conditional Mean</a></li>
+  <li><a href="#censored-mean" id="toc-censored-mean" class="nav-link" data-scroll-target="#censored-mean">Censored Mean</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#the-heckman-two-step-estimator" id="toc-the-heckman-two-step-estimator" class="nav-link" data-scroll-target="#the-heckman-two-step-estimator">The Heckman Two-Step Estimator</a></li>
+  <li><a href="#identification" id="toc-identification" class="nav-link" data-scroll-target="#identification">Identification</a></li>
   </ul></li>
   <li><a href="#applied" id="toc-applied" class="nav-link" data-scroll-target="#applied">Applied</a></li>
   </ul>
@@ -877,17 +1002,229 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="theory" class="level1">
 <h1>Theory</h1>
-<section id="motivation" class="level2">
-<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<section id="motivation-incompletely-observed-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-incompletely-observed-outcomes">Motivation: Incompletely Observed Outcomes</h2>
+<p>Standard OLS assumes a representative sample: all observations are drawn from the same population. Two closely related situations violate this, each requiring a different remedy.</p>
+<ol type="1">
+<li>The dependent variable is <strong>incompletely observed</strong>: some values of <span class="math inline">\(y\)</span> are missing or replaced by a boundary value. This is <strong>censoring</strong>.</li>
+<li>The dependent variable is only observed for a <strong>selected sample</strong>: entire observations are dropped based on the outcome. This is <strong>truncation</strong>.</li>
+</ol>
+<p>OLS applied to censored or truncated data yields inconsistent estimates because the conditional mean is no longer linear in <span class="math inline">\(\mathbf{x}\)</span>.</p>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="censoring-and-truncation" class="level2">
+<h2 class="anchored" data-anchor-id="censoring-and-truncation">Censoring and Truncation</h2>
+<p>Let <span class="math inline">\(y^*\)</span> be the latent (true) value of the dependent variable. The observed <span class="math inline">\(y\)</span> is a transformation <span class="math inline">\(y = g(y^*)\)</span>. The key distinction is:</p>
+<p><strong>Censoring (from below at <span class="math inline">\(L\)</span>):</strong> We observe <span class="math inline">\(y^*\)</span> when <span class="math inline">\(y^* &gt; L\)</span> but replace it with <span class="math inline">\(L\)</span> when <span class="math inline">\(y^* \leq L\)</span>. The regressor data is kept for all observations.</p>
+<p><span class="math display">\[
+y = \begin{cases} y^* &amp; \text{if } y^* &gt; L \\ L &amp; \text{if } y^* \leq L \end{cases}
+\]</span></p>
+<p>Example: earnings data where everyone below a threshold is reported as earning exactly the threshold amount (top-coding from above is the symmetric case).</p>
+<p><strong>Truncation (from below at <span class="math inline">\(L\)</span>):</strong> We only observe the data when <span class="math inline">\(y^* &gt; L\)</span>. Observations at or below the boundary are lost entirely.</p>
+<p><span class="math display">\[
+y = y^* \quad \text{if } y^* &gt; L \quad \text{(only these are in the sample)}
+\]</span></p>
+<p>Example: sampling only employed workers. Truncation entails greater information loss than censoring since the regressors <span class="math inline">\(\mathbf{x}\)</span> are also lost for out-of-sample observations.</p>
+<section id="censored-mle" class="level3">
+<h3 class="anchored" data-anchor-id="censored-mle">Censored MLE</h3>
+<p>Let <span class="math inline">\(f^*(y \mid \mathbf{x})\)</span> and <span class="math inline">\(F^*(y \mid \mathbf{x})\)</span> be the pdf and cdf of the latent <span class="math inline">\(y^*\)</span>. Define the censoring indicator <span class="math inline">\(d_i = \mathbf{1}[y_i &gt; L]\)</span>. Then the conditional density of the observed <span class="math inline">\(y\)</span> is:</p>
+<p><span class="math display">\[
+f(y \mid \mathbf{x}) = f^*(y \mid \mathbf{x})^d \cdot F^*(L \mid \mathbf{x})^{1-d}
+\]</span></p>
+<p>The <strong>censored MLE</strong> maximizes:</p>
+<p><span class="math display">\[
+\ell(\theta) = \sum_{i=1}^N \left[d_i \ln f^*(y_i \mid \mathbf{x}_i, \theta) + (1-d_i) \ln F^*(L_i \mid \mathbf{x}_i, \theta)\right]
+\]</span></p>
+<p>where <span class="math inline">\(\theta\)</span> collects the parameters of the distribution of <span class="math inline">\(y^*\)</span>. The censored MLE is consistent and asymptotically normal provided <span class="math inline">\(f^*(y^* \mid \mathbf{x})\)</span> is correctly specified.</p>
+</section>
+<section id="truncated-mle" class="level3">
+<h3 class="anchored" data-anchor-id="truncated-mle">Truncated MLE</h3>
+<p>For truncation from below, the observed <span class="math inline">\(y\)</span> has conditional density:</p>
+<p><span class="math display">\[
+f(y \mid \mathbf{x}) = \frac{f^*(y \mid \mathbf{x})}{\Pr[y &gt; L \mid \mathbf{x}]} = \frac{f^*(y \mid \mathbf{x})}{1 - F^*(L \mid \mathbf{x})}
+\]</span></p>
+<p>The <strong>truncated MLE</strong> maximizes:</p>
+<p><span class="math display">\[
+\ell(\theta) = \sum_{i=1}^N \left[\ln f^*(y_i \mid \mathbf{x}_i, \theta) - \ln\!\left(1 - F^*(L_i \mid \mathbf{x}_i, \theta)\right)\right]
+\]</span></p>
+</section>
+</section>
+<section id="the-tobit-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-tobit-model">The Tobit Model</h2>
+<p>The <strong>Tobit model</strong> (Tobin, 1958) is the most common censored regression model. It assumes that the latent variable is linear in <span class="math inline">\(\mathbf{x}\)</span> with normally distributed errors, and censoring occurs from below at zero:</p>
+<p><span class="math display">\[
+y_i^* = \mathbf{x}_i'\beta + \varepsilon_i, \qquad \varepsilon_i \sim \mathcal{N}(0, \sigma^2)
+\]</span></p>
+<p><span class="math display">\[
+y_i = \begin{cases} y_i^* &amp; \text{if } y_i^* &gt; 0 \\ 0 &amp; \text{if } y_i^* \leq 0 \end{cases}
+\]</span></p>
+<p>So <span class="math inline">\(y_i^* \sim \mathcal{N}(\mathbf{x}_i'\beta, \sigma^2)\)</span>. Let <span class="math inline">\(w_i = \mathbf{x}_i'\beta/\sigma\)</span> for shorthand. The Tobit MLE is inconsistent if <span class="math inline">\(\varepsilon_i\)</span> is either heteroskedastic or non-normal.</p>
+<section id="maximum-likelihood-estimation" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h3>
+<p>Using the general censored MLE with <span class="math inline">\(f^* = \mathcal{N}(\mathbf{x}_i'\beta, \sigma^2)\)</span>, the observed density indicator <span class="math inline">\(d_i = \mathbf{1}[y_i &gt; 0]\)</span>, and <span class="math inline">\(F^*(0 \mid \mathbf{x}_i) = 1 - \Phi(w_i)\)</span>:</p>
+<p><span class="math display">\[
+\ell(\beta, \sigma^2) = \sum_{i=1}^N \left\{d_i\left[-\tfrac{1}{2}\ln 2\pi - \tfrac{1}{2}\ln\sigma^2 - \frac{(y_i - \mathbf{x}_i'\beta)^2}{2\sigma^2}\right] + (1-d_i)\ln\!\left[1 - \Phi\!\left(\frac{\mathbf{x}_i'\beta}{\sigma}\right)\right]\right\}
+\]</span></p>
+<p>The Tobit MLE <span class="math inline">\(\hat\theta = (\hat\beta', \hat\sigma^2)'\)</span> maximizes this.</p>
+</section>
+<section id="first-order-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="first-order-conditions">First Order Conditions</h3>
+<p>Differentiating with respect to <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma^2\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial\ell}{\partial\beta} = \sum_{i=1}^N \frac{1}{\sigma^2}\left(d_i(y_i - \mathbf{x}_i'\beta) - (1-d_i)\frac{\sigma\phi_i}{1-\Phi_i}\right)\mathbf{x}_i = 0
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial\ell}{\partial\sigma^2} = \sum_{i=1}^N \left\{d_i\!\left(-\frac{1}{2\sigma^2} + \frac{(y_i - \mathbf{x}_i'\beta)^2}{2\sigma^4}\right) + (1-d_i)\frac{\phi_i\,\mathbf{x}_i'\beta}{(1-\Phi_i)\,2\sigma^3}\right\} = 0
+\]</span></p>
+<p>where <span class="math inline">\(\phi_i = \phi(w_i)\)</span> and <span class="math inline">\(\Phi_i = \Phi(w_i)\)</span>.</p>
+</section>
+<section id="marginal-effects" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-effects">Marginal Effects</h3>
+<p>The key insight is that the marginal effect of a regressor depends on which conditional mean we care about. Let <span class="math inline">\(w = \mathbf{x}'\beta/\sigma\)</span> and define the <strong>inverse Mills ratio</strong> <span class="math inline">\(\lambda(z) = \phi(z)/\Phi(z)\)</span> (derived below).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quantity</th>
+<th>Mean</th>
+<th><span class="math inline">\(\partial/\partial\mathbf{x}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Latent variable</td>
+<td><span class="math inline">\(E[y^* \mid \mathbf{x}] = \mathbf{x}'\beta\)</span></td>
+<td><span class="math inline">\(\beta\)</span></td>
+</tr>
+<tr class="even">
+<td>Truncated mean</td>
+<td><span class="math inline">\(E[y \mid y &gt; 0, \mathbf{x}]\)</span></td>
+<td><span class="math inline">\(\left\{1 - w\lambda(w) - \lambda(w)^2\right\}\beta\)</span></td>
+</tr>
+<tr class="odd">
+<td>Censored mean</td>
+<td><span class="math inline">\(E[y \mid \mathbf{x}]\)</span></td>
+<td><span class="math inline">\(\Phi(w)\,\beta\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The factor <span class="math inline">\(\Phi(w)\)</span> in the censored marginal effect is the probability that the observation is uncensored; at zero censoring (<span class="math inline">\(w \to \infty\)</span>), <span class="math inline">\(\Phi(w) \to 1\)</span> and the Tobit coefficient recovers the OLS coefficient. The censored marginal effect is the one reported in standard applied work.</p>
+</section>
+</section>
+<section id="sample-selection-models" class="level2">
+<h2 class="anchored" data-anchor-id="sample-selection-models">Sample Selection Models</h2>
+<section id="the-bivariate-sample-selection-model" class="level3">
+<h3 class="anchored" data-anchor-id="the-bivariate-sample-selection-model">The Bivariate Sample Selection Model</h3>
+<p>The simple Tobit model assumes the selection mechanism (who is observed) and the outcome equation share the same latent variable. The <strong>bivariate sample selection model</strong> (also called the Type 2 or generalized Tobit) separates them into two distinct equations:</p>
+<p><strong>Participation equation</strong> (determines whether <span class="math inline">\(y_2\)</span> is observed):</p>
+<p><span class="math display">\[
+y_1 = \begin{cases} 1 &amp; \text{if } y_1^* &gt; 0 \\ 0 &amp; \text{if } y_1^* \leq 0 \end{cases}, \qquad y_1^* = \mathbf{x}_1'\beta_1 + \varepsilon_1
+\]</span></p>
+<p><strong>Outcome equation</strong> (observed only when <span class="math inline">\(y_1 = 1\)</span>):</p>
+<p><span class="math display">\[
+y_2 = \begin{cases} y_2^* &amp; \text{if } y_1^* &gt; 0 \\ - &amp; \text{if } y_1^* \leq 0 \end{cases}, \qquad y_2^* = \mathbf{x}_2'\beta_2 + \varepsilon_2
+\]</span></p>
+<p>Example: <span class="math inline">\(y_1^*\)</span> determines whether a person works at all (participation); <span class="math inline">\(y_2^*\)</span> determines how many hours they work conditional on working. Different factors may drive each decision (e.g., fixed costs of commuting affect the participation margin but not hours conditional on working).</p>
+</section>
+<section id="joint-normal-errors" class="level3">
+<h3 class="anchored" data-anchor-id="joint-normal-errors">Joint Normal Errors</h3>
+<p>Estimation requires an assumption on the joint distribution of <span class="math inline">\((\varepsilon_1, \varepsilon_2)\)</span>. The standard assumption is <strong>joint normality</strong> with homoskedastic errors:</p>
+<p><span class="math display">\[
+\begin{bmatrix}\varepsilon_1 \\ \varepsilon_2\end{bmatrix} \sim \mathcal{N}\!\left(\begin{bmatrix}0\\0\end{bmatrix},\, \begin{bmatrix}1 &amp; \sigma_{12} \\ \sigma_{12} &amp; \sigma_2^2\end{bmatrix}\right)
+\]</span></p>
+<p>The normalization <span class="math inline">\(\sigma_1^2 = 1\)</span> is imposed since only the sign of <span class="math inline">\(y_1^*\)</span> is observed; rescaling <span class="math inline">\(y_1^*\)</span> by any <span class="math inline">\(a &gt; 0\)</span> does not change the observed <span class="math inline">\(y_1\)</span>, so the variance is not identified.</p>
+</section>
+<section id="conditional-means" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-means">Conditional Means</h3>
+<section id="inverse-mills-ratio" class="level4">
+<h4 class="anchored" data-anchor-id="inverse-mills-ratio">Inverse Mills Ratio</h4>
+<p>Using the truncated normal distribution, for any <span class="math inline">\(\varepsilon_1 \sim \mathcal{N}(0,1)\)</span>:</p>
+<p><span class="math display">\[
+\mathbb{E}[\varepsilon_1 \mid \varepsilon_1 &gt; -c] = \frac{\phi(c)}{\Phi(c)} \equiv \lambda(c)
+\]</span></p>
+<p>The function <span class="math inline">\(\lambda(z) = \phi(z)/\Phi(z)\)</span> is the <strong>inverse Mills ratio</strong>. It is always positive and decreasing in <span class="math inline">\(z\)</span>.</p>
+</section>
+<section id="truncated-conditional-mean" class="level4">
+<h4 class="anchored" data-anchor-id="truncated-conditional-mean">Truncated Conditional Mean</h4>
+<p>The mean of <span class="math inline">\(y_2\)</span> for the observed (selected) subsample is:</p>
+<p><span class="math display">\[
+\mathbb{E}[y_2 \mid \mathbf{x}, y_1^* &gt; 0] = \mathbf{x}_2'\beta_2 + \sigma_{12}\lambda(\mathbf{x}_1'\beta_1)
+\]</span></p>
+<p>This follows from writing <span class="math inline">\(\varepsilon_2 = \sigma_{12}\varepsilon_1 + \xi\)</span> where <span class="math inline">\(\xi\)</span> is independent of <span class="math inline">\(\varepsilon_1\)</span>, so <span class="math inline">\(\mathbb{E}[\varepsilon_2 \mid \varepsilon_1 &gt; -\mathbf{x}_1'\beta_1] = \sigma_{12}\lambda(\mathbf{x}_1'\beta_1)\)</span>.</p>
+<p>The key implication: OLS on only the observed <span class="math inline">\(y_2\)</span> is inconsistent unless <span class="math inline">\(\sigma_{12} = 0\)</span> (the errors are uncorrelated), because the inverse Mills ratio acts as an omitted variable correlated with <span class="math inline">\(\mathbf{x}_2\)</span>.</p>
+</section>
+<section id="censored-mean" class="level4">
+<h4 class="anchored" data-anchor-id="censored-mean">Censored Mean</h4>
+<p>If <span class="math inline">\(y_2 = 0\)</span> when <span class="math inline">\(y_1^* \leq 0\)</span>, the unconditional mean is:</p>
+<p><span class="math display">\[
+\mathbb{E}[y_2 \mid \mathbf{x}] = \Phi(\mathbf{x}_1'\beta_1)\,\mathbf{x}_2'\beta_2 + \sigma_{12}\phi(\mathbf{x}_1'\beta_1)
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="the-heckman-two-step-estimator" class="level2">
+<h2 class="anchored" data-anchor-id="the-heckman-two-step-estimator">The Heckman Two-Step Estimator</h2>
+<p>The full MLE for the bivariate sample selection model is efficient but computationally demanding. Heckman (1979) proposed a simpler two-step approach, known as the <strong>Heckit estimator</strong>.</p>
+<p><strong>Step 1:</strong> Estimate a Probit model for selection on the full sample (all <span class="math inline">\(N\)</span> observations, including <span class="math inline">\(y_1 = 0\)</span>). Since <span class="math inline">\(\Pr(y_1 = 1 \mid \mathbf{x}_1) = \Phi(\mathbf{x}_1'\beta_1)\)</span>, this yields consistent estimates <span class="math inline">\(\hat\beta_1\)</span>. Compute the estimated inverse Mills ratio for each individual:</p>
+<p><span class="math display">\[
+\hat\lambda_i = \lambda(\mathbf{x}_{1i}'\hat\beta_1) = \frac{\phi(\mathbf{x}_{1i}'\hat\beta_1)}{\Phi(\mathbf{x}_{1i}'\hat\beta_1)}
+\]</span></p>
+<p><strong>Step 2:</strong> Using only the selected subsample (<span class="math inline">\(y_{1i} = 1\)</span>), run OLS of <span class="math inline">\(y_{2i}\)</span> on <span class="math inline">\(\mathbf{x}_{2i}\)</span> and <span class="math inline">\(\hat\lambda_i\)</span>:</p>
+<p><span class="math display">\[
+y_{2i} = \mathbf{x}_{2i}'\beta_2 + \sigma_{12}\hat\lambda_i + v_i
+\]</span></p>
+<p>The coefficient on <span class="math inline">\(\hat\lambda_i\)</span> estimates <span class="math inline">\(\sigma_{12}\)</span>. A <span class="math inline">\(t\)</span>-test of this coefficient is a test for sample selection (<span class="math inline">\(H_0: \sigma_{12} = 0\)</span>).</p>
+<p><strong>Note:</strong> The standard errors from Step 2 OLS are incorrect. They must be adjusted to account for both heteroskedasticity and the fact that <span class="math inline">\(\hat\lambda_i\)</span> was estimated in Step 1 (sampling variability of <span class="math inline">\(\hat\beta_1\)</span> carries through). Stata’s <code>heckman, twostep</code> handles this automatically.</p>
+<p>The Heckit estimator is less efficient than MLE under joint normality but is simpler to implement and more robust: it only requires <span class="math inline">\(\mathbb{E}[\varepsilon_2 \mid \varepsilon_1] = \delta\varepsilon_1\)</span> rather than full joint normality.</p>
+</section>
+<section id="identification" class="level2">
+<h2 class="anchored" data-anchor-id="identification">Identification</h2>
+<p>The bivariate sample selection model is in principle identified without any restrictions on the regressors, purely through the functional form of <span class="math inline">\(\lambda(\cdot)\)</span>. However, the inverse Mills ratio <span class="math inline">\(\lambda(\mathbf{x}_1'\beta_1)\)</span> is approximately linear over a wide range of its argument. If <span class="math inline">\(\mathbf{x}_1 = \mathbf{x}_2\)</span>, this creates severe multicollinearity between <span class="math inline">\(\hat\lambda_i\)</span> and <span class="math inline">\(\mathbf{x}_{2i}\)</span> in Step 2.</p>
+<p>In practice, reliable identification requires an <strong>exclusion restriction</strong>: at least one variable in <span class="math inline">\(\mathbf{x}_1\)</span> (the participation equation) that is excluded from <span class="math inline">\(\mathbf{x}_2\)</span> (the outcome equation). This instrument must affect selection but have no direct effect on <span class="math inline">\(y_2^*\)</span> conditional on participation.</p>
 </section>
 </section>
 <section id="applied" class="level1">
 <h1>Applied</h1>
-<p>``{stata} heckman depvar [indepvars], select(depvar s = varlist s) [twostep]</p>
-<p>``</p>
+<div id="4fd342e6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>#| eval: false</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>* --- Tobit (censored from below <span class="fu">at</span> 0 <span class="kw">by</span> <span class="kw">default</span>) ---</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">tobit</span> depvar indepvars, ll(0)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>* --- Tobit censored from above ---</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">tobit</span> depvar indepvars, ul(100000)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>* --- <span class="kw">two</span>-sided censoring ---</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">tobit</span> depvar indepvars, ll(0) ul(100000)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>* --- alternatively (<span class="kw">more</span> general) ---</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">intreg</span> depvar_lower depvar_upper indepvars</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>* --- marginal <span class="kw">effects</span>: censored <span class="kw">mean</span> (<span class="kw">default</span>) ---</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>* --- marginal <span class="kw">effects</span>: truncated <span class="kw">mean</span> ---</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="fu">e</span>(0,.))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>* --- marginal <span class="kw">effects</span>: latent <span class="kw">variable</span> ---</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(<span class="kw">xb</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>* --- Heckman <span class="kw">two</span>-step (Heckit) ---</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>* depvar   = outcome <span class="kw">variable</span> (y2)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>* indepvars = regressors <span class="kw">in</span> outcome equation (<span class="kw">x2</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>* select() = selection equation: lhs is 0/1 indicator (y1),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>*            rhs contains selection regressors (x1, must <span class="kw">include</span> exclusion restriction)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">heckman</span> depvar indepvars, select(y1 = x1 exclusion_var) twostep</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>* --- Heckman MLE (<span class="kw">more</span> efficient under joint normality) ---</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="kw">heckman</span> depvar indepvars, select(y1 = x1 exclusion_var)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>* --- <span class="kw">test</span> <span class="kw">for</span> selection (H0: sigma12 = 0) ---</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>* reported automatically <span class="kw">in</span> <span class="kw">heckman</span> output <span class="kw">as</span> <span class="st">"rho"</span> <span class="kw">test</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section>
