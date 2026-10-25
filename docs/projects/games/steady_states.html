@@ -432,12 +432,10 @@ window.Quarto = {
   <li><a href="#visualizing-the-economy" id="toc-visualizing-the-economy" class="nav-link" data-scroll-target="#visualizing-the-economy">7. Visualizing the Economy</a>
   <ul class="collapse">
   <li><a href="#bringing-the-model-together" id="toc-bringing-the-model-together" class="nav-link" data-scroll-target="#bringing-the-model-together">7.1 Bringing the Model Together</a></li>
-  <li><a href="#animation-design" id="toc-animation-design" class="nav-link" data-scroll-target="#animation-design">7.2 Animation Design</a></li>
   </ul></li>
   <li><a href="#technical-architecture" id="toc-technical-architecture" class="nav-link" data-scroll-target="#technical-architecture">8. Technical Architecture</a>
   <ul class="collapse">
   <li><a href="#the-state-chain" id="toc-the-state-chain" class="nav-link" data-scroll-target="#the-state-chain">8.1 The State Chain</a></li>
-  <li><a href="#key-engineering-decisions" id="toc-key-engineering-decisions" class="nav-link" data-scroll-target="#key-engineering-decisions">8.2 Key Engineering Decisions</a></li>
   </ul></li>
   <li><a href="#limitations-and-extensions" id="toc-limitations-and-extensions" class="nav-link" data-scroll-target="#limitations-and-extensions">9. Limitations and Extensions</a>
   <ul class="collapse">
@@ -677,14 +675,14 @@ Figure&nbsp;7: <strong>Non-quasi-concave:</strong> bowl-shaped indifference curv
 </div>
 </div>
 </div>
-<p>These cases illustrate why the solver is built around a decision process rather than one universal formula. Smooth, well-behaved utilities can often be handled with derivatives. Kinked preferences need a different approach, since the usual first-order conditions do not apply at the kink. Non-quasi-concave preferences create another problem: an interior tangency can satisfy the first-order condition without being a utility maximum. The solver needs to account for all three cases rather than treating every preference structure the same way.</p>
+<p>These cases illustrate why the solver is built around a decision process rather than one universal formula. Smooth, well-behaved utilities can often be handled with derivatives. Kinked preferences need a different approach, since the usual first-order conditions do not apply at the kink. Non-quasi-concave preferences create another problem: an interior tangency can satisfy the first-order condition without being a utility maximum. The solver needs to account for all three cases, rather than treating every preference structure the same way.</p>
 </section>
 <section id="the-solver-decision-tree" class="level2">
 <h2 class="anchored" data-anchor-id="the-solver-decision-tree">3.4 The Solver Decision Tree</h2>
 <p>The dispatcher in <code>solveParetoSet.m</code> chooses a method based on the properties of the utility functions. It first checks whether both functions are differentiable. If either contains a <code>min</code> or <code>max</code>, the problem goes to <code>paretoNonDiff</code>, which handles the non-differentiable case separately.</p>
 <p>For differentiable utilities, the solver checks for neutral-good cases, where marginal utility is zero or becomes infinite at the relevant point. Depending on the combination, the Pareto set may collapse to an edge or a single point. It then checks for perfect substitutes, where the marginal rate of substitution is constant. If both agents have constant MRS, the relationship between those rates determines whether the efficient set covers a larger part of the box or is restricted to its boundary.</p>
 <p>The next check concerns curvature. In this implementation, the bordered-Hessian test is used to flag cases that may be non-quasi-concave. Rather than relying on an interior tangency in those cases, the solver calls <code>paretoBoundary</code>. If none of the special cases applies, it uses the standard approach: find interior tangencies, check the corners, and filter the candidate allocations.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% solveParetoSet.m -- top-level dispatch (abridged)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% solveParetoSet.m : top-level dispatch</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="va">mrs</span>.<span class="va">diff1</span> <span class="op">&amp;&amp;</span> <span class="va">mrs</span>.<span class="va">diff2</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Neutral-good edge cases</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span>     <span class="va">mrs</span>.<span class="va">MRS1_zero</span> <span class="op">&amp;&amp;</span> <span class="va">mrs</span>.<span class="va">MRS2_inf</span><span class="op">,</span>  <span class="va">px1</span> <span class="op">=</span> <span class="fl">0</span><span class="op">;</span>        <span class="va">px2</span> <span class="op">=</span> <span class="va">omega</span>(<span class="fl">2</span>)<span class="op">;</span> <span class="kw">return</span></span>
@@ -714,9 +712,9 @@ Figure&nbsp;7: <strong>Non-quasi-concave:</strong> bowl-shaped indifference curv
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">% At least one utility is non-differentiable (min or max)</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    [<span class="va">px1</span><span class="op">,</span> <span class="va">px2</span><span class="op">,</span> <span class="va">flags</span>] <span class="op">=</span> <span class="va">paretoNonDiff</span>(<span class="va">u1</span><span class="op">,</span> <span class="va">u2_sub</span><span class="op">,</span> <span class="va">omega</span><span class="op">,</span> <span class="va">x1_range</span>)<span class="op">;</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The <code>paretoBoundary</code> method handles cases where a closed-form tangency solution may not be reliable. It checks candidate allocations along the edges of the Edgeworth box against a <span class="math inline">\(100\times100\)</span>grid of feasible interior allocations. A candidate is kept only if no other point makes both agents at least as well off and one of them strictly better off.</p>
+<p>The <code>paretoBoundary</code> method handles cases where a closed-form tangency solution may not be reliable. It checks candidate allocations along the edges of the Edgeworth box against a <span class="math inline">\(100\times100\)</span> grid of feasible interior allocations. A candidate is kept only if no other point makes both agents at least as well off and one of them strictly better off.</p>
 <p>The numerical check follows the definition of Pareto dominance:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">% paretoBoundary.m -- inner dominance check</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">% paretoBoundary.m : inner dominance check</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">% u1g, u2g are flattened utility values across the grid.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">% u1c, u2c are the utilities at a candidate allocation.</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -735,7 +733,7 @@ Figure&nbsp;7: <strong>Non-quasi-concave:</strong> bowl-shaped indifference curv
 <section id="from-efficiency-to-individual-rationality" class="level2">
 <h2 class="anchored" data-anchor-id="from-efficiency-to-individual-rationality">4.1 From Efficiency to Individual Rationality</h2>
 <p>The Pareto set includes every allocation where one agent cannot be made better off without making the other worse off. It does not, by itself, say whether either agent would prefer such an allocation to their initial endowment.</p>
-<p>The core adds that requirement. Given endowments <span class="math inline">\(w_1\)</span>and $w_2), an allocation must be Pareto efficient and give both agents at least as much utility as they receive at their endowments. The individual-rationality conditions are</p>
+<p>The core adds that requirement. Given endowments <span class="math inline">\(w_1\)</span> and <span class="math inline">\(w_2\)</span>, an allocation must be Pareto efficient and give both agents at least as much utility as they receive at their endowments. The individual-rationality conditions are</p>
 <p><span class="math display">\[
 u_1(x_1,x_2) \geq u_1(w_1),
 \qquad
@@ -765,7 +763,6 @@ u_2(\omega_1-x_1,\omega_2-x_2) \geq u_2(w_2),
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">cx1</span> <span class="op">=</span> <span class="va">px1</span>(<span class="va">ir</span>)<span class="op">;</span></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="va">cx2</span> <span class="op">=</span> <span class="va">px2</span>(<span class="va">ir</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The code illustrates the filtering logic; the full implementation also handles utility evaluation and candidate sets that require numerical treatment. The tolerance avoids excluding an allocation because of small floating-point differences.</p>
 <p>The result is a useful distinction between efficiency and voluntary participation. An allocation can lie on the Pareto set but outside the core because one agent would rather keep their original endowment. The endowment therefore determines which part of the efficient set is individually rational.</p>
 <div id="fig-core" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -783,7 +780,7 @@ Figure&nbsp;8: The Pareto set and the core in the Edgeworth box. The core is the
 <h1>5. Competitive Equilibrium</h1>
 <section id="prices-and-budget-constraints" class="level2">
 <h2 class="anchored" data-anchor-id="prices-and-budget-constraints">5.1 Prices and Budget Constraints</h2>
-<p>Pareto efficiency and the core describe allocations without specifying a market mechanism. Competitive equilibrium introduces prices. Each agent takes prices as given and chooses the most preferred affordable basket, subject to their budget constraint.</p>
+<p>Pareto efficiency and the core describe allocations without specifying a market mechanism. Meanwhile, competitive equilibrium introduces prices. Each agent takes prices as given and chooses the most preferred affordable basket, subject to their budget constraint.</p>
 <p>Let <span class="math inline">\(p=(p_1,p_2)\)</span>be the vector of prices. Agent $i)’s wealth comes from the market value of their endowment:</p>
 <p><span class="math display">\[
 m_i=p_1w_{i1}+p_2w_{i2}.
@@ -807,29 +804,28 @@ x_{12}+x_{22}=\omega_2.
 <p><span class="math display">\[
 MRS_i=\frac{p_1}{p_2}.
 \]</span></p>
-<p>Since both agents face the same prices, their MRS values coincide at an interior competitive equilibrium. This connects the agents’ individual optimization problems to the market-clearing conditions. The numerical solver checks these conditions rather than relying on tangency alone.</p>
+<p>Since both agents face the same prices, their MRS values coincide at an interior competitive equilibrium. This connects the agents’ individual optimization problems to the market-clearing conditions.</p>
 </section>
 <section id="solving-for-equilibrium" class="level2">
 <h2 class="anchored" data-anchor-id="solving-for-equilibrium">5.2 Solving for Equilibrium</h2>
-<p>The equilibrium solver searches for prices and allocations that satisfy the agents’ demand conditions and clear both markets. Since only relative prices matter in a standard exchange economy, one price can be normalized. The implementation uses a relative price parameter to reduce the problem to a smaller numerical search.</p>
-<p>The solver must also account for corner solutions. If an agent’s optimal demand lies on the boundary of their budget set, the interior first-order conditions need not hold with equality. The implementation therefore compares candidate solutions and checks their feasibility, budget constraints, and market-clearing errors.</p>
-<p>For the running example, the demand functions are derived from the utility functions and the agents’ budget constraints. The resulting demands are then evaluated at candidate prices. A candidate equilibrium is retained only when the allocations are feasible and the aggregate excess demand is sufficiently close to zero.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Illustrative equilibrium residuals</span></span>
+<p>The equilibrium solver searches for prices and allocations that satisfy the agents’ demand conditions and clear both markets. Since only relative prices matter in a standard exchange economy, one price can be normalized. The implementation uses a relative price parameter to reduce the problem to a smaller numerical search. The solver must also account for corner solutions. If an agent’s optimal demand lies on the boundary of their budget set, the interior first-order conditions need not hold with equality. The implementation therefore compares candidate solutions and checks their feasibility, budget constraints, and market-clearing errors.</p>
+<p>The demand functions are derived from the utility functions and the agents’ budget constraints. The resulting demands are then evaluated at candidate prices. A candidate equilibrium is retained only when the allocations are feasible and the aggregate excess demand is <strong>sufficiently</strong> close to zero.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% equilibrium residuals</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">excess1</span> <span class="op">=</span> <span class="va">x_A</span>(<span class="fl">1</span>) <span class="op">+</span> <span class="va">x_B</span>(<span class="fl">1</span>) <span class="op">-</span> <span class="va">omega</span>(<span class="fl">1</span>)<span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">excess2</span> <span class="op">=</span> <span class="va">x_A</span>(<span class="fl">2</span>) <span class="op">+</span> <span class="va">x_B</span>(<span class="fl">2</span>) <span class="op">-</span> <span class="va">omega</span>(<span class="fl">2</span>)<span class="op">;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">market_clearing_error</span> <span class="op">=</span> <span class="va">max</span>(<span class="va">abs</span>([<span class="va">excess1</span><span class="op">,</span> <span class="va">excess2</span>]))<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The residuals provide a direct check on whether the computed allocation clears the markets. A solver’s exit status alone is not enough: numerical optimization can terminate successfully while leaving a material residual.</p>
+<p>The residuals provide a direct check on whether the computed allocation clears the markets or not.</p>
 </section>
 <section id="welfare-checks" class="level2">
 <h2 class="anchored" data-anchor-id="welfare-checks">5.3 Welfare Checks</h2>
-<p>The first welfare theorem states, under its standard assumptions, that a competitive equilibrium allocation is Pareto efficient. The second welfare theorem gives a converse under additional conditions: an efficient allocation can be decentralized as a competitive equilibrium after a suitable redistribution of initial endowments.</p>
-<p>The model uses welfare checks to compare the computed equilibrium with the Pareto set and the core. These comparisons are useful for identifying inconsistencies between the numerical routines. They should not be treated as a general proof of either welfare theorem, since the project also considers preferences that violate some of the standard assumptions.</p>
-<p>The implementation records whether the equilibrium lies on the computed Pareto set and whether each agent receives at least their endowment utility. These checks help distinguish an economic result from a numerical artifact.</p>
+<p>The first welfare theorem states, under its standard assumptions, that a competitive equilibrium allocation is Pareto efficient. The second welfare theorem gives a converse under additional conditions: an efficient allocation can be decentralized as a competitive equilibrium after a redistribution of initial endowments.</p>
+<p>The model uses welfare checks to compare the computed equilibrium with the Pareto set and the core. These comparisons are useful for identifying inconsistencies between the numerical routines. They should not be, however, treated as a general proof of either welfare theorem as we also consider preferences that violate some of the standard assumptions.</p>
+<p>The implementation records whether the equilibrium lies on the computed Pareto set and whether each agent receives at least their endowment utility.</p>
 <div id="fig-equilibrium" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-equilibrium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/fig_equilibrium.png" class="img-fluid figure-img" style="width:100.0%">
+<img src="images/fig_walrasian.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-equilibrium-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9: Competitive equilibrium in the Edgeworth box, showing the budget line, offer curves, and equilibrium allocation.
@@ -844,18 +840,18 @@ Figure&nbsp;9: Competitive equilibrium in the Edgeworth box, showing the budget 
 <h2 class="anchored" data-anchor-id="the-idea">6.1 The Idea</h2>
 <p>Finding an equilibrium numerically tells us which prices clear the markets, but it does not explain how a market might approach those prices from a different starting point. Tâtonnement provides a simple way to investigate that question.</p>
 <p>In the model, an auctioneer announces a relative price. Each agent responds with their demand at that price, and the economy’s excess demand is calculated. The price is then adjusted according to the imbalance between demand and supply. If demand for a good exceeds its available supply, its relative price rises; if supply exceeds demand, the price moves in the opposite direction.</p>
-<p>For a two-good exchange economy, the process can be represented using the excess demand for good 1. With good 2 as the numeraire, the update rule takes the form</p>
+<p>For a two-good exchange economy, the process can be represented using the excess demand for good 1. With good 2 as the numeraire, the update rule takes the form:</p>
 <p><span class="math display">\[
 p_{t+1}=\max\left(\varepsilon,\,
 p_t+\alpha z_1(p_t)\right),
 \]</span></p>
-<p>where <span class="math inline">\(p_t\)</span>is the relative price at iteration $t), <span class="math inline">\(z_1(p_t)\)</span>is excess demand for good 1, <span class="math inline">\(\alpha\)</span>is the adjustment step size, and <span class="math inline">\(\varepsilon&gt;0\)</span>prevents the price from becoming non-positive.</p>
-<p>The exact behaviour depends on the demand functions, the step size, and the initial price. A large step can cause oscillation or divergence; a small step may produce slower adjustment. Convergence is therefore something to test, not something to assume.</p>
+<p>where <span class="math inline">\(p_t\)</span> is the relative price at iteration <span class="math inline">\(t\)</span>, <span class="math inline">\(z_1(p_t)\)</span> is excess demand for good 1, <span class="math inline">\(\alpha\)</span> is the adjustment step size, and <span class="math inline">\(\varepsilon&gt;0\)</span> prevents the price from becoming non-positive.</p>
+<p>The exact behavior depends on the demand functions, the step size, and the initial price. A large step can cause oscillation or divergence, whereas a small step may produce slower adjustment. Convergence is therefore not guaranteed and should be checked (rather than assumed).</p>
 </section>
 <section id="the-simulation-loop" class="level2">
 <h2 class="anchored" data-anchor-id="the-simulation-loop">6.2 The Simulation Loop</h2>
 <p>The simulation repeatedly evaluates the agents’ demands and updates the price. The implementation stores the price path and associated quantities so that the process can be inspected after the run.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Simplified tâtonnement loop</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">% tâtonnement loop</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">p</span> <span class="op">=</span> <span class="va">p0</span><span class="op">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">p_path</span> <span class="op">=</span> <span class="va">nan</span>(<span class="va">max_iter</span><span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">z_path</span> <span class="op">=</span> <span class="va">nan</span>(<span class="va">max_iter</span><span class="op">,</span> <span class="fl">1</span>)<span class="op">;</span></span>
@@ -877,11 +873,10 @@ p_t+\alpha z_1(p_t)\right),
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">p</span> <span class="op">=</span> <span class="va">max</span>(<span class="va">eps_price</span><span class="op">,</span> <span class="va">p</span> <span class="op">+</span> <span class="va">alpha</span> <span class="op">*</span> <span class="va">z1</span>)<span class="op">;</span></span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This is a simplified illustration of the update rule; the project implementation also records the allocation paths and handles numerical failures. The stopping condition checks whether excess demand falls below a specified tolerance. If the iteration reaches its limit without meeting that condition, the run should be treated as non-convergent rather than as a successful equilibrium calculation.</p>
 </section>
 <section id="monte-carlo-experiments" class="level2">
 <h2 class="anchored" data-anchor-id="monte-carlo-experiments">6.3 Monte Carlo Experiments</h2>
-<p>A single simulation only shows what happens from one initial price. To assess sensitivity to the starting point, the project runs the adjustment process repeatedly from a range of initial prices.</p>
+<p>A single simulation only shows what happens from one initial price. However, to assess sensitivity to the starting point, the project runs the adjustment process repeatedly from a range of initial prices.</p>
 <p>The Monte Carlo routine records the final price and whether the run converged. The convergence rate is the proportion of tested starting prices that satisfy the stopping criterion within the iteration limit.</p>
 <p><span class="math display">\[
 \text{Convergence rate}
@@ -890,7 +885,6 @@ p_t+\alpha z_1(p_t)\right),
 {\text{Total number of runs}}.
 \]</span></p>
 <p>The resulting distribution shows whether convergence is robust to the initial price or depends strongly on where the process begins. It can also reveal cases in which the update rule oscillates, approaches a boundary, or fails to converge within the available iterations.</p>
-<p>A high convergence rate is evidence that the chosen numerical procedure works across the tested starting values. It is not a proof that tâtonnement converges for every possible starting price or every preference structure.</p>
 <div id="fig-tatonnement" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tatonnement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -901,6 +895,16 @@ Figure&nbsp;10: Tâtonnement price paths from different initial prices, showing 
 </figcaption>
 </figure>
 </div>
+<div id="fig-montecarlo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-montecarlo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_montecarlo.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-montecarlo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Monte Carlo simulation results.
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="visualizing-the-economy" class="level1">
@@ -908,21 +912,14 @@ Figure&nbsp;10: Tâtonnement price paths from different initial prices, showing 
 <section id="bringing-the-model-together" class="level2">
 <h2 class="anchored" data-anchor-id="bringing-the-model-together">7.1 Bringing the Model Together</h2>
 <p>The visualization brings the theoretical objects and numerical results into one place. The Edgeworth box shows the feasible allocations, the Pareto set identifies the efficient ones, the core highlights the individually rational region, and the competitive equilibrium marks the allocation supported by prices.</p>
-<p>The animated simulation adds a time dimension. As the relative price changes, the agents’ demands and resulting allocations change with it. The visualization makes it easier to see whether the simulated economy moves toward the equilibrium allocation or follows a less stable path.</p>
-<p>The animation is not an additional proof of convergence. It is a way to inspect the behaviour of the numerical procedure and relate the computed results back to the geometry of the model.</p>
-</section>
-<section id="animation-design" class="level2">
-<h2 class="anchored" data-anchor-id="animation-design">7.2 Animation Design</h2>
-<p>The visualization updates existing graphics objects rather than clearing and redrawing the entire figure at every iteration. This reduces unnecessary rendering work and keeps the animation responsive.</p>
-<p>The implementation supports different display styles. The utility-oriented view emphasizes indifference curves and welfare, while the stacked view makes the allocation and trading path easier to follow. Both views use the same underlying simulation results.</p>
-<p>The animation uses <code>drawnow limitrate</code> to refresh the figure without forcing a full redraw at every step. Updating object data in place also avoids repeatedly recreating axes, legends, and other graphical elements.</p>
+<p>The animated simulation adds a time dimension: as the relative price changes, the agents’ demands and resulting allocations change alongside it. The visualization makes it easier to see whether the simulated economy moves toward the equilibrium allocation or follows a less stable path.</p>
 <div id="fig-trading-animation" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-trading-animation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/fig_trading_animation.png" class="img-fluid figure-img" style="width:100.0%">
+<img src="images/fig_anim_utility.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trading-animation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11: Animated trading visualization showing the allocation path through the Edgeworth box.
+Figure&nbsp;12: Animated trading visualization showing the allocation path through the Edgeworth box.
 </figcaption>
 </figure>
 </div>
@@ -1006,14 +1003,6 @@ Figure&nbsp;11: Animated trading visualization showing the allocation path throu
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This design makes functions usable individually or as a pipeline. Running <code>walrasian</code> without upstream state should produce the same economic result as running it after <code>paretoSet</code> and <code>core</code>, although it may repeat calculations. The state chain separates the logic and avoids unnecessary duplicate work.</p>
 </section>
-<section id="key-engineering-decisions" class="level2">
-<h2 class="anchored" data-anchor-id="key-engineering-decisions">8.2 Key Engineering Decisions</h2>
-<p>A few implementation choices made a substantial difference to the project’s speed and reliability.</p>
-<p><strong>Symbolic first, numeric afterwards.</strong> The demand functions are derived symbolically when they are created, then converted into numerical function handles. Repeating the symbolic solve inside every price iteration would add overhead to a calculation that may run hundreds or thousands of times. The symbolic-to-numeric approach keeps the derivation readable while making repeated evaluations much cheaper.</p>
-<p><strong>Using <code>matlabFunction</code> rather than <code>subs</code> in a loop.</strong> Symbolic substitution is useful when checking an expression at a particular value, but it is not the best tool for repeatedly evaluating a large grid. <code>matlabFunction</code> converts the expression into a function handle that can be evaluated numerically. For the project’s large price sweeps, this avoids repeatedly constructing symbolic results and converting them to doubles.</p>
-<p><strong>Checking for complex values explicitly.</strong> A numerical value can be finite without being real. For example, <code>log(x_1-3)</code> is not real-valued when $x_1&lt;3), but a check based only on <code>isfinite</code> will not necessarily reject a complex result. The boundary dominance test and demand-clipping routine therefore check <code>imag(val) ~= 0</code> as well as non-finite values. Invalid evaluations are excluded rather than allowed to contaminate later calculations.</p>
-<p><strong>Updating the animation in place.</strong> The animation uses <code>drawnow limitrate</code> and updates existing graphics objects through their data properties instead of deleting and redrawing the entire figure at each step. Rebuilding the figure would repeatedly trigger layout, axis, legend, and decoration calculations. Updating the existing objects keeps the rendering loop lighter and makes the animation feel like a continuous process rather than a sequence of separate plots.</p>
-</section>
 </section>
 <section id="limitations-and-extensions" class="level1">
 <h1>9. Limitations and Extensions</h1>
@@ -1042,10 +1031,8 @@ Figure&nbsp;11: Animated trading visualization showing the allocation path throu
 <section id="conclusion" class="level1">
 <h1>10. Conclusion</h1>
 <p>The project began with five questions about a simple exchange economy. The Pareto set identifies allocations where no further Pareto improvement is possible. The core adds individual rationality, narrowing the efficient set to allocations that both agents would accept. Competitive equilibrium introduces prices as a way to coordinate individual choices, while tâtonnement provides a mechanism for testing whether those prices can be reached from different starting points. Finally, the visualization links the theoretical objects to the path followed by the simulated economy.</p>
-<p>Implementing the model also makes clear that these concepts are related but not interchangeable. An efficient allocation need not be fair, and Pareto efficiency alone does not establish that every agent prefers the outcome to their endowment. Likewise, a numerical routine that appears to converge is not necessarily solving the intended economic problem. The computed demands, budget constraints, market-clearing conditions, and welfare comparisons all need to agree.</p>
-<p>The most useful lesson from the project is therefore methodological as much as economic. General equilibrium theory provides a clear set of conditions, but translating those conditions into code requires careful treatment of special cases, numerical errors, and the assumptions behind each result. The same first-order condition cannot handle every preference structure, and the same convergence plot cannot establish every property of an equilibrium.</p>
-<p>The model is deliberately small, but its modular design makes it a useful starting point for further experiments. With the core routines in place, the next step is to change the structure of the economy—adding agents, allowing trade to occur through a network, or introducing decisions across time—and examine which of the original results survive.</p>
-<p>Source code and the full test suite will be available on <a href="https://github.com/mtfehl/steady-states">GitHub</a>.</p>
+<p>Implementing the model also makes clear that these concepts are related but not interchangeable. An efficient allocation need not be fair, and Pareto efficiency alone does not establish that every agent prefers the outcome to their endowment. Likewise, a numerical routine that appears to converge is not necessarily solving the intended economic problem. The agents’ demands, budget constraints, market-clearing conditions, and welfare comparisons all need to align under specific conditions for results to hold.</p>
+<p>Source code available on <a href="https://github.com/mtfehl/steady-states">GitHub</a>.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -1175,7 +1162,6 @@ Figure&nbsp;11: Animated trading visualization showing the allocation path throu
 </table>
 <hr>
 <p><strong>Test cases</strong></p>
-<p>The solver is tested against 13 combinations of utility functions, including standard smooth preferences, perfect substitutes, Leontief preferences, neutral goods, non-quasi-concave preferences, and cases with domain restrictions.</p>
 <table class="table-striped caption-top table">
 <caption>Test cases used to exercise the solver.</caption>
 <colgroup>
@@ -1189,7 +1175,7 @@ Figure&nbsp;11: Animated trading visualization showing the allocation path throu
 <th>#</th>
 <th><span class="math inline">\(u_1\)</span></th>
 <th><span class="math inline">\(u_2\)</span></th>
-<th>Intended case</th>
+<th>Base case</th>
 </tr>
 </thead>
 <tbody>
