@@ -19,7 +19,7 @@ format:
     fig-align: center
     fig-cap-location: bottom
     fig-responsive: true
-    
+
 execute:
   echo: true
   eval: false
@@ -28,17 +28,19 @@ execute:
 
 # 1. Introduction
 
-Two people meet at a marketplace. Each arrives with a basket of goods and a private opinion about how much they value what is in it. Nobody manufactures anything new, nobody brings in fresh capital, nobody robs anyone else. They just talk, swap, and walk away. The question this project asks is whether the outcome of those swaps has any structure to it, or whether it is the kind of random mess that emerges whenever real people get involved.
+Imagine two local vendors go to a farmer's market to sell their goods. Zack, a local apple farmer, had an exceptional yield this year at his family-owned orchard. Yuri, on the other hand, is an experienced fishmonger who specializes in selling seasonal varieties of seafood. Each of the two vendors start out with a their own baskets of goods and value their goods according to their own preferences. Zack, as much as he loves apples, prefers to hold a more balanced basket of both apples and fish so he has more possibilities come dinnertime; Yuri feels the same way. Both therefore would benefit from trading their goods with one another; however, how do we know which trades are worth making? When are there no further gains possible from trading with one another? Can a market can find that outcome on its own, just by agents acting in their own self-interests?
 
-Welfare economics has a striking answer. If both parties are rational and have stable preferences, the set of trades they can plausibly settle on is small, predictable, and in a precise sense efficient. The walk away point is not arbitrary. It sits inside a region called the core, and the core itself contains a smaller object, the competitive equilibrium, which is what a frictionless market would produce if it were given the chance to set prices.
+These are major questions behind general equilibrium theory in microeconomics. This project uses MATLAB to investigate these questions in a simple exchange economy with two agents, two goods, and fixed endowments. The goal is to better understand many of the abstract concepts that microeconomic theory proposes under specific conditions.
 
-This project is a working laboratory for that result. Every piece of the standard two-agent two-good general equilibrium model is implemented from scratch in MATLAB: the Pareto set, the core, Walrasian prices, the welfare theorems, tâtonnement price discovery, and a Monte Carlo robustness check on convergence. Each section below answers one question.
+The project is organized around five questions:
 
-1. Given fixed resources and conflicting tastes, which allocations are efficient?
-2. Among those efficient allocations, which ones are voluntary?
-3. Will a price-taking market actually find one of them?
-4. Does that result hold up if the auctioneer starts from a bad initial guess?
-5. Can we watch the economy converge in real time?
+1. Which allocations are efficient, given the agents' resources and preferences?
+2. Which of those allocations would both agents voluntarily accept?
+3. Can a competitive market find an equilibrium allocation?
+4. Does the price-adjustment process converge when it starts from a poor initial guess?
+5. Can we visualize the process and see how the economy moves toward equilibrium?
+
+Each question introduces a different part of the model. Together, they show how a set of theoretical results can be translated into numerical methods, tested across different preference structures, and brought to life through visualization.
 
 ![The full picture: indifference curves, Pareto set (white), core (cyan), offer curves, budget line, and competitive equilibrium (gold star).](images/fig_preview.png){#fig-preview width="100%"}
 
@@ -46,343 +48,395 @@ This project is a working laboratory for that result. Every piece of the standar
 
 ## 2.1 Agents, Goods, and Preferences
 
-An agent is anyone with a coherent ranking over baskets of goods. The ranking itself is the primitive object. The utility function $u_i(x_1, x_2)$ is just a numerical stand-in that respects that ranking: if the agent prefers basket $A$ to basket $B$, then $u_i(A) > u_i(B)$, and any monotone transformation of $u_i$ preserves the same ordering. Utility numbers are ordinal, not cardinal. Saying that Yuri's utility went from 40 to 41 carries no information beyond the fact that he is now weakly better off.
+The starting point is the agents' preferences. An agent does not need to assign an objective value to every basket of goods; they only need to be able to rank the alternatives. A utility function $u_i(x_1,x_2)$ provides a convenient numerical representation of that ranking. If an agent prefers basket $(A)$ to basket $(B)$, then $u_i(A)>u_i(B)$. The numerical values themselves are not meaningful in isolation: utility is ordinal, so any strictly increasing transformation represents the same preferences.
 
-The classical assumptions on preferences run as follows. They are complete (the agent can compare any two baskets), transitive (if $A \succeq B$ and $B \succeq C$, then $A \succeq C$), continuous (small changes in the basket produce small changes in the ranking), and locally non-satiated (in any neighborhood of any basket there is always something the agent strictly prefers). The first three guarantee that a continuous utility function representing the preference exists. The fourth rules out flat regions where the agent is indifferent over a whole patch of allocations. Convexity, when it holds, says the agent prefers averages to extremes, which is what makes interior tangencies into maxima rather than saddle points.
+The standard model assumes that preferences are complete, transitive, and continuous. Completeness means that the agent can compare any two baskets, while transitivity rules out contradictory rankings. Continuity ensures that small changes in a basket do not produce abrupt changes in the preference ordering. Local non-satiation adds another important condition: however good a basket may be, there is always a nearby basket the agent strictly prefers. This assumption will matter later when we consider whether agents spend their entire budget.
 
-The solver does not assume the preferences are well behaved. It handles four qualitatively distinct cases: smooth quasi-concave utilities (the textbook case), Leontief preferences that have kinks instead of smooth indifference curves, convex preferences (the $\max$ form, where the agent wants to specialize), and non-quasi-concave preferences where the bordered Hessian flips sign and interior tangencies become minima. Each case requires a different solution technique, which is what most of `solveParetoSet.m` is about.
+Convexity is often added as a further assumption. It captures a preference for balanced combinations over extreme ones and helps ensure that the usual first-order conditions identify utility-maximizing allocations. But not every preference structure fits this textbook case. To see where the standard methods work and where they fail, the solver handles four broad types of preferences: smooth quasi-concave utilities, Leontief preferences with kinks, convex preferences represented by a `max` function, and non-quasi-concave utilities for which an interior tangency can be a minimum rather than a maximum.
 
-The general form, and the running example used throughout:
+The running example uses two agents, Yuri and Zack, who value apples and fish according to
 
-$$u_\text{Yuri}(x_1, x_2) = x_1(x_2 + 3), \quad u_\text{Zack}(x_1, x_2) = x_1(x_2 + 2)$$
+$$ u_{\text{Yuri}}(x_1,x_2)=x_1(x_2+3), \qquad u_{\text{Zack}}(x_1,x_2)=x_1(x_2+2). $$
 
-where $x_1$ = Apples and $x_2$ = Fish, and each function takes the agent's own holdings as arguments.
+Here, $(x_1)$ denotes apples and $(x_2)$ denotes fish. Each utility function describes one agent's preferences over their own basket. The functions are similar, but not identical: the difference in their constants creates different marginal rates of substitution and therefore gives the agents a reason to trade.
 
 ## 2.2 Endowments and the Edgeworth Box
 
-An endowment is what the agent walks in with. Yuri's endowment $\omega_\text{Yuri} = (\omega_{1, \text{Yuri}}, \omega_{2, \text{Yuri}})$ specifies how many units of each good he owns before any trade happens. The economy as a whole is described by the total endowment $\omega = \omega_\text{Yuri} + \omega_\text{Zack}$. This vector is fixed for the rest of the analysis. No good is produced or destroyed during trade. Whatever Yuri gives up in good 1 must end up in Zack's basket, and vice versa.
+An endowment is the basket an agent owns before trading begins. It determines the agent's starting point and, as we will see in Section 4, the outside option against which any proposed trade must be evaluated.
 
-The Edgeworth box turns this conservation law into a picture. Yuri's holdings are measured from the bottom-left corner $O_\text{Yuri}$. Zack's holdings are measured from the top-right corner $O_\text{Zack}$, with his axes flipped. The width of the box equals the total amount of good 1 in the economy, and the height equals the total amount of good 2. Pick any interior point of the box, project it onto each pair of axes, and you have read off both agents' allocations simultaneously. Every interior point is a feasible allocation by construction.
+Let Yuri's endowment be $(\omega_{\text{Yuri}})$ and Zack's be $(\omega_{\text{Zack}})$. The total resources available to the economy are
 
-Both agents begin with equal endowments: $\omega_\text{Yuri} = \omega_\text{Zack} = (5, 5)$, giving a total endowment of $\omega = (10, 10)$.
+$$
+\omega=\omega_{\text{Yuri}}+\omega_{\text{Zack}}.
+$$
+
+These resources remain fixed throughout the model. Every apple or fish Yuri gives up must end up with Zack, and vice versa. Trade changes who owns the goods, not how many goods exist.
+
+The Edgeworth box is a convenient way to represent this constraint. Yuri's allocation is measured from the bottom-left corner, while Zack's is measured from the top-right corner, with his axes reversed. The box's width represents the total supply of apples and its height represents the total supply of fish. Any point inside the box therefore identifies both agents' holdings at once, with no goods created or lost.
+
+For the running example, both agents begin with equal endowments:
+
+$$
+\omega_{\text{Yuri}}=\omega_{\text{Zack}}=(5,5),
+\qquad
+\omega=(10,10).
+$$
 
 ![Empty Edgeworth box. Yuri's origin is bottom-left; Zack's is top-right. Every interior point is a complete, feasible allocation of all goods. The yellow square marks the initial endowment.](images/fig_empty_edgeworth.png){#fig-empty width="100%"}
 
 ::: {.callout-note}
-Every interior point of the box is a complete allocation of all goods. No resources are wasted.
+Every point in the Edgeworth box represents a feasible allocation of the economy's resources. The total supply of each good is fixed; only its distribution between the two agents changes.
 :::
 
 ## 2.3 The Marginal Rate of Substitution
 
-The MRS is the slope of an indifference curve, measuring the rate at which an agent will substitute one good for another:
+The marginal rate of substitution (MRS) describes how much of one good an agent is willing to give up for a small increase in another while remaining on the same indifference curve. It is the local slope of that curve and, in economic terms, the agent's willingness to trade one good for the other.
 
-$$MRS = \frac{MU(x_1)}{MU(x_2)}$$
+For differentiable utility functions,
 
-For the running example:
+$$
+MRS=\frac{MU(x_1)}{MU(x_2)}
+=\frac{\partial u/\partial x_1}{\partial u/\partial x_2}.
+$$
 
-$$MRS_\text{Yuri} = \frac{x_2 + 3}{x_1}, \quad MRS_\text{Zack} = \frac{x_2 + 2}{x_1}$$
+In the running example, the marginal rates of substitution are
 
-The MRS measures how much of good 2 the agent will accept in exchange for giving up one marginal unit of good 1, while keeping their own utility constant. It is the willingness to trade, expressed as a price the agent has in their head. When two agents stand at an allocation and discover that their internal exchange rates disagree, there is a deal to be made. One of them values good 1 relatively more, and the other values good 2 relatively more, so a swap that moves a little of each in the right direction makes both better off. Trade dies out when the rates equalize, because at that point no swap can improve one party without hurting the other.
+$$
+MRS_{\text{Yuri}}=\frac{x_2+3}{x_1},
+\qquad
+MRS_{\text{Zack}}=\frac{x_2+2}{x_1}.
+$$
+
+The important point is not the formula itself, but what happens when the two rates differ. If Yuri and Zack value an additional apple differently relative to an additional fish, there may be an exchange that benefits both. The agent who values apples more at the margin is willing to give up more fish to obtain them, while the other agent is willing to make the opposite trade.
+
+As the allocation changes, both agents' marginal rates change. Under the standard differentiability and interior-solution conditions, mutually beneficial trade ends when their MRS values coincide. This gives us the central condition used to derive the Pareto set in the next section.
 
 # 3. Pareto Optimality
 
 ## 3.1 The Concept
 
-An allocation is Pareto optimal when no reshuffling of the goods makes one agent strictly better off without making the other worse off. The bar is deliberately low. Pareto optimality says nothing about fairness, equality, or whether the allocation is one anybody would actually agree to. It only rules out the cases where free utility is being left on the table.
+An allocation is Pareto optimal if there is no feasible alternative that makes at least one agent strictly better off without making the other worse off. The definition is deliberately limited: it rules out allocations where mutually beneficial improvements remain possible, but it does not tell us whether the outcome is fair or whether either agent would voluntarily accept it.
 
-Geometrically, the condition translates into tangency. Each agent's indifference curves slice through the box. At a Pareto optimum, the curve through that point for agent 1 is tangent to the curve through that point for agent 2. If the curves crossed instead of touching, there would be a lens-shaped region between them, and any point inside that lens would dominate the original allocation for both agents. Tangency closes the lens.
+This distinction matters. An allocation where one agent owns everything and the other owns nothing can still be Pareto optimal. Taking a good away from the first agent to give it to the second would make the first worse off, so no Pareto improvement is possible. Efficiency alone therefore does not tell us which allocations are reasonable outcomes of voluntary trade.
+
+For smooth preferences and an interior allocation, Pareto optimality can often be identified geometrically. The agents' indifference curves must be tangent. If the curves cross, there is typically a lens-shaped region in which both agents can obtain higher utility. A move into that region is a Pareto improvement. At a tangency, the curves have the same local slope, so this particular opportunity for mutual improvement disappears.
 
 ![Left: indifference curves are tangent. No mutually beneficial trade remains, so this allocation is Pareto optimal. Right: curves cross. Both agents could move into the lens-shaped region between them and both gain, so this allocation is not Pareto optimal.](images/fig_pareto_concept.png){#fig-pareto-concept width="100%"}
 
 ## 3.2 The MRS Condition
 
-A Pareto optimal allocation satisfies:
+For an interior allocation, the standard tangency condition is
 
-$$\text{MRS}_\text{Yuri}(x_1, x_2) = \text{MRS}_\text{Zack}(\omega_1 - x_1,\ \omega_2 - x_2)$$
+$$
+MRS_{\text{Yuri}}(x_1,x_2)
+=
+MRS_{\text{Zack}}(\omega_1-x_1,\omega_2-x_2).
+$$
 
-The tangency condition is what equalizes the marginal rates of substitution. If the slopes of the two indifference curves match, the agents agree on the local exchange rate, and no further trade is mutually beneficial. If they disagree, the agent with the higher MRS values good 1 more at the margin, so a transfer of good 1 from the other agent in exchange for good 2 makes both better off. Pareto optimality is the absence of any such opportunity.
+Writing Zack's utility in terms of Yuri's holdings is a useful simplification. Once Yuri's allocation $(x_1,x_2)$is known, Zack's follows from the resource constraint:
 
-The substitution $u_2(\omega_1 - x_1, \omega_2 - x_2)$ writes Zack's utility in terms of Yuri's holdings. This is the central trick that lets the whole problem live in one coordinate system. Once it is done, every allocation is a single point $(x_1, x_2)$ in Yuri's frame, and Zack's bundle is recovered automatically as $(\omega_1 - x_1, \omega_2 - x_2)$.
+$$
+(x_{1,\text{Zack}},x_{2,\text{Zack}})
+=(\omega_1-x_1,\omega_2-x_2).
+$$
+
+The problem can therefore be represented in a single coordinate system rather than solving for four quantities independently.
+
+When the MRS values differ, there is scope for a mutually beneficial marginal trade. When they are equal, the agents agree on the local exchange rate. However, the tangency condition is not a complete solution in every case. It relies on differentiability and suitable curvature properties, and it can miss corner solutions, kinks, or interior points that are minima rather than maxima. The solver needs to account for these possibilities explicitly.
 
 ## 3.3 Special Preference Cases
 
-The solver handles four distinct preference structures, each producing a qualitatively different Pareto set:
+The same first-order condition cannot be applied mechanically to every utility function. The shape of the preferences changes the geometry of the solution and, in some cases, the appropriate numerical method.
 
 ::: {layout-ncol=2}
 
-![**Normal (differentiable):** smooth contract curve traced by the MRS condition.](images/fig_pref_normal.png){#fig-pref-normal}
+![**Normal (differentiable):** smooth indifference curves, with the Pareto set traced by the MRS condition.](images/fig_pref_normal.png){#fig-pref-normal}
 
-![**Leontief / min:** L-shaped indifference curves. Kink points cannot be equated by derivatives, so the Pareto set becomes a 2D region.](images/fig_pref_leontief.png){#fig-pref-leontief}
+![**Leontief / min:** L-shaped indifference curves. Kink points cannot be handled by equating derivatives, so the Pareto set may include a region.](images/fig_pref_leontief.png){#fig-pref-leontief}
 
-![**Convex / max:** reverse-L curves. Agents prefer to specialize, so efficient allocations lie on the boundary of the box.](images/fig_pref_convex.png){#fig-pref-convex}
+![**Convex / max:** reverse-L indifference curves. Agents may prefer specialization, placing efficient allocations on the boundary of the box.](images/fig_pref_convex.png){#fig-pref-convex}
 
-![**Non-quasi-concave:** bowl-shaped curves. Interior tangencies are utility minima, not maxima; the true Pareto set is found via grid dominance on the boundary.](images/fig_pref_nonqc.png){#fig-pref-nonqc}
+![**Non-quasi-concave:** bowl-shaped indifference curves. An interior tangency may be a utility minimum, so the solver checks boundary allocations using a dominance test.](images/fig_pref_nonqc.png){#fig-pref-nonqc}
 
 :::
 
+These cases illustrate why the solver is built around a decision process rather than one universal formula. Smooth, well-behaved utilities can often be handled with derivatives. Kinked preferences need a different approach, since the usual first-order conditions do not apply at the kink. Non-quasi-concave preferences create another problem: an interior tangency can satisfy the first-order condition without being a utility maximum. The solver needs to account for all three cases rather than treating every preference structure the same way.
+
 ## 3.4 The Solver Decision Tree
 
-The dispatcher in `solveParetoSet.m` picks the right solution path before any heavy computation begins. The branches go in this order. First, are both utilities differentiable? If either contains a $\min$ or $\max$, control passes to `paretoNonDiff`, which handles kinked preferences directly without taking derivatives. Second, if both are differentiable, are any of the marginal utilities zero or infinite at the test point? A zero marginal utility means the agent is neutral to that good, and the Pareto set collapses to an edge of the box. Third, is the MRS constant on each side? Constant MRS is the perfect substitutes case. The Pareto set then depends on which agent has the higher constant rate, and it is either the entire box (equal rates) or two adjacent edges. Fourth, is the bordered Hessian negative at the midpoint of the box? A negative determinant signals non-quasi-concave preferences, where any interior tangency identified by the first-order conditions is a utility minimum rather than a maximum. In that case, the true Pareto-efficient allocations all lie on the boundary, and we hand off to `paretoBoundary`. Only if all four checks pass does the solver run the standard interior-plus-corner pipeline.
+The dispatcher in `solveParetoSet.m` chooses a method based on the properties of the utility functions. It first checks whether both functions are differentiable. If either contains a `min` or `max`, the problem goes to `paretoNonDiff`, which handles the non-differentiable case separately.
+
+For differentiable utilities, the solver checks for neutral-good cases, where marginal utility is zero or becomes infinite at the relevant point. Depending on the combination, the Pareto set may collapse to an edge or a single point. It then checks for perfect substitutes, where the marginal rate of substitution is constant. If both agents have constant MRS, the relationship between those rates determines whether the efficient set covers a larger part of the box or is restricted to its boundary.
+
+The next check concerns curvature. In this implementation, the bordered-Hessian test is used to flag cases that may be non-quasi-concave. Rather than relying on an interior tangency in those cases, the solver calls `paretoBoundary`. If none of the special cases applies, it uses the standard approach: find interior tangencies, check the corners, and filter the candidate allocations.
 
 ```matlab
 % solveParetoSet.m -- top-level dispatch (abridged)
 if mrs.diff1 && mrs.diff2
-    % neutral good edge cases: pareto set collapses to a point or an edge
+    % Neutral-good edge cases
     if     mrs.MRS1_zero && mrs.MRS2_inf,  px1 = 0;        px2 = omega(2); return
     elseif mrs.MRS1_inf  && mrs.MRS2_zero, px1 = omega(1); px2 = 0;        return
     elseif mrs.MRS1_zero || mrs.MRS1_inf || mrs.MRS2_zero || mrs.MRS2_inf
-        % single-agent neutrality: route to the appropriate edge
+        % Single-agent neutrality: route to the appropriate edge
     end
 
-    % perfect substitutes: constant MRS on both sides
-    if mrs.constant_MRS1 && mrs.constant_MRS2, ...; return, end
+    % Perfect substitutes: constant MRS on both sides
+    if mrs.constant_MRS1 && mrs.constant_MRS2
+        % Handle the constant-MRS case
+        return
+    end
 
-    % bordered hessian test: negative det means non-quasi-concave
+    % Bordered-Hessian test: flag non-quasi-concave preferences
     if flags.convex_pref
         [px1, px2] = paretoBoundary(u1, u2_sub, omega, x1_range, x2_range);
         return
     end
 
-    % standard case: interior tangency + corner solutions
+    % Standard case: interior tangency + corner solutions
     [int_x1, int_x2] = paretoInterior(mrs.MRS1, mrs.MRS2_linked, omega, ...);
-    [cor_x1, cor_x2] = paretoCorners (mrs.MRS1, mrs.MRS2_linked, omega, ...);
-    [px1, px2]       = paretoFilter([int_x1, cor_x1], [int_x2, cor_x2], ...);
+    [cor_x1, cor_x2] = paretoCorners(mrs.MRS1, mrs.MRS2_linked, omega, ...);
+    [px1, px2] = paretoFilter([int_x1, cor_x1], [int_x2, cor_x2], ...);
 
-else  % at least one utility non-differentiable (min or max)
+else
+    % At least one utility is non-differentiable (min or max)
     [px1, px2, flags] = paretoNonDiff(u1, u2_sub, omega, x1_range);
 end
 ```
 
-`paretoBoundary` does what no closed-form method can do for non-quasi-concave preferences. It walks all four edges of the Edgeworth box, evaluates both utilities on a $100 \times 100$ grid of feasible interior points, and asks for each boundary candidate whether any other feasible point dominates it. A candidate survives only if no other allocation makes both agents weakly better off with at least one strict improvement. The dominance test, written in vectorized form, falls out of the formal definition of Pareto dominance:
+The `paretoBoundary` method handles cases where a closed-form tangency solution may not be reliable. It checks candidate allocations along the edges of the Edgeworth box against a $100\times100$grid of feasible interior allocations. A candidate is kept only if no other point makes both agents at least as well off and one of them strictly better off.
+
+The numerical check follows the definition of Pareto dominance:
 
 ```matlab
 % paretoBoundary.m -- inner dominance check
-% u1g, u2g are flattened utility values across the full feasible grid;
-% (u1_b, u2_b) is the candidate boundary point under test.
-dominated = any( (u1g >= u1_b - tol) & (u2g >= u2_b - tol) & ...
-                 (u1g >  u1_b + tol  | u2g >  u2_b + tol) );
-eff(k) = ~dominated;
+% u1g, u2g are flattened utility values across the grid.
+% u1c, u2c are the utilities at a candidate allocation.
+
+tol = 1e-8;
+
+dominates = (u1g >= u1c - tol) & ...
+            (u2g >= u2c - tol) & ...
+            ((u1g > u1c + tol) | (u2g > u2c + tol));
+
+is_efficient = ~any(dominates);
 ```
 
-The grid step also guards against domain failures. Utilities like $\log(x_1 - 3)$ produce complex values on part of the box, and the `imag(val) ~= 0` filter excludes those points from the dominance check rather than silently treating them as $-\infty$.
-
-## 3.5 Results
-
-![Edgeworth box for the running example. Blue: Yuri's indifference curves. Red: Zack's. White line: the contract curve (Pareto set), running corner to corner.](images/fig_pareto_running.png){#fig-pareto-running width="100%"}
-
-The contract curve spans the entire box because both agents share the same utility structure. The MRS condition yields allocations along the full diagonal:
-
-| Agent | Good   | Min | Max |
-|-------|--------|-----|-----|
-| Yuri  | Apples | 0   | 10  |
-| Yuri  | Fish   | 0   | 10  |
-| Zack  | Apples | 0   | 10  |
-| Zack  | Fish   | 0   | 10  |
-
-: Pareto efficiency ranges. {.striped}
-
-::: {.callout-note}
-The contract curve is the locus of all deals both agents could agree are efficient, but it says nothing about which one they would actually choose.
-:::
+This is a numerical approximation rather than a proof that every efficient allocation has been found. Its accuracy depends on the grid resolution, tolerance, and treatment of utility values near domain boundaries. It is useful for checking difficult cases, but results should be interpreted with those limitations in mind.
 
 # 4. The Core
 
-## 4.1 Individual Rationality
+## 4.1 From Efficiency to Individual Rationality
 
-Pareto optimality alone is too permissive. The corner of the Edgeworth box where one agent owns everything and the other owns nothing is Pareto optimal. There is no way to give the loser anything without taking it from the winner. But no rational agent voluntarily walks into that corner if they started with a balanced endowment. The endowment itself is an outside option. Any deal worth making has to clear the bar of being preferred to the status quo by both parties.
+The Pareto set includes every allocation where one agent cannot be made better off without making the other worse off. It does not, by itself, say whether either agent would prefer such an allocation to their initial endowment.
 
-An allocation is individually rational if neither agent prefers their endowment to the proposed deal:
+The core adds that requirement. Given endowments $w_1$and $w_2\), an allocation must be Pareto efficient and give both agents at least as much utility as they receive at their endowments. The individual-rationality conditions are
 
-$$u_\text{Yuri}(x_1, x_2) \geq u_\text{Yuri}(5, 5) = 40$$
+$$
+u_1(x_1,x_2) \geq u_1(w_1),
+\qquad
+u_2(\omega_1-x_1,\omega_2-x_2) \geq u_2(w_2),
+$$
 
-$$u_\text{Zack}(x_1, x_2) \geq u_\text{Zack}(5, 5) = 35$$
+where $\omega=w_1+w_2$is the economy's total endowment.
 
-## 4.2 The Core
+The implementation evaluates these conditions along the Pareto set. Allocations that fail either condition are removed, leaving the part of the efficient set that both agents would accept. The resulting set is the core for this two-agent exchange economy.
 
-The core is the intersection of the Pareto set with the individually rational region:
+## 4.2 Implementation
 
-$$\text{Core} = \text{Pareto set} \cap \{x : u_i(x) \geq u_i(\omega_i)\ \forall i\}$$
+The `core` function reuses the Pareto set if it is already available in the incoming state structure. It calculates each agent's utility at their endowment, evaluates utility along the efficient allocations, and applies the individual-rationality constraints.
 
-Geometrically, draw the indifference curve through the endowment for each agent. Yuri prefers anything to the upper right of his curve; Zack prefers anything to the lower left of his (in Yuri's frame). The intersection of the two preferred regions forms a lens around the endowment, which is the set of all allocations both agents would weakly accept. The core is what remains when this lens is intersected with the contract curve.
+```matlab
+% core.m -- simplified individual-rationality filter
 
-::: {.callout-note}
-The core contains every allocation that is simultaneously efficient and voluntarily acceptable. Neither agent would prefer to walk away.
-:::
+u1_outside = u1(w1(1), w1(2));
+u2_outside = u2(w2(1), w2(2));
 
-## 4.3 Results
+% Utilities at candidate allocations
+u1_candidates = u1(px1, px2);
+u2_candidates = u2(omega(1) - px1, omega(2) - px2);
 
-![Edgeworth box with core. Dotted blue/red curves: IR indifference curves through the endowment. Cyan segment: core. Yellow square: endowment.](images/fig_core.png){#fig-core width="100%"}
+tol = 1e-8;
 
-In the running example the core collapses to a single point, a degenerate case where the two IR constraints intersect the contract curve at the same allocation:
+ir1 = u1_candidates >= u1_outside - tol;
+ir2 = u2_candidates >= u2_outside - tol;
 
-| | Apples | Fish |
-|---|--------|------|
-| Endowment (both agents) | 5.000 | 5.000 |
-| IR threshold, Yuri | $u \geq 40$ | |
-| IR threshold, Zack | $u \geq 35$ | |
-| **Core allocation, Yuri** | **5.165** | **4.747** |
-| **Core allocation, Zack** | **4.835** | **5.253** |
+ir = ir1 & ir2;
 
-: Core of the economy. {.striped}
+cx1 = px1(ir);
+cx2 = px2(ir);
+```
 
-Two corner cases are worth flagging. When the IR constraints are tight enough that the lens collapses around a single point on the contract curve, the core is a singleton. When preferences are perfectly aligned (both agents share the same utility, or both have perfect substitutes with the same MRS), the contract curve fills the entire box and the core fills the entire IR lens. The solver detects both cases through `cflags.core_is_region` and `cflags.core_empty`, then routes to either a curve plot, a shaded region plot, or an empty-core warning.
+The code illustrates the filtering logic; the full implementation also handles utility evaluation and candidate sets that require numerical treatment. The tolerance avoids excluding an allocation because of small floating-point differences.
+
+The result is a useful distinction between efficiency and voluntary participation. An allocation can lie on the Pareto set but outside the core because one agent would rather keep their original endowment. The endowment therefore determines which part of the efficient set is individually rational.
+
+![The Pareto set and the core in the Edgeworth box. The core is the individually rational part of the efficient set, given the initial endowment.](images/fig_core.png){#fig-core width="100%"}
 
 # 5. Competitive Equilibrium
 
-## 5.1 The Walrasian Setup
+## 5.1 Prices and Budget Constraints
 
-Price normalization: $p_1 = 1$, find $p_2^*$.
+Pareto efficiency and the core describe allocations without specifying a market mechanism. Competitive equilibrium introduces prices. Each agent takes prices as given and chooses the most preferred affordable basket, subject to their budget constraint.
 
-Each agent sells their endowment at market prices and buys their preferred bundle subject to:
+Let $p=(p_1,p_2)$be the vector of prices. Agent $i\)'s wealth comes from the market value of their endowment:
 
-$$p_1 x_1 + p_2 x_2 = p_1 \omega_{i,1} + p_2 \omega_{i,2}$$
+$$
+m_i=p_1w_{i1}+p_2w_{i2}.
+$$
 
-Market clearing requires $d_\text{Yuri}(p_2) + d_\text{Zack}(p_2) = \omega$, which holds by Walras' Law once good 1 clears.
+The agent's optimization problem is
 
-## 5.2 Deriving Demand
+$$
+\max_{x_{i1},x_{i2}} u_i(x_{i1},x_{i2})
+$$
 
-The utility maximization problem uses the Lagrangian. The first-order conditions yield:
+subject to
 
-$$\frac{MU(x_1)}{MU(x_2)} = \frac{p_1}{p_2}$$
+$$
+p_1x_{i1}+p_2x_{i2}\leq m_i,
+\qquad x_{i1},x_{i2}\geq 0.
+$$
 
-combined with the binding budget constraint.
+A competitive equilibrium requires both agents to optimize at the same prices and the resulting allocation to clear the markets. For each good, aggregate demand must equal aggregate supply.
 
-From an engineering standpoint, the slow part of computing demand is the symbolic algebra: setting up the Lagrangian, solving the first-order conditions, and substituting in numeric prices. Doing this once per price quote inside a Monte Carlo loop is unworkable. `makeDemandFn.m` solves the symbolic system one time at the moment the agent is first defined, then converts the resulting expressions through `matlabFunction` into a vectorized handle of the form $\hat{d}(p_2)$. Every later evaluation, whether for a single tâtonnement step or for an offer curve traced over 80 price points, is a numeric function call with no symbolic work involved. The same factory dispatches into specialized code paths for perfect substitutes (corner comparison), neutral goods (closed form), Leontief preferences (kink condition solved at the corner of the L-shaped indifference curve), and convex preferences (utility comparison at the two budget-line corners). The fallback `fmincon` path exists for genuinely intractable utilities but rarely fires.
+$$
+x_{11}+x_{21}=\omega_1,
+\qquad
+x_{12}+x_{22}=\omega_2.
+$$
 
-For the running example, with $u_\text{Yuri}(x_1, x_2) = x_1(x_2 + 3)$ and budget $m_\text{Yuri} = 5 + 5 p_2$, the symbolic derivation gives:
+The equilibrium price ratio coordinates the agents' choices. At an interior optimum with differentiable preferences, the MRS equals the relative price:
 
-$$d_\text{Yuri}(p_2) = \left( \frac{m_\text{Yuri} + 3 p_2}{2}, \quad \frac{m_\text{Yuri} - 3 p_2}{2 p_2} \right)$$
+$$
+MRS_i=\frac{p_1}{p_2}.
+$$
+
+Since both agents face the same prices, their MRS values coincide at an interior competitive equilibrium. This connects the agents' individual optimization problems to the market-clearing conditions. The numerical solver checks these conditions rather than relying on tangency alone.
+
+## 5.2 Solving for Equilibrium
+
+The equilibrium solver searches for prices and allocations that satisfy the agents' demand conditions and clear both markets. Since only relative prices matter in a standard exchange economy, one price can be normalized. The implementation uses a relative price parameter to reduce the problem to a smaller numerical search.
+
+The solver must also account for corner solutions. If an agent's optimal demand lies on the boundary of their budget set, the interior first-order conditions need not hold with equality. The implementation therefore compares candidate solutions and checks their feasibility, budget constraints, and market-clearing errors.
+
+For the running example, the demand functions are derived from the utility functions and the agents' budget constraints. The resulting demands are then evaluated at candidate prices. A candidate equilibrium is retained only when the allocations are feasible and the aggregate excess demand is sufficiently close to zero.
 
 ```matlab
-% inside makeDemandFn.m: solve the FOC + budget once, then vectorize
-sol = solve([MRS == p2_s, x1 + p2_s*x2 == bud_s], [x1, x2]);
-d1_fn = matlabFunction(sol.x1, 'Vars', {p2_s});
-d2_fn = matlabFunction(sol.x2, 'Vars', {p2_s});
-d_fn  = @(p2) clip_demand(d1_fn(p2(:)'), d2_fn(p2(:)'), omega);
+% Illustrative equilibrium residuals
+excess1 = x_A(1) + x_B(1) - omega(1);
+excess2 = x_A(2) + x_B(2) - omega(2);
+
+market_clearing_error = max(abs([excess1, excess2]));
 ```
 
-The `clip_demand` step replaces out-of-box or complex-valued outputs with `NaN`. This matters when log or square-root utilities push demand outside the feasible region for some prices, and when downstream code wants to skip those points rather than crash.
+The residuals provide a direct check on whether the computed allocation clears the markets. A solver's exit status alone is not enough: numerical optimization can terminate successfully while leaving a material residual.
 
-## 5.3 Finding Equilibrium
+## 5.3 Welfare Checks
 
-`solveEquilibrium.m` first attempts a symbolic solve. It builds the excess demand expression $z(p_2) = d_{\text{Yuri},1}(p_2) + d_{\text{Zack},1}(p_2) - \omega_1$ in symbolic form and feeds it to MATLAB's `solve`. When the resulting equation has a closed-form root (which is the case for all the standard textbook utilities) this returns the exact equilibrium price, often as a rational number. When it does not (transcendental utilities, or systems where `solve` returns no closed-form), the function falls back to `fzero` from a small set of starting prices spaced over several orders of magnitude. The two paths together cover every utility the project handles. Roots are filtered to keep only those that are real, positive, and within tolerance, in case the symbolic solver returns a complex or negative branch.
+The first welfare theorem states, under its standard assumptions, that a competitive equilibrium allocation is Pareto efficient. The second welfare theorem gives a converse under additional conditions: an efficient allocation can be decentralized as a competitive equilibrium after a suitable redistribution of initial endowments.
 
-The market clears where excess demand $z(p_2) = d_{\text{Yuri},1}(p_2) + d_{\text{Zack},1}(p_2) - \omega_1 = 0$:
+The model uses welfare checks to compare the computed equilibrium with the Pareto set and the core. These comparisons are useful for identifying inconsistencies between the numerical routines. They should not be treated as a general proof of either welfare theorem, since the project also considers preferences that violate some of the standard assumptions.
 
-![Excess demand curve. The market clears at $p_2^* = 1.5$ where $z(p_2)$ crosses zero.](images/fig_excess_demand.png){#fig-excess width="100%"}
+The implementation records whether the equilibrium lies on the computed Pareto set and whether each agent receives at least their endowment utility. These checks help distinguish an economic result from a numerical artifact.
 
-## 5.4 Offer Curves and the Box
+![Competitive equilibrium in the Edgeworth box, showing the budget line, offer curves, and equilibrium allocation.](images/fig_equilibrium.png){#fig-equilibrium width="100%"}
 
-An offer curve is the trace of an agent's demand as the relative price varies, holding everything else fixed. For each value of $p_2$, the agent solves their utility maximization problem against the budget line $p_1 x_1 + p_2 x_2 = p_1 \omega_{i,1} + p_2 \omega_{i,2}$, and the resulting bundle is one point on the curve. As $p_2$ sweeps from low to high, the budget line rotates around the endowment, and the demanded bundle moves with it. The curve always passes through the endowment itself, since the agent has the option of not trading. Walras' equilibrium is the price at which both offer curves intersect at a point other than the endowment, and that intersection is the only allocation where every agent's demand simultaneously clears the market.
+# 6. Tâtonnement and Price Adjustment
 
-![Full Walrasian figure. Teal: Yuri's offer curve. Orange: Zack's offer curve. Green line: budget line at $p_2^* = 1.5$. Gold star: competitive equilibrium. Cyan: core. Yellow square: endowment.](images/fig_walrasian.png){#fig-walrasian width="100%"}
+## 6.1 The Idea
 
-## 5.5 Welfare Theorems
+Finding an equilibrium numerically tells us which prices clear the markets, but it does not explain how a market might approach those prices from a different starting point. Tâtonnement provides a simple way to investigate that question.
 
-**Equilibrium price:** $p_1 = 1,\quad p_2^* = 1.5$
+In the model, an auctioneer announces a relative price. Each agent responds with their demand at that price, and the economy's excess demand is calculated. The price is then adjusted according to the imbalance between demand and supply. If demand for a good exceeds its available supply, its relative price rises; if supply exceeds demand, the price moves in the opposite direction.
 
-| Agent | Apples | Fish  | $u_\text{CE}$ | $u_\text{endow}$ | Gain    |
-|-------|--------|-------|--------------|-----------------|---------|
-| Yuri  | 5.231  | 4.846 | 41.04        | 40.00           | +1.04   |
-| Zack  | 4.769  | 5.154 | 34.12        | 35.00           | **-0.88** |
+For a two-good exchange economy, the process can be represented using the excess demand for good 1. With good 2 as the numeraire, the update rule takes the form
 
-: Equilibrium allocations and utility gains from trade. {.striped}
+$$
+p_{t+1}=\max\left(\varepsilon,\,
+p_t+\alpha z_1(p_t)\right),
+$$
 
-::: {.callout-warning}
-**Zack's gain from trade is negative.** The CE is Pareto optimal (FWT holds), but it lies *outside* the core. Zack ends up worse off than at his endowment. This is why the core is a stricter concept than Pareto optimality alone, and why the SWT matters.
-:::
+where $p_t$is the relative price at iteration $t\), $z_1(p_t)$is excess demand for good 1, $\alpha$is the adjustment step size, and $\varepsilon>0$prevents the price from becoming non-positive.
 
-**First Welfare Theorem (FWT):** CE is on the Pareto set. The market does not waste resources. ✓
+The exact behaviour depends on the demand functions, the step size, and the initial price. A large step can cause oscillation or divergence; a small step may produce slower adjustment. Convergence is therefore something to test, not something to assume.
 
-**Second Welfare Theorem (SWT):** a lump-sum tax of $0.21$ on Yuri shifts the budget line to support the core allocation $(5.165,\ 4.747)$ as a CE at the same price $p_2^* = 1.5$. Equity and efficiency can be separated. ✓
+## 6.2 The Simulation Loop
 
-The welfare theorems rest on three assumptions, and each one breaks for known reasons. Quasiconcavity guarantees that demand is well-defined as a single bundle rather than a tie between corners; without it, the agent might switch discontinuously between specializing in one good and the other, and the offer curve develops a jump. Continuity of preferences rules out lexicographic orderings, where the agent would die before giving up any of good 1 for any amount of good 2. Local non-satiation says there is always more utility to be had nearby, which is what forces the agent to spend their entire budget rather than leave income on the table. The first assumption fails for non-quasi-concave preferences (test case 2 in the appendix), and the SWT note in the code explicitly flags this. The second is more of a theoretical concern than a practical one. The third holds for almost any utility a textbook would write down. None of the three are unreasonable for a small economy of two patient agents, but all three matter the moment one tries to extend the model to financial markets, durable goods, or behavioral preferences.
-
-# 6. Simulations: How the Market Converges
-
-## 6.1 The Tâtonnement Process
-
-In Walras' original telling there is no actual market, just an auctioneer. The auctioneer announces a price vector, agents submit their demands, and the auctioneer reads off whether the market clears. If good 1 is in excess demand the auctioneer raises its price; if it is in excess supply the auctioneer lowers it. No transactions occur until prices have settled, at which point everyone trades simultaneously at the cleared price. The point of the story is not that real markets work this way (they obviously do not), but that under reasonable conditions the price adjustment process actually converges to the equilibrium computed analytically.
-
-The price update rule uses a multiplicative form to keep prices strictly positive:
-
-$$p_{t+1} = p_t \cdot \exp(\lambda \cdot z(p_t))$$
-
-In code, this is one line inside the iteration loop, with a small floor to absorb numerical noise:
+The simulation repeatedly evaluates the agents' demands and updates the price. The implementation stores the price path and associated quantities so that the process can be inspected after the run.
 
 ```matlab
-% runTatonnement.m -- the inner loop
-for t = 1:n_iter
-    d_A = dFn_A(p);  d_B = dFn_B(p);
-    z = d_A(1) + d_B(1) - omega(1);   % good 1 excess demand
-    if abs(z) < tol, break, end
-    p = max(1e-9, p * exp(lambda * z));
+% Simplified tâtonnement loop
+p = p0;
+p_path = nan(max_iter, 1);
+z_path = nan(max_iter, 1);
+
+for t = 1:max_iter
+    xA = dFn_A(p);
+    xB = dFn_B(p);
+
+    z1 = xA(1) + xB(1) - omega(1);
+
+    p_path(t) = p;
+    z_path(t) = z1;
+
+    if abs(z1) < tol
+        p_path = p_path(1:t);
+        z_path = z_path(1:t);
+        break
+    end
+
+    p = max(eps_price, p + alpha * z1);
 end
 ```
 
-The `max(1e-9, ...)` floor matters in early iterations when an extreme starting price produces a large negative excess demand. Without it, $p \cdot \exp(\lambda z)$ can underflow to zero or even round negative, after which the budget constraint $p_1 x_1 + p_2 x_2 = m$ stops making economic sense. The step size $\lambda$ controls how aggressively prices respond to excess demand. Set it too low and convergence takes thousands of iterations. Set it too high and the price overshoots, oscillates, and may never settle. The default $\lambda = 0.05$ was tuned empirically across the 13 test cases. The tolerance is the threshold below which excess demand is treated as zero, set to $10^{-6}$. The maximum iteration count caps any non-converging run at 300 steps, after which the function returns its last state with `converged = false`.
+This is a simplified illustration of the update rule; the project implementation also records the allocation paths and handles numerical failures. The stopping condition checks whether excess demand falls below a specified tolerance. If the iteration reaches its limit without meeting that condition, the run should be treated as non-convergent rather than as a successful equilibrium calculation.
 
-## 6.2 A Single Trial
+## 6.3 Monte Carlo Experiments
 
-![Tâtonnement convergence from $p_0 = 1$. Top: price path converging to $p_2^* = 1.5$. Bottom: $|z(p_t)|$ on a log scale showing the convergence rate.](images/fig_tatonnement.png){#fig-tatonnement width="100%"}
+A single simulation only shows what happens from one initial price. To assess sensitivity to the starting point, the project runs the adjustment process repeatedly from a range of initial prices.
 
-Convergence shows up in the log-scale plot as a roughly linear descent of $|z(p_t)|$, which is the signature of geometric convergence. When $\lambda$ is too large for the local curvature of the excess demand function, the price overshoots and the log plot starts to oscillate or stall. When the demand function has a domain restriction (a square root or log of a quantity that goes negative for some prices), the trace can hit a `NaN` and stop early. Both failure modes were seen during testing and informed the choice of step size.
+The Monte Carlo routine records the final price and whether the run converged. The convergence rate is the proportion of tested starting prices that satisfy the stopping criterion within the iteration limit.
 
-## 6.3 Monte Carlo: Many Starting Prices
+$$
+\text{Convergence rate}
+=
+\frac{\text{Number of converged runs}}
+{\text{Total number of runs}}.
+$$
 
-A single converging run shows that tâtonnement works from one starting price. It says nothing about whether the equilibrium is robust. To check global stability, the function `runMonteCarlo.m` sweeps 80 starting prices spaced over four orders of magnitude on a log grid, runs the full tâtonnement from each, and records whether the trace converges and where it lands. The log spacing matters because the natural failure mode for price discovery is multiplicative drift: a starting price that is 100 times the equilibrium is qualitatively similar to one that is $1/100$ of it, and a uniform grid would over-sample the middle.
+The resulting distribution shows whether convergence is robust to the initial price or depends strongly on where the process begins. It can also reveal cases in which the update rule oscillates, approaches a boundary, or fails to converge within the available iterations.
 
-![Monte Carlo results across 80 starting prices. Left: $p_0$ vs $p_\text{final}$ colored by convergence; all trials land at $p_2^* = 1.5$ regardless of start. Right: distribution of iteration counts.](images/fig_montecarlo.png){#fig-montecarlo width="100%"}
+A high convergence rate is evidence that the chosen numerical procedure works across the tested starting values. It is not a proof that tâtonnement converges for every possible starting price or every preference structure.
 
-::: {.callout-note}
-If the market converges to the same price regardless of where it starts, the equilibrium is globally stable. The economy finds its way there no matter how chaotic the initial conditions.
-:::
+![Tâtonnement price paths from different initial prices, showing how the relative price changes over successive iterations.](images/fig_tatonnement.png){#fig-tatonnement width="100%"}
 
-# 7. Visualization
+# 7. Visualizing the Economy
 
-## 7.1 The 2x2 Figure
+## 7.1 Bringing the Model Together
 
-The animation runs in a single figure split into four panels that update together. The top-left panel is the 3D Edgeworth box with two cylinders standing on it, one for each agent. The cylinder positions reflect the current allocation, and a trail line behind each cylinder traces the path through allocation space from the endowment to the most recent step. The top-right panel is a grouped bar chart showing each agent's current holdings of each good, which is what changes most visibly during trade. The bottom-left panel plots welfare over time, with two horizontal reference lines marking the endowment utility for each agent. Both lines should rise (or stay flat) and never cross below the reference. The bottom-right panel plots $p_t$ against $t$ on a log scale, with the equilibrium price marked as a dashed line.
+The visualization brings the theoretical objects and numerical results into one place. The Edgeworth box shows the feasible allocations, the Pareto set identifies the efficient ones, the core highlights the individually rational region, and the competitive equilibrium marks the allocation supported by prices.
 
-All four panels are driven by the same underlying iteration index. On each frame the rendering loop reads off the price, allocation, and utility at step $t$ from the precomputed tâtonnement trace, then pushes a single update to each panel. Recomputing utilities symbolically inside the animation loop would be unworkably slow, so they are evaluated once into `u1_path` and `u2_path` before any frame is drawn.
+The animated simulation adds a time dimension. As the relative price changes, the agents' demands and resulting allocations change with it. The visualization makes it easier to see whether the simulated economy moves toward the equilibrium allocation or follows a less stable path.
 
-## 7.2 The Three Cylinder Styles
+The animation is not an additional proof of convergence. It is a way to inspect the behaviour of the numerical procedure and relate the computed results back to the geometry of the model.
 
-::: panel-tabset
+## 7.2 Animation Design
 
-## Original (Total Goods)
+The visualization updates existing graphics objects rather than clearing and redrawing the entire figure at every iteration. This reduces unnecessary rendering work and keeps the animation responsive.
 
-Height = $x_1 + x_2$; color = agent identity.
+The implementation supports different display styles. The utility-oriented view emphasizes indifference curves and welfare, while the stacked view makes the allocation and trading path easier to follow. Both views use the same underlying simulation results.
 
-Watch the cylinders drift across the floor of the box as trade reallocates the goods. Each cylinder ends up at the competitive equilibrium allocation, with its position projected on the grid below.
+The animation uses `drawnow limitrate` to refresh the figure without forcing a full redraw at every step. Updating object data in place also avoids repeatedly recreating axes, legends, and other graphical elements.
 
-## Utility Height
-
-Height = normalized utility; cylinders grow taller as agents gain welfare.
-
-Both cylinders should grow upward over time. Since the FWT guarantees the equilibrium is Pareto optimal and lies above each agent's IR threshold, neither agent ends up shorter than they started. The visual confirmation is that no cylinder ever shrinks during the run.
-
-![Utility-height style: cylinder height encodes welfare. Both agents grow taller as they move toward the competitive equilibrium.](images/fig_anim_utility.png){#fig-anim-utility width="100%"}
-
-## Stacked Goods
-
-Green band = Apples held; amber band = Fish held.
-
-The composition of each cylinder shows what each agent is trading away and receiving. Yuri values apples relative to fish slightly more than Zack does ($\text{MRS}_\text{Yuri} = 1.6 > 1.4 = \text{MRS}_\text{Zack}$ at the endowment), so he gives up some fish in exchange for apples. His amber band shrinks while his green band grows. Zack's bands move in the opposite direction. Total height stays close to constant in the running example, since agents trade roughly one for one.
-
-![Stacked-goods style: each cylinder is split by good. The bands shift as trade reallocates resources between agents.](images/fig_anim_stacked.png){#fig-anim-stacked width="100%"}
-
-:::
-
-## 7.3 Reading the Animation
-
-A few static elements anchor the animation regardless of step. The Pareto set is drawn in white on the floor of the box, since the trading path is supposed to terminate on it. The competitive equilibrium allocation is marked by a gold star at the same height. The endowment is a yellow square at the start point. Trail lines following each cylinder show the path through allocation space, and they should curve toward the gold star as iterations progress. Each cylinder carries a floating name label above it (blue for the first agent, red for the second) so the agents are visually distinguishable even when their cylinders are similar in size.
+![Animated trading visualization showing the allocation path through the Edgeworth box.](images/fig_trading_animation.png){#fig-trading-animation width="100%"}
 
 # 8. Technical Architecture
 
 ## 8.1 The State Chain
 
-Each section function accepts an optional `'from'` argument carrying all upstream results, so the pipeline reuses computation instead of rerunning it:
+The project is divided into functions that each handle one part of the economic model. The Pareto-set routine runs first, followed by the core, competitive equilibrium, simulations, and visualization. To avoid repeating work, each function can receive a state structure containing results computed by earlier stages.
+
+The workflow looks like this:
 
 ```matlab
 s = paretoSet(u1, u2, omega);
@@ -392,19 +446,19 @@ s = sims(u1, u2, w1, w2, 'from', s);
 s = viz(u1, u2, w1, w2, 'from', s, 'style', 'stacked');
 ```
 
-Each call extends the struct `s` with new fields:
+Each call extends the structure `s` with the outputs needed by later stages.
 
 | Section | Fields added to `s` |
-|---------|---------------------|
+|---|---|
 | `paretoSet` | `px1`, `px2`, `flags`, `mrs`, `X1`, `X2`, `Z_U1`, `Z_U2` |
 | `core` | `ir`, `cx1`, `cx2`, `cflags`, `w1`, `w2` |
 | `walrasian` | `p_eq`, `x_A`, `x_B`, `oc_A`, `oc_B`, `fwt`, `swt` |
 | `sims` | `tatonn`, `mc`, `p_eq_ref` |
 | `viz` | `tatonn` (reused), `mc_viz` |
 
-: State struct fields by section. {.striped}
+: State structure fields by section. {.striped}
 
-The mechanism is a single `arguments` block at the top of each section function. Optional state from upstream comes in as `options.from`, and the function checks whether each field is already populated before recomputing it. The pattern is the same in every section:
+Each function uses an `arguments` block to define its inputs and defaults. The optional `from` argument carries the state produced upstream. If a required field already exists, the function reuses it; otherwise, it computes that result itself.
 
 ```matlab
 function s = walrasian(u1, u2, w1, w2, options)
@@ -413,79 +467,95 @@ arguments
     u2
     w1 (1,2) {mustBeNumeric}
     w2 (1,2) {mustBeNumeric}
-    options.p0     (1,1) double = 1.0       % initial price guess
-    options.target (1,2) double = [NaN NaN] % SWT target allocation
+    options.p0     (1,1) double = 1.0
+    options.target (1,2) double = [NaN NaN]
     options.from   struct       = struct()
 end
 
-% reuse pareto set if it was computed upstream, otherwise compute it now
+% Reuse the Pareto set if it was computed upstream
 if isfield(options.from, 'px1')
-    px1   = options.from.px1;   px2   = options.from.px2;
-    flags = options.from.flags; mrs   = options.from.mrs;
+    px1   = options.from.px1;
+    px2   = options.from.px2;
+    flags = options.from.flags;
+    mrs   = options.from.mrs;
 else
-    [px1, px2, flags] = solveParetoSet(u1, u2, u2_sub, mrs, omega, ...);
+    % Compute the required Pareto-set results here
 end
 
 % ... walrasian-specific work ...
 
-s     = options.from;        % carry forward upstream state
-s.p_eq = p_eq;  s.x_A = x_A; s.x_B = x_B;   % append new fields
+s      = options.from;
+s.p_eq = p_eq;
+s.x_A  = x_A;
+s.x_B  = x_B;
 end
 ```
 
-Two things make this work cleanly. First, `arguments` blocks give every parameter a default value, so any downstream call that omits a field just gets a fresh `struct()` and computes from scratch. Second, the convention of returning `s = options.from; s.new_field = ...` means each section is composable in any order. Running `walrasian` standalone with no upstream state produces the same result as running it after `paretoSet` and `core`, just slower.
+This design makes functions usable individually or as a pipeline. Running `walrasian` without upstream state should produce the same economic result as running it after `paretoSet` and `core`, although it may repeat calculations. The state chain separates the logic and avoids unnecessary duplicate work.
 
 ## 8.2 Key Engineering Decisions
 
-A few choices ended up mattering more than the rest.
+A few implementation choices made a substantial difference to the project's speed and reliability.
 
-**Symbolic then numeric.** The first instinct when implementing demand was to call `solve` inside every price loop. This works for unit tests but melts under any serious workload. Doing the symbolic algebra once at agent definition time, exporting the result through `matlabFunction`, and then evaluating numerically across a vector of prices is roughly 10,000 times faster than the per-call symbolic route on the Monte Carlo sweep, and it produces identical answers to within numerical tolerance.
+**Symbolic first, numeric afterwards.** The demand functions are derived symbolically when they are created, then converted into numerical function handles. Repeating the symbolic solve inside every price iteration would add overhead to a calculation that may run hundreds or thousands of times. The symbolic-to-numeric approach keeps the derivation readable while making repeated evaluations much cheaper.
 
-**`matlabFunction` versus `subs` in a loop.** Related to the above, but distinct. `subs(expr, vars, values)` is a symbolic substitution that returns a symbolic value and forces a `double` conversion at the end. `matlabFunction(expr)` compiles the expression into a native MATLAB function handle on first call. For grids of $10^4$ points, the `subs` route takes minutes; the `matlabFunction` route takes milliseconds.
+**Using `matlabFunction` rather than `subs` in a loop.** Symbolic substitution is useful when checking an expression at a particular value, but it is not the best tool for repeatedly evaluating a large grid. `matlabFunction` converts the expression into a function handle that can be evaluated numerically. For the project's large price sweeps, this avoids repeatedly constructing symbolic results and converting them to doubles.
 
-**`imag(val) ~= 0` checks.** A common bug in numeric economics code is that `~isfinite(val)` only catches `NaN` and `Inf`, not complex values. A utility like $\log(x_1 - 3)$ returns a perfectly finite complex number on part of the domain, which then propagates silently into the next step and produces nonsense. The dominance check in `paretoBoundary` and the clipping in `makeDemandFn` both check `imag(val) ~= 0` explicitly to catch this case, treating any complex output as a domain failure.
+**Checking for complex values explicitly.** A numerical value can be finite without being real. For example, `log(x_1-3)` is not real-valued when $x_1<3\), but a check based only on `isfinite` will not necessarily reject a complex result. The boundary dominance test and demand-clipping routine therefore check `imag(val) ~= 0` as well as non-finite values. Invalid evaluations are excluded rather than allowed to contaminate later calculations.
 
-**Non-blocking animation.** The trading animation uses `drawnow limitrate` rather than `drawnow`, which lets MATLAB skip frames if the rendering can't keep up. It also updates existing graphics objects in place using their `XData` and `YData` properties, rather than deleting and redrawing. Building a fresh figure on every frame is the easiest thing to write and the worst thing to run; it triggers a full re-layout of axes, legends, and decorations on every iteration. Updating in place keeps the frame rate fast enough that the animation actually feels like a process rather than a slideshow.
+**Updating the animation in place.** The animation uses `drawnow limitrate` and updates existing graphics objects through their data properties instead of deleting and redrawing the entire figure at each step. Rebuilding the figure would repeatedly trigger layout, axis, legend, and decoration calculations. Updating the existing objects keeps the rendering loop lighter and makes the animation feel like a continuous process rather than a sequence of separate plots.
 
 # 9. Limitations and Extensions
 
 ## 9.1 Current Limitations
 
-- **Static endowment economy:** no production, no capital accumulation.
-- **Two agents, two goods:** the Edgeworth box geometry does not generalize beyond this.
-- **Price-taking assumption:** agents have no market power.
+The project uses a small, closed economy in order to see the relationship between preferences, feasible allocations, prices, and welfare in a clear way; however, it limits what the model can say about real markets.
+
+- **Fixed resources:** The economy is an exchange economy. There is no production, investment, or capital accumulation.
+- **Two agents and two goods:** The Edgeworth box is especially useful for this setting, but its geometry does not scale directly to larger economies.
+- **Price-taking behaviour:** Agents treat prices as given and have no market power.
+- **Numerical approximations:** Some preference cases rely on grids, tolerances, and numerical optimization. Their results depend on the resolution and robustness of those methods.
+- **Stylized price adjustment:** Tâtonnement is an analytical mechanism for studying price convergence, not a complete model of how actual markets operate.
 
 ## 9.2 Natural Extensions
 
-- **$n$-agent tâtonnement:** aggregate excess demand across $n$ agents with the same update rule.
-- **Overlapping generations:** agents trade across time periods.
-- **Network trade:** bilateral trades along a graph instead of through a centralized auctioneer.
+Several extensions follow naturally from the existing architecture.
+
+- **Many-agent tâtonnement:** Aggregate excess demand across more agents and examine whether the same price-adjustment rule converges.
+- **Overlapping generations:** Allow agents to trade across time periods, introducing intertemporal budgets and the role of saving.
+- **Network trade:** Replace the centralized auctioneer with bilateral trades along a network, making it possible to study how the pattern of connections affects the path toward an efficient allocation.
+
+The network extension is particularly interesting because it changes the process of trade without necessarily changing the underlying preferences. Instead of assuming that all agents can respond to one common price, the model could examine how local interactions and limited access to trading partners affect convergence and the allocations that are ultimately reached.
 
 # 10. Conclusion
 
-The five questions opened this writeup; the project answers them one by one. Which allocations are efficient? The Pareto set, computed by tangency for smooth utilities and by grid dominance for non-quasi-concave or kinked ones. Which efficient allocations are voluntary? The core, which is the segment of the Pareto set that survives the individual rationality constraint. Will a price-taking market find one of them? Yes, by the First Welfare Theorem, though not necessarily a core allocation. Does the result hold from a bad initial guess? Yes, on every test case run; the Monte Carlo sweep across four orders of magnitude in starting price always converges to the same equilibrium for the running example. Can we watch the economy converge in real time? Yes, the trading animation drives all four panels off a single tâtonnement trace.
+The project began with five questions about a simple exchange economy. The Pareto set identifies allocations where no further Pareto improvement is possible. The core adds individual rationality, narrowing the efficient set to allocations that both agents would accept. Competitive equilibrium introduces prices as a way to coordinate individual choices, while tâtonnement provides a mechanism for testing whether those prices can be reached from different starting points. Finally, the visualization links the theoretical objects to the path followed by the simulated economy.
 
-The result that surprised me most during implementation was how easy it is for the competitive equilibrium to land outside the core. The running example is symmetric in almost every dimension (equal endowments, near-identical utilities), and yet at $p_2^* = 1.5$ the second agent ends up worse off than at his endowment. The market is efficient and it is voluntary in the sense that nobody is forced to trade, but the price that clears the market is not the price that respects every agent's outside option. This is the gap that the Second Welfare Theorem fills: a one-shot lump-sum transfer of $0.21$ shifts the budget line and decentralizes the core allocation as a competitive equilibrium at the same price. Equity and efficiency genuinely are separable, but only if someone is allowed to redistribute first.
+Implementing the model also makes clear that these concepts are related but not interchangeable. An efficient allocation need not be fair, and Pareto efficiency alone does not establish that every agent prefers the outcome to their endowment. Likewise, a numerical routine that appears to converge is not necessarily solving the intended economic problem. The computed demands, budget constraints, market-clearing conditions, and welfare comparisons all need to agree.
 
-Source code and full test suite are available on [GitHub](https://github.com/your-username/steady-states). <!-- TODO: insert real repo URL -->
+The most useful lesson from the project is therefore methodological as much as economic. General equilibrium theory provides a clear set of conditions, but translating those conditions into code requires careful treatment of special cases, numerical errors, and the assumptions behind each result. The same first-order condition cannot handle every preference structure, and the same convergence plot cannot establish every property of an equilibrium.
 
+The model is deliberately small, but its modular design makes it a useful starting point for further experiments. With the core routines in place, the next step is to change the structure of the economy—adding agents, allowing trade to occur through a network, or introducing decisions across time—and examine which of the original results survive.
+
+Source code and the full test suite will be available on [GitHub](https://github.com/mtfehl/steady-states).
 
 ---
 
 ::: {.callout-note collapse="true"}
+
 ## Appendix
 
 **Running the project locally**
 
-Set MATLAB's current folder to `script/`, then open `main.m`. Set `run_through` to control how much executes:
+Set MATLAB's current folder to `script/`, then open `main.m`. The `run_through` setting controls how much of the pipeline executes:
 
 | Value | Runs |
-|-------|------|
-| 1 | Pareto set + Edgeworth box |
-| 2 | + Core |
-| 3 | + Competitive equilibrium |
-| 4 | + Tâtonnement + Monte Carlo |
-| 5 | + Animated trading visualization |
+|---|---|
+| 1 | Pareto set and Edgeworth box |
+| 2 | Pareto set + core |
+| 3 | + competitive equilibrium |
+| 4 | + tâtonnement and Monte Carlo |
+| 5 | + animated trading visualization |
 
 Set `viz_style` to `'utility'` or `'stacked'` to switch animation modes.
 
@@ -494,17 +564,17 @@ Set `viz_style` to `'utility'` or `'stacked'` to switch animation modes.
 **Function reference**
 
 | Function | Purpose | Key inputs | Key outputs |
-|----------|---------|------------|-------------|
-| `paretoSet` | Pareto set + Edgeworth box | `u1`, `u2`, `omega` | `px1/px2`, `flags`, `Z_U1/Z_U2` |
-| `core` | Core + IR constraints | `u1`, `u2`, `w1`, `w2` | `cx1/cx2`, `cflags`, `ir` |
-| `walrasian` | CE prices, offer curves, FWT/SWT | `u1`, `u2`, `w1`, `w2` | `p_eq`, `x_A/x_B`, `fwt`, `swt` |
-| `sims` | Tâtonnement + Monte Carlo | `u1`, `u2`, `w1`, `w2` | `tatonn`, `mc` |
-| `viz` | Animated trading journey | `u1`, `u2`, `w1`, `w2` | animation figure |
-| `solveParetoSet` | Dispatches to correct Pareto solver | `u1`, `u2`, `mrs`, `omega` | `px1/px2`, `flags` |
-| `solveEquilibrium` | Symbolic then numeric CE solve | `u1`, `u2`, `w1`, `w2` | `p_eq`, `x_A`, `x_B` |
-| `makeDemandFn` | Vectorized demand function factory | `u`, `w`, `omega` | `@(p2)` function handle |
-| `runTatonnement` | Single tâtonnement trace | `dFn_A`, `dFn_B`, `omega` | `p_path`, `xA_path`, `z_path` |
-| `runMonteCarlo` | Sweep over starting prices | `dFn_A`, `dFn_B`, `omega` | `p_final_arr`, `conv_rate` |
+|---|---|---|---|
+| `paretoSet` | Pareto set and Edgeworth box | `u1`, `u2`, `omega` | `px1/px2`, `flags`, `Z_U1/Z_U2` |
+| `core` | Core and individual-rationality constraints | `u1`, `u2`, `w1`, `w2` | `cx1/cx2`, `cflags`, `ir` |
+| `walrasian` | Equilibrium prices, offer curves, welfare checks | `u1`, `u2`, `w1`, `w2` | `p_eq`, `x_A/x_B`, `fwt`, `swt` |
+| `sims` | Tâtonnement and Monte Carlo | `u1`, `u2`, `w1`, `w2` | `tatonn`, `mc` |
+| `viz` | Animated trading visualization | `u1`, `u2`, `w1`, `w2` | Animation figure |
+| `solveParetoSet` | Selects the appropriate Pareto solver | `u1`, `u2`, `mrs`, `omega` | `px1/px2`, `flags` |
+| `solveEquilibrium` | Symbolic and numerical equilibrium solver | `u1`, `u2`, `w1`, `w2` | `p_eq`, `x_A`, `x_B` |
+| `makeDemandFn` | Creates a vectorized demand function | `u`, `w`, `omega` | Function handle `@(p2)` |
+| `runTatonnement` | Simulates one price-adjustment path | `dFn_A`, `dFn_B`, `omega` | `p_path`, `xA_path`, `z_path` |
+| `runMonteCarlo` | Tests a range of starting prices | `dFn_A`, `dFn_B`, `omega` | `p_final_arr`, `conv_rate` |
 
 : Function reference. {.striped}
 
@@ -512,21 +582,24 @@ Set `viz_style` to `'utility'` or `'stacked'` to switch animation modes.
 
 **Test cases**
 
-| # | $u_1$ | $u_2$ | Pareto set type |
-|---|-------|-------|-----------------|
-| 1 | $\log(x_1-3) + x_2^2$ | $\max(x_1, x_2+3)$ | Boundary (asymptote) |
-| 2 | $x_1^2 + x_2^2$ | $x_1(x_2+3)$ | Boundary (non-QC) |
-| 3 | $x_1$ | $x_2$ | Single point |
-| 4 | $x_1+x_2$ | $x_1+x_2$ | Full box |
-| 5 | $x_1+4+x_2$ | $x_1+2x_2$ | Boundary (linear, unequal) |
-| 6 | $\min(x_1,x_2)$ | $\min(x_1,x_2)$ | Region (equal Leontief) |
-| 7 | $\min(2x_1, x_2-4)$ | $\min(x_1, x_2+3)$ | Region (unequal Leontief) |
-| 8 | $\min(x_1,x_2)$ | $\max(x_1,x_2)$ | Boundary (Leontief vs max) |
-| 9 | $\min(2x_1, x_2+100)$ | $\min(-20x_1, x_2+3)$ | Out of bounds |
-| 10 | $x_1 - 2x_2$ | $x_1$ | Neutral/bad good |
-| 11 | $x_1(x_2+3)$ | $x_1(x_2+2)$ | Interior curve (running example) |
-| 12 | $x_1 + 2\log x_2$ | $x_1 + 2\log x_2$ | Interior curve (quasilinear) |
-| 13 | $-(x_1-5)^2-(x_2-5)^2$ | $x_1 x_2$ | Satiation point |
+The solver is tested against 13 combinations of utility functions, including standard smooth preferences, perfect substitutes, Leontief preferences, neutral goods, non-quasi-concave preferences, and cases with domain restrictions.
 
-: All 13 test cases. {.striped}
+| # | $u_1$| $u_2$| Intended case |
+|---|---|---|---|
+| 1 | $\log(x_1-3)+x_2^2$| $\max(x_1,x_2+3)$| Boundary and domain restriction |
+| 2 | $x_1^2+x_2^2$| $x_1(x_2+3)$| Non-quasi-concave preferences |
+| 3 | $x_1$| $x_2$| Neutral-good case |
+| 4 | $x_1+x_2$| $x_1+x_2$| Identical perfect substitutes |
+| 5 | $x_1+4+x_2$| $x_1+2x_2$| Linear preferences with unequal MRS |
+| 6 | $\min(x_1,x_2)$| $\min(x_1,x_2)$| Identical Leontief preferences |
+| 7 | $\min(2x_1,x_2-4)$| $\min(x_1,x_2+3)$| Unequal Leontief preferences |
+| 8 | $\min(x_1,x_2)$| $\max(x_1,x_2)$| Leontief versus `max` preferences |
+| 9 | $\min(2x_1,x_2+100)$| $\min(-20x_1,x_2+3)$| Edge and domain handling |
+| 10 | $x_1-2x_2$| $x_1$| Bad-good and neutrality case |
+| 11 | $x_1(x_2+3)$| $x_1(x_2+2)$| Running example |
+| 12 | $x_1+2\log x_2$| $x_1+2\log x_2$| Identical quasilinear preferences |
+| 13 | $-(x_1-5)^2-(x_2-5)^2$| $x_1x_2$| Satiation and non-standard preferences |
+
+: Test cases used to exercise the solver. {.striped}
+
 :::
