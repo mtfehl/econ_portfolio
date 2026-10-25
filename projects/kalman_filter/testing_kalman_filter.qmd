@@ -1,0 +1,17 @@
+---
+title: "The Kalman Filter under Misspecification"
+description: ""
+date: 2026-05-04
+image: /images/kalman_filter.png
+categories: [Networks]
+completed: true
+featured: true
+format:
+  html:
+    page-layout: full
+---
+
+[Download PDF](testing_kalman_filter.pdf)
+
+<iframe src="testing_kalman_filter.pdf" width="100%" height="900px"></iframe>
+

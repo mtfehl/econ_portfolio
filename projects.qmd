@@ -3,9 +3,9 @@ title: "My Portfolio"
 listing:
   - id: featured-work
     contents: 
-      - projects/car_crash
-      - projects/games
-      - projects/remittances
+      - projects/shock_propagation/*.qmd
+      - projects/games/*.qmd
+      - projects/kalman_filter/*.qmd
     include:
       featured: true
     type: grid
@@ -15,7 +15,7 @@ listing:
     
   - id: ongoing-projects
     contents: 
-      - projects/remittances
+      - projects/remittances/*.qmd
     include:
       ongoing: true
     type: grid
@@ -28,9 +28,11 @@ listing:
     
   - id: completed-projects
     contents: 
-      - projects/car_crash
-      - projects/games
-      - projects/voting
+      - projects/car_crash/*.qmd
+      - projects/games/*.qmd
+      - projects/voting/*.qmd
+      - projects/shock_propagation/*.qmd
+      - projects/kalman_filter/*.qmd
     include:
       completed: true
     type: grid
@@ -69,5 +71,3 @@ Welcome to my portfolio! Here you will find my project work across domains such 
 ::: {#completed-projects}
 
 :::
-
-<!-- placeholder -->

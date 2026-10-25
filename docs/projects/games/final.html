@@ -2,16 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Michael Fehl">
-<meta name="dcterms.date" content="2026-04-03">
+<meta name="dcterms.date" content="2026-05-05">
 <meta name="description" content="A general equilibrium model of two-agent, two-good trade">
 
 <title>Steady States: Finding Balance in a Risky World – Michael Fehl</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -22,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -35,17 +73,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-0aa8ac578e64621787fad33acf7ca235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-dark-9048effe7fa8d3cf582b1eca4ef56610.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-356bd8202a67871887a753402cedc074.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-dark-3f0c6ebf404f48d106ffb0cc3e903645.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -274,8 +311,6 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Michael Fehl</span>
     </a>
@@ -413,8 +448,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#current-limitations" id="toc-current-limitations" class="nav-link" data-scroll-target="#current-limitations">9.1 Current Limitations</a></li>
   <li><a href="#natural-extensions" id="toc-natural-extensions" class="nav-link" data-scroll-target="#natural-extensions">9.2 Natural Extensions</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">10. Conclusion</a></li>
   </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">10. Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -452,7 +487,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 3, 2026</p>
+      <p class="date">May 5, 2026</p>
     </div>
   </div>
   
@@ -464,242 +499,811 @@ window.Quarto = {
 </header>
 
 
-<p><strong>OUTLINE OF THE WRITEUP</strong></p>
-<p><a href="https://www.linkedin.com/feed/update/urn:li:activity:7431253938743533568/">Link</a> to see a preview of the algorithm</p>
-<p><em>note</em>: how much code should be included? perhaps only what is necessary to explain each section (could do code folding for most of the algos, just highlighting only the ‘most important’ parts)</p>
 <section id="introduction" class="level1">
 <h1>1. Introduction</h1>
-<p>hook: two people, different tastes (utilities), fixed resources. what happens? The five questions this project answers (matching the five sections)</p>
-<p>A preview figure: the final Edgeworth box with Pareto set, core, CE, offer curves</p>
+<p><em>hook: two people, different tastes (utilities), fixed resources. what happens? The five questions this project answers (matching the five sections)</em></p>
+<div id="fig-preview" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_preview.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-preview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The full picture: indifference curves, Pareto set (white), core (cyan), offer curves, budget line, and competitive equilibrium (gold star).
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="the-economic-setup" class="level1">
 <h1>2. The Economic Setup</h1>
 <section id="agents-goods-and-preferences" class="level2">
 <h2 class="anchored" data-anchor-id="agents-goods-and-preferences">2.1 Agents, Goods, and Preferences</h2>
-<p>Define <span class="math inline">\(u_1(x_1, x_2)\)</span>, <span class="math inline">\(u_2(x_1, x_2)\)</span> in prose: what utility means, why it’s ordinal. dive into primitive notions of utility, preferences, and assumptions underlying these notions.</p>
-<p>Math block: the general form, then the running example</p>
+<p><em>Define <span class="math inline">\(u_1(x_1, x_2)\)</span>, <span class="math inline">\(u_2(x_1, x_2)\)</span> in prose: what utility means, why it’s ordinal. Dive into primitive notions of utility, preferences, and assumptions underlying these notions.</em></p>
+<p><em>Brief note on the types of preferences the model handles (normal, Leontief, convex, non-quasi-concave).</em></p>
+<p>The general form, and the running example used throughout:</p>
 <p><span class="math display">\[u_\text{Yuri}(x_1, x_2) = x_1(x_2 + 3), \quad u_\text{Zack}(x_1, x_2) = x_1(x_2 + 2)\]</span></p>
-<p>Brief note on the types of preferences the model handles (normal, Leontief, convex, non-quasi-concave)</p>
+<p>where <span class="math inline">\(x_1\)</span> = Apples and <span class="math inline">\(x_2\)</span> = Fish, and each function takes the agent’s own holdings as arguments.</p>
 </section>
 <section id="endowments-and-the-edgeworth-box" class="level2">
 <h2 class="anchored" data-anchor-id="endowments-and-the-edgeworth-box">2.2 Endowments and the Edgeworth Box</h2>
-<p>What an endowment is; total endowment <span class="math inline">\(\omega = \omega_1 + \omega_2\)</span></p>
-<p>The Edgeworth box: explain the geometry in plain language</p>
-<p>Figure: the empty Edgeworth box diagram with axes labeled, endowment point marked</p>
-<p>Callout box: “Every interior point of the box is a complete allocation of all goods. No resources are wasted.”</p>
+<p><em>What an endowment is; total endowment <span class="math inline">\(\omega = \omega_1 + \omega_2\)</span>.</em></p>
+<p><em>The Edgeworth box: explain the geometry in plain language.</em></p>
+<p>Both agents begin with equal endowments: <span class="math inline">\(\omega_\text{Yuri} = \omega_\text{Zack} = (5, 5)\)</span>, giving a total endowment of <span class="math inline">\(\omega = (10, 10)\)</span>.</p>
+<div id="fig-empty" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-empty-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_empty_edgeworth.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-empty-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Empty Edgeworth box. Yuri’s origin is bottom-left; Zack’s is top-right. Every interior point is a complete, feasible allocation of all goods. The yellow square marks the initial endowment.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every interior point of the box is a complete allocation of all goods. No resources are wasted.</p>
+</div>
+</div>
 </section>
 <section id="the-marginal-rate-of-substitution" class="level2">
 <h2 class="anchored" data-anchor-id="the-marginal-rate-of-substitution">2.3 The Marginal Rate of Substitution</h2>
-<p>Define <span class="math inline">\(MRS = \frac{MU(x_1)}{MU(x_2)}\)</span>; the slope of an indifference curve</p>
-<p>Math block: general formula, then computed for the running example</p>
-<p>Why MRS is the key to efficiency: it measures willingness to trade</p>
+<p>The MRS is the slope of an indifference curve, measuring the rate at which an agent will substitute one good for another:</p>
+<p><span class="math display">\[MRS = \frac{MU(x_1)}{MU(x_2)}\]</span></p>
+<p>For the running example:</p>
+<p><span class="math display">\[MRS_\text{Yuri} = \frac{x_2 + 3}{x_1}, \quad MRS_\text{Zack} = \frac{x_2 + 2}{x_1}\]</span></p>
+<p><em>Why MRS is the key to efficiency: it measures willingness to trade.</em></p>
 </section>
 </section>
 <section id="pareto-optimality" class="level1">
 <h1>3. Pareto Optimality</h1>
 <section id="the-concept" class="level2">
 <h2 class="anchored" data-anchor-id="the-concept">3.1 The Concept</h2>
-<p>Definition: an allocation is Pareto optimal if no reallocation makes one agent better off without harming the other</p>
-<p>Geometric interpretation: tangency of indifference curves</p>
-<p>Figure: Edgeworth box showing two indifference curves tangent at a Pareto optimal point vs.&nbsp;crossing at a non-optimal point</p>
+<p><em>Definition: an allocation is Pareto optimal if no reallocation makes one agent better off without harming the other.</em></p>
+<p><em>Geometric interpretation: tangency of indifference curves.</em></p>
+<div id="fig-pareto-concept" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pareto-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_pareto_concept.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pareto-concept-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Left: indifference curves are tangent. No mutually beneficial trade remains, so this allocation is Pareto optimal. Right: curves cross. Both agents could move into the lens-shaped region between them and both gain, so this allocation is not Pareto optimal.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="the-mrs-condition" class="level2">
 <h2 class="anchored" data-anchor-id="the-mrs-condition">3.2 The MRS Condition</h2>
-<p><span class="math display">\[\text{MRS}_A(x_1, x_2) = \text{MRS}_B(\omega_1 - x_1,; \omega_2 - x_2)\]</span></p>
-<p>Derivation: why equal MRS means no mutually beneficial trade exists</p>
-<p>The substitution: B’s utility written in A’s coordinate frame</p>
+<p>A Pareto optimal allocation satisfies:</p>
+<p><span class="math display">\[\text{MRS}_\text{Yuri}(x_1, x_2) = \text{MRS}_\text{Zack}(\omega_1 - x_1,\ \omega_2 - x_2)\]</span></p>
+<p><em>Derivation: why equal MRS means no mutually beneficial trade exists.</em></p>
+<p><em>The substitution: Zack’s utility written in Yuri’s coordinate frame.</em></p>
 </section>
 <section id="special-preference-cases" class="level2">
 <h2 class="anchored" data-anchor-id="special-preference-cases">3.3 Special Preference Cases</h2>
-<div id="special-preferences" class="quarto-layout-panel" data-layout-ncol="2" data-layout-nrow="2">
+<p>The solver handles four distinct preference structures, each producing a qualitatively different Pareto set:</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>Normal (differentiable): smooth contract curve via MRS = MRS</p>
+<div id="fig-pref-normal" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pref-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_pref_normal.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pref-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: <strong>Normal (differentiable):</strong> smooth contract curve traced by the MRS condition.
+</figcaption>
+</figure>
+</div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>Leontief / min: L-shaped curves - Pareto set is a region, not a curve</p>
+<div id="fig-pref-leontief" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pref-leontief-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_pref_leontief.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pref-leontief-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: <strong>Leontief / min:</strong> L-shaped indifference curves. Kink points cannot be equated by derivatives, so the Pareto set becomes a 2D region.
+</figcaption>
+</figure>
+</div>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>Convex / max: reverse-L curves - Pareto set is the boundary</p>
+<div id="fig-pref-convex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pref-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_pref_convex.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pref-convex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: <strong>Convex / max:</strong> reverse-L curves. Agents prefer to specialize, so efficient allocations lie on the boundary of the box.
+</figcaption>
+</figure>
+</div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>Non-quasi-concave: bowl-shaped curves - interior tangencies are minima, not maxima; Pareto set on boundary via grid dominance</p>
+<div id="fig-pref-nonqc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pref-nonqc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_pref_nonqc.png" class="img-fluid figure-img">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pref-nonqc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: <strong>Non-quasi-concave:</strong> bowl-shaped curves. Interior tangencies are utility minima, not maxima; the true Pareto set is found via grid dominance on the boundary.
+</figcaption>
+</figure>
 </div>
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p>Satiation Points</p>
 </div>
 </div>
 </div>
 </section>
 <section id="the-solver-decision-tree" class="level2">
 <h2 class="anchored" data-anchor-id="the-solver-decision-tree">3.4 The Solver Decision Tree</h2>
-<p>Prose + flowchart diagram of how solveParetoSet dispatches: classify –&gt; neutral? –&gt; constant MRS? –&gt; bordered Hessian test –&gt; interior / boundary path</p>
-<p>Brief explanation of paretoBoundary: why a 100×100 grid dominance check is needed</p>
+<p><em>Prose + flowchart diagram of how <code>solveParetoSet</code> dispatches: classify → neutral? → constant MRS? → bordered Hessian test → interior / boundary path.</em></p>
+<p><em>Brief explanation of <code>paretoBoundary</code>: why a 100×100 grid dominance check is needed.</em></p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">3.5 Results</h2>
-<p>Figure: the full Edgeworth box for the running example with the Pareto set (white contract curve)</p>
-<p>Console output: the efficiency range table</p>
-<p>Callout box: “The contract curve is the locus of all deals both agents could agree are efficient; but it says nothing about which one they’d actually choose.”</p>
+<div id="fig-pareto-running" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pareto-running-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_pareto_running.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pareto-running-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Edgeworth box for the running example. Blue: Yuri’s indifference curves. Red: Zack’s. White line: the contract curve (Pareto set), running corner to corner.
+</figcaption>
+</figure>
+</div>
+<p>The contract curve spans the entire box because both agents share the same utility structure. The MRS condition yields allocations along the full diagonal:</p>
+<table class="table-striped caption-top table">
+<caption>Pareto efficiency ranges.</caption>
+<thead>
+<tr class="header">
+<th>Agent</th>
+<th>Good</th>
+<th>Min</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Yuri</td>
+<td>Apples</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Yuri</td>
+<td>Fish</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Zack</td>
+<td>Apples</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Zack</td>
+<td>Fish</td>
+<td>0</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The contract curve is the locus of all deals both agents could agree are efficient, but it says nothing about which one they would actually choose.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="the-core" class="level1">
 <h1>4. The Core</h1>
 <section id="individual-rationality" class="level2">
 <h2 class="anchored" data-anchor-id="individual-rationality">4.1 Individual Rationality</h2>
-<p>Why efficiency alone isn’t enough: agents have outside options (their own endowment)</p>
-<p>IR constraint: <span class="math inline">\(u_i(allocation) \geq u_i(endowment)\)</span></p>
-<p>Math block: the two IR inequalities</p>
+<p><em>Why efficiency alone isn’t enough: agents have outside options (their own endowment).</em></p>
+<p>An allocation is individually rational if neither agent prefers their endowment to the proposed deal:</p>
+<p><span class="math display">\[u_\text{Yuri}(x_1, x_2) \geq u_\text{Yuri}(5, 5) = 40\]</span></p>
+<p><span class="math display">\[u_\text{Zack}(x_1, x_2) \geq u_\text{Zack}(5, 5) = 35\]</span></p>
 </section>
 <section id="the-core-1" class="level2">
 <h2 class="anchored" data-anchor-id="the-core-1">4.2 The Core</h2>
-<p>Definition: Pareto set <span class="math inline">\(\cap\)</span> IR region</p>
-<p>Geometric interpretation: the segment of the contract curve between the two IR indifference curves</p>
-<p>Callout box: “The core contains every allocation that is simultaneously efficient and voluntarily acceptable. Neither agent would prefer to walk away.”</p>
+<p>The core is the intersection of the Pareto set with the individually rational region:</p>
+<p><span class="math display">\[\text{Core} = \text{Pareto set} \cap \{x : u_i(x) \geq u_i(\omega_i)\ \forall i\}\]</span></p>
+<p><em>Geometric interpretation: the segment of the contract curve between the two IR indifference curves.</em></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The core contains every allocation that is simultaneously efficient and voluntarily acceptable. Neither agent would prefer to walk away.</p>
+</div>
+</div>
 </section>
 <section id="results-1" class="level2">
 <h2 class="anchored" data-anchor-id="results-1">4.3 Results</h2>
-<p>Figure: Edgeworth box with IR boundary curves (dotted), core highlighted in cyan, endowment (yellow square)</p>
-<p>Note on degenerate cases: when the core collapses to a point vs.&nbsp;when it spans the entire contract curve</p>
+<div id="fig-core" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-core-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_core.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-core-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Edgeworth box with core. Dotted blue/red curves: IR indifference curves through the endowment. Cyan segment: core. Yellow square: endowment.
+</figcaption>
+</figure>
+</div>
+<p>In the running example the core collapses to a single point, a degenerate case where the two IR constraints intersect the contract curve at the same allocation:</p>
+<table class="table-striped caption-top table">
+<caption>Core of the economy.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Apples</th>
+<th>Fish</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Endowment (both agents)</td>
+<td>5.000</td>
+<td>5.000</td>
+</tr>
+<tr class="even">
+<td>IR threshold, Yuri</td>
+<td><span class="math inline">\(u \geq 40\)</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>IR threshold, Zack</td>
+<td><span class="math inline">\(u \geq 35\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Core allocation, Yuri</strong></td>
+<td><strong>5.165</strong></td>
+<td><strong>4.747</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Core allocation, Zack</strong></td>
+<td><strong>4.835</strong></td>
+<td><strong>5.253</strong></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note on degenerate cases: when the core collapses to a point vs.&nbsp;when it spans the entire contract curve.</em></p>
 </section>
 </section>
 <section id="competitive-equilibrium" class="level1">
 <h1>5. Competitive Equilibrium</h1>
 <section id="the-walrasian-setup" class="level2">
 <h2 class="anchored" data-anchor-id="the-walrasian-setup">5.1 The Walrasian Setup</h2>
-<p>Price normalization: <span class="math inline">\(p_1 = 1\)</span>, find <span class="math inline">\(p_2^*\)</span></p>
-<p>Budget constraint: each agent sells their endowment at market prices, buys their preferred bundle</p>
-<p><span class="math display">\[p_1 x_1 + p_2 x_2 = p_1 w_{i,1} + p_2 w_{i,2}\]</span></p>
-<p>Market clearing: demand_A(p2) + demand_B(p2) = <span class="math inline">\(\omega\)</span> (by Walras’ Law)</p>
+<p>Price normalization: <span class="math inline">\(p_1 = 1\)</span>, find <span class="math inline">\(p_2^*\)</span>.</p>
+<p>Each agent sells their endowment at market prices and buys their preferred bundle subject to:</p>
+<p><span class="math display">\[p_1 x_1 + p_2 x_2 = p_1 \omega_{i,1} + p_2 \omega_{i,2}\]</span></p>
+<p>Market clearing requires <span class="math inline">\(d_\text{Yuri}(p_2) + d_\text{Zack}(p_2) = \omega\)</span>, which holds by Walras’ Law once good 1 clears.</p>
 </section>
 <section id="deriving-demand" class="level2">
 <h2 class="anchored" data-anchor-id="deriving-demand">5.2 Deriving Demand</h2>
-<p>The utility maximization problem: Lagrangian, FOC <span class="math inline">\(\frac{MU(x_1)}{MU(x_2)} = \frac{p_1}{p_2}\)</span>, budget binding</p>
-<p>Key engineering point: <code>makeDemandFn()</code> derives the formula symbolically once → returns a vectorized <code>@(p2)</code> function</p>
-<p>Code block (collapsed): the demand derivation for the running example, showing the symbolic formula before vectorization</p>
+<p>The utility maximization problem uses the Lagrangian. The first-order conditions yield:</p>
+<p><span class="math display">\[\frac{MU(x_1)}{MU(x_2)} = \frac{p_1}{p_2}\]</span></p>
+<p>combined with the binding budget constraint.</p>
+<p><em>Engineering point: <code>makeDemandFn()</code> derives the formula symbolically once, then returns a vectorized <code>@(p2)</code> function handle.</em></p>
+<p><em>Code block (collapsed): the demand derivation for the running example, showing the symbolic formula before vectorization.</em></p>
 </section>
 <section id="finding-equilibrium" class="level2">
 <h2 class="anchored" data-anchor-id="finding-equilibrium">5.3 Finding Equilibrium</h2>
-<p>How <code>solveEquilibrium()</code> works: symbolic <code>solve()</code> first, numeric fzero fallback</p>
-<p>Figure: excess demand curve <span class="math inline">\(z(p_2)\)</span> crossing zero at <span class="math inline">\(p_2^*\)</span></p>
+<p><em>How <code>solveEquilibrium()</code> works: symbolic <code>solve()</code> first, numeric <code>fzero</code> fallback.</em></p>
+<p>The market clears where excess demand <span class="math inline">\(z(p_2) = d_{\text{Yuri},1}(p_2) + d_{\text{Zack},1}(p_2) - \omega_1 = 0\)</span>:</p>
+<div id="fig-excess" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-excess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_excess_demand.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-excess-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Excess demand curve. The market clears at <span class="math inline">\(p_2^* = 1.5\)</span> where <span class="math inline">\(z(p_2)\)</span> crosses zero.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="offer-curves-and-the-box" class="level2">
 <h2 class="anchored" data-anchor-id="offer-curves-and-the-box">5.4 Offer Curves and the Box</h2>
-<p>What an offer curve is: the set of bundles demanded as price varies</p>
-<p>Figure: the full Walrasian figure: ICs, Pareto set, core (cyan), offer curves (teal/orange), budget line (green), CE (gold star), endowment (yellow square)</p>
+<p><em>What an offer curve is: the set of bundles demanded as price varies.</em></p>
+<div id="fig-walrasian" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-walrasian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_walrasian.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-walrasian-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Full Walrasian figure. Teal: Yuri’s offer curve. Orange: Zack’s offer curve. Green line: budget line at <span class="math inline">\(p_2^* = 1.5\)</span>. Gold star: competitive equilibrium. Cyan: core. Yellow square: endowment.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="welfare-theorems" class="level2">
 <h2 class="anchored" data-anchor-id="welfare-theorems">5.5 Welfare Theorems</h2>
-<p><u><strong>FWT</strong></u>: every CE is Pareto optimal; the market doesn’t waste</p>
-<p><u><strong>SWT</strong></u>: any Pareto optimal allocation can be supported as a CE with lump-sum transfers; i.e., equity and efficiency can be separated</p>
-<p>Show fwt.dist and swt.holds (or doesnt hold!) from the console output. What cases does this faill? assumptions they rely on – quasiconcavity, continuity, LNS; reasonable assumptions?</p>
+<p><strong>Equilibrium price:</strong> <span class="math inline">\(p_1 = 1,\quad p_2^* = 1.5\)</span></p>
+<table class="table-striped caption-top table">
+<caption>Equilibrium allocations and utility gains from trade.</caption>
+<thead>
+<tr class="header">
+<th>Agent</th>
+<th>Apples</th>
+<th>Fish</th>
+<th><span class="math inline">\(u_\text{CE}\)</span></th>
+<th><span class="math inline">\(u_\text{endow}\)</span></th>
+<th>Gain</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Yuri</td>
+<td>5.231</td>
+<td>4.846</td>
+<td>41.04</td>
+<td>40.00</td>
+<td>+1.04</td>
+</tr>
+<tr class="even">
+<td>Zack</td>
+<td>4.769</td>
+<td>5.154</td>
+<td>34.12</td>
+<td>35.00</td>
+<td><strong>-0.88</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Zack’s gain from trade is negative.</strong> The CE is Pareto optimal (FWT holds), but it lies <em>outside</em> the core. Zack ends up worse off than at his endowment. This is why the core is a stricter concept than Pareto optimality alone, and why the SWT matters.</p>
+</div>
+</div>
+<p><strong>First Welfare Theorem (FWT):</strong> CE is on the Pareto set. The market does not waste resources. ✓</p>
+<p><strong>Second Welfare Theorem (SWT):</strong> a lump-sum tax of <span class="math inline">\(0.21\)</span> on Yuri shifts the budget line to support the core allocation <span class="math inline">\((5.165,\ 4.747)\)</span> as a CE at the same price <span class="math inline">\(p_2^* = 1.5\)</span>. Equity and efficiency can be separated. ✓</p>
+<p><em>What cases does this fail? Assumptions they rely on: quasiconcavity, continuity, local non-satiation. Are these reasonable?</em></p>
 </section>
 </section>
 <section id="simulations-how-the-market-converges" class="level1">
 <h1>6. Simulations: How the Market Converges</h1>
 <section id="the-tâtonnement-process" class="level2">
 <h2 class="anchored" data-anchor-id="the-tâtonnement-process">6.1 The Tâtonnement Process</h2>
-<p>The auctioneer metaphor: announce price –&gt; observe excess demand –&gt; adjust –&gt; repeat</p>
-<p>The update rule and why multiplicative form:</p>
+<p><em>The auctioneer metaphor: announce price, observe excess demand, adjust, repeat.</em></p>
+<p>The price update rule uses a multiplicative form to keep prices strictly positive:</p>
 <p><span class="math display">\[p_{t+1} = p_t \cdot \exp(\lambda \cdot z(p_t))\]</span></p>
-<p>Parameters: step size <span class="math inline">\(\lambda\)</span>, tolerance, max iterations</p>
+<p><em>Parameters: step size <span class="math inline">\(\lambda\)</span>, tolerance, max iterations.</em></p>
 </section>
 <section id="a-single-trial" class="level2">
 <h2 class="anchored" data-anchor-id="a-single-trial">6.2 A Single Trial</h2>
-<p>Figure: the tâtonnement trace; price path (top) and <span class="math inline">\(|z(p_t)|\)</span> on log scale (bottom)</p>
-<p>What convergence looks like vs.&nbsp;failure to converge</p>
+<div id="fig-tatonnement" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tatonnement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_tatonnement.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tatonnement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Tâtonnement convergence from <span class="math inline">\(p_0 = 1\)</span>. Top: price path converging to <span class="math inline">\(p_2^* = 1.5\)</span>. Bottom: <span class="math inline">\(|z(p_t)|\)</span> on a log scale showing the convergence rate.
+</figcaption>
+</figure>
+</div>
+<p><em>What convergence looks like vs.&nbsp;failure to converge.</em></p>
 </section>
 <section id="monte-carlo-many-starting-prices" class="level2">
 <h2 class="anchored" data-anchor-id="monte-carlo-many-starting-prices">6.3 Monte Carlo: Many Starting Prices</h2>
-<p>Why starting price matters (or doesn’t)</p>
-<p>80 trials over logspace to test robustness</p>
-<p>Figure: scatter of <span class="math inline">\(p_0\)</span> vs <span class="math inline">\(p_{final}\)</span> colored by convergence + histogram of iteration counts</p>
-<p>Callout box: “If the market converges to the same price regardless of where it starts, the equilibrium is globally stable; the economy finds its way there no matter how chaotic the initial conditions.”</p>
+<p><em>Why starting price matters (or doesn’t). 80 trials over logspace to test robustness.</em></p>
+<div id="fig-montecarlo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-montecarlo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_montecarlo.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-montecarlo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13: Monte Carlo results across 80 starting prices. Left: <span class="math inline">\(p_0\)</span> vs <span class="math inline">\(p_\text{final}\)</span> colored by convergence; all trials land at <span class="math inline">\(p_2^* = 1.5\)</span> regardless of start. Right: distribution of iteration counts.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the market converges to the same price regardless of where it starts, the equilibrium is globally stable. The economy finds its way there no matter how chaotic the initial conditions.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="visualization" class="level1">
 <h1>7. Visualization</h1>
 <section id="the-2x2-figure" class="level2">
 <h2 class="anchored" data-anchor-id="the-2x2-figure">7.1 The 2x2 Figure</h2>
-<p>Layout description: 3D box (top-left), holdings bar chart (top-right), welfare over time (bottom-left), price convergence (bottom-right)</p>
-<p>How all four panels update simultaneously each frame</p>
+<p><em>Layout description: 3D box (top-left), holdings bar chart (top-right), welfare over time (bottom-left), price convergence (bottom-right). How all four panels update simultaneously each frame.</em></p>
 </section>
 <section id="the-three-cylinder-styles" class="level2">
 <h2 class="anchored" data-anchor-id="the-three-cylinder-styles">7.2 The Three Cylinder Styles</h2>
-<p>Use a tabset:</p>
-<p>Tab: Original (total goods)</p>
-<p>Height = <span class="math inline">\(x_1 + x_2\)</span>; color = agent identity</p>
-<p>What to look for: cylinders drifting toward CE</p>
-<p>Tab: Utility Height</p>
-<p>Height = normalized utility; cylinders grow taller as agents gain welfare</p>
-<p>What to look for: both cylinders rising together; Pareto improvement at every step</p>
-<p>Figure: screenshot of the utility-height animation</p>
-<p>Tab: Stacked Goods</p>
-<p>Green band = good 1 held; amber band = good 2 held</p>
-<p>What to look for: as Yuri trades away apples, his green band shrinks; as he receives fish, his amber band grows</p>
-<p>Figure: screenshot of the stacked-goods animation</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Original (Total Goods)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Utility Height</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Stacked Goods</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Height = <span class="math inline">\(x_1 + x_2\)</span>; color = agent identity.</p>
+<p><em>What to look for: cylinders drifting toward the CE allocation as trading progresses.</em></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Height = normalized utility; cylinders grow taller as agents gain welfare.</p>
+<p><em>What to look for: both cylinders rising together as each step is a Pareto improvement.</em></p>
+<div id="fig-anim-utility" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anim-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_anim_utility.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anim-utility-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: Utility-height style: cylinder height encodes welfare. Both agents grow taller as they move toward the competitive equilibrium.
+</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Green band = Apples held; amber band = Fish held.</p>
+<p><em>What to look for: as Yuri trades away Apples, his green band shrinks; as he receives Fish, his amber band grows.</em></p>
+<div id="fig-anim-stacked" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anim-stacked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig_anim_stacked.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anim-stacked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: Stacked-goods style: each cylinder is split by good. The bands shift as trade reallocates resources between agents.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="reading-the-animation" class="level2">
 <h2 class="anchored" data-anchor-id="reading-the-animation">7.3 Reading the Animation</h2>
-<p>Trail lines show the path through allocation space</p>
-<p>Pareto set (white) and CE (gold star) anchored on the floor</p>
-<p>Agent names float above their cylinders</p>
+<p><em>Trail lines show the path through allocation space. Pareto set (white) and CE (gold star) anchored on the floor. Agent names float above their cylinders.</em></p>
 </section>
 </section>
 <section id="technical-architecture" class="level1">
 <h1>8. Technical Architecture</h1>
 <section id="the-state-chain" class="level2">
 <h2 class="anchored" data-anchor-id="the-state-chain">8.1 The State Chain</h2>
-<p>The options.from pattern: how each section checks for upstream state and skips re-computation</p>
-<p>Table: which fields each section adds to the struct</p>
-<p>Code block: the five-line full pipeline</p>
-<ul>
-<li>s = <code>economy(u1, u2, w1, w2)</code>;</li>
-<li>s = <code>sims(u1, u2, w1, w2, 'from', s)</code>;</li>
-<li>s = <code>viz(u1, u2, w1, w2, 'from', s, 'style', 'stacked')</code>;</li>
-</ul>
+<p>Each section function accepts an optional <code>'from'</code> argument carrying all upstream results, so the pipeline reuses computation instead of rerunning it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode matlab code-with-copy"><code class="sourceCode matlab"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> <span class="va">paretoSet</span>(<span class="va">u1</span><span class="op">,</span> <span class="va">u2</span><span class="op">,</span> <span class="va">omega</span>)<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> <span class="va">core</span>(<span class="va">u1</span><span class="op">,</span> <span class="va">u2</span><span class="op">,</span> <span class="va">w1</span><span class="op">,</span> <span class="va">w2</span><span class="op">,</span> <span class="ss">'from'</span><span class="op">,</span> <span class="va">s</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> <span class="va">walrasian</span>(<span class="va">u1</span><span class="op">,</span> <span class="va">u2</span><span class="op">,</span> <span class="va">w1</span><span class="op">,</span> <span class="va">w2</span><span class="op">,</span> <span class="ss">'from'</span><span class="op">,</span> <span class="va">s</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> <span class="va">sims</span>(<span class="va">u1</span><span class="op">,</span> <span class="va">u2</span><span class="op">,</span> <span class="va">w1</span><span class="op">,</span> <span class="va">w2</span><span class="op">,</span> <span class="ss">'from'</span><span class="op">,</span> <span class="va">s</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="va">s</span> <span class="op">=</span> <span class="va">viz</span>(<span class="va">u1</span><span class="op">,</span> <span class="va">u2</span><span class="op">,</span> <span class="va">w1</span><span class="op">,</span> <span class="va">w2</span><span class="op">,</span> <span class="ss">'from'</span><span class="op">,</span> <span class="va">s</span><span class="op">,</span> <span class="ss">'style'</span><span class="op">,</span> <span class="ss">'stacked'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Each call extends the struct <code>s</code> with new fields:</p>
+<table class="table-striped caption-top table">
+<caption>State struct fields by section.</caption>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Fields added to <code>s</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>paretoSet</code></td>
+<td><code>px1</code>, <code>px2</code>, <code>flags</code>, <code>mrs</code>, <code>X1</code>, <code>X2</code>, <code>Z_U1</code>, <code>Z_U2</code></td>
+</tr>
+<tr class="even">
+<td><code>core</code></td>
+<td><code>ir</code>, <code>cx1</code>, <code>cx2</code>, <code>cflags</code>, <code>w1</code>, <code>w2</code></td>
+</tr>
+<tr class="odd">
+<td><code>walrasian</code></td>
+<td><code>p_eq</code>, <code>x_A</code>, <code>x_B</code>, <code>oc_A</code>, <code>oc_B</code>, <code>fwt</code>, <code>swt</code></td>
+</tr>
+<tr class="even">
+<td><code>sims</code></td>
+<td><code>tatonn</code>, <code>mc</code>, <code>p_eq_ref</code></td>
+</tr>
+<tr class="odd">
+<td><code>viz</code></td>
+<td><code>tatonn</code> (reused), <code>mc_viz</code></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="key-engineering-decisions" class="level2">
 <h2 class="anchored" data-anchor-id="key-engineering-decisions">8.2 Key Engineering Decisions</h2>
-<p>Short paragraph each on:</p>
-<p>Symbolic then numeric; why derive demand symbolically before evaluating numerically</p>
-<p><code>matlabFunction</code> vs <code>subs</code> in a loop: 10,000x speedup on grids</p>
-<p><code>imag(val)</code> ~= 0 check: why <code>~isfinite</code> alone misses log/sqrt domain violations</p>
-<p>drawnow limitrate, non-blocking animation; why not delete/redraw</p>
+<p><em>Short paragraph each on:</em></p>
+<p><em>Symbolic then numeric: why derive demand symbolically before evaluating numerically.</em></p>
+<p><em><code>matlabFunction</code> vs <code>subs</code> in a loop: 10,000x speedup on grids.</em></p>
+<p><em><code>imag(val) ~= 0</code> check: why <code>~isfinite</code> alone misses log/sqrt domain violations.</em></p>
+<p><em><code>drawnow limitrate</code>, non-blocking animation: why not delete/redraw.</em></p>
 </section>
 </section>
 <section id="limitations-and-extensions" class="level1">
 <h1>9. Limitations and Extensions</h1>
 <section id="current-limitations" class="level2">
 <h2 class="anchored" data-anchor-id="current-limitations">9.1 Current Limitations</h2>
-<p>Static endowment economy: no production, no capital</p>
-<p>Two agents, two goods: Edgeworth box geometry doesn’t generalize</p>
-<p>Price-taking assumption: agents have no market power</p>
+<ul>
+<li><strong>Static endowment economy:</strong> no production, no capital accumulation.</li>
+<li><strong>Two agents, two goods:</strong> the Edgeworth box geometry does not generalize beyond this.</li>
+<li><strong>Price-taking assumption:</strong> agents have no market power.</li>
+</ul>
 </section>
 <section id="natural-extensions" class="level2">
 <h2 class="anchored" data-anchor-id="natural-extensions">9.2 Natural Extensions</h2>
-<p>n-agent tâtonnement: aggregate excess demand across n agents; same update rule</p>
-<p>Overlapping generations: agents trade across time periods</p>
-<p>Network trade: bilateral trades along a graph instead of a centralized auctioneer</p>
+<ul>
+<li><strong><span class="math inline">\(n\)</span>-agent tâtonnement:</strong> aggregate excess demand across <span class="math inline">\(n\)</span> agents with the same update rule.</li>
+<li><strong>Overlapping generations:</strong> agents trade across time periods.</li>
+<li><strong>Network trade:</strong> bilateral trades along a graph instead of through a centralized auctioneer.</li>
+</ul>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">10. Conclusion</h2>
-<p>Restate the five questions, answered</p>
-<p>What the project demonstrates about general equilibrium theory</p>
-<p>Link to GitHub repository</p>
-<p>Appendix (optional, collapsed by default)</p>
-<p>Full function reference table (name → purpose → inputs → outputs)</p>
-<p>The solver decision tree as a full flowchart</p>
-<p>All 13 test cases with utility functions and expected Pareto set type (maybe maintain one thru project? or multiple?)</p>
-<p>Quarto callout: how to run the project locally (main.m, run_through settings)</p>
-
-
-
 </section>
+<section id="conclusion" class="level1">
+<h1>10. Conclusion</h1>
+<p><em>Restate the five questions, answered. What the project demonstrates about general equilibrium theory. Link to GitHub repository.</em></p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Appendix
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Running the project locally</strong></p>
+<p>Set MATLAB’s current folder to <code>script/</code>, then open <code>main.m</code>. Set <code>run_through</code> to control how much executes:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Value</th>
+<th>Runs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Pareto set + Edgeworth box</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>+ Core</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>+ Competitive equilibrium</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>+ Tâtonnement + Monte Carlo</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>+ Animated trading visualization</td>
+</tr>
+</tbody>
+</table>
+<p>Set <code>viz_style</code> to <code>'utility'</code> or <code>'stacked'</code> to switch animation modes.</p>
+<hr>
+<p><strong>Function reference</strong></p>
+<table class="table-striped caption-top table">
+<caption>Function reference.</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 20%">
+<col style="width: 27%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Purpose</th>
+<th>Key inputs</th>
+<th>Key outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>paretoSet</code></td>
+<td>Pareto set + Edgeworth box</td>
+<td><code>u1</code>, <code>u2</code>, <code>omega</code></td>
+<td><code>px1/px2</code>, <code>flags</code>, <code>Z_U1/Z_U2</code></td>
+</tr>
+<tr class="even">
+<td><code>core</code></td>
+<td>Core + IR constraints</td>
+<td><code>u1</code>, <code>u2</code>, <code>w1</code>, <code>w2</code></td>
+<td><code>cx1/cx2</code>, <code>cflags</code>, <code>ir</code></td>
+</tr>
+<tr class="odd">
+<td><code>walrasian</code></td>
+<td>CE prices, offer curves, FWT/SWT</td>
+<td><code>u1</code>, <code>u2</code>, <code>w1</code>, <code>w2</code></td>
+<td><code>p_eq</code>, <code>x_A/x_B</code>, <code>fwt</code>, <code>swt</code></td>
+</tr>
+<tr class="even">
+<td><code>sims</code></td>
+<td>Tâtonnement + Monte Carlo</td>
+<td><code>u1</code>, <code>u2</code>, <code>w1</code>, <code>w2</code></td>
+<td><code>tatonn</code>, <code>mc</code></td>
+</tr>
+<tr class="odd">
+<td><code>viz</code></td>
+<td>Animated trading journey</td>
+<td><code>u1</code>, <code>u2</code>, <code>w1</code>, <code>w2</code></td>
+<td>animation figure</td>
+</tr>
+<tr class="even">
+<td><code>solveParetoSet</code></td>
+<td>Dispatches to correct Pareto solver</td>
+<td><code>u1</code>, <code>u2</code>, <code>mrs</code>, <code>omega</code></td>
+<td><code>px1/px2</code>, <code>flags</code></td>
+</tr>
+<tr class="odd">
+<td><code>solveEquilibrium</code></td>
+<td>Symbolic then numeric CE solve</td>
+<td><code>u1</code>, <code>u2</code>, <code>w1</code>, <code>w2</code></td>
+<td><code>p_eq</code>, <code>x_A</code>, <code>x_B</code></td>
+</tr>
+<tr class="even">
+<td><code>makeDemandFn</code></td>
+<td>Vectorized demand function factory</td>
+<td><code>u</code>, <code>w</code>, <code>omega</code></td>
+<td><code>@(p2)</code> function handle</td>
+</tr>
+<tr class="odd">
+<td><code>runTatonnement</code></td>
+<td>Single tâtonnement trace</td>
+<td><code>dFn_A</code>, <code>dFn_B</code>, <code>omega</code></td>
+<td><code>p_path</code>, <code>xA_path</code>, <code>z_path</code></td>
+</tr>
+<tr class="even">
+<td><code>runMonteCarlo</code></td>
+<td>Sweep over starting prices</td>
+<td><code>dFn_A</code>, <code>dFn_B</code>, <code>omega</code></td>
+<td><code>p_final_arr</code>, <code>conv_rate</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>Test cases</strong></p>
+<table class="table-striped caption-top table">
+<caption>All 13 test cases.</caption>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th><span class="math inline">\(u_1\)</span></th>
+<th><span class="math inline">\(u_2\)</span></th>
+<th>Pareto set type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><span class="math inline">\(\log(x_1-3) + x_2^2\)</span></td>
+<td><span class="math inline">\(\max(x_1, x_2+3)\)</span></td>
+<td>Boundary (asymptote)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><span class="math inline">\(x_1^2 + x_2^2\)</span></td>
+<td><span class="math inline">\(x_1(x_2+3)\)</span></td>
+<td>Boundary (non-QC)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><span class="math inline">\(x_1\)</span></td>
+<td><span class="math inline">\(x_2\)</span></td>
+<td>Single point</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><span class="math inline">\(x_1+x_2\)</span></td>
+<td><span class="math inline">\(x_1+x_2\)</span></td>
+<td>Full box</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><span class="math inline">\(x_1+4+x_2\)</span></td>
+<td><span class="math inline">\(x_1+2x_2\)</span></td>
+<td>Boundary (linear, unequal)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><span class="math inline">\(\min(x_1,x_2)\)</span></td>
+<td><span class="math inline">\(\min(x_1,x_2)\)</span></td>
+<td>Region (equal Leontief)</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><span class="math inline">\(\min(2x_1, x_2-4)\)</span></td>
+<td><span class="math inline">\(\min(x_1, x_2+3)\)</span></td>
+<td>Region (unequal Leontief)</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><span class="math inline">\(\min(x_1,x_2)\)</span></td>
+<td><span class="math inline">\(\max(x_1,x_2)\)</span></td>
+<td>Boundary (Leontief vs max)</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><span class="math inline">\(\min(2x_1, x_2+100)\)</span></td>
+<td><span class="math inline">\(\min(-20x_1, x_2+3)\)</span></td>
+<td>Out of bounds</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><span class="math inline">\(x_1 - 2x_2\)</span></td>
+<td><span class="math inline">\(x_1\)</span></td>
+<td>Neutral/bad good</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><span class="math inline">\(x_1(x_2+3)\)</span></td>
+<td><span class="math inline">\(x_1(x_2+2)\)</span></td>
+<td>Interior curve (running example)</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td><span class="math inline">\(x_1 + 2\log x_2\)</span></td>
+<td><span class="math inline">\(x_1 + 2\log x_2\)</span></td>
+<td>Interior curve (quasilinear)</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><span class="math inline">\(-(x_1-5)^2-(x_2-5)^2\)</span></td>
+<td><span class="math inline">\(x_1 x_2\)</span></td>
+<td>Satiation point</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->

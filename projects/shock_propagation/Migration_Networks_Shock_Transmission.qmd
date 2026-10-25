@@ -1,0 +1,17 @@
+---
+title: "Migration Networks as a Shock Transmission Infrastructure"
+description: ""
+date: 2026-03-01
+image: /images/shock_propagation.png
+categories: [Networks, R, Machine Learning]
+completed: true
+featured: true
+format:
+  html:
+    page-layout: full
+---
+
+[Download PDF](Migration_Networks_Shock_Transmission.pdf)
+
+<iframe src="Migration_Networks_Shock_Transmission.pdf" width="100%" height="900px"></iframe>
+

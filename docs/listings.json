@@ -80,6 +80,9 @@
     "listing": "/projects.html",
     "items": [
       "/projects/games/final.html",
+      "/projects/kalman_filter/testing_kalman_filter.html",
+      "/projects/shock_propagation/Migration_Networks_Shock_Transmission.html",
+      "/projects/games/final(1).html",
       "/projects/remittances/remittances.html",
       "/projects/car_crash/car_crash_final.html",
       "/projects/voting/voting_paper.pdf"
