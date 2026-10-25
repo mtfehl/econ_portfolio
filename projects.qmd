@@ -4,7 +4,7 @@ listing:
   - id: featured-work
     contents: 
       - projects/shock_propagation/*.qmd
-      - projects/games/*.qmd
+      - projects/games/steady_states.qmd
       - projects/kalman_filter/*.qmd
     include:
       featured: true
@@ -29,7 +29,7 @@ listing:
   - id: completed-projects
     contents: 
       - projects/car_crash/*.qmd
-      - projects/games/*.qmd
+      - projects/games/steady_states.qmd
       - projects/voting/*.qmd
       - projects/shock_propagation/*.qmd
       - projects/kalman_filter/*.qmd
